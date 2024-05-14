@@ -152,6 +152,9 @@
 ### Réalisations
 
 <!-- Description des tâches accomplies -->
+#### 1. Choix des outils
+- React pour Front-end
+- Node JS pour Back-end
 
 ### Observations
 
