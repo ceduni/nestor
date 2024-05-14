@@ -155,10 +155,13 @@
 #### 1. Choix des outils
 - React pour Front-end
 - Node JS avec TypeScript pour Back-end
+- PostCSS
 
 ### Observations
 
 <!-- Description des observations importantes (ex: remarque ou trouvaille intéressante, difficultés rencontrées) de la semaine -->
+#### 1. Difficultés rencontrées
+- Plusieurs outils nécessaires à apprendre en même temps avant le démarrage du projet.
 
 ### Ressources
 
