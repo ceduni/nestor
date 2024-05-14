@@ -154,7 +154,7 @@
 <!-- Description des tâches accomplies -->
 #### 1. Choix des outils
 - React pour Front-end
-- Node JS avec TypeScript pour Back-end
+- Node JS avec TypeScript ou django pour Back-end
 - PostCSS
 
 ### Observations
