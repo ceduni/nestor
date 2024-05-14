@@ -167,3 +167,6 @@
 - [React](https://react.dev/)
 - [Apprentissage du React 1](https://www.udemy.com/course/the-complete-web-developer-zero-to-mastery/)
 - [Apprentissage du React 2](https://www.udemy.com/course/the-complete-web-development-bootcamp/?couponCode=LEADERSALE24A)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node JS](https://nodejs.org/en)
+- [PostCSS](https://postcss.org/)
