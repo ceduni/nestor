@@ -152,11 +152,28 @@
 ### Réalisations
 
 <!-- Description des tâches accomplies -->
+#### 1. Choix des outils
+- React pour Front-end
+- Node JS avec TypeScript ou django pour Back-end
+- PostCSS
 
 ### Observations
 
 <!-- Description des observations importantes (ex: remarque ou trouvaille intéressante, difficultés rencontrées) de la semaine -->
+#### 1. Difficultés rencontrées
+- Plusieurs outils nécessaires à apprendre en même temps avant le démarrage du projet.
 
 ### Ressources
 
 <!-- Matériels consultés (vidéo, article, documentation, livres) -->
+- [Bibliothèques UdeM](https://bib.umontreal.ca/)
+- [React](https://react.dev/)
+- [Udemy React 1](https://www.udemy.com/course/the-complete-web-developer-zero-to-mastery/)
+- [Udemy React 2](https://www.udemy.com/course/the-complete-web-development-bootcamp/?couponCode=LEADERSALE24A)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node JS](https://nodejs.org/en)
+- [PostCSS](https://postcss.org/)
+- [npm](https://www.npmjs.com/)
+- [yarn](https://yarnpkg.com/)
+- [MDN Web](https://developer.mozilla.org/en-US/docs/Web)
+- [W3Schools](https://www.w3schools.com/)
