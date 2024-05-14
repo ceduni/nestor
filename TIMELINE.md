@@ -173,3 +173,5 @@
 - [TypeScript](https://www.typescriptlang.org/)
 - [Node JS](https://nodejs.org/en)
 - [PostCSS](https://postcss.org/)
+- [npm](https://www.npmjs.com/)
+- [yarn](https://yarnpkg.com/)
