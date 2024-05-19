@@ -1,5 +1,7 @@
 # Nestor
 
+> **Page web du projet (IFT3150):** https://ceduni.github.io/nestor
+
 Système de réservation d'espace d'études visant à optimiser l'utilisation des infrastructures sur les campus universitaires et favoriser une expérience d'apprentissage collaborative et fluide.
 
 Avec une emphase sur l'accessibilité et la flexibilité, Nestor offrira des fonctionnalités avancées d'exploration et de recherche, permettant aux utilisateurs de trouver aisément les espaces correspondant à leurs besoins spécifiques et de procéder à la réservation en toute simplicité.
