@@ -74,6 +74,19 @@ Le suivi du projet est présenté dans le fichier [**TIMELINE**](TIMELINE.md).
 
 L'infrastructure de l'application est basée sur React qui offre une interface graphique pour une bonne experience utilisateur,
 fastify pour traiter les requètes et MongoDB pour une gestion efficace des données.
+
+### 🗄️ Base de données
+
+- [**MongoDB**](https://www.mongodb.com/): Base de données NoSQL orientée document.
+
+### 🔗 API
+
+- [**Fastify**](https://fastify.dev): Framework JavaScript permettant le développement d'API performant et efficace de style REST.
+
+### 💻 Application web
+
+- [**React**](https://react.dev/): Librairie JavaScript facilitant le développement d'application web en mode single-page application (SPA).
+- [**Tailwind CSS**](https://tailwindcss.com/): Framework CSS open-source.
 <!-- TODO -->
 
 # 📘 Documentation
@@ -82,6 +95,9 @@ fastify pour traiter les requètes et MongoDB pour une gestion efficace des donn
 
 Les dossiers du répertoire sont organisés comme suit:
 
+- `\server`: contient le code source du backend composé de l'API et de la base de données
+- `\client`: contient le code source de l'application web
+- `\docs`: contient la page web du projet
 <!-- TODO -->
 
 # 🌟 Contribution
