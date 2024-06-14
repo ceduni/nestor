@@ -11,7 +11,25 @@ La plateforme permettra également aux utilisateurs de modifier facilement leurs
 
 <!-- TODO -->
 
-### Fonctionnalités
+## :scroll: Fonctionnalités
+
+### Pour les étudiants
+
+- [ ] Réservation d'espace d'étude
+- [ ] Annulation d'une réservation
+- [ ] Demande de participation à une session d'étude en cours
+- [ ] Évaluer une séssion d'étude
+- [ ] Envoie d'invitations pour une séssion d'étude
+
+### Pour les administrateurs 
+
+- [ ] Ajout d'un espace d'étude
+- [ ] Suppression d'un espace d'étude
+- [ ] Modification d'un espace d'étude
+- [ ] Envoie de notifications sur un espace d'étude
+- [ ] Création d'un groupe d'espace d'étude
+- [ ] Modification d'un groupe d'espace d'étude
+- [ ] Suppressoin d'un groupe d'espace d'étude
 
 <!-- TODO -->
 
@@ -52,10 +70,10 @@ Le développement du projet sera divisé en plusieurs phases:
 
 Le suivi du projet est présenté dans le fichier [**TIMELINE**](TIMELINE.md).
 
-## 🌐 Infrastructure
+## :gear:  Infrastructure
 
-L'infrastructure de l'application est basée sur...
-
+L'infrastructure de l'application est basée sur React qui offre une interface graphique pour une bonne experience utilisateur,
+fastify pour traiter les requètes et MongoDB pour une gestion efficace des données.
 <!-- TODO -->
 
 # 📘 Documentation
