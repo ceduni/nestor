@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function FiltersTags() {
     return (
-        <section>
+        <div>
             filters tags
-        </section>
+        </div>
     );
 }
 

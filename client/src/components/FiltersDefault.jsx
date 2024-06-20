@@ -8,7 +8,7 @@ import { FiFilter } from "react-icons/fi";
 
 export default function FiltersDefault({filterBtnCliked, onFilterBtnClick}) {
     return (
-        <section className='filter_section flex flex-col items-center'>
+        <div className='filter_section flex flex-col items-center'>
             <h1 className='text-xl p-2'>Slogan</h1>
             <form className='filter_form flex justify-center rounded-full px-8 m-3' action="">
                 <div className='filter_form_items flex flex-col gap-x-5 items-start'>
@@ -71,7 +71,7 @@ export default function FiltersDefault({filterBtnCliked, onFilterBtnClick}) {
                     </a>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
 

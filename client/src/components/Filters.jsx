@@ -8,11 +8,11 @@ export default function Filters() {
     const [hasAnyFilter, setHasAnyFilter] = useState(true);
     
     return (
-        <div className='filters p-2'>
+        <section className='filters p-2'>
             <FiltersDefault />
             {filterBtnCliked && <FiltersExtra />}
             {hasAnyFilter && <FiltersTags />}
-        </div>
+        </section>
     );
 }
 
