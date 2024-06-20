@@ -1,10 +1,9 @@
 import React from 'react';
 
-export default function FiltersExtra() {
+export default function Cartes() {
     return (
         <div>
-            filters extras
+            
         </div>
     );
 }
-
