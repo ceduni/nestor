@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Filters from './Filters';
 
 export default function Main() {
