@@ -12,6 +12,69 @@
   font-weight: bold;
 }
 
+/* -----Filters---- */
+.filters {
+  border-bottom: 1px solid #eceded;
+}
+
+.filter_section {
+}
+
+.filter_form {
+  border: 1px solid #eceded;
+  width: fit-content;
+}
+
+.filter_form_items {
+  margin: 0.4rem;
+  padding: 0.2rem 1rem;
+  border-right: 1px solid #eceded;
+}
+
+.filter_label {
+  font-weight: 600;
+}
+
+.filter_input {
+}
+
+.filter_input:focus {
+  outline: none;
+}
+
+.filter_form_btn {
+  position: relative;
+}
+
+.filter_form_btn_link {
+  position: relative;
+  left: 1.8rem;
+}
+
+.filter_icons {
+  transition: all 120ms linear;
+}
+
+.filter_icons:hover {
+  scale: 1.1;
+  border-bottom: 0.4rem solid #eceded;
+}
+
+.filter_btn_container {
+  position: relative;
+}
+
+.filter_btn {
+  border: 1px solid #eceded;
+  position: relative;
+  left: 2rem;
+  transition: all 120ms linear;
+}
+
+.filter_btn:hover {
+  scale: 1.1;
+}
+
 /* -----existing css codes----- */
 /* #root {
   max-width: 1280px;
