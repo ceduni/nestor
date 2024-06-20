@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RiLoginBoxLine } from "react-icons/ri";
+import { FaRegUserCircle } from "react-icons/fa";
 import { GiSpellBook } from "react-icons/gi";
 
 const defaultItems = ["À propos", "Contact"];
@@ -23,13 +24,13 @@ export default function Header({logedIn, isAdmin}) {
                     {/* nav items */}
                     {navItems.map((item)=>(
                         <a className='nav_items' href="">
-                        <li>{item}</li>
-                    </a>
+                            <li>{item}</li>
+                        </a>
                     ))}
 
-                    {/* nav button */}
+                    {/* nav connection button */}
                     <a className='nav_items' href="">
-                        <li><RiLoginBoxLine className='size-6'/></li>
+                        <li>{logedIn? <FaRegUserCircle className='size-6'/> : <RiLoginBoxLine className='size-6'/>}</li>
                     </a> 
                 </ul>
             </nav>
