@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import nestorLogo from './assets/logo-nestor.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
   // Modes pour nav items
@@ -12,6 +11,7 @@ function App() {
   return (
     <div>
       <Header logedIn={logedIn} isAdmin={isAdmin}/>
+      <Footer />
     </div>
   )
 }
