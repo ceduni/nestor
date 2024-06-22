@@ -2,7 +2,7 @@ require('dotenv').config();
 "use strict";
 const fastify = require('fastify')({ logger: true });
 const mongoose = require('mongoose');
-
+mongoose.set({ debug: true });
 // import routes
 const spaceRoutes = require("./routes/space.routes.js");
 
