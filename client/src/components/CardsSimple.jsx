@@ -1,9 +1,10 @@
 import React from 'react';
 
-export default function Cartes() {
+export default function CardsSimple() {
     return (
         <div>
             
         </div>
     );
 }
+

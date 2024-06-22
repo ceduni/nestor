@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { LuSchool2 } from "react-icons/lu";
 import { IoSearchCircle, IoLibraryOutline } from "react-icons/io5";
 import { VscCoffee } from "react-icons/vsc";
 import { MdOutlinePark } from "react-icons/md";
 import { MdOutlineCottage } from "react-icons/md";
 import { FiFilter } from "react-icons/fi";
+import FiltersExtra from './FiltersExtra';
+import FilterTags from './FiltersTags';
 
-export default function FiltersDefault({filterBtnCliked, onFilterBtnClick}) {
+export default function FiltersDefault() {
+    const [filterBtnCliked, setFilterBtnClicked] = useState(false);
+    const [hasAnyFilter, setHasAnyFilter] = useState(false);
+    const handleClick = (e)=>{
+        e.preventDefault();
+        setFilterBtnClicked(!filterBtnCliked);
+    }
     return (
         <div className='filter_section flex flex-col items-center'>
             <h1 className='text-xl p-2'>Slogan</h1>
@@ -64,13 +72,20 @@ export default function FiltersDefault({filterBtnCliked, onFilterBtnClick}) {
                 </ul>
                 <div className='filter_btn_container flex justify-center items-center'>
                     <a  className='filter_btn flex gap-2 items-center px-3 py-1 rounded-full' 
-                        href="" 
+                        href=""
+                        onClick={handleClick} 
                     >
                         <p>Tous les filtres</p>
                         <FiFilter />
                     </a>
                 </div>
             </div>
+
+            {/* Tous les filtres */}
+            {filterBtnCliked && <FiltersExtra />}
+
+            {/* Filter tags */}
+            {hasAnyFilter && <FilterTags/>}
         </div>
     );
 }
