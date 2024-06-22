@@ -384,11 +384,14 @@ const sampleSpaces = [
   }
 ];
 
-mongoose.connect(process.env.MONGODB_TEST_CONNECTION_STRING, {}).then(() => console.log("Connected to the database")).catch((e) => console.log("Error connecting to database", e));
+mongoose.set('debug', true);
+mongoose.connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {}).then(() => console.log("Connected to the database")).catch((e) => console.log("Error connecting to database", e));
 
 const seedSampleSpaces = async () => {
   try {
-    await space.insertMany(sampleSpaces);
+    await space.insertMany(sampleSpaces).then(() => {
+      mongoose.connection.close();
+    })
   } catch (error) {
     console.log(error);
   }
@@ -396,4 +399,3 @@ const seedSampleSpaces = async () => {
 
 seedSampleSpaces();
 
-mongoose.connection.close();
