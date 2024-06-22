@@ -1,61 +1,38 @@
 const mongoose = require("mongoose");
+const spaceSchema = require("../schemas/space.schema");
+const currentDate = new Date();
 
-const availabilitySchema = new mongoose.Schema({
-  startTime: {
-    type: Date,
-    required: true
-  },
-  endTime: {
-    type: Date,
-    required: true
+spaceSchema.pre("save", function(next) {
+
+  const size = this.availabilities.length;
+
+  for (let i = 0; i < size; i++) {
+    const startDate = this.availabilities[i].startTime;
+    const endDate = this.availabilities[i].endTime;
+    const periodic = this.availabilities[i].periodic;
+    if (startDate.getTime() > endDate.getTime()) {
+      next(new Error("Availability start date can't be greater than availability end date"));
+    }
+    if (!periodic && endDate.getTime() < currentDate.getTime()) {
+      next(new Error("Availability start and end date cannot be older than current date"));
+    }
+
   }
-});
 
-const spaceSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  library: {
-    type: String
-  },
-  address: {
-    type: String,
-    require: true
-  },
-  capacity: {
-    type: Number,
-    min: 1,
-    require: true
-  },
-  status: {
-    type: Boolean,
-    required: true,
-    default: true
-  },
-  image: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  organisation: {
-    type: String,
-    required: true
-  },
-  features: {
-    type: [String],
-    enum: ["wifi", "écran", "prise", "projecteur", "imprimante", "réduction de bruit", "tableau blanc", "mur inscriptible", "accessible"]
-  },
-  availabilities: [availabilitySchema],
-  type: {
-    type: String,
-    enum: ["studyRoom", "facility", "coffee", "park"]
+  for (let i = 0; i < size; i++) {
+    for (let j = i + 1; j < size; j++) {
+      const startDateA = this.availabilities[j].startTime;
+      const endDateA = this.availabilities[j].endTime;
+      const startDateB = this.availabilities[i].startTime;
+      const endDateB = this.availabilities[i].endTime;
+      if (endDateA.getTime() > startDateB.getTime() && startDateA < endDateB) {
+        next(new Error("Two availabilities cannot overlap"));
+      }
+    }
   }
-});
 
+  next();
+})
 const space = mongoose.model("space", spaceSchema);
 
 module.exports = space;
