@@ -11,7 +11,8 @@ async function getSpaces(request, reply) {
 
 async function getSpace(request, reply) {
   try {
-    reply.send("TODO");
+    const result = await space.findById(request.params.id);
+    reply.send(result);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -19,7 +20,8 @@ async function getSpace(request, reply) {
 
 async function addSpace(request, reply) {
   try {
-    reply.send("TODO");
+    const result = new space(request.body);
+    reply.send(await result.save());
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -27,7 +29,8 @@ async function addSpace(request, reply) {
 
 async function updateSpace(request, reply) {
   try {
-    reply.send("TODO");
+    result = await space.findByIdAndUpdate(request.params.id, request.body, { new: true });
+    reply.send(result);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -35,7 +38,8 @@ async function updateSpace(request, reply) {
 
 async function removeSpace(request, reply) {
   try {
-    reply.send("TODO");
+    await space.findByIdAndDelete(request.params.id);
+    reply.status(203).send("");
   } catch (error) {
     reply.status(500).send(error);
   }
