@@ -37,7 +37,20 @@ export default function FiltersDefault() {
                     </a>
                 </div>
             </form>
-            <div className='flex justify-center gap-10 mx-2'>
+
+            <div className='filter_btn_container flex justify-center items-center m-3'>
+                <a  className='filter_btn flex gap-2 items-center px-3 py-1 rounded-full' 
+                    href=""
+                    onClick={handleClick} 
+                >
+                    <p>Afficher tous les filtres</p>
+                    <FiFilter />
+                </a>
+            </div>
+            {/* Tous les filtres */}
+            {filterBtnCliked && <FiltersExtra />}
+
+            <div className='flex justify-center gap-10 m-3'>
                 <ul className='flex justify-center gap-8'>
                     <li>
                         <a className='filter_icons flex flex-col items-center' href="">
@@ -70,19 +83,7 @@ export default function FiltersDefault() {
                         </a>
                     </li>
                 </ul>
-                <div className='filter_btn_container flex justify-center items-center'>
-                    <a  className='filter_btn flex gap-2 items-center px-3 py-1 rounded-full' 
-                        href=""
-                        onClick={handleClick} 
-                    >
-                        <p>Tous les filtres</p>
-                        <FiFilter />
-                    </a>
-                </div>
             </div>
-
-            {/* Tous les filtres */}
-            {filterBtnCliked && <FiltersExtra />}
 
             {/* Filter tags */}
             {hasAnyFilter && <FilterTags/>}

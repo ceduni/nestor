@@ -29,6 +29,7 @@
   margin: 0.4rem;
   padding: 0.2rem 1rem;
   border-right: 1px solid #eceded;
+  width: 20rem;
 }
 
 .filter_label {
@@ -57,7 +58,8 @@
 
 .filter_icons:hover {
   scale: 1.1;
-  border-bottom: 0.4rem solid #eceded;
+  /* border-bottom: 0.4rem solid #eceded; */
+  text-decoration: underline;
 }
 
 .filter_btn_container {
@@ -73,6 +75,22 @@
 
 .filter_btn:hover {
   scale: 1.1;
+}
+
+/* -----Card----- */
+.cards::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  /* border: 1px solid #eceded; */
+  box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
+  -moz-box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
+}
+
+.card_detail::-webkit-scrollbar {
+  display: none;
 }
 
 /* -----existing css codes----- */
