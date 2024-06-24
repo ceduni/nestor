@@ -1,5 +1,9 @@
+:root {
+  --border-color: #eceded;
+}
+
 .header {
-  border-bottom: 1px solid #eceded;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nav_items {
@@ -14,21 +18,21 @@
 
 /* -----Filters---- */
 .filters {
-  border-bottom: 1px solid #eceded;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .filter_section {
 }
 
 .filter_form {
-  border: 1px solid #eceded;
+  border: 1px solid var(--border-color);
   width: fit-content;
 }
 
 .filter_form_items {
   margin: 0.4rem;
   padding: 0.2rem 1rem;
-  border-right: 1px solid #eceded;
+  border-right: 1px solid var(--border-color);
   width: 20rem;
 }
 
@@ -67,7 +71,7 @@
 }
 
 .filter_btn {
-  border: 1px solid #eceded;
+  border: 1px solid var(--border-color);
   position: relative;
   left: 2rem;
   transition: all 120ms linear;
