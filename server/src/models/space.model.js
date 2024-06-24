@@ -1,42 +1,75 @@
 const mongoose = require("mongoose");
-const spaceSchema = require("../schemas/space.schema");
-const currentDate = new Date();
 
-const availabilityConstraint = (avail, next) => {
-
-  const size = avail.length;
-
-  for (let i = 0; i < size; i++) {
-    const startDate = avail[i].startTime;
-    const endDate = avail[i].endTime;
-    const periodic = avail[i].periodic;
-    if (startDate.getTime() > endDate.getTime()) {
-      next(new Error("Availability start date can't be greater than availability end date"));
-    }
-    if (!periodic && endDate.getTime() < currentDate.getTime()) {
-      next(new Error("Availability start and end date cannot be older than current date"));
-    }
-
+const spaceSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  library: {
+    type: String
+  },
+  address: {
+    type: String,
+    require: true
+  },
+  capacity: {
+    type: Number,
+    min: 1,
+    require: true
+  },
+  status: {
+    type: Boolean,
+    required: true,
+    default: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  organisation: {
+    type: String,
+    required: true
+  },
+  features: {
+    type: [String],
+    enum: ["wifi", "écran", "prise", "projecteur", "imprimante", "réduction de bruit", "tableau blanc", "mur inscriptible", "accessible"]
+  },
+  availabilities: [{ type: mongoose.Schema.Types.ObjectId, ref: "availability" }],
+  type: {
+    type: String,
+    enum: ["studyRoom", "facility", "coffee", "park"]
   }
+});
 
-  for (let i = 0; i < size; i++) {
-    for (let j = i + 1; j < size; j++) {
-      const startDateA = avail[j].startTime;
-      const endDateA = avail[j].endTime;
-      const startDateB = avail[i].startTime;
-      const endDateB = avail[i].endTime;
-      if (endDateA.getTime() > startDateB.getTime() && startDateA < endDateB) {
-        next(new Error("Two availabilities cannot overlap"));
-      }
-    }
-  }
+const availabilityConstraintOnSave = (avail, next) => {
+
+  //console.log()
+  //const size = avail.length;
+
+  //for (let i = 0; i < size; i++) {
+  // for (let j = i + 1; j < size; j++) {
+  //   const startAtA = avail[j].startAt;
+  // const endAtA = avail[j].endAt;
+  //const startAtB = avail[i].startAt;
+  //const endAtB = avail[i].endAt;
+  //if (endAtA.getTime() > startAtB.getTime() && startAtA < endAtB) {
+  // next(new Error("Two availabilities cannot overlap"));
+  //}
+  // }
+  //}
 
 }
 
-spaceSchema.pre(["save", "findOneAndUpdate"], function(next) {
-  availabilityConstraint(this.availabilities, next);
+spaceSchema.pre("save", function(next) {
+  availabilityConstraintOnSave(this.availabilities, next);
   next();
 })
+
 const space = mongoose.model("space", spaceSchema);
 
 module.exports = space;
