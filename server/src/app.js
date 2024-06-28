@@ -1,6 +1,7 @@
 require('dotenv').config();
 "use strict";
 const fastify = require('fastify')({ logger: true });
+const cors = require('@fastify/cors');
 const mongoose = require('mongoose');
 mongoose.set({ debug: true });
 
@@ -12,7 +13,10 @@ mongoose.connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {}).then(() => con
 
 // start server
 fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });
-
+fastify.register(cors, {
+  origin: "*",
+  methods: ["GET"]
+});
 const start = () => {
   try {
     fastify.listen({ port: process.env.PORT }, (err) => {
