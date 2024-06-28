@@ -72,7 +72,7 @@ availabilitySchema.pre("save", function(next) {
   if (!this.periodic && (endAtToMilliseconds < currentToMilliseconds || startAtToMilliseconds < currentToMilliseconds)) {
     next(new Error("Availability start and end date cannot be older than current date"));
   }
-  if (this.startAt.getFullYear() != this.endAt.getFullYear() || this.startAt.getMonth() != this.endAt.getMonth() || this.startAt.getDate() != this.endAt.getDate()) {
+  if (this.startAt.getFullYear() !== this.endAt.getFullYear() || this.startAt.getMonth() !== this.endAt.getMonth() || this.startAt.getDate() !== this.endAt.getDate()) {
     next(new Error("Availability start and end date should be within a day"));
   }
   if ((endAtToMilliseconds - startAtToMilliseconds) / 1000 < 3600) {
