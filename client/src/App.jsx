@@ -11,10 +11,10 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(()=>{
-    fetch('/api/data')
+    fetch('http://localhost:3000/api/v1/spaces/')
       .then(res => {
         console.log("res : " + res);
-        res.json();
+        return res.json();
       })
       .then(data => {
         console.log("data : " + data);
