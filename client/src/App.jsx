@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
+import { Outlet } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
-import Main from './components/Main'
 import Footer from './components/Footer'
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
   return (
     <div>
       <Header logedIn={logedIn} isAdmin={isAdmin}/>
-      <Main />
+      <Outlet />
       <Footer />
       {data ? <p>{data.hello}</p> : <p>no msg</p>}
     </div>

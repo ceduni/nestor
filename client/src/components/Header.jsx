@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GiSpellBook } from "react-icons/gi";
@@ -14,24 +15,25 @@ export default function Header({logedIn, isAdmin}) {
         <header className='header px-14 w-full flex place-content-between items-center'>
             
             {/* Nestor logo */}
-            <a href="">
-                <img className='size-16' src="../src/assets/logo-nestor.svg" alt="" />
-            </a>
+            <Link to="/">
+                <img className='size-16' src="../src/assets/logo-nestor.svg" alt="logo" />
+            </Link>
 
             <nav>
                 <ul className='flex justify-center gap-8'>
                     
                     {/* nav items */}
                     {navItems.map((item)=>(
-                        <a className='nav_items' href="">
+                        <Link className='nav_items' to={item.replace(/\s+/g, '')}>
+                            {console.log(item)}
                             <li>{item}</li>
-                        </a>
+                        </Link>
                     ))}
 
                     {/* nav connection button */}
-                    <a className='nav_items' href="">
+                    <Link to="Connexion" className='nav_items' >
                         <li>{logedIn? <FaRegUserCircle className='size-6'/> : <RiLoginBoxLine className='size-6'/>}</li>
-                    </a> 
+                    </Link> 
                 </ul>
             </nav>
         </header>
