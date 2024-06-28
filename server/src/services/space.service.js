@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 async function getSpaces(req, rep) {
   try {
     const spaces = await space.find();
-    if (spaces.length == 0) {
+    if (spaces.length === 0) {
       return rep.status(404).send("No space found");
     }
     rep.send(spaces);
@@ -62,7 +62,7 @@ async function getAvailabilities(req, rep) {
       return rep.status(404).send("No Space found");
     }
     const availabilities = result[0].availabilities;
-    if (!availabilities || availabilities.length == 0) {
+    if (!availabilities || availabilities.length === 0) {
       return rep.status(404).send("No availability found");
     }
     rep.send(availabilities);
@@ -88,21 +88,19 @@ async function addAvailability(req, rep) {
 
 async function updateAvailability(req, rep) {
   try {
-    const updateQuery = Object.keys(req.body).map(key => ({
-      [`availabilities.$.${key}`]: req.body[key]
-    })).reduce((acc, obj) => ({ ...acc, ...obj }), {});
-    const updatedSpace = await space.findOneAndUpdate({ _id: req.params.spaceId, "availabilities._id": req.params.availId },
-      {
-        "$set": updateQuery
-      }, { new: true });
-    if (!updatedSpace) {
+    const spaceResult = await space.findById(req.params.spaceId);
+    if (!spaceResult) {
+      return rep.status(404).send("Space not found");
+    }
+    const availIdCasted = new mongoose.Types.ObjectId(req.params.availId);
+    const indexToUpdate = spaceResult.availabilities.findIndex(avail => avail._id.equals(availIdCasted));
+    if (indexToUpdate === -1) {
       return rep.status(404).send("Availability not found");
     }
-    updatedSpace.save();
+    spaceResult.availabilities[indexToUpdate] = Object.assign(spaceResult.availabilities[indexToUpdate],req.body);
+    const updatedSpace = await spaceResult.save();
     rep.send(updatedSpace);
   } catch (error) {
-    await space.findOneAndUpdate({ _id: req.params.spaceId, "availabilities._id": req.params.availId },
-      { $pull: { "availabilities": { _id: req.params.availId } } }, { new: true });
     rep.status(500).send(error);
   }
 }

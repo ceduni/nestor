@@ -9,7 +9,7 @@ mongoose.set({ debug: true });
 const spaceRoutes = require("./routes/space.routes.js");
 
 // connect to database
-mongoose.connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {}).then(() => console.log("Connected to the database")).catch((e) => console.log("Error connecting to database", e));
+mongoose.connect(process.env.MONGODB_TEST_CONNECTION_STRING, {}).then(() => console.log("Connected to the database")).catch((e) => console.log("Error connecting to database", e));
 
 // start server
 fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });
