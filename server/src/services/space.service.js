@@ -11,7 +11,7 @@ async function getSpaces(req, rep) {
   } catch (error) {
     rep.status(500).send(error);
   }
-};
+}
 
 async function getSpace(req, rep) {
   try {
@@ -47,7 +47,7 @@ async function updateSpace(req, rep) {
   }
 }
 
-async function getAvailabilities(req, rep) {
+/*async function getAvailabilities(req, rep) {
   try {
     const result = await space.aggregate([
       { $match: { _id: new mongoose.Types.ObjectId(req.params.id) } },
@@ -69,7 +69,7 @@ async function getAvailabilities(req, rep) {
   } catch (error) {
     rep.status(500).send(error);
   }
-}
+}*/
 
 async function addAvailability(req, rep) {
   try {
@@ -130,6 +130,55 @@ async function removeSpace(req, rep) {
   }
 }
 
+async function addImage(req,rep) {
+  try {
+    const spaceResult = await space.findById(req.params.id);
+    if (!spaceResult) {
+      return rep.status(404).send("Space not found");
+    }
+    spaceResult.images.push(req.body);
+    const updatedSpace = await spaceResult.save();
+    rep.send(updatedSpace);
+  }
+  catch (err) {
+    rep.status(500).send(err);
+  }
+}
+
+async function updateImage(req, rep) {
+  try {
+    const spaceResult = await space.findById(req.params.spaceId);
+    if (!spaceResult) {
+      return rep.status(404).send("Space not found");
+    }
+    const imageIdCasted = new mongoose.Types.ObjectId(req.params.imageId);
+    const indexToUpdate = spaceResult.images.findIndex(image => image._id.equals(imageIdCasted));
+    if (indexToUpdate === -1) {
+      return rep.status(404).send("Image not found");
+    }
+    spaceResult.images[indexToUpdate] = Object.assign(spaceResult.images[indexToUpdate],req.body);
+    const updatedSpace = await spaceResult.save();
+    rep.send(updatedSpace);
+  } catch (error) {
+    rep.status(500).send(error);
+  }
+}
+
+async function removeImage(req, rep) {
+  try {
+    const spaceResult = await space.findOneAndUpdate({ _id: req.params.spaceId, "images._id": req.params.imageId },
+        { $pull: { "images": { _id: req.params.imageId } } }, { new: true });
+    if (!spaceResult) {
+      return rep.status(404).send("Image not found");
+    }
+    rep.send(spaceResult);
+  } catch (error) {
+    rep.status(500).send(error);
+  }
+}
+
 module.exports = {
-  getSpaces, getSpace, addSpace, updateSpace, removeSpace, getAvailabilities, addAvailability, updateAvailability, removeAvailability
+  getSpaces, getSpace, addSpace, updateSpace, removeSpace,
+  addAvailability, updateAvailability, removeAvailability,
+  addImage, removeImage, updateImage
 }
