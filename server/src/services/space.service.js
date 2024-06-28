@@ -1,50 +1,135 @@
 const space = require("../models/space.model");
+const mongoose = require("mongoose");
 
-async function getSpaces(request, reply) {
+async function getSpaces(req, rep) {
   try {
-    spaces = await space.find();
-    reply.send(spaces);
+    const spaces = await space.find();
+    if (spaces.length === 0) {
+      return rep.status(404).send("No space found");
+    }
+    rep.send(spaces);
   } catch (error) {
-    reply.status(500).send(error);
+    rep.status(500).send(error);
+  }
+};
+
+async function getSpace(req, rep) {
+  try {
+    const spaceResult = await space.findById(req.params.id);
+    if (!spaceResult) {
+      return rep.status(404).send("Space not found");
+    }
+    rep.send(spaceResult);
+  } catch (error) {
+    rep.status(500).send(error);
   }
 }
 
-async function getSpace(request, reply) {
+async function addSpace(req, rep) {
   try {
-    const result = await space.findById(request.params.id);
-    reply.send(result);
+    const newSpace = new space(req.body);
+    const newSpaceResult = await newSpace.save();
+    rep.send(newSpaceResult);
   } catch (error) {
-    reply.status(500).send(error);
+    rep.status(500).send(error);
   }
 }
 
-async function addSpace(request, reply) {
+async function updateSpace(req, rep) {
   try {
-    const result = new space(request.body);
-    reply.send(await result.save());
+    const updatedSpace = await space.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedSpace) {
+      return rep.status(404).send("Space not found");
+    }
+    rep.send(updatedSpace);
   } catch (error) {
-    reply.status(500).send(error);
+    rep.status(500).send(error);
   }
 }
 
-async function updateSpace(request, reply) {
+async function getAvailabilities(req, rep) {
   try {
-    result = await space.findByIdAndUpdate(request.params.id, request.body, { new: true });
-    reply.send(result);
+    const result = await space.aggregate([
+      { $match: { _id: new mongoose.Types.ObjectId(req.params.id) } },
+      {
+        $project: {
+          _id: 0,
+          availabilities: 1
+        }
+      }
+    ]);
+    if (!result) {
+      return rep.status(404).send("No Space found");
+    }
+    const availabilities = result[0].availabilities;
+    if (!availabilities || availabilities.length === 0) {
+      return rep.status(404).send("No availability found");
+    }
+    rep.send(availabilities);
   } catch (error) {
-    reply.status(500).send(error);
+    rep.status(500).send(error);
   }
 }
 
-async function removeSpace(request, reply) {
+async function addAvailability(req, rep) {
   try {
-    await space.findByIdAndDelete(request.params.id);
-    reply.status(203).send("");
+    const spaceResult = await space.findById(req.params.id);
+    if (!spaceResult) {
+      return rep.status(404).send("Space not found");
+    }
+    spaceResult.availabilities.push(req.body);
+    const updatedSpace = await spaceResult.save();
+    rep.send(updatedSpace);
+  }
+  catch (err) {
+    rep.status(500).send(err);
+  }
+}
+
+async function updateAvailability(req, rep) {
+  try {
+    const spaceResult = await space.findById(req.params.spaceId);
+    if (!spaceResult) {
+      return rep.status(404).send("Space not found");
+    }
+    const availIdCasted = new mongoose.Types.ObjectId(req.params.availId);
+    const indexToUpdate = spaceResult.availabilities.findIndex(avail => avail._id.equals(availIdCasted));
+    if (indexToUpdate === -1) {
+      return rep.status(404).send("Availability not found");
+    }
+    spaceResult.availabilities[indexToUpdate] = Object.assign(spaceResult.availabilities[indexToUpdate],req.body);
+    const updatedSpace = await spaceResult.save();
+    rep.send(updatedSpace);
   } catch (error) {
-    reply.status(500).send(error);
+    rep.status(500).send(error);
+  }
+}
+
+async function removeAvailability(req, rep) {
+  try {
+    const spaceResult = await space.findOneAndUpdate({ _id: req.params.spaceId, "availabilities._id": req.params.availId },
+      { $pull: { "availabilities": { _id: req.params.availId } } }, { new: true });
+    if (!spaceResult) {
+      return rep.status(404).send("Availability not found");
+    }
+    rep.send(spaceResult);
+  } catch (error) {
+    rep.status(500).send(error);
+  }
+}
+
+async function removeSpace(req, rep) {
+  try {
+    const deletedSpace = await space.findByIdAndDelete(req.params.id);
+    if (!deletedSpace) {
+      return rep.status(404).send("Space not found");
+    }
+    rep.status(203).send("");
+  } catch (error) {
+    rep.status(500).send(error);
   }
 }
 
 module.exports = {
-  getSpaces, getSpace, addSpace, updateSpace, removeSpace
+  getSpaces, getSpace, addSpace, updateSpace, removeSpace, getAvailabilities, addAvailability, updateAvailability, removeAvailability
 }
