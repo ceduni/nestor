@@ -25,7 +25,7 @@ export default function Header({logedIn, isAdmin}) {
                     {/* nav items */}
                     {navItems.map((item)=>(
                         <Link className='nav_items' to={item.replace(/\s+/g, '')}>
-                            {console.log(item)}
+                            {/* {console.log(item)} */}
                             <li>{item}</li>
                         </Link>
                     ))}
