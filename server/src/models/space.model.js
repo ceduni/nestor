@@ -107,13 +107,6 @@ availabilitySchema.pre("save", function(next) {
 
 spaceSchema.pre("save", function(next) {
   const avails = this.availabilities;
-  const images = this.images;
-  if(avails.length === 0) {
-    next(new Error("Space should have at least one availability"));
-  }
-  if(images.length === 0) {
-    next(new Error("Space should have at least one image"))
-  }
   for (let i = 0; i < avails.length; i++) {
     for (let j = i + 1; j < avails.length; j++) {
       const startAtA = avails[j].startAt;

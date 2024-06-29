@@ -15,8 +15,10 @@ const spaceSchema = {
                 organisation: { type: "string" },
                 images: {
                     type: "array",
+                    minItems:1,
                     items: {
                         type: "object",
+                        minProperties: 1,
                         additionalProperties: false,
                         properties: {
                             url: { type: "string" }
@@ -25,9 +27,11 @@ const spaceSchema = {
                 },
                 availabilities: {
                     type: "array",
+                    minItems:1,
                     items: {
                         type: "object",
                         additionalProperties: false,
+                        minProperties: 1,
                         properties: {
                             isPeriodic: { type: "boolean" },
                             startAt: { type: "string" },
@@ -47,17 +51,8 @@ const spaceSchema = {
                     enum: ["studyRoom", "facility", "nature"]
                 }
             },
-            additionalProperties: false
-        },
-        params: {
-            type: "object",
             additionalProperties: false,
-            properties: {
-                id: { type: "string" },
-                spaceId: { type: "string" },
-                availId: { type: "string" },
-                imageId: { type: "string" }
-            }
+            required: ["images", "availabilities"]
         }
     }
 };
