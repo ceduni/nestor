@@ -1,0 +1,60 @@
+const spaceSchema = {
+    schema: {
+        body: {
+            type: "object",
+            properties: {
+                name: { type: "string" },
+                library: { type: "string" },
+                street: { type: "string" },
+                city: { type: "string" },
+                state: { type: "string" },
+                postalCode: { type: "string" },
+                capacity: { type: "number" },
+                isAvailable: { type: "boolean" },
+                description: { type: "string" },
+                organisation: { type: "string" },
+                images: {
+                    type: "array",
+                    minItems:1,
+                    items: {
+                        type: "object",
+                        minProperties: 1,
+                        additionalProperties: false,
+                        properties: {
+                            url: { type: "string" }
+                        }
+                    }
+                },
+                availabilities: {
+                    type: "array",
+                    minItems:1,
+                    items: {
+                        type: "object",
+                        additionalProperties: false,
+                        minProperties: 1,
+                        properties: {
+                            isPeriodic: { type: "boolean" },
+                            startAt: { type: "string" },
+                            endAt: { type: "string" }
+                        }
+                    }
+                },
+                features: {
+                    type: "array",
+                    items: {
+                        type: "string",
+                        enum: ["wifi", "screen", "plug", "projector", "noise cancelling", "whiteboard", "accessible"]
+                    }
+                },
+                type: {
+                    type: "string",
+                    enum: ["studyRoom", "facility", "nature"]
+                }
+            },
+            additionalProperties: false,
+            required: ["images", "availabilities"]
+        }
+    }
+};
+
+module.exports = spaceSchema;

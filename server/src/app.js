@@ -1,6 +1,14 @@
 require('dotenv').config();
 "use strict";
-const fastify = require('fastify')({ logger: true });
+const fastify = require('fastify')({
+  logger: true,
+  ajv: {
+    customOptions: {
+      removeAdditional: false
+    }
+  }
+});
+
 const cors = require('@fastify/cors');
 const mongoose = require('mongoose');
 mongoose.set({ debug: true });

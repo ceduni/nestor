@@ -9,7 +9,7 @@ const imageSchema = new mongoose.Schema({
     }
 )
 const availabilitySchema = new mongoose.Schema({
-  periodic: {
+  isPeriodic: {
     type: Boolean,
     required: true
   },
@@ -93,7 +93,7 @@ availabilitySchema.pre("save", function(next) {
   if (startAtToMilliseconds > endAtToMilliseconds) {
     next(new Error("Availability start date can't be greater than availability end date"));
   }
-  if (!this.periodic && (endAtToMilliseconds < currentToMilliseconds || startAtToMilliseconds < currentToMilliseconds)) {
+  if (!this.isPeriodic && (endAtToMilliseconds < currentToMilliseconds || startAtToMilliseconds < currentToMilliseconds)) {
     next(new Error("Availability start and end date cannot be older than current date"));
   }
   if (this.startAt.getFullYear() !== this.endAt.getFullYear() || this.startAt.getMonth() !== this.endAt.getMonth() || this.startAt.getDate() !== this.endAt.getDate()) {
@@ -107,9 +107,8 @@ availabilitySchema.pre("save", function(next) {
 
 spaceSchema.pre("save", function(next) {
   const avails = this.availabilities;
-  const size = avails.length;
-  for (let i = 0; i < size; i++) {
-    for (let j = i + 1; j < size; j++) {
+  for (let i = 0; i < avails.length; i++) {
+    for (let j = i + 1; j < avails.length; j++) {
       const startAtA = avails[j].startAt;
       const endAtA = avails[j].endAt;
       const startAtB = avails[i].startAt;
