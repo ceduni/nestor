@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 const current = new Date();
 
+const imageSchema = new mongoose.Schema({
+  url: {
+    type: String,
+    required: true
+  }
+    }
+)
 const availabilitySchema = new mongoose.Schema({
   periodic: {
     type: Boolean,
@@ -25,22 +32,34 @@ const spaceSchema = new mongoose.Schema({
   library: {
     type: String
   },
-  address: {
+  street: {
     type: String,
-    require: true
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  },
+  postalCode: {
+    type: String,
+    required: true
   },
   capacity: {
     type: Number,
     min: 1,
-    require: true
+    required: true
   },
   isAvailable: {
     type: Boolean,
     required: true,
     default: true
   },
-  image: {
-    type: [String],
+  images: {
+    type: [imageSchema],
     required: true
   },
   description: {
@@ -53,12 +72,17 @@ const spaceSchema = new mongoose.Schema({
   },
   features: {
     type: [String],
-    enum: ["wifi", "screen", "plug", "projector", "noise cancelling", "whiteboard", "accessible"]
+    enum: ["wifi", "screen", "plug", "projector", "noise cancelling", "whiteboard", "accessible"],
+    required: true
   },
-  availabilities: [availabilitySchema],
+  availabilities: {
+    type:[availabilitySchema],
+    required: true
+  },
   type: {
     type: String,
-    enum: ["studyRoom", "facility", "nature"]
+    enum: ["studyRoom", "facility", "nature"],
+    required: true
   }
 });
 
