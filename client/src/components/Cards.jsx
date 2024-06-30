@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import {v4 as uuidv4} from 'uuid';
 import Card from './Card';
 import CardDetail from './CardDetail';
 
-export default function Cards({allSpaces, nameFilter}) {
+export default function Cards({allSpaces, nameFilter, addressFilter}) {
     // States
     const [cardSelected, setCardSelected] = useState(false);
     const [spaces, setSpaces] = useState([]);
@@ -16,6 +17,10 @@ export default function Cards({allSpaces, nameFilter}) {
     useEffect(()=>{
         filterByName(nameFilter);
     }, [nameFilter]);
+
+    useEffect(()=>{
+        filterByAddress(addressFilter);
+    }, [addressFilter]);
 
     // Handles
     const handleCardClick = (isClicked, space) =>{
@@ -40,6 +45,14 @@ export default function Cards({allSpaces, nameFilter}) {
         }
     }
 
+    const filterByAddress = (addressFilter) =>{
+        if(addressFilter === "" || !addressFilter) {
+            setSpaces(allSpaces);
+        } else {
+            setSpaces(allSpaces.filter((space) => (space.organisation.toLowerCase().includes(addressFilter.toLowerCase()) )));
+        }
+    }
+
     return (
     <>
         <p className='text-center p-3'>{spaces.length} résultats trouvés</p>
@@ -51,6 +64,7 @@ export default function Cards({allSpaces, nameFilter}) {
             >   
                 {spaces.map((item) => (
                     <Card
+                        key={uuidv4()}
                         space={item}
                         cardSelected={cardSelected}
                         onCardClick={handleCardClick}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {v4 as uuidv4} from 'uuid';
 import { Link } from 'react-router-dom';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -24,7 +25,7 @@ export default function Header({logedIn, isAdmin}) {
                     
                     {/* nav items */}
                     {navItems.map((item)=>(
-                        <Link className='nav_items' to={item.replace(/\s+/g, '')}>
+                        <Link key={uuidv4()} className='nav_items' to={item.replace(/\s+/g, '')}>
                             {/* {console.log(item)} */}
                             <li>{item}</li>
                         </Link>
