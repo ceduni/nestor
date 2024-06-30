@@ -13,7 +13,8 @@ const sampleSpaces = [
     postalCode: "H3T 1N8",
     capacity: 8,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+        {url: ""}],
     description: "La salle d'étude est un espace calme et bien équipé, idéal pour travailler ou étudier seul(e) ou en groupe.Elle peut être réservée pour des séances d'étude privées ou des réunions académiques.",
     organisation: "Université de Montréal",
     features: ["screen", "whiteboard", "plug"],
