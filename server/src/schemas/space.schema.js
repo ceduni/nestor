@@ -1,4 +1,5 @@
 const spaceSchema = {
+    $id: "spaceSchema",
     schema: {
         body: {
             type: "object",
@@ -17,6 +18,7 @@ const spaceSchema = {
                     type: "array",
                     minItems:1,
                     items: {
+                        $id: "imageSchema",
                         type: "object",
                         minProperties: 1,
                         additionalProperties: false,
@@ -29,6 +31,7 @@ const spaceSchema = {
                     type: "array",
                     minItems:1,
                     items: {
+                        $id: "availabilitySchema",
                         type: "object",
                         additionalProperties: false,
                         minProperties: 1,
