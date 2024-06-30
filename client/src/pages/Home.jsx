@@ -4,14 +4,21 @@ import Cards from '../components/Cards';
 
 export default function Home() {
     const [nameFilter, setNameFilter] = useState("");
+    const [addressFilter, setAddressFilter] = useState("");
     const [allSpaces, setAllSpaces] = useState([]);
-    const handleNameFilter = (name) =>{
-        setNameFilter(name);
-    }
+    
 
     useEffect(()=>{
         fetchAllSpaces();
     }, []);
+
+    const handleNameFilter = (name) => {
+        setNameFilter(name);
+    }
+
+    const handleAddressFilter = (address) => {
+        setAddressFilter(address);
+    }
 
     const fetchAllSpaces = ()=>{
         fetch('http://localhost:3000/api/v1/spaces/')
@@ -29,9 +36,17 @@ export default function Home() {
     return (
         <main>
             <section className='filters p-2'>
-                <Filters onNameFilterUpdate={handleNameFilter}/>
+                <Filters 
+                    onNameFilterUpdate={handleNameFilter} 
+                    onAddressFilterUpdate={handleAddressFilter}
+                />
             </section>
-            <Cards allSpaces={allSpaces} nameFilter={nameFilter}/>
+
+            <Cards 
+                allSpaces={allSpaces} 
+                nameFilter={nameFilter}
+                addressFilter={addressFilter}
+            />
         </main>
     );
 }

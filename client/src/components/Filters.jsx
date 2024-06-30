@@ -8,10 +8,11 @@ import { FiFilter } from "react-icons/fi";
 import FiltersExtra from './FiltersExtra';
 import FilterTags from './FiltersTags';
 
-export default function Filters({onNameFilterUpdate}) {
+export default function Filters({onNameFilterUpdate, onAddressFilterUpdate}) {
     const [filterBtnCliked, setFilterBtnClicked] = useState(false);
     const [hasAnyFilter, setHasAnyFilter] = useState(false);
     const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
 
     const handleClick = (e)=>{
         e.preventDefault();
@@ -22,9 +23,14 @@ export default function Filters({onNameFilterUpdate}) {
         setName(e.target.value);
     }
 
+    const handleAddressChange = (e)=>{
+        setAddress(e.target.value);
+    }
+
     const handleFilterSubmit = (e)=>{
         e.preventDefault();
         onNameFilterUpdate(name.trim());
+        onAddressFilterUpdate(address.trim());
     }
 
     return (
@@ -37,7 +43,7 @@ export default function Filters({onNameFilterUpdate}) {
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
                     <label className='filter_label' htmlFor="">Adresse</label>
-                    <input className='filter_input' type="text" placeholder="Entrer une adresse"/>
+                    <input className='filter_input' type="text" placeholder="Entrer une adresse" onChange={handleAddressChange}/>
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
                     <label className='filter_label' htmlFor="">Date</label>
