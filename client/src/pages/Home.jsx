@@ -24,6 +24,8 @@ export default function Home() {
         .catch(error => console.error(error));
     }
 
+    console.log(allSpaces);
+
     return (
         <main>
             <section className='filters p-2'>
