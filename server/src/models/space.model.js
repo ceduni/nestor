@@ -123,4 +123,4 @@ spaceSchema.pre("save", function(next) {
 
 const space = mongoose.model("space", spaceSchema);
 
-module.exports = space;
+module.exports = {space, availabilitySchema}

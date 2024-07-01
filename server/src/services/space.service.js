@@ -1,4 +1,4 @@
-const space = require("../models/space.model");
+const space = require("../models/space.model").space ;
 const mongoose = require("mongoose");
 
 async function getSpaces(req, rep) {
