@@ -15,14 +15,6 @@ export default function Cards({allSpaces, filters}) {
       setSpaces(allSpaces);
     }, [allSpaces]);
 
-    // useEffect(()=>{
-    //     filterByName(filters.name);
-    // }, [filters.name]);
-
-    // useEffect(()=>{
-    //     filterByAddress(filters.address);
-    // }, [filters.address]);
-
     useEffect(()=>{
         filtering(filters);
     }, [filters]);
@@ -37,7 +29,6 @@ export default function Cards({allSpaces, filters}) {
             } else if(filters.name === "" && filters.address){
                 setSpaces(allSpaces.filter((space) => (space.organisation.toLowerCase().includes(filters.address.toLowerCase()) )));
             } else {
-                console.log("how");
                 setSpaces(allSpaces.filter((space) => (
                     space.name.toLowerCase().includes(filters.name.toLowerCase()) ||
                     space.organisation.toLowerCase().includes(filters.address.toLowerCase()) 
@@ -60,22 +51,6 @@ export default function Cards({allSpaces, filters}) {
         const spaceSelected = spaces.find((sp) => sp.name === space.name);
         setDetailSelected(spaceSelected);
     }
-
-    // const filterByName = (nameFilter) =>{
-    //     if(nameFilter === "") {
-    //         setSpaces(allSpaces);
-    //     } else {
-    //         setSpaces(allSpaces.filter((space) => (space.name.toLowerCase().includes(filters.name.toLowerCase()) )));
-    //     }
-    // }
-
-    // const filterByAddress = (addressFilter) =>{
-    //     if(addressFilter === "") {
-    //         setSpaces(allSpaces);
-    //     } else {
-    //         setSpaces(allSpaces.filter((space) => (space.organisation.toLowerCase().includes(filters.address.toLowerCase()) )));
-    //     }
-    // }
 
     return (
     <>
