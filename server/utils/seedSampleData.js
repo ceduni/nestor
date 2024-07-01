@@ -14,7 +14,10 @@ const sampleSpaces = [
     capacity: 8,
     isAvailable: true,
     images: [
-        {url: ""}],
+      { "url": "src/assets/images/udem_campus_laval_1.jpg" },
+      { "url": "src/assets/images/udem_campus_laval_2.jpg" },
+      { "url": "src/assets/images/udem_campus_laval_3.jpg" }
+    ],
     description: "La salle d'étude est un espace calme et bien équipé, idéal pour travailler ou étudier seul(e) ou en groupe.Elle peut être réservée pour des séances d'étude privées ou des réunions académiques.",
     organisation: "Université de Montréal",
     features: ["screen", "whiteboard", "plug"],
@@ -46,7 +49,11 @@ const sampleSpaces = [
     postalCode: "H3T 1J7",
     capacity: 6,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/udem_biblio_droit_1.jpg" },
+      { "url": "src/assets/images/udem_biblio_droit_2.jpg" },
+      { "url": "src/assets/images/udem_biblio_droit_3.jpg" }
+    ],
     description: "Espace de travail confortable avec accès à la bibliothèque de droit. Idéal pour des sessions d'étude concentrée ou des réunions académiques.",
     organisation: "Université de Montréal",
     features: ["screen", "plug"],
@@ -78,7 +85,11 @@ const sampleSpaces = [
     postalCode: "H2V 0B3",
     capacity: 8,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/udem_biblio_sciences_1.jpg" },
+      { "url": "src/assets/images/udem_biblio_sciences_2.jpg" },
+      { "url": "src/assets/images/udem_biblio_sciences_3.jpg" }
+    ],
     description: "Espace moderne équipé d'un mur inscriptible. Parfait pour les séances de brainstorming ou les études en groupe.",
     organisation: "Université de Montréal",
     features: ["screen", "plug"],
@@ -110,7 +121,11 @@ const sampleSpaces = [
     postalCode: "H3A 1Y1",
     capacity: 10,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/biblio_mcgill_hssl_1.jpg" },
+      { "url": "src/assets/images/biblio_mcgill_hssl_2.jpg" },
+      { "url": "src/assets/images/biblio_mcgill_hssl_3.jpg" }
+    ],
     description: "Salle de lecture silencieuse. Lieu idéal pour l'étude individuelle ou en petit groupe.",
     organisation: "Université de McGill",
     features: ["plug"],
@@ -142,7 +157,11 @@ const sampleSpaces = [
     postalCode: "H3G 1M8",
     capacity: 6,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/biblio_webster_1.jpg" },
+      { "url": "src/assets/images/biblio_webster_2.jpg" },
+      { "url": "src/assets/images/biblio_webster_3.jpg" }
+    ],
     description: "Espace tranquille idéal pour les sessions de travail nécessitant concentration et inspiration.",
     organisation: "Université de McGill",
     features: ["plug", "accessible"],
@@ -173,7 +192,11 @@ const sampleSpaces = [
     postalCode: "H7P 2P1",
     capacity: 14,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/salle_croissance_1.jpg" },
+      { "url": "src/assets/images/salle_croissance_2.jpg" },
+      { "url": "src/assets/images/salle_croissance_3.jpg" }
+    ],
     description: "Salle de travail spacieuse avec ambiance détendue. Équipée pour des études individuelles ou en groupe dans un environnement confortable.",
     organisation: "Association de location de salles du Québec",
     features: ["plug", "screen"],
@@ -204,7 +227,10 @@ const sampleSpaces = [
     postalCode: "H7G 3A5",
     capacity: 110,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/agrandissement-1.jpg" },
+      { "url": "src/assets/images/agrandissement-2.jpg" }
+    ],
     description: "Espace polyvalent adapté pour des événements de grande envergure ou des sessions de formation. Confortablement aménagé.",
     organisation: "Association de location de salles du Québec",
     features: ["plug"],
@@ -230,7 +256,11 @@ const sampleSpaces = [
     postalCode: "H1A 2B3",
     capacity: 20,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/montreal_cowork_1.jpg" },
+      { "url": "src/assets/images/montreal_cowork_2.jpg" },
+      { "url": "src/assets/images/montreal_cowork_3.jpg" }
+    ],
     description: "Espace de co-working moderne avec connexion Wi-Fi rapide et espaces de réunion. Parfait pour les freelancers et les petites équipes cherchant un environnement collaboratif.",
     organisation: "Montreal CoWork",
     features: ["wifi"],
@@ -251,7 +281,11 @@ const sampleSpaces = [
     postalCode: "H1A 2B3",
     capacity: 12,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/centre_etude_101_1.jpg" },
+      { "url": "src/assets/images/centre_etude_101_2.jpg" },
+      { "url": "src/assets/images/centre_etude_101_3.jpg" }
+    ],
     description: "Espace d'étude moderne équipé de mobilier ergonomique et d'internet haut débit. Idéal pour l'étude individuelle ou les discussions en petit groupe.",
     organisation: "Solutions d'Étude Inc.",
     features: ["plug", "wifi"],
@@ -282,7 +316,11 @@ const sampleSpaces = [
     postalCode: "H2C 3D5",
     capacity: 5,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/coin_etude_tranquille_1.jpg" },
+      { "url": "src/assets/images/coin_etude_tranquille_2.jpg" },
+      { "url": "src/assets/images/coin_etude_tranquille_3.jpg" }
+    ],
     description: "Coin d'étude confortable et calme avec lumière naturelle. Parfait pour la lecture concentrée ou la contemplation individuelle.",
     organisation: "Espaces Paisibles Ltée.",
     features: ["whiteboard", "plug"],
@@ -313,7 +351,11 @@ const sampleSpaces = [
     postalCode: "H3E 4F6",
     capacity: 20,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/labo_etude_technologie_1.jpg" },
+      { "url": "src/assets/images/labo_etude_technologie_2.jpg" },
+      { "url": "src/assets/images/labo_etude_technologie_3.jpg" }
+    ],
     description: "Laboratoire d'étude de pointe avec technologie avancée et espaces de travail collaboratif. Idéal pour les projets de groupe ou les sessions d'étude axées sur la technologie.",
     organisation: "TechÉtude Inc.",
     features: ["whiteboard", "plug"],
@@ -339,7 +381,10 @@ const sampleSpaces = [
     postalCode: "H4G 5K9",
     capacity: 10,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/retraite_etude_silencieuse_1.jpg" },
+      { "url": "src/assets/images/retraite_etude_silencieuse_2.jpg" }
+    ],
     description: "Retraite d'étude tranquille entourée de nature. Idéal pour des sessions d'étude sans interruption ou pour la réflexion personnelle.",
     organisation: "Retraites Sérénité",
     features: ["whiteboard", "plug"],
@@ -365,7 +410,11 @@ const sampleSpaces = [
     postalCode: "H5J 6M2",
     capacity: 8,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/coin_etude_cosy_1.jpg" },
+      { "url": "src/assets/images/coin_etude_cosy_2.jpg" },
+      { "url": "src/assets/images/coin_etude_cosy_3.jpg" }
+    ],
     description: "Coin d'étude confortable avec une collection de livres de référence. Parfait pour la lecture détendue ou les sessions d'étude concentrées.",
     organisation: "Studios Livrovore",
     features: ["whiteboard", "plug"],
@@ -391,7 +440,11 @@ const sampleSpaces = [
     postalCode: "H2A 3B4",
     capacity: 15,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/bureau_etudiant_pro_1.jpg" },
+      { "url": "src/assets/images/bureau_etudiant_pro_2.jpg" },
+      { "url": "src/assets/images/bureau_etudiant_pro_3.jpg" }
+    ],
     description: "Bureau d'étude professionnel avec équipements de pointe et ambiance studieuse. Idéal pour les étudiants cherchant un environnement sérieux et productif.",
     organisation: "Étude Professionnelle Inc.",
     features: ["whiteboard", "plug"],
@@ -417,7 +470,11 @@ const sampleSpaces = [
     postalCode: "H3C 2E1",
     capacity: 6,
     isAvailable: true,
-    images: [{url: "test"}],
+    images: [
+      { "url": "src/assets/images/espace_etude_zen_1.jpg" },
+      { "url": "src/assets/images/espace_etude_zen_2.jpg" },
+      { "url": "src/assets/images/espace_etude_zen_3.jpg" }
+    ],
     description: "Espace d'étude zen avec décor apaisant et musique relaxante. Parfait pour les étudiants recherchant une atmosphère calme et inspirante.",
     organisation: "Zen Étude Studios",
     features: ["whiteboard", "plug"],
