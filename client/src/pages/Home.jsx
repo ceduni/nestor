@@ -3,22 +3,15 @@ import Filters from '../components/Filters';
 import Cards from '../components/Cards';
 
 export default function Home() {
-    const [nameFilter, setNameFilter] = useState("");
-    const [addressFilter, setAddressFilter] = useState("");
+    const [filters, setFilters] = useState({
+        name: "",
+        address: "",
+    })
     const [allSpaces, setAllSpaces] = useState([]);
     
-
     useEffect(()=>{
         fetchAllSpaces();
     }, []);
-
-    const handleNameFilter = (name) => {
-        setNameFilter(name);
-    }
-
-    const handleAddressFilter = (address) => {
-        setAddressFilter(address);
-    }
 
     const fetchAllSpaces = ()=>{
         fetch('http://localhost:3000/api/v1/spaces/')
@@ -31,7 +24,19 @@ export default function Home() {
         .catch(error => console.error(error));
     }
 
-    console.log(allSpaces);
+    const handleNameFilter = (name) => {
+        setNameFilter(name);
+    }
+
+    const handleAddressFilter = (address) => {
+        setAddressFilter(address);
+    }
+
+    const handleFilters = (newName, newAddress)=>{
+        setFilters({...filters, name : newName, address : newAddress})
+    }
+
+    // console.log(filters.name + " & " + filters.address);
 
     return (
         <main>
@@ -39,13 +44,13 @@ export default function Home() {
                 <Filters 
                     onNameFilterUpdate={handleNameFilter} 
                     onAddressFilterUpdate={handleAddressFilter}
+                    onFiltersUpdate={handleFilters}
                 />
             </section>
 
             <Cards 
                 allSpaces={allSpaces} 
-                nameFilter={nameFilter}
-                addressFilter={addressFilter}
+                filters={filters}
             />
         </main>
     );

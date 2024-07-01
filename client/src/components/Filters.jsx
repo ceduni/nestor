@@ -8,7 +8,7 @@ import { FiFilter } from "react-icons/fi";
 import FiltersExtra from './FiltersExtra';
 import FilterTags from './FiltersTags';
 
-export default function Filters({onNameFilterUpdate, onAddressFilterUpdate}) {
+export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFiltersUpdate}) {
     const [filterBtnCliked, setFilterBtnClicked] = useState(false);
     const [hasAnyFilter, setHasAnyFilter] = useState(false);
     const [name, setName] = useState("");
@@ -29,9 +29,13 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate}) {
 
     const handleFilterSubmit = (e)=>{
         e.preventDefault();
-        onNameFilterUpdate(name.trim());
-        onAddressFilterUpdate(address.trim());
+        // onNameFilterUpdate(name.trim());
+        // onAddressFilterUpdate(address.trim());
+
+        onFiltersUpdate(name.trim(), address.trim());
     }
+
+    // console.log("name : " + name + " address : " + address);
 
     return (
         <div className='filter_section flex flex-col items-center'>

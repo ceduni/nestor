@@ -3,7 +3,8 @@ import {v4 as uuidv4} from 'uuid';
 import Card from './Card';
 import CardDetail from './CardDetail';
 
-export default function Cards({allSpaces, nameFilter, addressFilter}) {
+export default function Cards({allSpaces, filters}) {
+// console.log(filters);
     // States
     const [cardSelected, setCardSelected] = useState(false);
     const [spaces, setSpaces] = useState([]);
@@ -14,13 +15,36 @@ export default function Cards({allSpaces, nameFilter, addressFilter}) {
       setSpaces(allSpaces);
     }, [allSpaces]);
 
-    useEffect(()=>{
-        filterByName(nameFilter);
-    }, [nameFilter]);
+    // useEffect(()=>{
+    //     filterByName(filters.name);
+    // }, [filters.name]);
+
+    // useEffect(()=>{
+    //     filterByAddress(filters.address);
+    // }, [filters.address]);
 
     useEffect(()=>{
-        filterByAddress(addressFilter);
-    }, [addressFilter]);
+        filtering(filters);
+    }, [filters]);
+
+
+    const filtering = (filters) =>{
+        if(filters.name === "" && filters.address === ""){
+            setSpaces(allSpaces);
+        } else {
+            if(filters.name && filters.address === ""){
+                setSpaces(allSpaces.filter((space) => (space.name.toLowerCase().includes(filters.name.toLowerCase()) )));
+            } else if(filters.name === "" && filters.address){
+                setSpaces(allSpaces.filter((space) => (space.organisation.toLowerCase().includes(filters.address.toLowerCase()) )));
+            } else {
+                console.log("how");
+                setSpaces(allSpaces.filter((space) => (
+                    space.name.toLowerCase().includes(filters.name.toLowerCase()) ||
+                    space.organisation.toLowerCase().includes(filters.address.toLowerCase()) 
+                )));
+            }
+        }
+    }
 
     // Handles
     const handleCardClick = (isClicked, space) =>{
@@ -37,25 +61,25 @@ export default function Cards({allSpaces, nameFilter, addressFilter}) {
         setDetailSelected(spaceSelected);
     }
 
-    const filterByName = (nameFilter) =>{
-        if(nameFilter === "" || !nameFilter) {
-            setSpaces(allSpaces);
-        } else {
-            setSpaces(allSpaces.filter((space) => (space.name.toLowerCase().includes(nameFilter.toLowerCase()) )));
-        }
-    }
+    // const filterByName = (nameFilter) =>{
+    //     if(nameFilter === "") {
+    //         setSpaces(allSpaces);
+    //     } else {
+    //         setSpaces(allSpaces.filter((space) => (space.name.toLowerCase().includes(filters.name.toLowerCase()) )));
+    //     }
+    // }
 
-    const filterByAddress = (addressFilter) =>{
-        if(addressFilter === "" || !addressFilter) {
-            setSpaces(allSpaces);
-        } else {
-            setSpaces(allSpaces.filter((space) => (space.organisation.toLowerCase().includes(addressFilter.toLowerCase()) )));
-        }
-    }
+    // const filterByAddress = (addressFilter) =>{
+    //     if(addressFilter === "") {
+    //         setSpaces(allSpaces);
+    //     } else {
+    //         setSpaces(allSpaces.filter((space) => (space.organisation.toLowerCase().includes(filters.address.toLowerCase()) )));
+    //     }
+    // }
 
     return (
     <>
-        <p className='text-center p-3'>{spaces.length} résultats trouvés</p>
+        <p className='text-center p-3'>{spaces.length} espaces trouvés</p>
         <section className='grid grid-cols-3 px-0'>
             <div className={cardSelected ?  
                             'cards h-1/3 overflow-auto scrollbar-hidden grid grid-cols-1 gap-5 px-10 py-5' 

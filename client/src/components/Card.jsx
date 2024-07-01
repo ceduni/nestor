@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Card({space, cardSelected, onCardClick}) {
-    console.log(space.images);
     const {images, name, organisation, capacity, isAvailable} = space;
     const handleClick = (e)=>{
         e.preventDefault();
