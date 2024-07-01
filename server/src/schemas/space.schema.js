@@ -54,8 +54,7 @@ const spaceSchema = {
                     enum: ["studyRoom", "facility", "nature"]
                 }
             },
-            additionalProperties: false,
-            required: ["images", "availabilities"]
+            additionalProperties: false
         }
     }
 };

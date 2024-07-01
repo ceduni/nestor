@@ -2,8 +2,29 @@ const spaceService = require("../services/space.service");
 async function getRoutes(fastify, options) {
   fastify.get("/", spaceService.getSpaces);
   fastify.get("/:id", spaceService.getSpace);
-  fastify.post("/",fastify.getSchema("spaceSchema"), spaceService.addSpace);
-  fastify.put("/:id",fastify.getSchema("spaceSchema"), spaceService.updateSpace);
+  fastify.post("/",{
+      schema: {
+          body: {
+              $ref: "spaceSchema#/schema/body",
+              type: "object",
+              required: ["images", "availabilities"]
+          }
+      }
+  }, spaceService.addSpace);
+  fastify.put("/:id",{
+      schema: {
+          body: {
+              $ref: "spaceSchema#/schema/body",
+              type: "object",
+              not: {
+                  anyOf: [
+                      {required: ["images"]},
+                      {required: ["availabilities"]}
+                  ]
+              }
+          }
+      }
+  }, spaceService.updateSpace);
   fastify.delete("/:id", spaceService.removeSpace);
 
   fastify.post("/:id/availabilities/",

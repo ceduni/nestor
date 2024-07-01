@@ -21,7 +21,7 @@ const spaceRoutes = require("./routes/space.routes.js");
 const spaceSchema = require("./schemas/space.schema.js");
 
 // connect to database
-mongoose.connect(process.env.MONGODB_TEST_CONNECTION_STRING, {}).
+mongoose.connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {}).
 then(() => console.log("Connected to the database")).
 catch((e) => console.log("Error connecting to database", e));
 
