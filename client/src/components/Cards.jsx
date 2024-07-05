@@ -55,11 +55,11 @@ export default function Cards({allSpaces, filters}) {
     return (
     <>
         <p className='text-center p-3'>{spaces.length} espaces trouvés</p>
-        <section className='grid grid-cols-3 px-0'>
+        <section className='grid grid-cols-3 xl:grid-cols-4 px-0'>
             <div className={cardSelected ?  
-                            'cards h-1/3 overflow-auto scrollbar-hidden grid grid-cols-1 gap-5 px-10 py-5' 
+                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 px-20 py-5 col-span-1' 
                             :
-                            'cards h-1/2 overflow-auto scrollbar-hidden grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 px-10 py-5 col-span-3' }
+                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 pl-5 py-5 col-span-4' }
             >   
                 {spaces.map((item) => (
                     <Card
@@ -70,7 +70,7 @@ export default function Cards({allSpaces, filters}) {
                     />
                 ))}
             </div>
-            <div className='card_detail h-1/3 overflow-auto flex justify-center items-start col-span-2 px-10 py-5'>
+            <div className='card_detail overflow-auto flex justify-center items-start col-span-3 pr-10 py-5'>
                 {cardSelected ? <CardDetail spaceDetail={detailSelected}/> : <></>}
             </div>
         </section>

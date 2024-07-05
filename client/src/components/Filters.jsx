@@ -39,19 +39,19 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
 
     return (
         <div className='filter_section flex flex-col items-center'>
-            <h1 className='text-xl p-2'>Slogan</h1>
+            {/* <h1 className='text-xl p-2'>Slogan</h1> */}
             <form className='filter_form flex justify-center rounded-full px-8 m-3' action="" >
                 <div className='filter_form_items flex flex-col gap-x-5 items-start'>
-                    <label className='filter_label' htmlFor="">Nom de l'espace</label>
-                    <input className='filter_input' type="text" placeholder="Entrer un nom" onChange={handleNameChange}/>
+                    <label className='filter_label' htmlFor="filter_nom_espace">Nom de l'espace</label>
+                    <input className='filter_input' id='filter_nom_espace' type="text" placeholder="Entrer un nom" onChange={handleNameChange}/>
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
-                    <label className='filter_label' htmlFor="">Adresse</label>
-                    <input className='filter_input' type="text" placeholder="Entrer une adresse" onChange={handleAddressChange}/>
+                    <label className='filter_label' htmlFor="filter_addresse">Adresse</label>
+                    <input className='filter_input' id='filter_addresse' type="text" placeholder="Entrer une adresse" onChange={handleAddressChange}/>
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
-                    <label className='filter_label' htmlFor="">Date</label>
-                    <input type="date" />
+                    <label className='filter_label' htmlFor="filter_date">Date</label>
+                    <input type="date" id='filter_date'/>
                 </div>
                 <div className='filter_form_btn flex justify-center items-center px-2'>
                     <button className="filter_form_btn_link" onClick={handleFilterSubmit} >

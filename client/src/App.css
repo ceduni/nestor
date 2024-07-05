@@ -84,21 +84,64 @@
 /* -----Card----- */
 .cards::-webkit-scrollbar {
   display: none;
+  @apply overflow-scroll;
 }
 
 .card {
   /* border: 1px solid #eceded; */
-  box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
+  /* box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
   -webkit-box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
-  -moz-box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
+  -moz-box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6); */
+  /* background-color: var(--border-color); */
+  width: fit-content;
 }
 
 .card:hover {
   background-color: var(--border-color);
 }
 
+.card_img_container {
+  width: fit-content;
+}
+
+.card_img {
+  @apply w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80;
+}
+
+/* -----CardDetail----- */
 .card_detail::-webkit-scrollbar {
   display: none;
+  @apply overflow-scroll;
+}
+
+.slide-container {
+  background-color: grey;
+}
+
+.slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  height: auto;
+}
+
+.slide span {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  color: white;
+  /* background: rgba(141, 174, 224, 0.5); */
+  text-align: center;
+  position: relative;
+  top: 90%;
+}
+
+/* -----footer----- */
+.footer {
+  background-color: #f2f2ed;
 }
 
 /* -----existing css codes----- */
