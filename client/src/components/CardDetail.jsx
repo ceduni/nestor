@@ -55,17 +55,6 @@ export default function CardDetail({spaceDetail}) {
     }
     return (
         <div className='w-full card_detail rounded-xl flex flex-col'>
-            {/* <div 
-                className={
-                    spaceDetail.images && spaceDetail.images.length > 0  && spaceDetail.images.length < 2? 
-                        "grid grid-cols-2 gap-3 rounded-lg": 
-                        "grid grid-cols-2 gap-3 rounded-lg"
-                }
-            >
-                {spaceDetail.images.map((image)=>(
-                    <img className='w-full h-44' src={image.url} alt="space image" />
-                ))}
-            </div> */}
             <div className="slide-container">
                 <Slide easing="ease">
                     {slideImages.map((slide, index) => {
@@ -93,6 +82,9 @@ export default function CardDetail({spaceDetail}) {
                     <li className='flex items-center gap-2'><CgOrganisation />{spaceDetail.organisation}</li>
                     <li className='flex items-center gap-2'><IoPeopleOutline />{spaceDetail.capacity} personnes</li>
                     <li className='flex items-center gap-2'><MdOutlineDescription />{spaceDetail.description}</li>
+                        {spaceDetail.features.map(equip => (
+                            <li className='flex items-center gap-2'>{equip}</li>
+                        ))}
                 </ul>
                 <form className='flex gap-10 justify-center items-center py-5 border'>
                     <div className='flex flex-col gap-2'>

@@ -72,6 +72,9 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
             {/* Tous les filtres */}
             {filterBtnCliked && <FiltersExtra />}
 
+            {/* Filter tags */}
+            {hasAnyFilter && <FilterTags/>}
+
             <div className='flex justify-center gap-10 m-3'>
                 <ul className='flex justify-center gap-8'>
                     <li>
@@ -100,9 +103,6 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
                     </li>
                 </ul>
             </div>
-
-            {/* Filter tags */}
-            {hasAnyFilter && <FilterTags/>}
         </div>
     );
 }

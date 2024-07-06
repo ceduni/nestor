@@ -6,8 +6,8 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { GiSpellBook } from "react-icons/gi";
 
 const defaultItems = ["À propos", "Contact"];
-const adminItems = ["Mes favoris", "Gérer mes espaces", "À propos", "Contact"];
-const studentItems = ["Mes favoris", "À propos", "Contact"];
+const adminItems = ["Mes réservations", "Gérer mes espaces", "À propos", "Contact"];
+const studentItems = ["Mes réservations", "À propos", "Contact"];
 
 export default function Header({logedIn, isAdmin}) {
     const [navItems, setNavitems] = useState(()=>selectNavItems(logedIn, isAdmin));

@@ -6,8 +6,8 @@ import Footer from './components/Footer'
 
 function App() {
   // Modes pour nav items
-  const [logedIn, setLogedin] = useState(false);
-  const [isAdmin, setIsadmin] = useState(false);
+  const [logedIn, setLogedin] = useState(true);
+  const [isAdmin, setIsadmin] = useState(true);
 
   return (
     <div>
