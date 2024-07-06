@@ -3,7 +3,6 @@ import { LuSchool2 } from "react-icons/lu";
 import { IoSearchCircle, IoLibraryOutline } from "react-icons/io5";
 import { VscCoffee } from "react-icons/vsc";
 import { MdOutlinePark } from "react-icons/md";
-import { MdOutlineCottage } from "react-icons/md";
 import { FiFilter } from "react-icons/fi";
 import FiltersExtra from './FiltersExtra';
 import FilterTags from './FiltersTags';
@@ -96,13 +95,7 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
                     <li>
                         <a className='filter_icons flex flex-col items-center' href="">
                             <MdOutlinePark />
-                            <p>Parc</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a className='filter_icons flex flex-col items-center' href="">
-                            <MdOutlineCottage />
-                            <p>Chalet</p>
+                            <p>Nature</p>
                         </a>
                     </li>
                 </ul>

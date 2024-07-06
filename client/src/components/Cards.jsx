@@ -57,7 +57,7 @@ export default function Cards({allSpaces, filters}) {
         <p className='text-center p-3'>{spaces.length} espaces trouvés</p>
         <section className='grid grid-cols-3 xl:grid-cols-4 px-0'>
             <div className={cardSelected ?  
-                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 px-20 py-5 col-span-1' 
+                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 px-5 py-5 col-span-1' 
                             :
                             'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 pl-5 py-5 col-span-4' }
             >   
@@ -70,7 +70,7 @@ export default function Cards({allSpaces, filters}) {
                     />
                 ))}
             </div>
-            <div className='card_detail overflow-auto flex justify-center items-start col-span-3 pr-10 py-5'>
+            <div className='card_detail overflow-auto flex justify-center items-start md:col-span-2 xl:col-span-3 pr-5 py-5'>
                 {cardSelected ? <CardDetail spaceDetail={detailSelected}/> : <></>}
             </div>
         </section>
