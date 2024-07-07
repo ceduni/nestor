@@ -23,7 +23,7 @@ const router = createBrowserRouter([{
     {index: true, path: '/', element: <Home/>},
     {path: '/apropos', element: <Apropos />},
     {path: '/connexion', element: <Connexion />},
-    {path: '/mesFavoris', element: <MesFavoris />},
+    {path: '/mesfavoris', element: <MesFavoris />},
     {path: '/gerermesespaces', element: <GererMesEspaces />},
   ]
 }])
