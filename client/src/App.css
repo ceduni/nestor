@@ -144,6 +144,14 @@ body {
   top: 90%;
 }
 
+/* -----Login----- */
+.login_container {
+  width: 40%;
+}
+.login_form {
+  height: 55%;
+}
+
 /* -----footer----- */
 .footer {
   background-color: #f2f2ed;

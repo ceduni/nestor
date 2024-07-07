@@ -3,7 +3,7 @@ import LogIn from '../components/LogIn';
 
 export default function Connexion() {
     return (
-        <div>
+        <div className='flex justify-center items-center'>
             <LogIn />
         </div>
     );
