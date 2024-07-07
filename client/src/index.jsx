@@ -21,10 +21,10 @@ const router = createBrowserRouter([{
   errorElement: <NotFound />,
   children:[
     {index: true, path: '/', element: <Home/>},
-    {path: '/Àpropos', element: <Apropos />},
-    {path: '/Connexion', element: <Connexion />},
-    {path: '/MesFavoris', element: <MesFavoris />},
-    {path: '/Gérermesespaces', element: <GererMesEspaces />},
+    {path: '/apropos', element: <Apropos />},
+    {path: '/connexion', element: <Connexion />},
+    {path: '/mesFavoris', element: <MesFavoris />},
+    {path: '/gerermesespaces', element: <GererMesEspaces />},
   ]
 }])
 
