@@ -5,6 +5,7 @@ import CardDetail from './CardDetail';
 import { LuRefreshCw } from "react-icons/lu";
 
 export default function Cards({allSpaces, filters}) {
+    // allSpaces.map(space=>console.log(Object.values(space)));
     // States
     const [cardSelected, setCardSelected] = useState(false);
     const [spaces, setSpaces] = useState([]);
@@ -38,9 +39,21 @@ export default function Cards({allSpaces, filters}) {
         }
     }
 
-    const filtering2 = (filters)=>{
-        
-    }
+    // const filtering2 = (filters)=>{
+    //     const filtersValues = Object.values(filters);
+    //     console.log(filtersValues);
+    //     const spaces = allSpaces.filter(space =>{
+    //         const spaceValues = Object.values(space);
+    //         console.log(spaceValues);
+    //         for (let val in filtersValues){
+    //             if(val in spaceValues){
+    //                 return true;
+    //             }
+    //         }
+    //         return false;
+    //     })
+    // }
+    // filtering2(filters);
 
     // Handles
     const handleCardClick = (isClicked, space) =>{

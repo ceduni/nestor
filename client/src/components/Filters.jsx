@@ -102,7 +102,7 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
             {/* Filter tags */}
             {hasAnyFilter && <FilterTags filterTags={filterTags}/>}
             
-            {/* icon filters */}
+            {/* Filters with icons*/}
             <FiltersIcons />
         </div>
     );
