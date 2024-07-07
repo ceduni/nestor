@@ -6,6 +6,7 @@ export default function Home() {
     const [filters, setFilters] = useState({
         name: "",
         address: "",
+        peopleNum: 0,
     })
     const [allSpaces, setAllSpaces] = useState([]);
     
@@ -32,11 +33,9 @@ export default function Home() {
         setAddressFilter(address);
     }
 
-    const handleFilters = (newName, newAddress)=>{
-        setFilters({...filters, name : newName, address : newAddress})
+    const handleFilters = (newName, newAddress, newPeopleNum)=>{
+        setFilters({...filters, name : newName, address : newAddress, peopleNum: newPeopleNum})
     }
-
-    // console.log(filters.name + " & " + filters.address);
 
     return (
         <main>

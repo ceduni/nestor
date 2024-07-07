@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
 import Card from './Card';
 import CardDetail from './CardDetail';
+import { LuRefreshCw } from "react-icons/lu";
 
 export default function Cards({allSpaces, filters}) {
-// console.log(filters);
     // States
     const [cardSelected, setCardSelected] = useState(false);
     const [spaces, setSpaces] = useState([]);
     const [detailSelected, setDetailSelected] = useState({});
+    const [onlyCards, setOnlyCards] = useState(false);
 
     // effects
     useEffect(()=>{
@@ -37,6 +38,10 @@ export default function Cards({allSpaces, filters}) {
         }
     }
 
+    const filtering2 = (filters)=>{
+        
+    }
+
     // Handles
     const handleCardClick = (isClicked, space) =>{
         if(isClicked){
@@ -52,9 +57,20 @@ export default function Cards({allSpaces, filters}) {
         setDetailSelected(spaceSelected);
     }
 
+    const handleRefreshClick = (e)=>{
+        e.preventDefault();
+        setCardSelected(false);
+        setDetailSelected({});
+        console.log(cardSelected);
+        console.log(detailSelected);
+    }
+
     return (
     <>
-        <p className='text-center p-3'>{spaces.length} espaces trouvés</p>
+        <div className='flex justify-center items-center'>
+            <p className='text-center p-3'>{spaces.length} espaces trouvés</p>
+            <button className='border p-1 rounded' onClick={handleRefreshClick}><LuRefreshCw /></button>
+        </div>
         <section className='grid grid-cols-3 xl:grid-cols-4 px-0'>
             <div className={cardSelected ?  
                             'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 px-5 py-5 col-span-1' 

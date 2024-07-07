@@ -8,7 +8,7 @@ export default function FiltersExtra() {
         }
     }
     return (
-        <div>
+        <div className='p-2'>
             <h3>Équipements</h3>
             <form className='flex flex-col'>
                 <div>

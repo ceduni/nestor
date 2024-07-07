@@ -2,6 +2,11 @@
   --border-color: #eceded;
 }
 
+body {
+  font-family: Arial;
+  @apply text-base;
+}
+
 .header {
   border-bottom: 1px solid var(--border-color);
 }
@@ -30,10 +35,10 @@
 }
 
 .filter_form_items {
-  margin: 0.4rem;
-  padding: 0.2rem 1rem;
+  margin: 0.3rem;
+  padding: 0.2rem 0.5rem;
   border-right: 1px solid var(--border-color);
-  width: 15rem;
+  width: 12rem;
 }
 
 .filter_label {

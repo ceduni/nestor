@@ -3,7 +3,6 @@ import {v4 as uuidv4} from 'uuid';
 import { Link } from 'react-router-dom';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
-import { GiSpellBook } from "react-icons/gi";
 
 const defaultItems = ["À propos", "Contact"];
 const adminItems = ["Mes réservations", "Gérer mes espaces", "À propos", "Contact"];
@@ -34,6 +33,7 @@ export default function Header({logedIn, isAdmin}) {
                     {/* nav connection button */}
                     <Link to="Connexion" className='nav_items' >
                         <li>{logedIn? <FaRegUserCircle className='size-6'/> : <RiLoginBoxLine className='size-6'/>}</li>
+                        {/* <li>{logedIn? <li>Déconnecter</li> : <li>Connecter</li>}</li> */}
                     </Link> 
                 </ul>
             </nav>
