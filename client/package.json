@@ -15,6 +15,7 @@
     "react-big-calendar": "^1.13.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
+    "react-login-page": "^1.0.4",
     "react-router-dom": "^6.24.0",
     "react-slideshow-image": "^4.3.1",
     "uuid": "^10.0.0"
