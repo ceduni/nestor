@@ -1,11 +1,10 @@
 import React from 'react';
 
-
-export default function LogIn() {
+export default function LogIn({onSignupClick}) {
     return (
         <div className='login_container flex flex-col justify-center items-center gap-5 border m-10 p-10'>
             <h1>Connexion</h1>
-            <form className="login_form flex flex-col gap-2" action="">
+            <form className="login_form flex flex-col gap-3" action="">
                 <label htmlFor="">Courriel</label>
                 <input className='border' type="text" placeholder='Enter votre courriel'/>
 
@@ -14,7 +13,7 @@ export default function LogIn() {
 
                 <input className='border' type="submit" value="Se connecter"/>
                 <p className='text-center'>Ou</p>
-                <input className='border' type="submit" value="Créer un compte"/>
+                <input className='border' type="submit" value="Créer un compte" onClick={onSignupClick}/>
             </form>
         </div>
     );

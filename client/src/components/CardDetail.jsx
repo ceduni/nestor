@@ -47,7 +47,7 @@ export default function CardDetail({spaceDetail}) {
     const [slideImages, setSlideImages] = useState([]);
     useEffect(()=>{
         setSlideImages(spaceDetail.images);
-    }, []);
+    }, [spaceDetail]);
     // console.log(slideImages); 
     const handleSelectEvent = (e)=>{
         // e.preventDefault();
@@ -60,7 +60,7 @@ export default function CardDetail({spaceDetail}) {
                     {slideImages.map((slide, index) => {
                         return (
                             <div className={slide} key={slide}>
-                                <div className='h-80 rounded-3xl' style={{ backgroundImage: `url(${slideImages[index].url})` }}>
+                                <div className='slide_bg rounded-lg bg-no-repeat bg-cover' style={{ backgroundImage: `url(${slideImages[index].url})` }}>
                                     <span className=''>image {index + 1} / {slideImages.length}</span>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@ export default function CardDetail({spaceDetail}) {
             <section className='p-2'>
                 <header className='py-2'>
                     <nav>
-                        <ul className='flex gap-x-4'>
+                        <ul className='flex gap-x-8'>
                             <li>Aperçu</li>
                             <li>Réservation</li>
                         </ul>

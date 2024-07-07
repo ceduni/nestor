@@ -120,17 +120,12 @@ body {
 }
 
 .slide-container {
-  background-color: grey;
+  /* background-color: grey; */
 }
 
-.slide > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
+.slide_bg {
+  height: 28rem;
   background-position: 50% 50%;
-  background-repeat: no-repeat;
-  height: auto;
 }
 
 .slide span {
@@ -144,9 +139,17 @@ body {
   top: 90%;
 }
 
+/* -----Account create----- */
+.account_create_container {
+  width: 50%;
+}
+
+.account_create_form {
+}
+
 /* -----Login----- */
 .login_container {
-  width: 40%;
+  width: 30%;
 }
 .login_form {
   height: 55%;
