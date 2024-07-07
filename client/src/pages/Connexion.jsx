@@ -11,10 +11,15 @@ export default function Connexion() {
         setIsSignup(true);
     }
 
+    const handleAnnulerClick = ()=>{
+        setIsLogin(true);
+        setIsSignup(false);
+    }
+
     return (
         <div className='flex justify-center items-center'>
             {isLogin && <LogIn onSignupClick={handleSignupClick}/>}
-            {isSignup && <SignUp />}
+            {isSignup && <SignUp onAnnulerClick={handleAnnulerClick}/>}
         </div>
     );
 }

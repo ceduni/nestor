@@ -147,6 +147,10 @@ body {
 .account_create_form {
 }
 
+.account_create_input {
+  @apply w-80 p-1;
+}
+
 /* -----Login----- */
 .login_container {
   width: 30%;
