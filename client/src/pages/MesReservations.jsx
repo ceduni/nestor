@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MesFavoris() {
+export default function MesReservations() {
     return (
         <div>
             Mes Favoris

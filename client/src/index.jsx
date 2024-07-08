@@ -6,7 +6,7 @@ import App from './App.jsx'
 import NotFound from './pages/NotFound.jsx';
 import Apropos from './pages/Apropos.jsx';
 import Connexion from './pages/Connexion.jsx';
-import MesFavoris from './pages/MesFavoris.jsx';
+import MesReservations from './pages/MesReservations.jsx';
 import GererMesEspaces from './pages/GererMesEspaces.jsx';
 import Home from './pages/Home.jsx';
 
@@ -21,10 +21,10 @@ const router = createBrowserRouter([{
   errorElement: <NotFound />,
   children:[
     {index: true, path: '/', element: <Home/>},
-    {path: '/apropos', element: <Apropos />},
+    {path: '/àpropos', element: <Apropos />},
     {path: '/connexion', element: <Connexion />},
-    {path: '/mesfavoris', element: <MesFavoris />},
-    {path: '/gerermesespaces', element: <GererMesEspaces />},
+    {path: '/mesréservations', element: <MesReservations />},
+    {path: '/gérermesespaces', element: <GererMesEspaces />},
   ]
 }])
 

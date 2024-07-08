@@ -24,7 +24,7 @@ export default function Header({logedIn, isAdmin}) {
                     
                     {/* nav items */}
                     {navItems.map((item)=>(
-                        <Link key={uuidv4()} className='nav_items' to={item.replace(/\s+/g, '')}>
+                        <Link key={uuidv4()} className='nav_items' to={item.toLowerCase().replace(/\s+/g, '')}>
                             {/* {console.log(item)} */}
                             <li>{item}</li>
                         </Link>
