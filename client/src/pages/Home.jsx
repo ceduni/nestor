@@ -41,8 +41,6 @@ export default function Home() {
         <main>
             <section className='filters p-2'>
                 <Filters 
-                    onNameFilterUpdate={handleNameFilter} 
-                    onAddressFilterUpdate={handleAddressFilter}
                     onFiltersUpdate={handleFilters}
                 />
             </section>

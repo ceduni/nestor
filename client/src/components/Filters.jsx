@@ -5,15 +5,17 @@ import FiltersIcons from './FiltersIcons';
 import FiltersExtra from './FiltersExtra';
 import FilterTags from './FiltersTags';
 
-export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFiltersUpdate}) {
+export default function Filters({onFiltersUpdate}) {
     const [filterBtnCliked, setFilterBtnClicked] = useState(false);
     const [hasAnyFilter, setHasAnyFilter] = useState(false);
     const [filters, setFilters] = useState({
         name: "",
         address: "",
         peopleNum: 0,
+        date: "",
     });
     const [filterTags, setFilterTags] = useState([]);
+    const [iconFilters, setIconFilters] = useState([]);
 
     useEffect(()=>{
         if(filterTags.length === 0){
@@ -49,6 +51,13 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
         }));
     }
 
+    const handleDateChange = (e)=>{
+        setFilters(prev =>({
+            ...prev,
+            date: e.target.value
+        }));
+    }
+
     const handleFilterSubmit = (e)=>{
         e.preventDefault();
         const filterValues = Object.values(filters);
@@ -57,7 +66,10 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
         onFiltersUpdate(filters.name.trim(), filters.address.trim(), filters.peopleNum);
     }
 
-    // console.log("name : " + filters.name + " address : " + filters.address);
+    const handleIconsClick = (iconsSelected)=>{
+        console.log("param : "+iconsSelected);
+        setIconFilters(iconsSelected);
+    }
 
     return (
         <div className='filter_section flex flex-col items-center'>
@@ -77,7 +89,7 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
                     <label className='filter_label text-base' htmlFor="filter_date">Date</label>
-                    <input className='filter_input text-base' type="date" id='filter_date'/>
+                    <input className='filter_input text-base' type="date" id='filter_date' onChange={handleDateChange}/>
                 </div>
                 <div className='filter_form_btn flex justify-center items-center px-2'>
                     <button className="filter_form_btn_link" >
@@ -103,7 +115,7 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
             {hasAnyFilter && <FilterTags filterTags={filterTags}/>}
             
             {/* Filters with icons*/}
-            <FiltersIcons />
+            <FiltersIcons onIconClick={handleIconsClick} iconFilters={iconFilters}/>
         </div>
     );
 }
