@@ -1,9 +1,9 @@
-const space = require("../models/space.model");
+const space = require("../models/space.model").space ;
 const mongoose = require("mongoose");
 
 async function getSpaces(req, rep) {
   try {
-    const spaces = await space.find();
+    const spaces = await space.find({isAvailable: true});
     if (spaces.length === 0) {
       return rep.status(404).send("No space found");
     }

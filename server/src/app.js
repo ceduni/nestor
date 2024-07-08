@@ -4,7 +4,8 @@ const fastify = require('fastify')({
   logger: true,
   ajv: {
     customOptions: {
-      removeAdditional: false
+      removeAdditional: false,
+      keywords: ['schema']
     }
   }
 });
@@ -15,12 +16,20 @@ mongoose.set({ debug: true });
 
 // import routes
 const spaceRoutes = require("./routes/space.routes.js");
+const locationRoutes = require("./routes/location.routes.js");
+
+// import schemas
+const spaceSchema = require("./schemas/space.schema.js");
 
 // connect to database
-mongoose.connect(process.env.MONGODB_TEST_CONNECTION_STRING, {}).then(() => console.log("Connected to the database")).catch((e) => console.log("Error connecting to database", e));
+mongoose.connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {}).
+then(() => console.log("Connected to the database")).
+catch((e) => console.log("Error connecting to database", e));
 
 // start server
 fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });
+fastify.register(locationRoutes, {prefix: "/api/v1/cities"})
+fastify.addSchema(spaceSchema);
 fastify.register(cors, {
   origin: "*",
   methods: ["GET"]

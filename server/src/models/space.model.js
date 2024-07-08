@@ -5,6 +5,10 @@ const imageSchema = new mongoose.Schema({
   url: {
     type: String,
     required: true
+  },
+  isMain: {
+    type: Boolean,
+    unique: true
   }
     }
 )
@@ -93,9 +97,9 @@ availabilitySchema.pre("save", function(next) {
   if (startAtToMilliseconds > endAtToMilliseconds) {
     next(new Error("Availability start date can't be greater than availability end date"));
   }
-  if (!this.isPeriodic && (endAtToMilliseconds < currentToMilliseconds || startAtToMilliseconds < currentToMilliseconds)) {
+  /*if (!this.isPeriodic && (endAtToMilliseconds < currentToMilliseconds || startAtToMilliseconds < currentToMilliseconds)) {
     next(new Error("Availability start and end date cannot be older than current date"));
-  }
+  }*/
   if (this.startAt.getFullYear() !== this.endAt.getFullYear() || this.startAt.getMonth() !== this.endAt.getMonth() || this.startAt.getDate() !== this.endAt.getDate()) {
     next(new Error("Availability start and end date should be within a day"));
   }
@@ -123,4 +127,4 @@ spaceSchema.pre("save", function(next) {
 
 const space = mongoose.model("space", spaceSchema);
 
-module.exports = space;
+module.exports = {space, availabilitySchema}
