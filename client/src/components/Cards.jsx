@@ -85,7 +85,7 @@ export default function Cards({allSpaces, filters}) {
         </div>
         <section className='grid grid-cols-3 xl:grid-cols-4 place-content-center px-5'>
             <div className={cardSelected ?  
-                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 px-0 py-5 col-span-1' 
+                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 px-0 py-5 col-span-1 place-items-center' 
                             :
                             'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 py-5 col-span-4 place-items-center' }
             >   
