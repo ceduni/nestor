@@ -12,7 +12,7 @@ export default function Card({space, cardSelected, onCardClick}) {
     return (
         <a className='card rounded-lg flex flex-col' href="" onClick={handleClick}>
             <div className='card_img_container'>
-                <img className='card_img rounded-lg z-0 brightness-105 contrast-100 saturate-150' src={images[0].url} alt="space photo" />
+                <img className='card_img rounded-lg z-0 brightness-95 contrast-125 saturate-150' src={images[0].url} alt="space photo" />
             </div>
             <div className='flex flex-col px-1 py-2 w-80 h-32'>
                 <p className='text-base font-bold flex items-center gap-2'><MdOutlineSubtitles className='w-5' />{name}</p>

@@ -22,16 +22,20 @@ const icons = [
 ]
 
 export default function FiltersIcons() {
+    const handleIconClick = (e) =>{
+        e.preventDefault();
+    }
+
     return (
         <div className='flex justify-center gap-10 m-3'>
                 <ul className='flex justify-center gap-8'>
                     {icons.map((icon)=>{
                         const IconComponent = icon.name;
                         return (
-                        <li key={uuidv4()}>
+                        <li key={uuidv4()} onClick={handleIconClick}>
                             <a className='filter_icons flex flex-col items-center gap-y-2 opacity-70' href="">
                                 <IconComponent className='size-6'/>
-                                <p className='text-sm'>{icon.title}</p>
+                                <p className='filter_icons_text text-sm'>{icon.title}</p>
                             </a>
                         </li>);
                     })}
