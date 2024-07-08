@@ -67,7 +67,6 @@ export default function Filters({onFiltersUpdate}) {
     }
 
     const handleIconsClick = (iconsSelected)=>{
-        console.log("param : "+iconsSelected);
         setIconFilters(iconsSelected);
     }
 
