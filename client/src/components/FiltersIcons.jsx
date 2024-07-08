@@ -29,8 +29,8 @@ export default function FiltersIcons() {
                         const IconComponent = icon.name;
                         return (
                         <li key={uuidv4()}>
-                            <a className='filter_icons flex flex-col items-center' href="">
-                                <IconComponent />
+                            <a className='filter_icons flex flex-col items-center gap-y-2 opacity-70' href="">
+                                <IconComponent className='size-6'/>
                                 <p className='text-sm'>{icon.title}</p>
                             </a>
                         </li>);

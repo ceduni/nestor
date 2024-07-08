@@ -5,7 +5,6 @@ import CardDetail from './CardDetail';
 import { LuRefreshCw } from "react-icons/lu";
 
 export default function Cards({allSpaces, filters}) {
-    // allSpaces.map(space=>console.log(Object.values(space)));
     // States
     const [cardSelected, setCardSelected] = useState(false);
     const [spaces, setSpaces] = useState([]);
@@ -84,11 +83,11 @@ export default function Cards({allSpaces, filters}) {
             <p className='text-center p-3'>{spaces.length} espaces trouvés</p>
             <button className='border p-1 rounded' onClick={handleRefreshClick}><LuRefreshCw /></button>
         </div>
-        <section className='grid grid-cols-3 xl:grid-cols-4 px-0'>
+        <section className='grid grid-cols-3 xl:grid-cols-4 place-content-center px-5'>
             <div className={cardSelected ?  
-                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 px-5 py-5 col-span-1' 
+                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 px-0 py-5 col-span-1' 
                             :
-                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 pl-5 py-5 col-span-4' }
+                            'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 py-5 col-span-4 place-items-center' }
             >   
                 {spaces.map((item) => (
                     <Card

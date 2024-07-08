@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: Arial;
+  font-family: Nunito;
   @apply text-base;
 }
 
@@ -61,6 +61,10 @@ body {
   left: 1.8rem;
 }
 
+.filter_search_icon {
+  color: red;
+}
+
 .filter_icons {
   transition: all 120ms linear;
 }
@@ -68,7 +72,8 @@ body {
 .filter_icons:hover {
   scale: 1.1;
   /* border-bottom: 0.4rem solid #eceded; */
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  opacity: 1;
 }
 
 .filter_btn_container {
@@ -83,7 +88,7 @@ body {
 }
 
 .filter_btn:hover {
-  scale: 1.1;
+  scale: 1;
 }
 
 /* -----Card----- */

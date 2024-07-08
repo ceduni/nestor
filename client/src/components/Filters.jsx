@@ -64,24 +64,24 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
             {/* <h1 className='text-xl p-2'>Slogan</h1> */}
             <form className='filter_form flex justify-center rounded-full px-8 m-3' action="" onSubmit={handleFilterSubmit}>
                 <div className='filter_form_items flex flex-col gap-x-5 items-start'>
-                    <label className='filter_label text-sm' htmlFor="filter_nom_espace">Nom de l'espace</label>
-                    <input className='filter_input text-sm' id='filter_nom_espace' type="text" placeholder="Entrer un nom" onChange={handleNameChange}/>
+                    <label className='filter_label text-base' htmlFor="filter_nom_espace">Nom de l'espace</label>
+                    <input className='filter_input text-base' id='filter_nom_espace' type="text" placeholder="Entrer un nom" onChange={handleNameChange}/>
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
-                    <label className='filter_label text-sm' htmlFor="filter_addresse">Adresse</label>
-                    <input className='filter_input text-sm' id='filter_addresse' type="text" placeholder="Entrer une adresse" onChange={handleAddressChange}/>
+                    <label className='filter_label text-base' htmlFor="filter_addresse">Adresse</label>
+                    <input className='filter_input text-base' id='filter_addresse' type="text" placeholder="Entrer une adresse" onChange={handleAddressChange}/>
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
-                    <label className='filter_label text-sm' htmlFor="filter_addresse">Nombre de personnes</label>
-                    <input className='filter_input text-sm' id='filter_nb_personnes' type="number" placeholder="Entrer un nombre" onChange={handlePeopleNumChange}/>
+                    <label className='filter_label text-base' htmlFor="filter_addresse">Nombre de personnes</label>
+                    <input className='filter_input text-base' id='filter_nb_personnes' type="number" placeholder="Entrer un nombre" onChange={handlePeopleNumChange}/>
                 </div>
                 <div className='filter_form_items flex flex-col items-start'>
-                    <label className='filter_label text-sm' htmlFor="filter_date">Date</label>
-                    <input className='filter_input text-sm' type="date" id='filter_date'/>
+                    <label className='filter_label text-base' htmlFor="filter_date">Date</label>
+                    <input className='filter_input text-base' type="date" id='filter_date'/>
                 </div>
                 <div className='filter_form_btn flex justify-center items-center px-2'>
                     <button className="filter_form_btn_link" >
-                        <IoSearchCircle className='size-12'/>
+                        <IoSearchCircle className='filter_search_icon color-red size-12'/>
                     </button>
                 </div>
             </form>
@@ -91,7 +91,7 @@ export default function Filters({onNameFilterUpdate, onAddressFilterUpdate, onFi
                     href=""
                     onClick={handleClick} 
                 >
-                    <p className='text-sm'>Afficher tous les filtres</p>
+                    <p className='text-base'>Afficher tous les filtres</p>
                     <FiFilter />
                 </a>
             </div>
