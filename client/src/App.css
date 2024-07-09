@@ -106,6 +106,10 @@ body {
   @apply overflow-scroll;
 }
 
+.cards {
+  height: 100rem;
+}
+
 .card {
   /* border: 1px solid #eceded; */
   /* box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
