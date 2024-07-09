@@ -46,7 +46,7 @@ export default function FiltersIcons({onIconClick}) {
                     return (
                         <li className='filter_icons flex flex-col items-center gap-y-2 opacity-70' key={uuidv4()} onClick={handleIconClick}>
                             <IconComponent className='size-6'/>
-                            <p className='filter_icons_text text-sm'>{icon.title}</p>
+                            <p className={`filter_icons_text ${iconsSelected.indexOf(icon.title) !== -1 ? 'selected' : ''} text-sm`}>{icon.title}</p>
                         </li>
                     );
                 })}
