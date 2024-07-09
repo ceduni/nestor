@@ -46,11 +46,11 @@ export default function CardDetail({spaceDetail}) {
                 </Slide>
             </div>
             <section className='p-2'>
-                <header className='py-2'>
+                <header className='border-b-2 py-2'>
                     <nav>
                         <ul className='flex gap-x-8'>
-                            <li onClick={handleApercuClick}>Aperçu</li>
-                            <li onClick={handleReservationClick}>Réservation</li>
+                            <li className={`card_detail_options ${isApercu === true ? "selected" : ""}`} onClick={handleApercuClick}>Aperçu</li>
+                            <li className={`card_detail_options ${isReservation === true ? "selected" : ""}`} onClick={handleReservationClick}>Réservation</li>
                         </ul>
                     </nav>
                 </header>

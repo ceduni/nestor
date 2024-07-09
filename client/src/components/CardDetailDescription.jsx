@@ -6,7 +6,7 @@ import { IoPeopleOutline } from "react-icons/io5";
 
 export default function CardDetailDescription({spaceDetail}) {
     return (
-        <ul className='py-5'>
+        <ul className='py-2'>
             <li className='font-bold flex items-center gap-2'><MdOutlineSubtitles />{spaceDetail.name}</li>
             <li className='flex items-center gap-2'><CgOrganisation />{spaceDetail.organisation}</li>
             <li className='flex items-center gap-2'><IoPeopleOutline />{spaceDetail.capacity} personnes</li>

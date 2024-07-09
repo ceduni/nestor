@@ -19,18 +19,18 @@ const localizer = dateFnsLocalizer({
 const bookingList = [
   {
     'title': 'All Day Event very long title',
-    'start': new Date(2024, 6, 5, 10, 0),
-    'end': new Date(2024, 6, 5, 12, 0)
+    'start': new Date(2024, 6, 11, 10, 0),
+    'end': new Date(2024, 6, 11, 12, 0)
   },
   {
     'title': 'Long Event',
-    'start': new Date(2024, 6, 6, 13, 0),
-    'end': new Date(2024, 6, 6, 15, 0)
+    'start': new Date(2024, 6, 12, 13, 0),
+    'end': new Date(2024, 6, 12, 15, 0)
   },
   {
     'title': 'New Event',
-    'start': new Date(2024, 6, 4, 13, 0),
-    'end': new Date(2024, 6, 4, 15, 0)
+    'start': new Date(2024, 6, 10, 13, 0),
+    'end': new Date(2024, 6, 10, 15, 0)
   },
 ]
 
@@ -41,29 +41,29 @@ export default function CardDetailCalendar() {
     }
     return (
         <div>
-            <form className='flex gap-10 justify-center items-center py-5 border'>
-                    <div className='flex flex-col gap-2'>
-                        <label htmlFor="">Date et heure de début</label>
-                        <input type="datetime-local" />
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                        <label htmlFor="">Date et heure de fin</label>
-                        <input type="datetime-local" />
-                    </div>
-                    <button className='border p-2 rounded-full' type='submit'>Réserver</button>
-                </form>
-                <div className='py-5'>
-                    <Calendar
-                        localizer={localizer}
-                        events={bookingList}
-                        startAccessor="start"
-                        endAccessor="end"
-                        style={{ height: 500 }}
-                        defaultView="week"
-                        views={{month:true, week: true, day: true}}
-                        onSelectEvent={handleSelectEvent}
-                    />
-                </div>
+          <form className='flex gap-7 justify-center items-center py-5'>
+            <div className='flex flex-col gap-2 p-2'>
+                <label className='font-semibold' htmlFor="">Date et heure de début</label>
+                <input className='card_detail_input border p-2' type="datetime-local" />
+            </div>
+            <div className='flex flex-col gap-2 p-2'>
+                <label className='font-semibold' htmlFor="">Date et heure de fin</label>
+                <input className='card_detail_input border p-2' type="datetime-local" />
+            </div>
+            <button className='border p-2 rounded-full font-semibold' type='submit'>Réserver</button>
+          </form>
+          <div className='py-5'>
+            <Calendar
+                localizer={localizer}
+                events={bookingList}
+                startAccessor="start"
+                endAccessor="end"
+                style={{ height: 500 }}
+                defaultView="week"
+                views={{month:true, week: true, day: true}}
+                onSelectEvent={handleSelectEvent}
+            />
+          </div>
         </div>
     );
 }

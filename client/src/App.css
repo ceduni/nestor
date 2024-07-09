@@ -133,6 +133,15 @@ body {
   @apply overflow-scroll;
 }
 
+.card_detail_options:hover {
+  cursor: pointer;
+  scale: 1.05;
+}
+
+.card_detail_options.selected {
+  @apply font-bold;
+}
+
 .slide-container {
   /* background-color: grey; */
 }
