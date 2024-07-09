@@ -37,7 +37,7 @@ export default function CardDetail({spaceDetail}) {
                     {slideImages.map((slide, index) => {
                         return (
                             <div className={slide} key={slide}>
-                                <div className='slide_bg rounded-lg bg-no-repeat bg-cover' style={{ backgroundImage: `url(${slideImages[index].url})` }}>
+                                <div className='slide_bg rounded-lg bg-no-repeat bg-cover brightness-105 contrast-125 saturate-125' style={{ backgroundImage: `url(${slideImages[index].url})` }}>
                                     <span className=''>image {index + 1} / {slideImages.length}</span>
                                 </div>
                             </div>
