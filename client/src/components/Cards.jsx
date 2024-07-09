@@ -83,7 +83,7 @@ export default function Cards({allSpaces, filters}) {
             <p className='text-center p-3'>{spaces.length} espaces trouvés</p>
             <button className='border p-1 rounded' onClick={handleRefreshClick}><LuRefreshCw /></button>
         </div>
-        <section className='grid grid-cols-3 xl:grid-cols-4 place-content-center px-5'>
+        <section className='grid grid-cols-3 xl:grid-cols-4 place-content-center md:px-3 xl:px-14'>
             <div className={cardSelected ?  
                             'cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 py-5 col-span-1 place-items-center' 
                             :
