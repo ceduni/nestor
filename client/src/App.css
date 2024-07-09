@@ -142,6 +142,9 @@ body {
   @apply font-bold;
 }
 
+.card_detail_input {
+}
+
 .slide-container {
   /* background-color: grey; */
 }
