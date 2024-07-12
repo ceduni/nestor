@@ -57,7 +57,7 @@ export default function CardDetail({spaceDetail}) {
 
                 {isApercu && <CardDetailDescription spaceDetail={spaceDetail}/>}
 
-                {isReservation && <CardDetailCalendar />}
+                {isReservation && <CardDetailCalendar spaceDetail={spaceDetail}/>}
             </section>
         </div>  
     );

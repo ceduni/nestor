@@ -9,6 +9,7 @@ import Connexion from './pages/Connexion.jsx';
 import MesReservations from './pages/MesReservations.jsx';
 import GererMesEspaces from './pages/GererMesEspaces.jsx';
 import Home from './pages/Home.jsx';
+import SpaceAdd from './components/SpaceAdd.jsx';
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -25,8 +26,10 @@ const router = createBrowserRouter([{
     {path: '/connexion', element: <Connexion />},
     {path: '/mesréservations', element: <MesReservations />},
     {path: '/gérermesespaces', element: <GererMesEspaces />},
+    {path: '/gérermesespaces/spaceadd', element: <SpaceAdd />},
   ]
-}])
+},
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
