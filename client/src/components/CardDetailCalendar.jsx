@@ -37,6 +37,18 @@ export default function CardDetailCalendar({spaceDetail}) {
       spaceId: spaceDetail._id,
     });
 
+    // api : fetch all reservations
+    useEffect(()=>{
+      const fetchReservations = async ()=>{
+        try{
+          const reservationsData = await getReservations();
+          setAllReservations(reservationsData);
+        } catch(err){
+          console.error('Error fetching reservations : ', err);
+        }
+      }
+    }, []);
+
     const handleStartAtChange = (e)=>{
       const startDateTime = e.target.value;
       setReservation({...reservation, startAt: startDateTime});
