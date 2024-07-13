@@ -11,6 +11,7 @@ export default function Home() {
     })
     const [allSpaces, setAllSpaces] = useState([]);
     
+    // api : fetch all spaces
     useEffect(()=>{
         const fetchSpacesData = async ()=>{
             try{
