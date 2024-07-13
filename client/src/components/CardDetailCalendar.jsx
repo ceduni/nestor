@@ -4,6 +4,7 @@ import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { frCA } from 'date-fns/locale';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import ReservationInfo from './ReservationInfo';
+import { getReservations, getReservationById, createReservation, updateReservation, deleteReservation } from '../apis/reservation-api';
 
 const locales = {
   'en-US': frCA,
