@@ -59,13 +59,14 @@ export default function CardDetailCalendar({spaceDetail}) {
       if(isBeforeNow){
         console.log("Impossible");
         alert("Impossible");
+        // display msg
         return;
       }
 
       if(hasDuplicate){
         console.log("Already exists");
         alert("Already exists");
-        // add message
+        // display msg
         return;
       }else{
         // add post request
@@ -90,22 +91,33 @@ export default function CardDetailCalendar({spaceDetail}) {
 
     return (
         <div>
-          <form onSubmit={handleSubmit} className='flex gap-7 justify-center items-center py-5'>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-x-7 justify-center items-center py-5'>
             <div className='flex'>
               <div className='flex flex-col gap-2 p-2'>
-                  <label className='font-semibold' htmlFor="">Date et heure de début</label>
-                  <input onChange={handleStartAtChange} className='start_time card_detail_input border p-2' type="datetime-local" />
+                  <label className='font-semibold' htmlFor="start_time">Date et heure de début</label>
+                  <input onChange={handleStartAtChange} id='start_time' className='start_time card_detail_input border p-2' type="datetime-local" />
               </div>
               <div className='flex flex-col gap-2 p-2'>
-                  <label className='font-semibold' htmlFor="">Date et heure de fin</label>
-                  <input onChange={handleEndAtChange} className='card_detail_input border p-2' type="datetime-local" />
+                  <label className='font-semibold' htmlFor="end_time">Date et heure de fin</label>
+                  <input onChange={handleEndAtChange} id='end_time' className='card_detail_input border p-2' type="datetime-local" />
               </div>
             </div>
-            <div>
-
-            </div>
-
-            <button className='border p-2 rounded-full font-semibold' type='submit'>Réserver</button>
+            {/* <div className='flex'>
+              <div className='flex flex-col gap-2 p-2'>
+                  <label className='font-semibold' htmlFor="activite">Activité</label>
+                  <input id='activite' type="text" className='card_detail_input border p-2' />
+              </div>
+              <div className='flex flex-col gap-2 p-2'>
+                  <label className='font-semibold' htmlFor="activite">Statut</label>
+                  <select name="status" id="status">
+                    <option value="fullfilled">fullfilled</option>
+                    <option value="confirmed">confirmed</option>
+                    <option value="pending">pending</option>
+                    <option value="cancelled">cancelled</option>
+                  </select>
+              </div>
+            </div> */}
+              <button className='border p-2 rounded-full font-semibold' type='submit'>Réserver</button>
           </form>
 
           <div className='py-5'>
