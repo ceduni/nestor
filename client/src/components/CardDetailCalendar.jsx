@@ -3,6 +3,7 @@ import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { frCA } from 'date-fns/locale';
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import ReservationInfo from './ReservationInfo';
 
 const locales = {
   'en-US': frCA,
@@ -18,6 +19,12 @@ const localizer = dateFnsLocalizer({
 
 export default function CardDetailCalendar({spaceDetail}) {
     const [allReservations, setAllReservations] = useState([]);
+    const [isEventSelected, setIsEventSelected] = useState(false);
+    const [eventSelected, setEventSelected] = useState({
+      title: "",
+      start: "",
+      end: "",
+    });
     const [reservation, setReservation] = useState({
       hostId: "",
       isPeriodic: false,
@@ -43,7 +50,7 @@ export default function CardDetailCalendar({spaceDetail}) {
     const handleSubmit = (e)=>{
       e.preventDefault();
       const {activity, startAt, endAt} = reservation;
-      const event = {title: activity, start: new Date(startAt), end: new Date(endAt), color:'red'};
+      const event = {title: activity, start: new Date(startAt), end: new Date(endAt)};
       const isBeforeNow = isDateBeforeNow(event.start, event.end);
       const hasDuplicate = allReservations.some(reservation =>{
         return isDateInInterval(event.start, event.end, reservation.start, reservation.end);
@@ -69,6 +76,15 @@ export default function CardDetailCalendar({spaceDetail}) {
     const handleSelectEvent = (e)=>{
         // e.preventDefault();
         console.log("Selected event : " + e.title);
+
+        if (isEventSelected && eventSelected.title === e.title) {
+          setIsEventSelected(false);
+          setEventSelected({ title: "", start: "", end: "" });
+        } else {
+          setIsEventSelected(true);
+          setEventSelected({ title: e.title, start: e.start.toString(), end: e.end.toString() });
+        }
+        console.log(eventSelected);
     }
 
 
@@ -91,6 +107,7 @@ export default function CardDetailCalendar({spaceDetail}) {
 
             <button className='border p-2 rounded-full font-semibold' type='submit'>Réserver</button>
           </form>
+
           <div className='py-5'>
             <Calendar
                 localizer={localizer}
@@ -100,8 +117,12 @@ export default function CardDetailCalendar({spaceDetail}) {
                 style={{ height: 500 }}
                 defaultView="week"
                 views={{month:true, week: true, day: true}}
+                onSelectEvent={handleSelectEvent}
             />
           </div>
+          
+          {isEventSelected && <ReservationInfo eventSelected={eventSelected}/>}
+
         </div>
     );
 }
