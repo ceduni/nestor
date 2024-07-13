@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Filters from '../components/Filters';
 import Cards from '../components/Cards';
-import { fetchAllSpaces } from '../apis/spaces-api';
+import { getSpaces } from '../apis/spaces-api';
 
 export default function Home() {
     const [filters, setFilters] = useState({
@@ -15,7 +15,7 @@ export default function Home() {
     useEffect(()=>{
         const fetchSpacesData = async ()=>{
             try{
-                const spacesData = await fetchAllSpaces();
+                const spacesData = await getSpaces();
                 setAllSpaces(spacesData);
             }catch(err){
                 console.error(err);
