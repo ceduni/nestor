@@ -3,14 +3,15 @@ import {v4 as uuidv4} from 'uuid';
 import { Link } from 'react-router-dom';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useLoginStatus } from '../context/LoginStatusContext';
 
 const defaultItems = ["À propos", "Contact"];
 const adminItems = ["Mes réservations", "Gérer mes espaces", "À propos", "Contact"];
 const studentItems = ["Mes réservations", "À propos", "Contact"];
 
-export default function Header({logedIn, isAdmin}) {
-    const [navItems, setNavitems] = useState(()=>selectNavItems(logedIn, isAdmin));
-
+export default function Header() {
+    const {hasLogedin, setHasLogedin, isAdmin, setIsAdmin} = useLoginStatus();
+    const [navItems, setNavitems] = useState(()=>selectNavItems(hasLogedin, isAdmin));
     return (
         <header className='header px-14 w-full flex place-content-between items-center'>
             
@@ -31,9 +32,9 @@ export default function Header({logedIn, isAdmin}) {
                     ))}
 
                     {/* nav connection button */}
-                    <Link to="Connexion" className='nav_items' >
-                        <li>{logedIn? <FaRegUserCircle className='size-6'/> : <RiLoginBoxLine className='size-6'/>}</li>
-                        {/* <li>{logedIn? <li>Déconnecter</li> : <li>Connecter</li>}</li> */}
+                    <Link to="connexion/login" className='nav_items' >
+                        {hasLogedin && <li><FaRegUserCircle className='size-6'/></li>}
+                        {!hasLogedin && <li><RiLoginBoxLine className='size-6'/></li>}
                     </Link> 
                 </ul>
             </nav>
