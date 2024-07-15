@@ -3,7 +3,7 @@ import { createContext, useState, useEffect, useContext } from 'react';
 const LoginStatusContext = createContext();
 
 export function LoginStatusProvider({children}){
-    const [hasLogedin, setHasLogedin] = useState(true);
+    const [hasLogedin, setHasLogedin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(true);
 
     return (

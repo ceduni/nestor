@@ -10,7 +10,7 @@ export const getSpaces = async () => {
   }
 };
 
-export const getSpaceById = async ()=>{
+export const getSpaceById = async (id)=>{
     try{
         const res = await axios.get(`http://localhost:3000/api/v1/spaces/${id}`);
         return res.data;

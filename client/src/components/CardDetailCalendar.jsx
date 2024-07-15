@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { frCA } from 'date-fns/locale';
@@ -48,6 +48,8 @@ export default function CardDetailCalendar({spaceDetail}) {
           console.error('Error fetching reservations : ', err);
         }
       }
+
+      fetchReservations();
     }, []);
 
     const handleStartAtChange = (e)=>{
