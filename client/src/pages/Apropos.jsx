@@ -1,10 +1,5 @@
-import React from 'react';
+import React from "react";
 
 export default function Apropos() {
-    return (
-        <div>
-            À propos
-        </div>
-    );
+  return <div>À propos</div>;
 }
-

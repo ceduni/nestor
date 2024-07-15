@@ -220,7 +220,7 @@ export default function Filters({
           </button>
         </div>
       </form>
-      <FiltersIcons setIconFilters={setIconFilters} iconFilters={iconFilters}/>
+      <FiltersIcons setIconFilters={setIconFilters} iconFilters={iconFilters} />
     </div>
   );
 }

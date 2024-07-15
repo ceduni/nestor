@@ -1,10 +1,5 @@
-import React from 'react';
+import React from "react";
 
 export default function SpaceAdd() {
-    return (
-        <div>
-            Space Add
-        </div>
-    );
+  return <div>Space Add</div>;
 }
-

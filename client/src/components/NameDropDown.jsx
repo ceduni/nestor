@@ -6,7 +6,7 @@ export default function NameDropDown({
   setFilters,
   hasClickedOutsideName,
   setIsNameDropDownClicked,
-  isNameDropDownClicked
+  isNameDropDownClicked,
 }) {
   const [filteredNames, setFilteredNames] = useState([]);
 

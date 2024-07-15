@@ -21,7 +21,6 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
   }, [filters, iconFilters]);
 
   const filtering = (filters) => {
-
     let filteredSpaces = [...allSpaces];
 
     const addressParts = filters.address.split(",");
