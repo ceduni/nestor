@@ -25,11 +25,13 @@ export default function CardDetail({spaceDetail}) {
     useEffect(()=>{
         setSlideImages(spaceDetail.images);
     }, [spaceDetail]);
+    
     // console.log(slideImages); 
     const handleSelectEvent = (e)=>{
         // e.preventDefault();
         console.log("Selected event : " + e.title);
     }
+
     return (
         <div className='w-full card_detail rounded-xl flex flex-col'>
             <div className="slide-container">
@@ -57,7 +59,7 @@ export default function CardDetail({spaceDetail}) {
 
                 {isApercu && <CardDetailDescription spaceDetail={spaceDetail}/>}
 
-                {isReservation && <CardDetailCalendar />}
+                {isReservation && <CardDetailCalendar spaceDetail={spaceDetail}/>}
             </section>
         </div>  
     );
