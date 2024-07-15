@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Filters from '../components/Filters';
 import Cards from '../components/Cards';
+import {useQuery} from '@tanstack/react-query';
 import { getSpaces } from '../apis/spaces-api';
 
 export default function Home() {
@@ -9,21 +10,34 @@ export default function Home() {
         address: "",
         peopleNum: 0,
     })
-    const [allSpaces, setAllSpaces] = useState([]);
-    
-    // api : fetch all spaces
-    useEffect(()=>{
-        const fetchSpacesData = async ()=>{
-            try{
-                const spacesData = await getSpaces();
-                setAllSpaces(spacesData);
-            }catch(err){
-                console.error(err);
-            }
-        }
 
-        fetchSpacesData();
-    }, []);
+    const {data:allSpaces, error, isLoading} = useQuery({
+        queryKey : ['spaces'],
+        queryFn : getSpaces,
+    });
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error fetching spaces: {error.message}</div>;
+    }
+    // const [allSpaces, setAllSpaces] = useState([]);
+    
+    // // api : fetch all spaces
+    // useEffect(()=>{
+    //     const fetchSpacesData = async ()=>{
+    //         try{
+    //             const spacesData = await getSpaces();
+    //             setAllSpaces(spacesData);
+    //         }catch(err){
+    //             console.error(err);
+    //         }
+    //     }
+
+    //     fetchSpacesData();
+    // }, []);
 
     const handleNameFilter = (name) => {
         setNameFilter(name);

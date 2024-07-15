@@ -4,7 +4,8 @@ import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { frCA } from 'date-fns/locale';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import ReservationInfo from './ReservationInfo';
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+
 import { getReservations, getReservationById, createReservation, updateReservation, deleteReservation } from '../apis/reservation-api';
 
 const locales = {
@@ -20,7 +21,10 @@ const localizer = dateFnsLocalizer({
 });
 
 export default function CardDetailCalendar({spaceDetail}) {
-    const {data:allReservations, error, isLoading} = useQuery(['reservations'], getReservations);
+    const {data:allReservations, error, isLoading} = useQuery({
+      queryKey : ['reservations'], 
+      queryFn : getReservations,
+    });
     const [isEventSelected, setIsEventSelected] = useState(false);
     const [eventSelected, setEventSelected] = useState({
       title: "",
