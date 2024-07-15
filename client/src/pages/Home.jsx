@@ -10,79 +10,26 @@ export default function Home() {
         address: "",
         peopleNum: 0,
     })
+    const [allAddresses, setAllAddresses] = useState([]);
+    const [allNames, setAllNames] = useState([]);
+    const [iconFilters, setIconFilters] = useState([]);
+    const [allSpaces, setAllSpaces] = useState([]);
 
-    const {data:allSpaces, error, isLoading} = useQuery({
-        queryKey : ['spaces'],
-        queryFn : getSpaces,
-    });
+    // const {data:allSpaces, error, isLoading} = useQuery({
+    //     queryKey : ['spaces'],
+    //     queryFn : getSpaces,
+    //     staleTime: 1000 * 60 * 2,
+    // });
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    // console.log(getSpaces);
+    // console.log('allSpaces:', allSpaces);
+    // console.log('error:', error);
+    // console.log('isLoading:', isLoading);
 
-    if (error) {
-        return <div>Error fetching spaces: {error.message}</div>;
-    }
-    // const [allSpaces, setAllSpaces] = useState([]);
-    
-    // // api : fetch all spaces
-    // useEffect(()=>{
-    //     const fetchSpacesData = async ()=>{
-    //         try{
-    //             const spacesData = await getSpaces();
-    //             setAllSpaces(spacesData);
-    //         }catch(err){
-    //             console.error(err);
-    //         }
-    //     }
-
-    //     fetchSpacesData();
-    // }, []);
-
-  // api : fetch all spaces
-  useEffect(() => {
-    const fetchSpacesData = async () => {
-      try {
-        const spacesData = await getSpaces();
-        setAllSpaces(spacesData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchSpacesData();
-  }, []);
-
-  useEffect(() => {
-    const addresses = [];
-    const names = [];
-    allSpaces.forEach((space) => {
-      const exists = addresses.some(
-        (item) =>
-          item.city === space.city &&
-          item.state === space.state &&
-          item.street === space.street,
-      );
-      if (!exists) {
-        addresses.push({
-          street: space.street,
-          city: space.city,
-          state: space.state,
-        });
-      }
-    });
-    allSpaces.forEach((space) => {
-      names.push({
-        name: space.name,
-        library: space.library,
-        organisation: space.organisation,
-      });
-    });
-    setAllAddresses(addresses);
-    setAllNames(names);
-  }, [allSpaces]);
-
-  const fetchAllSpaces = () => {
+    useEffect(() => {
+        fetchAllSpaces();
+    }, []);
+    const fetchAllSpaces = () => {
     fetch("http://localhost:3000/api/v1/spaces/")
       .then((res) => {
         return res.json();
@@ -93,32 +40,61 @@ export default function Home() {
       .catch((error) => console.error(error));
   };
 
-  const handleFilters = (newName, newAddress, newPeopleNum, newDate) => {
-    setFilters({
-      ...filters,
-      name: newName,
-      address: newAddress,
-      peopleNum: newPeopleNum,
-      date: newDate,
-    });
-  };
+    useEffect(() => {
+        const addresses = [];
+        const names = [];
+        allSpaces.forEach((space) => {
+            const exists = addresses.some(
+                (item) =>
+                item.city === space.city &&
+                item.state === space.state &&
+                item.street === space.street,
+            );
+            if (!exists) {
+                addresses.push({
+                    street: space.street,
+                    city: space.city,
+                    state: space.state,
+                });
+            }
+        });
+        allSpaces.forEach((space) => {
+            names.push({
+            name: space.name,
+            library: space.library,
+            organisation: space.organisation,
+            });
+        });
+        setAllAddresses(addresses);
+        setAllNames(names);
+    }, [allSpaces]);
 
-  return (
-    <main>
-      <section className="filters p-2">
-        <Filters
-          onFiltersUpdate={handleFilters}
-          onIconFiltersUpdate={setIconFilters}
-          allAddresses={allAddresses}
-          allNames={allNames}
-        />
-      </section>
+    const handleFilters = (newName, newAddress, newPeopleNum, newDate) => {
+        setFilters({
+            ...filters,
+            name: newName,
+            address: newAddress,
+            peopleNum: newPeopleNum,
+            date: newDate,
+        });
+    };
 
-      <Cards
-        allSpaces={allSpaces}
-        filters={filters}
-        iconFilters={iconFilters}
-      />
-    </main>
-  );
+    return (
+        <main>
+            <section className="filters p-2">
+                <Filters
+                onFiltersUpdate={handleFilters}
+                onIconFiltersUpdate={setIconFilters}
+                allAddresses={allAddresses}
+                allNames={allNames}
+                />
+            </section>
+
+            <Cards
+                allSpaces={allSpaces}
+                filters={filters}
+                iconFilters={iconFilters}
+            />
+        </main>
+    );
 }
