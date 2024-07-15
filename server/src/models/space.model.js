@@ -85,7 +85,7 @@ const spaceSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["studyRoom", "facility", "nature"],
+    enum: ["university","library", "facility", "nature","coffee","laboratory", "studyRoom"],
     required: true
   }
 });

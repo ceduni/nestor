@@ -39,31 +39,86 @@ export default function Home() {
     //     fetchSpacesData();
     // }, []);
 
-    const handleNameFilter = (name) => {
-        setNameFilter(name);
-    }
+  // api : fetch all spaces
+  useEffect(() => {
+    const fetchSpacesData = async () => {
+      try {
+        const spacesData = await getSpaces();
+        setAllSpaces(spacesData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-    const handleAddressFilter = (address) => {
-        setAddressFilter(address);
-    }
+    fetchSpacesData();
+  }, []);
 
-    const handleFilters = (newName, newAddress, newPeopleNum)=>{
-        setFilters({...filters, name : newName, address : newAddress, peopleNum: newPeopleNum})
-    }
+  useEffect(() => {
+    const addresses = [];
+    const names = [];
+    allSpaces.forEach((space) => {
+      const exists = addresses.some(
+        (item) =>
+          item.city === space.city &&
+          item.state === space.state &&
+          item.street === space.street,
+      );
+      if (!exists) {
+        addresses.push({
+          street: space.street,
+          city: space.city,
+          state: space.state,
+        });
+      }
+    });
+    allSpaces.forEach((space) => {
+      names.push({
+        name: space.name,
+        library: space.library,
+        organisation: space.organisation,
+      });
+    });
+    setAllAddresses(addresses);
+    setAllNames(names);
+  }, [allSpaces]);
 
-    return (
-        <main>
-            <section className='filters p-2'>
-                <Filters 
-                    onFiltersUpdate={handleFilters}
-                />
-            </section>
+  const fetchAllSpaces = () => {
+    fetch("http://localhost:3000/api/v1/spaces/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setAllSpaces(data);
+      })
+      .catch((error) => console.error(error));
+  };
 
-            <Cards 
-                allSpaces={allSpaces} 
-                filters={filters}
-            />
-        </main>
-    );
+  const handleFilters = (newName, newAddress, newPeopleNum, newDate) => {
+    setFilters({
+      ...filters,
+      name: newName,
+      address: newAddress,
+      peopleNum: newPeopleNum,
+      date: newDate,
+    });
+  };
+
+  return (
+    <main>
+      <section className="filters p-2">
+        <Filters
+          onFiltersUpdate={handleFilters}
+          onIconFiltersUpdate={setIconFilters}
+          allAddresses={allAddresses}
+          allNames={allNames}
+        />
+      </section>
+
+      <Cards
+        allSpaces={allSpaces}
+        filters={filters}
+        iconFilters={iconFilters}
+      />
+    </main>
+  );
 }
-
