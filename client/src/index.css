@@ -116,7 +116,8 @@ body {
 }
 
 .cards {
-  @apply h-lvh;
+  /* @apply h-96; */
+  /* height: 90rem; */
 }
 
 .card {
@@ -137,7 +138,11 @@ body {
 }
 
 .card_img {
-  @apply w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80;
+  /* @apply w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80; */
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* -----CardDetail----- */
