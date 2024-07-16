@@ -1,2 +1,1 @@
-const cron= require("cron");
-
+const cron = require("cron");

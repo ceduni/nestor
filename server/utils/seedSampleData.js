@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const space = require("../src/models/space.model").space;
 const currentDate = new Date();
 
-
 const sampleSpaces = [
   {
     name: "Campus de Laval",
@@ -14,31 +13,74 @@ const sampleSpaces = [
     capacity: 8,
     isAvailable: true,
     images: [
-      { url: "src/assets/images/udem_campus_laval_1.jpg"},
+      { url: "src/assets/images/udem_campus_laval_1.jpg" },
       { url: "src/assets/images/udem_campus_laval_2.jpg" },
-      { url: "src/assets/images/udem_campus_laval_3.jpg" }
+      { url: "src/assets/images/udem_campus_laval_3.jpg" },
     ],
-    description: "La salle d'étude est un espace calme et bien équipé, idéal pour travailler ou étudier seul(e) ou en groupe.Elle peut être réservée pour des séances d'étude privées ou des réunions académiques.",
+    description:
+      "La salle d'étude est un espace calme et bien équipé, idéal pour travailler ou étudier seul(e) ou en groupe.Elle peut être réservée pour des séances d'étude privées ou des réunions académiques.",
     organisation: "Université de Montreal",
     features: ["screen", "whiteboard", "plug"],
     type: "studyRoom",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 12, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          12,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 16, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          16,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 20, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          20,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Média 5438",
@@ -52,29 +94,72 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/udem_biblio_droit_1.jpg" },
       { url: "src/assets/images/udem_biblio_droit_2.jpg" },
-      { url: "src/assets/images/udem_biblio_droit_3.jpg" }
+      { url: "src/assets/images/udem_biblio_droit_3.jpg" },
     ],
-    description: "Espace de travail confortable avec accès à la bibliothèque de droit. Idéal pour des sessions d'étude concentrée ou des réunions académiques.",
+    description:
+      "Espace de travail confortable avec accès à la bibliothèque de droit. Idéal pour des sessions d'étude concentrée ou des réunions académiques.",
     organisation: "Université de Montreal",
     features: ["screen", "plug"],
     type: "studyRoom",
     availabilities: [
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 11, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 12, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          11,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          12,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 15, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          15,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 16, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          16,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "A-0708",
@@ -88,29 +173,72 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/udem_biblio_sciences_1.jpg" },
       { url: "src/assets/images/udem_biblio_sciences_2.jpg" },
-      { url: "src/assets/images/udem_biblio_sciences_3.jpg" }
+      { url: "src/assets/images/udem_biblio_sciences_3.jpg" },
     ],
-    description: "Espace moderne équipé d'un mur inscriptible. Parfait pour les séances de brainstorming ou les études en groupe.",
+    description:
+      "Espace moderne équipé d'un mur inscriptible. Parfait pour les séances de brainstorming ou les études en groupe.",
     organisation: "Université de Montreal",
     features: ["screen", "plug"],
     type: "studyRoom",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 10, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 11, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          10,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          11,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 16, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          16,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 20, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          20,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "HSSL - Cyberthèque Pod 1",
@@ -124,29 +252,72 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/biblio_mcgill_hssl_1.jpg" },
       { url: "src/assets/images/biblio_mcgill_hssl_2.jpg" },
-      { url: "src/assets/images/biblio_mcgill_hssl_3.jpg" }
+      { url: "src/assets/images/biblio_mcgill_hssl_3.jpg" },
     ],
-    description: "Salle de lecture silencieuse. Lieu idéal pour l'étude individuelle ou en petit groupe.",
+    description:
+      "Salle de lecture silencieuse. Lieu idéal pour l'étude individuelle ou en petit groupe.",
     organisation: "Université de McGill",
     features: ["plug"],
     type: "studyRoom",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 9, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 11, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          9,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          11,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 15, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          15,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 17, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 19, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          17,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          19,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "LB 251 - Linda Kay",
@@ -160,29 +331,72 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/biblio_webster_1.jpg" },
       { url: "src/assets/images/biblio_webster_2.jpg" },
-      { url: "src/assets/images/biblio_webster_3.jpg" }
+      { url: "src/assets/images/biblio_webster_3.jpg" },
     ],
-    description: "Espace tranquille idéal pour les sessions de travail nécessitant concentration et inspiration.",
+    description:
+      "Espace tranquille idéal pour les sessions de travail nécessitant concentration et inspiration.",
     organisation: "Université de McGill",
     features: ["plug", "accessible"],
     type: "studyRoom",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 8, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 10, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          8,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          10,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 12, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          12,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 16, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          16,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Salle croissance 25",
@@ -195,29 +409,72 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/salle_croissance_1.jpg" },
       { url: "src/assets/images/salle_croissance_2.jpg" },
-      { url: "src/assets/images/salle_croissance_3.jpg" }
+      { url: "src/assets/images/salle_croissance_3.jpg" },
     ],
-    description: "Salle de travail spacieuse avec ambiance détendue. Équipée pour des études individuelles ou en groupe dans un environnement confortable.",
+    description:
+      "Salle de travail spacieuse avec ambiance détendue. Équipée pour des études individuelles ou en groupe dans un environnement confortable.",
     organisation: "Association de location de salles du Québec",
     features: ["plug", "screen"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 9, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 12, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          9,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          12,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 16, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          16,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 17, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 20, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          17,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          20,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Aggrandissement",
@@ -229,24 +486,53 @@ const sampleSpaces = [
     isAvailable: true,
     images: [
       { url: "src/assets/images/agrandissement-1.jpg" },
-      { url: "src/assets/images/agrandissement-2.jpg" }
+      { url: "src/assets/images/agrandissement-2.jpg" },
     ],
-    description: "Espace polyvalent adapté pour des événements de grande envergure ou des sessions de formation. Confortablement aménagé.",
+    description:
+      "Espace polyvalent adapté pour des événements de grande envergure ou des sessions de formation. Confortablement aménagé.",
     organisation: "Association de location de salles du Québec",
     features: ["plug"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 8, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 12, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          8,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          12,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Montreal CoWork",
@@ -259,19 +545,34 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/montreal_cowork_1.jpg" },
       { url: "src/assets/images/montreal_cowork_2.jpg" },
-      { url: "src/assets/images/montreal_cowork_3.jpg" }
+      { url: "src/assets/images/montreal_cowork_3.jpg" },
     ],
-    description: "Espace de co-working moderne avec connexion Wi-Fi rapide et espaces de réunion. Parfait pour les freelancers et les petites équipes cherchant un environnement collaboratif.",
+    description:
+      "Espace de co-working moderne avec connexion Wi-Fi rapide et espaces de réunion. Parfait pour les freelancers et les petites équipes cherchant un environnement collaboratif.",
     organisation: "Montreal CoWork",
     features: ["wifi"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 9, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          9,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Centre d'Étude 101",
@@ -284,29 +585,72 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/centre_etude_101_1.jpg" },
       { url: "src/assets/images/centre_etude_101_2.jpg" },
-      { url: "src/assets/images/centre_etude_101_3.jpg" }
+      { url: "src/assets/images/centre_etude_101_3.jpg" },
     ],
-    description: "Espace d'étude moderne équipé de mobilier ergonomique et d'internet haut débit. Idéal pour l'étude individuelle ou les discussions en petit groupe.",
+    description:
+      "Espace d'étude moderne équipé de mobilier ergonomique et d'internet haut débit. Idéal pour l'étude individuelle ou les discussions en petit groupe.",
     organisation: "Solutions d'Étude Inc.",
     features: ["plug", "wifi"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 10, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 12, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          10,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          12,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 15, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          15,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 16, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          16,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Coin Étude Tranquille",
@@ -319,29 +663,72 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/coin_etude_tranquille_1.jpg" },
       { url: "src/assets/images/coin_etude_tranquille_2.jpg" },
-      { url: "src/assets/images/coin_etude_tranquille_3.jpg" }
+      { url: "src/assets/images/coin_etude_tranquille_3.jpg" },
     ],
-    description: "Coin d'étude confortable et calme avec lumière naturelle. Parfait pour la lecture concentrée ou la contemplation individuelle.",
+    description:
+      "Coin d'étude confortable et calme avec lumière naturelle. Parfait pour la lecture concentrée ou la contemplation individuelle.",
     organisation: "Espaces Paisibles Ltée.",
     features: ["whiteboard", "plug"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 11, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          11,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 16, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          16,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 17, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 19, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          17,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          19,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Laboratoire d'Étude Technologique",
@@ -354,24 +741,53 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/labo_etude_technologie_1.jpg" },
       { url: "src/assets/images/labo_etude_technologie_2.jpg" },
-      { url: "src/assets/images/labo_etude_technologie_3.jpg" }
+      { url: "src/assets/images/labo_etude_technologie_3.jpg" },
     ],
-    description: "Laboratoire d'étude de pointe avec technologie avancée et espaces de travail collaboratif. Idéal pour les projets de groupe ou les sessions d'étude axées sur la technologie.",
+    description:
+      "Laboratoire d'étude de pointe avec technologie avancée et espaces de travail collaboratif. Idéal pour les projets de groupe ou les sessions d'étude axées sur la technologie.",
     organisation: "TechÉtude Inc.",
     features: ["whiteboard", "plug"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 9, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          9,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Retraite d'Étude Silencieuse",
@@ -383,24 +799,53 @@ const sampleSpaces = [
     isAvailable: true,
     images: [
       { url: "src/assets/images/retraite_etude_silencieuse_1.jpg" },
-      { url: "src/assets/images/retraite_etude_silencieuse_2.jpg" }
+      { url: "src/assets/images/retraite_etude_silencieuse_2.jpg" },
     ],
-    description: "Retraite d'étude tranquille entourée de nature. Idéal pour des sessions d'étude sans interruption ou pour la réflexion personnelle.",
+    description:
+      "Retraite d'étude tranquille entourée de nature. Idéal pour des sessions d'étude sans interruption ou pour la réflexion personnelle.",
     organisation: "Retraites Sérénité",
     features: ["whiteboard", "plug"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 8, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 12, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          8,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          12,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 17, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          17,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Coin Étude Cosy",
@@ -413,24 +858,53 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/coin_etude_cosy_1.jpg" },
       { url: "src/assets/images/coin_etude_cosy_2.jpg" },
-      { url: "src/assets/images/coin_etude_cosy_3.jpg" }
+      { url: "src/assets/images/coin_etude_cosy_3.jpg" },
     ],
-    description: "Coin d'étude confortable avec une collection de livres de référence. Parfait pour la lecture détendue ou les sessions d'étude concentrées.",
+    description:
+      "Coin d'étude confortable avec une collection de livres de référence. Parfait pour la lecture détendue ou les sessions d'étude concentrées.",
     organisation: "Studios Livrovore",
     features: ["whiteboard", "plug"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 10, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          10,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 15, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 19, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          15,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          19,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Bureau Étudiant Pro",
@@ -443,24 +917,53 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/bureau_etudiant_pro_1.jpg" },
       { url: "src/assets/images/bureau_etudiant_pro_2.jpg" },
-      { url: "src/assets/images/bureau_etudiant_pro_3.jpg" }
+      { url: "src/assets/images/bureau_etudiant_pro_3.jpg" },
     ],
-    description: "Bureau d'étude professionnel avec équipements de pointe et ambiance studieuse. Idéal pour les étudiants cherchant un environnement sérieux et productif.",
+    description:
+      "Bureau d'étude professionnel avec équipements de pointe et ambiance studieuse. Idéal pour les étudiants cherchant un environnement sérieux et productif.",
     organisation: "Étude Professionnelle Inc.",
     features: ["whiteboard", "plug"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 9, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 13, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          9,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          13,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 18, 0, 0)
-      }
-    ]
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          18,
+          0,
+          0,
+        ),
+      },
+    ],
   },
   {
     name: "Espace Étude Zen",
@@ -473,41 +976,70 @@ const sampleSpaces = [
     images: [
       { url: "src/assets/images/espace_etude_zen_1.jpg" },
       { url: "src/assets/images/espace_etude_zen_2.jpg" },
-      { url: "src/assets/images/espace_etude_zen_3.jpg" }
+      { url: "src/assets/images/espace_etude_zen_3.jpg" },
     ],
-    description: "Espace d'étude zen avec décor apaisant et musique relaxante. Parfait pour les étudiants recherchant une atmosphère calme et inspirante.",
+    description:
+      "Espace d'étude zen avec décor apaisant et musique relaxante. Parfait pour les étudiants recherchant une atmosphère calme et inspirante.",
     organisation: "Zen Étude Studios",
     features: ["whiteboard", "plug"],
     type: "facility",
     availabilities: [
       {
         isPeriodic: true,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 10, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 14, 0, 0)
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          10,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          14,
+          0,
+          0,
+        ),
       },
       {
         isPeriodic: false,
-        startAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 15, 0, 0),
-        endAt: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 19, 0, 0)
-      }
-    ]
-  }
+        startAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          15,
+          0,
+          0,
+        ),
+        endAt: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          19,
+          0,
+          0,
+        ),
+      },
+    ],
+  },
 ];
 
-mongoose.set('debug', true);
-mongoose.connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {})
-    .then(() => console.log("Connected to the database"))
-    .catch((e) => console.log("Error connecting to database", e));
+mongoose.set("debug", true);
+mongoose
+  .connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {})
+  .then(() => console.log("Connected to the database"))
+  .catch((e) => console.log("Error connecting to database", e));
 
 const seedSampleSpaces = async () => {
   try {
     await space.insertMany(sampleSpaces).then(() => {
       mongoose.connection.close();
-    })
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 seedSampleSpaces();
-

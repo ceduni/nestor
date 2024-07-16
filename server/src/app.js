@@ -1,38 +1,41 @@
-require('dotenv').config();
-"use strict";
-const fastify = require('fastify')({
+require("dotenv").config();
+("use strict");
+const fastify = require("fastify")({
   logger: true,
   ajv: {
     customOptions: {
       removeAdditional: false,
-      keywords: ['schema']
-    }
-  }
+      keywords: ["schema"],
+    },
+  },
 });
 
-const cors = require('@fastify/cors');
-const mongoose = require('mongoose');
+const cors = require("@fastify/cors");
+const mongoose = require("mongoose");
 mongoose.set({ debug: true });
 
 // import routes
 const spaceRoutes = require("./routes/space.routes.js");
 const locationRoutes = require("./routes/location.routes.js");
+const reservationRoutes = require("./routes/reservation.routes.js");
 
 // import schemas
 const spaceSchema = require("./schemas/space.schema.js");
 
 // connect to database
-mongoose.connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {}).
-then(() => console.log("Connected to the database")).
-catch((e) => console.log("Error connecting to database", e));
+mongoose
+  .connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {})
+  .then(() => console.log("Connected to the database"))
+  .catch((e) => console.log("Error connecting to database", e));
 
 // start server
 fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });
-fastify.register(locationRoutes, {prefix: "/api/v1/cities"})
+fastify.register(locationRoutes, { prefix: "/api/v1/cities" });
+fastify.register(reservationRoutes, { prefix: "/api/v1/reservations" });
 fastify.addSchema(spaceSchema);
 fastify.register(cors, {
   origin: "*",
-  methods: ["GET"]
+  methods: ["GET"],
 });
 const start = () => {
   try {
@@ -41,11 +44,13 @@ const start = () => {
         fastify.log.error(err);
         process.exit(1);
       }
-      fastify.log.info(`Server is running on port ${fastify.server.address().port}`);
+      fastify.log.info(
+        `Server is running on port ${fastify.server.address().port}`,
+      );
     });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 start();
