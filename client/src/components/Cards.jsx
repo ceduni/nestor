@@ -107,12 +107,12 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           <LuRefreshCw />
         </button>
       </div>
-      <section className="grid grid-cols-3 xl:grid-cols-4 place-content-center md:px-3 xl:px-14">
+      <section className="grid grid-cols-3 xl:grid-cols-4 md:px-3 xl:px-14">
         <div
           className={
             cardSelected
-              ? "cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 py-5 col-span-1 place-items-center"
-              : "cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 py-5 col-span-4 place-items-center"
+              ? "cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 col-span-1 py-5"
+              : "cards overflow-auto scrollbar-hidden grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 py-5 col-span-4"
           }
         >
           {spaces.map((item) => (

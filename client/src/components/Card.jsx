@@ -10,7 +10,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
     onCardClick(cardSelected, space);
   };
   return (
-    <a className="card rounded-lg flex flex-col" href="" onClick={handleClick}>
+    <a className="card rounded-lg flex flex-col items-center" href="" onClick={handleClick}>
       <div className="card_img_container">
         <img
           className="card_img rounded-lg z-0 brightness-105 contrast-125 saturate-150"
