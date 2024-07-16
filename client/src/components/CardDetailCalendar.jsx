@@ -21,10 +21,10 @@ const localizer = dateFnsLocalizer({
 });
 
 export default function CardDetailCalendar({spaceDetail}) {
-  const {data:allReservations, error, isLoading} = useQuery({
-    queryKey : ['reservations'], 
-    queryFn : getReservations,
-  });
+  // const {data:allReservations, error, isLoading} = useQuery({
+  //   queryKey : ['reservations'], 
+  //   queryFn : getReservations,
+  // });
   const [isEventSelected, setIsEventSelected] = useState(false);
   const [eventSelected, setEventSelected] = useState({
     title: "",
@@ -42,6 +42,22 @@ export default function CardDetailCalendar({spaceDetail}) {
     isPrivate: false,
     spaceId: spaceDetail._id,
   });
+  const [allReservations, setAllReservations] = useState([]);
+
+  useEffect(() => {
+    const fetchReservations = async () => {
+      try {
+        const data = await getReservations();
+        setReservations(data);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchReservations();
+  }, []);
 
   const handleStartAtChange = (e) => {
     const startDateTime = e.target.value;
@@ -55,6 +71,7 @@ export default function CardDetailCalendar({spaceDetail}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(reservation);
     const { activity, startAt, endAt } = reservation;
     const event = {
       title: activity,
