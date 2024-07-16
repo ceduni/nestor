@@ -107,7 +107,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           <LuRefreshCw />
         </button>
       </div>
-      <section className="grid grid-cols-3 xl:grid-cols-4 md:px-3 xl:px-14">
+      <section className="grid grid-cols-3 xl:grid-cols-4 md:px-3 xl:px-14 my-5">
         <div
           className={
             cardSelected
