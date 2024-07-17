@@ -24,6 +24,7 @@ const spaceSchema = {
             additionalProperties: false,
             properties: {
               url: { type: "string" },
+              isMain: { type: "boolean" },
             },
           },
         },
@@ -59,10 +60,19 @@ const spaceSchema = {
         },
         type: {
           type: "string",
-          enum: ["studyRoom", "facility", "nature"],
+          enum: [
+            "university",
+            "library",
+            "facility",
+            "nature",
+            "coffee",
+            "laboratory",
+            "studyRoom",
+          ],
         },
       },
       additionalProperties: false,
+      minProperties: 1,
     },
   },
 };

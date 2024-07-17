@@ -21,10 +21,10 @@ const reservationRoutes = require("./routes/reservation.routes.js");
 
 // import schemas
 const spaceSchema = require("./schemas/space.schema.js");
-
+const reservationSchema = require("./schemas/reservation.schema.js");
 // connect to database
 mongoose
-  .connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {})
+  .connect(process.env.MONGODB_TEST_CONNECTION_STRING, {})
   .then(() => console.log("Connected to the database"))
   .catch((e) => console.log("Error connecting to database", e));
 
@@ -33,9 +33,10 @@ fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });
 fastify.register(locationRoutes, { prefix: "/api/v1/cities" });
 fastify.register(reservationRoutes, { prefix: "/api/v1/reservations" });
 fastify.addSchema(spaceSchema);
+fastify.addSchema(reservationSchema);
 fastify.register(cors, {
   origin: "*",
-  methods: ["GET"],
+  methods: ["GET", "POST"],
 });
 const start = () => {
   try {
