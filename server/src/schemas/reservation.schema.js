@@ -11,8 +11,10 @@ const reservationSchema = {
           minProperties: 1,
           properties: {
             isPeriodic: { type: "boolean" },
+            isBooked: { type: "boolean" },
             startAt: { type: "string" },
             endAt: { type: "string" },
+            _id: { type: "string" },
           },
         },
         guests: {

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const availabilitySchema = require("./space.model").availabilitySchema;
+const { space, availabilitySchema } = require("./space.model");
 const reservationSchema = new mongoose.Schema(
   {
     host: {
@@ -30,11 +30,48 @@ const reservationSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-reservationSchema.pre("save", function (next) {
-  const host = this.host;
-  const guests = this.guests;
-  guests.forEach((guest) => {
-    if (guest.equals(host)) {
+reservationSchema.pre("save", async function (next) {
+  const strArr = this.guests.map((guest) => guest.toString());
+  const uniqueStrSet = [...new Set(strArr)];
+  this.guests = uniqueStrSet.map((str) => new mongoose.Types.ObjectId(str));
+  const spaceResult = await space.findById(this.space);
+  if (!spaceResult) {
+    next("Space not found");
+  }
+  const capacity = spaceResult.capacity;
+  const indexToUpdate = spaceResult.availabilities.findIndex((avail) =>
+    avail._id.equals(this.availability._id),
+  );
+  if (indexToUpdate === -1) {
+    next("Availability not found");
+  }
+  if (
+    this.availability.startAt.getTime() !==
+      spaceResult.availabilities[indexToUpdate].startAt.getTime() ||
+    this.availability.endAt.getTime() !==
+      spaceResult.availabilities[indexToUpdate].endAt.getTime()
+  ) {
+    next("Reservation availability should match space availability");
+  }
+  if (this.status === "confirmed") {
+    spaceResult.availabilities[indexToUpdate] = Object.assign(
+      spaceResult.availabilities[indexToUpdate],
+      { isBooked: true },
+    );
+    spaceResult.save();
+  } else if (this.status === "cancelled") {
+    spaceResult.availabilities[indexToUpdate] = Object.assign(
+      spaceResult.availabilities[indexToUpdate],
+      { isBooked: false },
+    );
+    spaceResult.save();
+  }
+
+  if (this.guests.length > capacity) {
+    next("Number of guests can not exceed space capacity");
+  }
+  this.guests.forEach((guest) => {
+    if (guest.equals(this.host)) {
       next("Host can not be guest at the same time");
     }
   });
@@ -45,8 +82,15 @@ reservationSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.createdAt;
   delete obj.updatedAt;
+  delete obj.availability.isPeriodic;
+  delete obj.availability.isBooked;
   return obj;
 };
+
+reservationSchema.index(
+  { createdAt: 1 },
+  { expireAfterSeconds: 600, partialFilterExpression: { status: "pending" } },
+);
 
 const reservation = mongoose.model("reservation", reservationSchema);
 

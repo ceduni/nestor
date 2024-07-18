@@ -37,6 +37,7 @@ const spaceSchema = {
             additionalProperties: false,
             minProperties: 1,
             properties: {
+              isBooked: { type: "boolean" },
               isPeriodic: { type: "boolean" },
               startAt: { type: "string" },
               endAt: { type: "string" },

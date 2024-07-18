@@ -36,7 +36,7 @@ fastify.addSchema(spaceSchema);
 fastify.addSchema(reservationSchema);
 fastify.register(cors, {
   origin: "*",
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "PUT"],
 });
 const start = () => {
   try {

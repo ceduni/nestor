@@ -50,7 +50,7 @@ async function addReservation(req, rep) {
   }
 }
 
-async function removeReservation(req, rep) {
+/*async function removeReservation(req, rep) {
   try {
     const deletedReservation = await reservation.findByIdAndDelete(
       req.params.id,
@@ -62,6 +62,6 @@ async function removeReservation(req, rep) {
   } catch (error) {
     rep.status(500).send(error);
   }
-}
+}*/
 
-module.exports = { getReservations, addReservation };
+module.exports = { getReservations, addReservation, updateReservation };

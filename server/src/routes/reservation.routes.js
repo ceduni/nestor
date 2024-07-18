@@ -1,4 +1,5 @@
 const reservationService = require("../services/reservation.service");
+const spaceService = require("../services/space.service");
 
 async function getRoutes(fastify) {
   fastify.get("/", reservationService.getReservations);
@@ -13,6 +14,7 @@ async function getRoutes(fastify) {
     },
     reservationService.addReservation,
   );
+  fastify.put("/:id");
 }
 
 module.exports = getRoutes;

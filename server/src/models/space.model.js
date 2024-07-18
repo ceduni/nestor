@@ -24,6 +24,19 @@ const availabilitySchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  isBooked: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const spaceLockSchema = new mongoose.Schema({
+  expireAt: {
+    type: Date,
+    default: new Date(),
+    expires: 840,
+  },
+  spaceId: { type: mongoose.Schema.ObjectId, ref: "space", unique: true },
 });
 
 const spaceSchema = new mongoose.Schema(
