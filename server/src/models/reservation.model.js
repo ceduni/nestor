@@ -84,6 +84,7 @@ reservationSchema.methods.toJSON = function () {
   delete obj.updatedAt;
   delete obj.availability.isPeriodic;
   delete obj.availability.isBooked;
+  delete obj.__v;
   return obj;
 };
 

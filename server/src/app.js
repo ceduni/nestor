@@ -24,7 +24,7 @@ const spaceSchema = require("./schemas/space.schema.js");
 const reservationSchema = require("./schemas/reservation.schema.js");
 // connect to database
 mongoose
-  .connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {})
+  .connect(process.env.MONGODB_TEST_CONNECTION_STRING, {})
   .then(() => console.log("Connected to the database"))
   .catch((e) => console.log("Error connecting to database", e));
 

@@ -64,4 +64,4 @@ async function addReservation(req, rep) {
   }
 }*/
 
-module.exports = { getReservations, addReservation, updateReservation };
+module.exports = { getReservations, addReservation, updateReservation, getReservation };
