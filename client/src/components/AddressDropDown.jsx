@@ -79,7 +79,7 @@ export default function AddressDropDown({
   return (
     <div
       id="dropdown"
-      className={`right-[445px] z-10 top-[72px] p-3 gap-4 flex flex-col bg-white absolute rounded-lg border w-80 ${
+      className={`right-[445px] z-10 top-[72px] p-3 gap-5 flex flex-col bg-white absolute shadow rounded-lg border w-80 ${
         !filters.address.trim() ||
         filteredAddresses.length === 0 ||
         hasClickedOutsideAddress
@@ -94,7 +94,7 @@ export default function AddressDropDown({
         .map((address, index) => (
           <div
             key={index}
-            className="text-sm hover:font-semibold hover:transition-[font-weight] hover:duration-300"
+            className="text-md hover:font-semibold hover:transition-[font-weight] hover:duration-300"
             onClick={handleItemClick}
           >
             {`${address.street ? `${address.street}, ` : ""}${address.city}, ${address.state}`}

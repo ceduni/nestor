@@ -71,21 +71,6 @@ body {
   /* color: red; */
 }
 
-.filter_icons {
-  transition: all 120ms linear;
-}
-
-/* .filter_icons_text.selected {
-  text-decoration: underline;
-  opacity: 1;
-} */
-.filter_icons_text.selected::after {
-  content: "";
-  display: block;
-  margin-top: 0.2rem;
-  border: 1px solid var(--color-text);
-}
-
 .filter_icons:hover {
   /* scale: 1.1; */
   /* border-bottom: 0.4rem solid #eceded; */

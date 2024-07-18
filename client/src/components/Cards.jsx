@@ -40,12 +40,12 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           space.state.toLowerCase().includes(state.toLowerCase().trim()),
       );
     }
-
     filteredSpaces = filteredSpaces.filter((space) =>
       space.availabilities.some((avail) =>
         avail.startAt.includes(filters.date),
       ),
     );
+    console.log(filters.date)
     filteredSpaces = filteredSpaces.filter(
       (space) =>
         Number(filters.peopleNum) === 0 ||
@@ -62,7 +62,6 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
             .includes(filters.name.toLowerCase().trim())) ||
         space.name.toLowerCase().includes(filters.name.toLowerCase().trim()),
     );
-
     if (iconFilters.length !== 0) {
       filteredSpaces = filteredSpaces.filter(
         (space) =>

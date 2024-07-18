@@ -9,6 +9,7 @@ export default function Home() {
         name: "",
         address: "",
         peopleNum: 0,
+        date: "",
     })
     const [allAddresses, setAllAddresses] = useState([]);
     const [allNames, setAllNames] = useState([]);

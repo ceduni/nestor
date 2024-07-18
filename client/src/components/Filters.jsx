@@ -13,7 +13,7 @@ export default function Filters({
   onFiltersUpdate,
   allAddresses,
   allNames,
-  onIconFiltersUpdate,
+  onIconFiltersUpdate
 }) {
   const [filterBtnCliked, setFilterBtnClicked] = useState(false);
   const [hasAnyFilter, setHasAnyFilter] = useState(false);
@@ -25,7 +25,6 @@ export default function Filters({
   const [isDateItemClicked, setIsDateItemClicked] = useState(false);
   const [isNameDropDownClicked, setIsNameDropDownClicked] = useState(false);
   const [filterTags, setFilterTags] = useState([]);
-  const [iconFilters, setIconFilters] = useState([]);
   const currentDate = startOfToday();
   const addressRef = useRef(null);
   const dateRef = useRef(null);
@@ -97,7 +96,6 @@ export default function Filters({
       filters.peopleNum,
       filters.date,
     );
-    onIconFiltersUpdate(iconFilters);
   };
 
   useEffect(() => {
@@ -122,7 +120,7 @@ export default function Filters({
     <div className="filter_section flex flex-col items-center">
       {/* <h1 className='text-xl p-2'>Slogan</h1> */}
       <form
-        className="relative filter_form flex justify-center rounded-full px-8 m-3"
+        className="relative filter_form flex justify-center rounded-full px-8 m-3 shadow"
         action=""
         onSubmit={handleFilterSubmit}
       >
@@ -131,7 +129,7 @@ export default function Filters({
           ref={nameRef}
         >
           <label className="filter_label text-base" htmlFor="filter_nom_espace">
-            Nom de l'espace
+            Nom
           </label>
           <input
             className="filter_input text-base"
@@ -149,7 +147,6 @@ export default function Filters({
             hasClickedOutsideName={hasClickedOutsideName}
             setIsNameDropDownClicked={setIsNameDropDownClicked}
             isNameDropDownClicked={isNameDropDownClicked}
-            iconFilters={iconFilters}
           />
         </div>
         <div
@@ -177,7 +174,7 @@ export default function Filters({
         </div>
         <div className="filter_form_items flex flex-col items-start">
           <label className="filter_label text-base" htmlFor="filter_addresse">
-            Nombre de personnes
+            Capacité
           </label>
           <input
             className="filter_input text-base"
@@ -220,7 +217,7 @@ export default function Filters({
           </button>
         </div>
       </form>
-      <FiltersIcons setIconFilters={setIconFilters} iconFilters={iconFilters} />
+      <FiltersIcons onIconFiltersUpdate={onIconFiltersUpdate}/>
     </div>
   );
 }

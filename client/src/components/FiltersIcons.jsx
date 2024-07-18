@@ -25,11 +25,11 @@ const icons = [
 ];
 
 const toFR = {
-  university: "université",
-  library: "bibliothèque",
+  university: "uni",
+  library: "biblio",
   coffee: "café",
   nature: "nature",
-  laboratory: "laboratoire",
+  laboratory: "labo",
   music: "musique",
   screen: "écran",
   whiteboard: "tableau",
@@ -39,11 +39,11 @@ const toFR = {
 };
 
 const toEN = {
-  université: "university",
-  bibliothèque: "library",
+  uni: "university",
+  biblio: "library",
   café: "coffee",
   nature: "nature",
-  laboratoire: "laboratory",
+  labo: "laboratory",
   musique: "music",
   écran: "screen",
   tableau: "whiteboard",
@@ -52,7 +52,8 @@ const toEN = {
   wifi: "wifi",
 };
 
-export default function FiltersIcons({ setIconFilters, iconFilters }) {
+export default function FiltersIcons({ onIconFiltersUpdate }) {
+  const [iconFilters, setIconFilters] = useState([]);
   const handleIconClick = (e) => {
     e.preventDefault();
     const iconFilter =
@@ -64,21 +65,25 @@ export default function FiltersIcons({ setIconFilters, iconFilters }) {
     }
   };
 
+  useEffect(() => {
+    onIconFiltersUpdate(iconFilters);
+  }, [iconFilters]);
+
   return (
-    <div className="flex justify-center gap-10 m-3">
-      <ul className="flex justify-center gap-6">
+    <div className="m-3">
+      <ul className="flex w-[900px] gap-2">
         {icons.map((icon, index) => {
           const IconComponent = icon.name;
           return (
             <li
-              className="filter_icons flex flex-col items-center gap-y-2 opacity-70"
+              className={`filter_icons flex flex-col flex-1 items-center gap-1 opacity-70 py-4 rounded-full transition
+              ${iconFilters.indexOf(icon.title) !== -1 ? "bg-[#cccccc]" : ""}`}
               key={index}
               onClick={handleIconClick}
             >
               <IconComponent className="size-6" />
               <p
-                id="iconLabel"
-                className={`filter_icons_text text-sm ${iconFilters.indexOf(icon.title) !== -1 ? "selected" : ""}`}
+                className="text-xs filter_icons_text"
               >
                 {toFR[icon.title]}
               </p>

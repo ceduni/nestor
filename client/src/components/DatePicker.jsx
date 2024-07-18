@@ -56,7 +56,7 @@ export default function DatePicker({
 
   return (
     <div
-      className={`flex flex-col gap-4 bg-white z-10 rounded-lg absolute top-[72px] border w-[300px] right-[50px] ${isDateClicked && !isDateItemClicked && !hasClickedOutsideDate ? "" : "invisible"}`}
+      className={`shadow flex flex-col gap-4 bg-white z-10 rounded-lg absolute top-[72px] border w-[300px] right-[50px] ${isDateClicked && !isDateItemClicked && !hasClickedOutsideDate ? "" : "invisible"}`}
     >
       <div className="flex items-center p-2">
         <h2 className="flex-auto font-semibold text-gray-900">
