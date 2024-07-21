@@ -32,8 +32,8 @@ export default function CardDetail({ spaceDetail }) {
   };
 
   return (
-    <div className="w-full card_detail rounded-xl flex flex-col">
-      <div className="slide-container">
+    <div className="card_detail rounded-xl flex flex-col w-[700px] sticky border top-[270.98px] self-start">
+      {/*<div className="slide-container">
         <Slide easing="ease">
           {slideImages.map((slide, index) => {
             return (
@@ -50,9 +50,20 @@ export default function CardDetail({ spaceDetail }) {
             );
           })}
         </Slide>
+      </div>*/}
+      <div className="grid gap-2 grid-cols-8 grid-rows-8 h-[474.66px]">
+        {spaceDetail.images.map((image, index) => (
+          <div key={index} className={`grid-image grid-image-${index}`}>
+            <img
+              src={image.url}
+              className="object-cover w-full h-full rounded-lg"
+              alt="space photo"
+            />
+          </div>
+        ))}
       </div>
       <section className="p-2">
-        <header className="border-b-2 py-2">
+        <header className="border-b-2 p-2">
           <nav>
             <ul className="flex gap-x-8">
               <li

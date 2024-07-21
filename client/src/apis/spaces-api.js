@@ -7,7 +7,7 @@ export const getSpaces = async () => {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    console.log('Fetched spaces data:', data);
+    console.log("Fetched spaces data:", data);
     return data;
   } catch (error) {
     console.error("Error fetching spaces: ", error);

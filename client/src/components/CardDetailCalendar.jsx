@@ -3,10 +3,16 @@ import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { frCA } from "date-fns/locale";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import ReservationInfo from './ReservationInfo';
-import { useQuery } from '@tanstack/react-query';
+import ReservationInfo from "./ReservationInfo";
+import { useQuery } from "@tanstack/react-query";
 
-import { getReservations, getReservationById, createReservation, updateReservation, deleteReservation } from '../apis/reservation-api';
+import {
+  getReservations,
+  getReservationById,
+  createReservation,
+  updateReservation,
+  deleteReservation,
+} from "../apis/reservation-api";
 
 const locales = {
   "en-US": frCA,
@@ -20,14 +26,14 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-export default function CardDetailCalendar({spaceDetail}) {
+export default function CardDetailCalendar({ spaceDetail }) {
   // const {data:allReservations, error, isLoading} = useQuery({
-  //   queryKey : ['reservations'], 
+  //   queryKey : ['reservations'],
   //   queryFn : getReservations,
   // });
-  
+
   // const {data:allReservations = [], error, isLoading} = useQuery({
-  //   queryKey : ['reservations'], 
+  //   queryKey : ['reservations'],
   //   queryFn : async ()=>{
   //     const response = await fetch("http://localhost:3000/api/v1/reservations/");
   //     const data = await response.json();
@@ -178,19 +184,28 @@ export default function CardDetailCalendar({spaceDetail}) {
             />
           </div>
         </div>
-        <div className='flex flex-col'>
-          <div className='flex flex-col gap-2 p-2'>
-              <label className='font-semibold' htmlFor="activite">Activité</label>
-              <input onChange={handleActiviteChange} id='activite' type="text" className='card_detail_input border w-44 p-2' />
+        <div className="flex flex-col">
+          <div className="flex flex-col gap-2 p-2">
+            <label className="font-semibold" htmlFor="activite">
+              Activité
+            </label>
+            <input
+              onChange={handleActiviteChange}
+              id="activite"
+              type="text"
+              className="card_detail_input border w-44 p-2"
+            />
           </div>
-          <div className='flex flex-col gap-2 p-2'>
-              <label className='font-semibold' htmlFor="activite">Statut</label>
-              <select onChange={handleStatutChange} name="status" id="status">
-                <option value="fullfilled">fullfilled</option>
-                <option value="confirmed">confirmed</option>
-                <option value="pending">pending</option>
-                <option value="cancelled">cancelled</option>
-              </select>
+          <div className="flex flex-col gap-2 p-2">
+            <label className="font-semibold" htmlFor="activite">
+              Statut
+            </label>
+            <select onChange={handleStatutChange} name="status" id="status">
+              <option value="fullfilled">fullfilled</option>
+              <option value="confirmed">confirmed</option>
+              <option value="pending">pending</option>
+              <option value="cancelled">cancelled</option>
+            </select>
           </div>
         </div>
         <button className="border p-2 rounded-full font-semibold" type="submit">

@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoSearchCircle } from "react-icons/io5";
-import { FiFilter } from "react-icons/fi";
 import FiltersIcons from "./FiltersIcons";
-import FiltersExtra from "./FiltersExtra";
-import FilterTags from "./FiltersTags";
 import AddressDropDown from "./AddressDropDown.jsx";
 import { startOfToday } from "date-fns";
 import DatePicker from "./DatePicker.jsx";
@@ -13,7 +10,7 @@ export default function Filters({
   onFiltersUpdate,
   allAddresses,
   allNames,
-  onIconFiltersUpdate
+  onIconFiltersUpdate,
 }) {
   const [filterBtnCliked, setFilterBtnClicked] = useState(false);
   const [hasAnyFilter, setHasAnyFilter] = useState(false);
@@ -217,7 +214,7 @@ export default function Filters({
           </button>
         </div>
       </form>
-      <FiltersIcons onIconFiltersUpdate={onIconFiltersUpdate}/>
+      <FiltersIcons onIconFiltersUpdate={onIconFiltersUpdate} />
     </div>
   );
 }

@@ -5,20 +5,45 @@ import { IoPeopleOutline } from "react-icons/io5";
 
 export default function Card({ space, cardSelected, onCardClick }) {
   const { images, name, organisation, capacity } = space;
+
+  const current = new Date();
   const handleClick = (e) => {
     e.preventDefault();
     onCardClick(cardSelected, space);
   };
+
+  const checkOngoingActivity = () => {
+    return space.availabilities.some((avail) => {
+      const endTime = new Date(avail.endAt);
+      return (
+        avail.isBooked && (endTime.getTime() - current.getTime()) / 1000 > 1800
+      );
+    });
+  };
+
+  const alertNextAvailability = () => {
+    return space.availabilities.some((avail) => {
+      const endTime = new Date(avail.endAt);
+      return (
+        avail.isBooked && (endTime.getTime() - current.getTime()) / 1000 <= 300
+      );
+    });
+  };
+
   return (
-    <a className="card rounded-lg flex flex-col items-center" href="" onClick={handleClick}>
-      <div className="card_img_container">
+    <a
+      className="card rounded-lg flex flex-col gap-2 border"
+      href=""
+      onClick={handleClick}
+    >
+      <div className="">
         <img
-          className="card_img rounded-lg z-0 brightness-105 contrast-125 saturate-150"
+          className="rounded-lg object-cover w-full h-[200px]"
           src={images[0].url}
           alt="space photo"
         />
       </div>
-      <div className="flex flex-col px-1 py-2 w-80 h-32">
+      <div className="flex flex-col px-1 py-2 gap-1 flex-1">
         <p className="text-base font-bold flex items-center gap-2">
           <MdOutlineSubtitles className="w-5" />
           {name}
@@ -31,6 +56,20 @@ export default function Card({ space, cardSelected, onCardClick }) {
           <IoPeopleOutline className="w-5" />
           {capacity} {capacity > 1 ? "personnes" : "personne"}
         </p>
+      </div>
+      <div>
+        {checkOngoingActivity() && (
+          <div className="flex flex-row-reverse">
+            <p className="bg-[#cccccc] py-1 px-2 rounded-full border-2 border-white font-bold my-1 mx-3">
+              Activité en cours
+            </p>
+          </div>
+        )}
+        {/*<div className="flex flex-row-reverse">
+          <p className="bg-[#cccccc] py-1 px-2 rounded-full border-2 border-white font-bold my-2 mx-3">
+            Dispo dans 5 minutes
+          </p>
+        </div>*/}
       </div>
     </a>
   );

@@ -16,7 +16,6 @@ const icons = [
   { name: VscCoffee, title: "coffee" },
   { name: MdOutlinePark, title: "nature" },
   { name: LuMicroscope, title: "laboratory" },
-  { name: CiMusicNote1, title: "music" },
   { name: SlScreenDesktop, title: "screen" },
   { name: TfiBlackboard, title: "whiteboard" },
   { name: BsPlug, title: "plug" },
@@ -30,7 +29,6 @@ const toFR = {
   coffee: "café",
   nature: "nature",
   laboratory: "labo",
-  music: "musique",
   screen: "écran",
   whiteboard: "tableau",
   plug: "prise",
@@ -76,17 +74,13 @@ export default function FiltersIcons({ onIconFiltersUpdate }) {
           const IconComponent = icon.name;
           return (
             <li
-              className={`filter_icons flex flex-col flex-1 items-center gap-1 opacity-70 py-4 rounded-full transition
+              className={`filter_icons flex flex-col flex-1 items-center gap-1 opacity-70 py-4 rounded-full transition hover:rounded-full hover:transition hover:bg-[#cccccc]
               ${iconFilters.indexOf(icon.title) !== -1 ? "bg-[#cccccc]" : ""}`}
               key={index}
               onClick={handleIconClick}
             >
               <IconComponent className="size-6" />
-              <p
-                className="text-xs filter_icons_text"
-              >
-                {toFR[icon.title]}
-              </p>
+              <p className="text-xs filter_icons_text">{toFR[icon.title]}</p>
             </li>
           );
         })}

@@ -20,7 +20,7 @@ export default function Header() {
     selectNavItems(hasLogedin, isAdmin),
   );
   return (
-    <header className="header px-14 w-full flex place-content-between items-center">
+    <header className="header sticky top-0 z-10 bg-white px-14 w-full flex place-content-between items-center">
       {/* Nestor logo */}
       <Link to="/">
         <img

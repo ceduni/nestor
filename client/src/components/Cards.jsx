@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
 import { LuRefreshCw } from "react-icons/lu";
@@ -45,7 +44,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
         avail.startAt.includes(filters.date),
       ),
     );
-    console.log(filters.date)
+    console.log(filters.date);
     filteredSpaces = filteredSpaces.filter(
       (space) =>
         Number(filters.peopleNum) === 0 ||
@@ -65,7 +64,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
     if (iconFilters.length !== 0) {
       filteredSpaces = filteredSpaces.filter(
         (space) =>
-          iconFilters.includes(space.type) ||
+          iconFilters.some((iconFilter) => space.type.includes(iconFilter)) ||
           iconFilters.every((iconFilter) =>
             space.features.includes(iconFilter),
           ),
@@ -99,14 +98,13 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
   };
 
   return (
-    <div className='my-5'>
-      <div className="flex justify-center items-center">
-        <p className="text-center p-3">{spaces.length} espaces trouvés</p>
-        <button className="border p-1 rounded" onClick={handleRefreshClick}>
-          <LuRefreshCw />
-        </button>
+    <div className="">
+      <div className="flex justify-center items-center sticky top-[206.98px] p-2 bg-white z-20">
+        <p className="text-center p-3 font-bold">
+          {spaces.length} espaces trouvés
+        </p>
       </div>
-      <section className="grid grid-cols-3 gap-2 xl:grid-cols-4 md:px-3 xl:px-14">
+      {/*<section className="grid grid-cols-3 gap-2 xl:grid-cols-4 md:px-3 xl:px-14">
         <div
           className={
             cardSelected
@@ -114,9 +112,9 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
               : "cards scrollbar-hidden grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 py-5 col-span-4"
           }
         >
-          {spaces.map((item) => (
+          {spaces.map((item, index) => (
             <Card
-              key={uuidv4()}
+              key={index}
               space={item}
               cardSelected={cardSelected}
               onCardClick={handleCardClick}
@@ -126,6 +124,25 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
         <div className="card_detail overflow-auto flex justify-center items-start md:col-span-2 xl:col-span-3 pr-5 py-5">
           {cardSelected ? <CardDetail spaceDetail={detailSelected} /> : <></>}
         </div>
+      </section>*/}
+      <section className="p-4 flex gap-10 justify-center">
+        <div
+          className={`${cardSelected ? "flex flex-col gap-8 w-[402px]" : "grid grid-cols-4 gap-8 p-6 auto-rows-fr"}`}
+        >
+          {spaces.map((item, index) => (
+            <Card
+              key={index}
+              space={item}
+              cardSelected={cardSelected}
+              onCardClick={handleCardClick}
+            />
+          ))}
+        </div>
+        {cardSelected && spaces.length !== 0 ? (
+          <CardDetail spaceDetail={detailSelected} />
+        ) : (
+          <></>
+        )}
       </section>
     </div>
   );
