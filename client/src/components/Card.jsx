@@ -21,15 +21,6 @@ export default function Card({ space, cardSelected, onCardClick }) {
     });
   };
 
-  const alertNextAvailability = () => {
-    return space.availabilities.some((avail) => {
-      const endTime = new Date(avail.endAt);
-      return (
-        avail.isBooked && (endTime.getTime() - current.getTime()) / 1000 <= 300
-      );
-    });
-  };
-
   return (
     <a
       className="card rounded-lg flex flex-col gap-2 border"
