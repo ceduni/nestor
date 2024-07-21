@@ -4,7 +4,7 @@ const reservationSchema = {
     body: {
       type: "object",
       properties: {
-        host: { type: "string" },
+        hostId: { type: "string" },
         availability: {
           type: "object",
           additionalProperties: false,
@@ -17,7 +17,7 @@ const reservationSchema = {
             _id: { type: "string" },
           },
         },
-        guests: {
+        guestIds: {
           type: "array",
           items: {
             type: "string",
@@ -29,7 +29,7 @@ const reservationSchema = {
           enum: ["fulfilled", "confirmed", "pending", "cancelled"],
         },
         isPrivate: { type: "boolean" },
-        space: { type: "string" },
+        spaceId: { type: "string" },
       },
       additionalProperties: false,
       minProperties: 1,

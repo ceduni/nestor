@@ -105,7 +105,7 @@ const spaceSchema = new mongoose.Schema(
       required: true,
     },
     type: {
-      type: String,
+      type: [String],
       enum: [
         "university",
         "library",

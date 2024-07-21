@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const { space, availabilitySchema } = require("./space.model");
 const reservationSchema = new mongoose.Schema(
   {
-    host: {
+    hostId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     availability: { type: availabilitySchema, required: true },
-    guests: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+    guestIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
     activity: {
       type: String,
       required: true,
@@ -21,7 +21,7 @@ const reservationSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    space: {
+    spaceId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "space",
       required: true,
@@ -31,10 +31,10 @@ const reservationSchema = new mongoose.Schema(
 );
 
 reservationSchema.pre("save", async function (next) {
-  const strArr = this.guests.map((guest) => guest.toString());
+  const strArr = this.guestIds.map((guest) => guest.toString());
   const uniqueStrSet = [...new Set(strArr)];
-  this.guests = uniqueStrSet.map((str) => new mongoose.Types.ObjectId(str));
-  const spaceResult = await space.findById(this.space);
+  this.guestIds = uniqueStrSet.map((str) => new mongoose.Types.ObjectId(str));
+  const spaceResult = await space.findById(this.spaceId);
   if (!spaceResult) {
     next("Space not found");
   }
@@ -67,11 +67,11 @@ reservationSchema.pre("save", async function (next) {
     spaceResult.save();
   }
 
-  if (this.guests.length > capacity) {
+  if (this.guestIds.length > capacity) {
     next("Number of guests can not exceed space capacity");
   }
-  this.guests.forEach((guest) => {
-    if (guest.equals(this.host)) {
+  this.guestIds.forEach((guest) => {
+    if (guest.equals(this.hostId)) {
       next("Host can not be guest at the same time");
     }
   });
