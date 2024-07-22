@@ -6,10 +6,6 @@ Système de réservation d'espace d'études visant à optimiser l'utilisation de
 
 Avec une emphase sur l'accessibilité et la flexibilité, Nestor offrira des fonctionnalités avancées d'exploration et de recherche, permettant aux utilisateurs de trouver aisément les espaces correspondant à leurs besoins spécifiques et de procéder à la réservation en toute simplicité.
 La plateforme permettra également aux utilisateurs de modifier facilement leurs réservations et notifier le système et tout intéresser en cas de libération d'espace. Les utilisateurs auront la possibilité de communiquer des informations pertinentes, telles que la description de leur activité, afin d'améliorer l'expérience globale et pourront inviter ou permettre d'autres étudiants à les rejoindre lors de leurs sessions d'étude. 
- 
-## Objectifs 
-
-<!-- TODO -->
 
 ## :scroll: Fonctionnalités
 
