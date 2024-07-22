@@ -66,7 +66,6 @@ export default function Card({ space, cardSelected, onCardClick }) {
       );
     });
   };
-
   return (
     <a
       className="card rounded-lg flex flex-col gap-2 border"
