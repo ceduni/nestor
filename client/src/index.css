@@ -185,6 +185,10 @@ body {
 .card_detail_input {
 }
 
+.display_btn {
+  transform: rotate(180deg);
+}
+
 .slide-container {
   /* background-color: grey; */
 }
