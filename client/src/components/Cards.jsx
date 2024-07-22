@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
 import { LuRefreshCw } from "react-icons/lu";
+import { BsFillGrid1X2Fill, BsFillGrid3X3GapFill } from "react-icons/bs";
 
 export default function Cards({ allSpaces, filters, iconFilters }) {
   // States
@@ -97,12 +98,19 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
     console.log(detailSelected);
   };
 
+  const handleDisplaymodeClick = ()=>{
+    setCardSelected(prev => !prev);
+  }
+
   return (
     <div className="">
       <div className="flex justify-center items-center sticky top-[206.98px] p-2 bg-white z-20">
         <p className="text-center p-3 font-bold">
           {spaces.length} espaces trouvés
         </p>
+        <button onClick={handleDisplaymodeClick} className='border p-1 rounded'>
+          {cardSelected ? <BsFillGrid1X2Fill /> : <BsFillGrid3X3GapFill />}
+        </button>
       </div>
       {/*<section className="grid grid-cols-3 gap-2 xl:grid-cols-4 md:px-3 xl:px-14">
         <div
@@ -127,7 +135,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
       </section>*/}
       <section className="p-4 flex gap-10 justify-center">
         <div
-          className={`${cardSelected ? "flex flex-col gap-8 w-[402px]" : "grid grid-cols-4 gap-8 p-6 auto-rows-fr"}`}
+          className={`${cardSelected ? " flex flex-col gap-8 w-[402px]" : "grid grid-cols-4 gap-8 p-6 auto-rows-fr"}`}
         >
           {spaces.map((item, index) => (
             <Card

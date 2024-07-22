@@ -138,6 +138,10 @@ body {
   cursor: pointer;
 }
 
+.cards_detailmode {
+  overflow: auto;
+}
+
 .card {
   /* border: 1px solid #eceded; */
   /* box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
@@ -166,7 +170,7 @@ body {
 /* -----CardDetail----- */
 .card_detail::-webkit-scrollbar {
   display: none;
-  @apply overflow-scroll;
+  /* @apply overflow-scroll; */
 }
 
 .card_detail_options:hover {
