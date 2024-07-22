@@ -100,6 +100,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
 
   const handleDisplaymodeClick = ()=>{
     setCardSelected(prev => !prev);
+    handleSelectSpaceDetail(spaces[0]);
   }
 
   return (
@@ -109,7 +110,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           {spaces.length} espaces trouvés
         </p>
         <button onClick={handleDisplaymodeClick} className='border p-1 rounded'>
-          {cardSelected ? <BsFillGrid1X2Fill className='display_btn'/> : <BsFillGrid3X3GapFill />}
+          {!cardSelected ? <BsFillGrid1X2Fill className='display_btn'/> : <BsFillGrid3X3GapFill />}
         </button>
       </div>
       {/*<section className="grid grid-cols-3 gap-2 xl:grid-cols-4 md:px-3 xl:px-14">
