@@ -134,6 +134,9 @@ body {
   /* @apply h-96; */
   /* height: 90rem; */
 }
+.cards:hover {
+  cursor: pointer;
+}
 
 .card {
   /* border: 1px solid #eceded; */

@@ -23,13 +23,12 @@ export default function Card({ space, cardSelected, onCardClick }) {
 
   return (
     <a
-      className="card rounded-lg flex flex-col gap-2 border"
-      href=""
+      className={`cards ${cardSelected ? "flex flex-row h-36":"card rounded-lg flex flex-col gap-2 border"}`}
       onClick={handleClick}
     >
       <div className="">
         <img
-          className="rounded-lg object-cover w-full h-[200px]"
+          className={`rounded-lg object-cover ${cardSelected ? "w-44 h-full" : "w-full h-[200px]"}  `}
           src={images[0].url}
           alt="space photo"
         />
