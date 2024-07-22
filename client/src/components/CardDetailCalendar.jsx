@@ -13,6 +13,7 @@ import {
   updateReservation,
   deleteReservation,
 } from "../apis/reservation-api";
+import { useReservations } from '../context/ReservationsContext';
 
 const locales = {
   "en-US": frCA,
@@ -44,11 +45,14 @@ export default function CardDetailCalendar({ spaceDetail }) {
 
   // console.log(allReservations);
 
+  const {allReservations, setAllReservations, fetchAllReservations} = useReservations();
+  const [reservations, setReservations] = useState(allReservations.filter(r => r.spaceId === spaceDetail.spaceId));
+  const [events, setEvents] = useState([]);
   const [isEventSelected, setIsEventSelected] = useState(false);
   const [eventSelected, setEventSelected] = useState({
     title: "",
-    start: "",
-    end: "",
+    start: undefined,
+    end: undefined,
   });
   const [reservation, setReservation] = useState({
     hostId: "",
@@ -62,42 +66,55 @@ export default function CardDetailCalendar({ spaceDetail }) {
     spaceId: spaceDetail._id,
   });
 
-  const [allReservations, setAllReservations] = useState([]);
+  // const filterReservationsBySpace = (spaceDetail) =>{
+  //   const spaceReservations = allReservations.filter(r => r.spaceId === spaceDetail.id);
+  //   return spaceReservations;
+  // }
 
-  useEffect(() => {
-    const fetchReservations = async () => {
-      try {
-        const data = await getReservations();
-        setReservations(data);
-        setIsLoading(false);
-      } catch (err) {
-        setError(err);
-        setIsLoading(false);
+  // const [allReservations, setAllReservations] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchReservations = async () => {
+  //     try {
+  //       const data = await getReservations();
+  //       setReservations(data);
+  //       setIsLoading(false);
+  //     } catch (err) {
+  //       setError(err);
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchReservations();
+  // }, []);
+
+  useEffect(()=>{
+    const spaceReservations = allReservations.filter(r => r.spaceId === spaceDetail._id);
+    console.log(spaceReservations);
+    const allEvents = spaceReservations.map(r => {
+      const event = {
+        title: r.activity,
+        start: new Date(r.availability.startAt),
+        end: new Date(r.availability.startAt)
       }
-    };
+      return (event);
+    })
 
-    fetchReservations();
-  }, []);
+    console.log(allEvents);
+    setEvents(allEvents);
+  }, [spaceDetail])
 
-  const handleStartAtChange = (e) => {
-    const startDateTime = e.target.value;
-    setReservation({ ...reservation, startAt: startDateTime });
-  };
-  const handleEndAtChange = (e) => {
-    const endDateTime = e.target.value;
-    setReservation({ ...reservation, endAt: endDateTime });
-  };
-  const handleActiviteChange = (e) => {
-    const activity = e.target.value;
-    setReservation({ ...reservation, activity: activity });
-  };
-  const handleStatutChange = (e) => {
-    const statut = e.target.value;
-    setReservation({ ...reservation, status: statut });
-  };
+  const handleInputsChange = (e)=>{
+    const {name, value} = e.target;
+    setReservation(prev =>({
+      ...prev,
+      [name]: value
+    }))
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(spaceDetail);
     console.log(reservation);
     const { activity, startAt, endAt } = reservation;
     const event = {
@@ -158,27 +175,29 @@ export default function CardDetailCalendar({ spaceDetail }) {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex gap-x-7 justify-center items-center py-5"
+        className="flex gap-x-7 justify-center items-center py-5"
       >
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2">
-            <label className="font-semibold" htmlFor="start_time">
+            <label className="font-semibold" htmlFor="startAt">
               Date et heure de début
             </label>
             <input
-              onChange={handleStartAtChange}
-              id="start_time"
+              onChange={handleInputsChange}
+              id="startAt"
+              name='startAt'
               className="card_detail_input border w-44 p-2"
               type="datetime-local"
             />
           </div>
           <div className="flex flex-col gap-2 p-2">
-            <label className="font-semibold" htmlFor="end_time">
+            <label className="font-semibold" htmlFor="endAt">
               Date et heure de fin
             </label>
             <input
-              onChange={handleEndAtChange}
-              id="end_time"
+              onChange={handleInputsChange}
+              id="endAt"
+              name='endAt'
               className="card_detail_input border w-44 p-2"
               type="datetime-local"
             />
@@ -186,21 +205,22 @@ export default function CardDetailCalendar({ spaceDetail }) {
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2">
-            <label className="font-semibold" htmlFor="activite">
+            <label className="font-semibold" htmlFor="activity">
               Activité
             </label>
             <input
-              onChange={handleActiviteChange}
-              id="activite"
+              onChange={handleInputsChange}
+              id="activity"
+              name='activity'
               type="text"
               className="card_detail_input border w-44 p-2"
             />
           </div>
           <div className="flex flex-col gap-2 p-2">
-            <label className="font-semibold" htmlFor="activite">
+            <label className="font-semibold" htmlFor="status">
               Statut
             </label>
-            <select onChange={handleStatutChange} name="status" id="status">
+            <select onChange={handleInputsChange} name="status" id="status">
               <option value="fullfilled">fullfilled</option>
               <option value="confirmed">confirmed</option>
               <option value="pending">pending</option>
@@ -216,7 +236,7 @@ export default function CardDetailCalendar({ spaceDetail }) {
       <div className="py-5">
         <Calendar
           localizer={localizer}
-          events={allReservations}
+          events={events}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 500 }}

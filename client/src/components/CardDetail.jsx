@@ -53,7 +53,7 @@ export default function CardDetail({ spaceDetail }) {
       </div>*/}
       <div className="grid gap-2 grid-cols-8 grid-rows-8 h-[474.66px]">
         {spaceDetail.images.map((image, index) => (
-          <div key={index} className={`grid-image grid-image-${index}`}>
+          <div key={index} className={`grid-image grid-image-${index} `}>
             <img
               src={image.url}
               className="object-cover w-full h-full rounded-lg"

@@ -22,7 +22,7 @@ export function ReservationsProvider({children}){
     }
 
     return (
-        <ReservationsContext.Provider value={{allReservations, fetchAllReservations}}>
+        <ReservationsContext.Provider value={{allReservations, setAllReservations, fetchAllReservations}}>
             {children}
         </ReservationsContext.Provider>
     )
