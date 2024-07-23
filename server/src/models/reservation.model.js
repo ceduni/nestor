@@ -49,24 +49,26 @@ reservationSchema.pre("save", async function (next) {
     this.availability.startAt.getTime() !==
       spaceResult.availabilities[indexToUpdate].startAt.getTime() ||
     this.availability.endAt.getTime() !==
-      spaceResult.availabilities[indexToUpdate].endAt.getTime()
+      spaceResult.availabilities[indexToUpdate].endAt.getTime() ||
+    this.availability.isPeriodic !==
+      spaceResult.availabilities[indexToUpdate].isPeriodic
   ) {
     next("Reservation availability should match space availability");
   }
   if (this.status === "confirmed") {
-    spaceResult.availabilities[indexToUpdate] = Object.assign(
-      spaceResult.availabilities[indexToUpdate],
-      { isBooked: true },
-    );
+    spaceResult.availabilities[indexToUpdate].isBooked = true;
     spaceResult.save();
   } else if (this.status === "cancelled") {
-    spaceResult.availabilities[indexToUpdate] = Object.assign(
-      spaceResult.availabilities[indexToUpdate],
-      { isBooked: false },
-    );
+    spaceResult.availabilities[indexToUpdate].isBooked = false;
+    spaceResult.save();
+  } else if (this.status === "fulfilled") {
+    if (this.availability.isPeriodic) {
+      spaceResult.availabilities[indexToUpdate].isBooked = false;
+    } else {
+      spaceResult.availabilities.pull(this.availability._id);
+    }
     spaceResult.save();
   }
-
   if (this.guestIds.length > capacity) {
     next("Number of guests can not exceed space capacity");
   }

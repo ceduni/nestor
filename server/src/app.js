@@ -14,6 +14,9 @@ const cors = require("@fastify/cors");
 const mongoose = require("mongoose");
 mongoose.set({ debug: true });
 
+// import tasks
+const { reservationTask, spaceTask } = require("../scripts/ttl.script");
+
 // import routes
 const spaceRoutes = require("./routes/space.routes.js");
 const locationRoutes = require("./routes/location.routes.js");
@@ -27,6 +30,10 @@ mongoose
   .connect(process.env.MONGODB_CLOUD_CONNECTION_STRING, {})
   .then(() => console.log("Connected to the database"))
   .catch((e) => console.log("Error connecting to database", e));
+
+// run tasks
+reservationTask.start();
+spaceTask.start();
 
 // start server
 fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });
