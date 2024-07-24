@@ -67,16 +67,19 @@ export default function CardDetailDescription({ spaceDetail }) {
           <IoPeopleOutline className="mt-1" />
           {spaceDetail.capacity} personnes
         </li>
-        <li className="flex gap-2 bg-[#ebedee] rounded-lg p-2">
+        <li className="flex gap-2 bg-[#ebedee] rounded-lg p-2 font-bold">
           <MdOutlineDescription className="mt-1" />
           <p className="w-[600px] text-justify">{spaceDetail.description}</p>
         </li>
       </ul>
-      <div className="grid grid-cols-2 text-lg p-4">
+      <div className="grid grid-cols-2 gap-4 text-lg p-4 w-[300px]">
         {spaceDetail.features.map((equip, index) => {
           const IconComponent = icons[equip];
           return (
-            <div className="flex gap-2" key={index}>
+            <div
+              className="flex gap-2 bg-black text-white rounded-xl justify-center"
+              key={index}
+            >
               <IconComponent className="mt-1" />
               {toFR[equip]}
             </div>

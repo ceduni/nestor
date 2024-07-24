@@ -1,6 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
-import { format, parse, startOfWeek, getDay } from "date-fns";
+import React, { useState, useEffect, useCallback } from "react";
+import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar";
+import {
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  endOfWeek,
+  getMonth,
+  addMonths,
+  addWeeks,
+  addDays,
+  subMonths,
+  subWeeks,
+  subDays,
+  getHours,
+} from "date-fns";
 import { frCA } from "date-fns/locale";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import ReservationInfo from "./ReservationInfo";
@@ -13,7 +27,7 @@ import {
   updateReservation,
   deleteReservation,
 } from "../apis/reservation-api";
-import { useReservations } from '../context/ReservationsContext';
+import { useReservations } from "../context/ReservationsContext";
 
 const locales = {
   "en-US": frCA,
@@ -45,10 +59,16 @@ export default function CardDetailCalendar({ spaceDetail }) {
 
   // console.log(allReservations);
 
-  const {allReservations, setAllReservations, fetchAllReservations} = useReservations();
-  const [reservations, setReservations] = useState(allReservations.filter(r => r.spaceId === spaceDetail.spaceId));
+  const { allReservations, setAllReservations, fetchAllReservations } =
+    useReservations();
+  const [reservations, setReservations] = useState(
+    allReservations.filter((r) => r.spaceId === spaceDetail.spaceId),
+  );
   const [events, setEvents] = useState([]);
   const [isEventSelected, setIsEventSelected] = useState(false);
+  const [view, setView] = useState(Views.WEEK);
+  const currentDate = new Date();
+  const [date, setDate] = useState(currentDate);
   const [eventSelected, setEventSelected] = useState({
     title: "",
     start: undefined,
@@ -66,6 +86,43 @@ export default function CardDetailCalendar({ spaceDetail }) {
     spaceId: spaceDetail._id,
   });
 
+  const onView = useCallback((newDate) => setDate(newDate), [setDate]);
+  const onNavigate = useCallback((newDate) => setDate(newDate), [setDate]);
+  const displayDate = () => {
+    if (view === Views.MONTH) return format(date, "MMMM yyyy");
+    else if (view === Views.WEEK) {
+      let concatFormat = "dd";
+      if (getMonth(startOfWeek(date)) !== getMonth(endOfWeek(date))) {
+        concatFormat = "MMMM dd";
+      }
+      return format(startOfWeek(date), "MMMM dd")
+        .concat(" - ")
+        .concat(format(endOfWeek(date), concatFormat));
+    } else return format(date, "EEEE MMM dd");
+  };
+
+  const handleNextClick = () => {
+    if (view === Views.MONTH) setDate(addMonths(date, 1));
+    else if (view === Views.WEEK) setDate(addWeeks(date, 1));
+    else setDate(addDays(date, 1));
+  };
+
+  const handleBackClick = () => {
+    if (view === Views.MONTH) setDate(subMonths(date, 1));
+    else if (view === Views.WEEK) setDate(subWeeks(date, 1));
+    else setDate(subDays(date, 1));
+  };
+  const eventPropGetter = useCallback(
+    (event, start, end, isSelected) => ({
+      ...(!isSelected && {
+        style: {
+          backgroundColor: "#88f488",
+          border: "none",
+        },
+      }),
+    }),
+    [],
+  );
   // const filterReservationsBySpace = (spaceDetail) =>{
   //   const spaceReservations = allReservations.filter(r => r.spaceId === spaceDetail.id);
   //   return spaceReservations;
@@ -88,29 +145,45 @@ export default function CardDetailCalendar({ spaceDetail }) {
   //   fetchReservations();
   // }, []);
 
-  useEffect(()=>{
-    const spaceReservations = allReservations.filter(r => r.spaceId === spaceDetail._id);
-    console.log(spaceReservations);
-    const allEvents = spaceReservations.map(r => {
-      const event = {
-        title: r.activity,
-        start: new Date(r.availability.startAt),
-        end: new Date(r.availability.startAt)
+  useEffect(() => {
+    const allEvents = spaceDetail.availabilities.map((avail) => {
+      let startTime = new Date(avail.startAt);
+      let endTime = new Date(avail.endAt);
+      if (avail.isPeriodic) {
+        startTime = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          startTime.getHours(),
+          startTime.getMinutes(),
+          startTime.getSeconds(),
+        );
+        endTime = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          endTime.getHours(),
+          endTime.getMinutes(),
+          endTime.getSeconds(),
+        );
       }
-      return (event);
-    })
-
-    console.log(allEvents);
+      const event = {
+        title: "",
+        start: startTime,
+        end: endTime,
+      };
+      return event;
+    });
     setEvents(allEvents);
-  }, [spaceDetail])
+  }, [spaceDetail]);
 
-  const handleInputsChange = (e)=>{
-    const {name, value} = e.target;
-    setReservation(prev =>({
+  const handleInputsChange = (e) => {
+    const { name, value } = e.target;
+    setReservation((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -173,7 +246,7 @@ export default function CardDetailCalendar({ spaceDetail }) {
 
   return (
     <div>
-      <form
+      {/*<form
         onSubmit={handleSubmit}
         className="flex gap-x-7 justify-center items-center py-5"
       >
@@ -231,9 +304,57 @@ export default function CardDetailCalendar({ spaceDetail }) {
         <button className="border p-2 rounded-full font-semibold" type="submit">
           Réserver
         </button>
-      </form>
+      </form>*/}
 
-      <div className="py-5">
+      <div className="py-5 flex flex-col gap-4">
+        <div className="flex justify-between">
+          <div className="flex bg-[#ebedee] font-bold text-lg rounded-xl">
+            <div
+              className="px-4 hover:bg-[#d4d5d6] rounded-l-xl"
+              onClick={() => setDate(currentDate)}
+            >
+              Today
+            </div>
+            <div className="px-4 hover:bg-[#d4d5d6]" onClick={handleBackClick}>
+              Back
+            </div>
+            <div
+              className="px-4 hover:bg-[#d4d5d6] rounded-r-xl"
+              onClick={handleNextClick}
+            >
+              Next
+            </div>
+          </div>
+          <div className="bg-[#ebedee] font-bold rounded-xl px-2">
+            {displayDate()}
+          </div>
+          <div className="flex bg-[#ebedee] font-bold text-lg rounded-xl">
+            <div
+              className="px-4 hover:bg-[#d4d5d6] rounded-l-xl"
+              onClick={() => {
+                setView(Views.MONTH);
+              }}
+            >
+              Month
+            </div>
+            <div
+              className="px-4 hover:bg-[#d4d5d6]"
+              onClick={() => {
+                setView(Views.WEEK);
+              }}
+            >
+              Week
+            </div>
+            <div
+              className="px-4 hover:bg-[#d4d5d6] rounded-r-xl"
+              onClick={() => {
+                setView(Views.DAY);
+              }}
+            >
+              Day
+            </div>
+          </div>
+        </div>
         <Calendar
           localizer={localizer}
           events={events}
@@ -241,8 +362,13 @@ export default function CardDetailCalendar({ spaceDetail }) {
           endAccessor="end"
           style={{ height: 500 }}
           defaultView="week"
-          views={{ month: true, week: true, day: true }}
           onSelectEvent={handleSelectEvent}
+          eventPropGetter={eventPropGetter}
+          toolbar={false}
+          view={view}
+          onView={onView}
+          onNavigate={onNavigate}
+          date={date}
         />
       </div>
 

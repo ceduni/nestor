@@ -3,11 +3,7 @@ import { CgOrganisation } from "react-icons/cg";
 import { MdOutlineSubtitles } from "react-icons/md";
 import { IoPeopleOutline } from "react-icons/io5";
 
-export default function Card({
-  space,
-  cardSelected,
-  onCardClick
-}) {
+export default function Card({ space, cardSelected, onCardClick }) {
   const { images, name, organisation, capacity } = space;
   const [remainTimeBeforeNext, setRemainTimeBeforeNext] = useState(0);
   const [hasOngoingActivity, setHasOngoingActivity] = useState(false);
@@ -18,36 +14,29 @@ export default function Card({
     onCardClick(cardSelected, space);
   };
 
-  const setUTCDate = (year,month,date,hours,minutes, seconds) => {
-    return new Date(
-        year,
-        month,
-        date,
-        hours,
-        minutes,
-        seconds,
-    );
-  }
+  const setUTCDate = (year, month, date, hours, minutes, seconds) => {
+    return new Date(year, month, date, hours, minutes, seconds);
+  };
 
   const checkOngoingActivity = () => {
     setHasOngoingActivity(
-        space.availabilities.some((avail) => {
-          let localEndTime = new Date(avail.endAt);
-          if (avail.isPeriodic) {
-            localEndTime = new Date(
-                current.getFullYear(),
-                current.getMonth(),
-                current.getDate(),
-                localEndTime.getHours(),
-                localEndTime.getMinutes(),
-                localEndTime.getSeconds(),
-            );
-          }
-          return (
-            avail.isBooked &&
-            (localEndTime.getTime() - current.getTime()) / 1000 > 1800
+      space.availabilities.some((avail) => {
+        let localEndTime = new Date(avail.endAt);
+        if (avail.isPeriodic) {
+          localEndTime = new Date(
+            current.getFullYear(),
+            current.getMonth(),
+            current.getDate(),
+            localEndTime.getHours(),
+            localEndTime.getMinutes(),
+            localEndTime.getSeconds(),
           );
-        }),
+        }
+        return (
+          avail.isBooked &&
+          (localEndTime.getTime() - current.getTime()) / 1000 > 1800
+        );
+      }),
     );
   };
 
@@ -59,19 +48,19 @@ export default function Card({
   const alertNextAvailability = () => {
     space.availabilities.some((avail) => {
       let localStartTime = new Date(avail.startAt);
-      if(avail.isPeriodic) {
+      if (avail.isPeriodic) {
         localStartTime = new Date(
-            current.getFullYear(),
-            current.getMonth(),
-            current.getDate(),
-            localStartTime.getHours(),
-            localStartTime.getMinutes(),
-            localStartTime.getSeconds(),
+          current.getFullYear(),
+          current.getMonth(),
+          current.getDate(),
+          localStartTime.getHours(),
+          localStartTime.getMinutes(),
+          localStartTime.getSeconds(),
         );
       }
       if (
         !avail.isBooked &&
-          localStartTime.getTime() - current.getTime() > 0 &&
+        localStartTime.getTime() - current.getTime() > 0 &&
         (localStartTime.getTime() - current.getTime()) / 1000 < 1800
       ) {
         setRemainTimeBeforeNext(

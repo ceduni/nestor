@@ -130,10 +130,6 @@ body {
   @apply overflow-scroll;
 }
 
-.cards {
-  /* @apply h-96; */
-  /* height: 90rem; */
-}
 .cards:hover {
   cursor: pointer;
 }
@@ -142,21 +138,8 @@ body {
   overflow: auto;
 }
 
-.card {
-  /* border: 1px solid #eceded; */
-  /* box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
-  -webkit-box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6);
-  -moz-box-shadow: 0px 0px 0px 1px rgba(230, 228, 228, 0.6); */
-  /* background-color: var(--border-color); */
-  /* width: fit-content; */
-}
-
 .card:hover {
   background-color: var(--border-color);
-}
-
-.card_img_container {
-  /* width: fit-content; */
 }
 
 .card_img {
@@ -237,46 +220,45 @@ body {
   background-color: #f7f7f7;
 }
 
-/* -----existing css codes----- */
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.rbc-time-view {
+  @apply rounded-xl;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.rbc-today {
+  @apply bg-white;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.rbc-month-view {
+  @apply rounded-xl;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.rbc-header {
+  @apply border-none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.rbc-current-time-indicator {
+  @apply border-2 border-black;
 }
 
-.card {
-  padding: 2em;
+.rbc-time-column {
+  @apply h-[2500px] border-none;
 }
 
-.read-the-docs {
-  color: #888;
-} */
+.rbc-timeslot-group {
+  @apply border-none;
+}
+
+.rbc-time-content {
+  @apply border;
+}
+
+.rbc-label {
+  @apply text-gray-400;
+}
+
+.rbc-event-label {
+  @apply text-wrap;
+}
+
+.rbc-event {
+  @apply bg-[#88f488] text-black;
+}

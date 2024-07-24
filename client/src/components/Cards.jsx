@@ -138,7 +138,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           {cardSelected ? <CardDetail spaceDetail={detailSelected} /> : <></>}
         </div>
       </section>*/}
-      <section className="p-4 flex gap-10 justify-center">
+      <section className="p-4 flex gap-10 ">
         <div
           className={`${cardSelected ? " flex flex-col gap-8 w-[402px]" : "grid grid-cols-4 gap-8 p-6 auto-rows-fr"}`}
         >
