@@ -72,7 +72,6 @@ const spaceSchema = new mongoose.Schema(
     },
     isAvailable: {
       type: Boolean,
-      required: true,
       default: true,
     },
     images: {
@@ -124,7 +123,6 @@ const spaceSchema = new mongoose.Schema(
 availabilitySchema.pre("save", function (next) {
   const startAtToMilliseconds = this.startAt.getTime();
   const endAtToMilliseconds = this.endAt.getTime();
-  const currentToMilliseconds = current.getTime();
   if (startAtToMilliseconds > endAtToMilliseconds) {
     next(
       new Error(
@@ -136,9 +134,9 @@ availabilitySchema.pre("save", function (next) {
     next(new Error("Availability start and end date cannot be older than current date"));
   }*/
   if (
-    this.startAt.getFullYear() !== this.endAt.getFullYear() ||
-    this.startAt.getMonth() !== this.endAt.getMonth() ||
-    this.startAt.getDate() !== this.endAt.getDate()
+    this.startAt.getUTCFullYear() !== this.endAt.getUTCFullYear() ||
+    this.startAt.getUTCMonth() !== this.endAt.getUTCMonth() ||
+    this.startAt.getUTCDate() !== this.endAt.getUTCDate()
   ) {
     next(new Error("Availability start and end date should be within a day"));
   }

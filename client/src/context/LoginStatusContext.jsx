@@ -7,7 +7,9 @@ export function LoginStatusProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(true);
 
   return (
-    <LoginStatusContext.Provider value={{ hasLogedin, setHasLogedin, isAdmin, setIsAdmin }}>
+    <LoginStatusContext.Provider
+      value={{ hasLogedin, setHasLogedin, isAdmin, setIsAdmin }}
+    >
       {children}
     </LoginStatusContext.Provider>
   );

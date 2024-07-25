@@ -14,21 +14,27 @@ export default function Card({ space, cardSelected, onCardClick }) {
     onCardClick(cardSelected, space);
   };
 
+  const setUTCDate = (year, month, date, hours, minutes, seconds) => {
+    return new Date(year, month, date, hours, minutes, seconds);
+  };
+
   const checkOngoingActivity = () => {
     setHasOngoingActivity(
       space.availabilities.some((avail) => {
-        const localEndTime = new Date(avail.endAt);
-        const utcEndTime = new Date(
-          localEndTime.getUTCFullYear(),
-          localEndTime.getUTCMonth(),
-          localEndTime.getUTCDate(),
-          localEndTime.getUTCHours(),
-          localEndTime.getUTCMinutes(),
-          localEndTime.getUTCSeconds(),
-        );
+        let localEndTime = new Date(avail.endAt);
+        if (avail.isPeriodic) {
+          localEndTime = new Date(
+            current.getFullYear(),
+            current.getMonth(),
+            current.getDate(),
+            localEndTime.getHours(),
+            localEndTime.getMinutes(),
+            localEndTime.getSeconds(),
+          );
+        }
         return (
           avail.isBooked &&
-          (utcEndTime.getTime() - current.getTime()) / 1000 > 1800
+          (localEndTime.getTime() - current.getTime()) / 1000 > 1800
         );
       }),
     );
@@ -41,34 +47,37 @@ export default function Card({ space, cardSelected, onCardClick }) {
 
   const alertNextAvailability = () => {
     space.availabilities.some((avail) => {
-      const localStartTime = new Date(avail.startAt);
-      const utcStartTime = new Date(
-        localStartTime.getUTCFullYear(),
-        localStartTime.getUTCMonth(),
-        localStartTime.getUTCDate(),
-        localStartTime.getUTCHours(),
-        localStartTime.getUTCMinutes(),
-        localStartTime.getUTCSeconds(),
-      );
+      let localStartTime = new Date(avail.startAt);
+      if (avail.isPeriodic) {
+        localStartTime = new Date(
+          current.getFullYear(),
+          current.getMonth(),
+          current.getDate(),
+          localStartTime.getHours(),
+          localStartTime.getMinutes(),
+          localStartTime.getSeconds(),
+        );
+      }
       if (
         !avail.isBooked &&
-        utcStartTime.getTime() - current.getTime() > 0 &&
-        (utcStartTime.getTime() - current.getTime()) / 1000 < 300
+        localStartTime.getTime() - current.getTime() > 0 &&
+        (localStartTime.getTime() - current.getTime()) / 1000 < 1800
       ) {
         setRemainTimeBeforeNext(
-          Math.floor((utcStartTime.getTime() - current.getTime()) / 60000),
+          Math.floor((localStartTime.getTime() - current.getTime()) / 60000),
         );
       }
       return (
         !avail.isBooked &&
-        utcStartTime.getTime() - current.getTime() > 0 &&
-        (utcStartTime.getTime() - current.getTime()) / 1000 < 300
+        localStartTime.getTime() - current.getTime() > 0 &&
+        (localStartTime.getTime() - current.getTime()) / 1000 < 1800
       );
     });
   };
+
   return (
     <a
-      className={`cards ${cardSelected ? "flex flex-row h-36":"card rounded-lg flex flex-col gap-2 border"}`}
+      className={`cards ${cardSelected ? "flex flex-row h-36" : "card rounded-lg flex flex-col gap-2 border"}`}
       onClick={handleClick}
     >
       <div className="">

@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { LoginStatusProvider } from "./context/LoginStatusContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReservationsProvider } from './context/ReservationsContext';
+import { ReservationsProvider } from "./context/ReservationsContext";
 
 const queryClient = new QueryClient();
 
