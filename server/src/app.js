@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 mongoose.set({ debug: true });
 
 // import tasks
-const { reservationTask, spaceTask } = require("../scripts/ttl.script");
+//const { reservationTask, spaceTask } = require("../scripts/ttl.script");
 
 // import routes
 const spaceRoutes = require("./routes/space.routes.js");
@@ -32,8 +32,8 @@ mongoose
   .catch((e) => console.log("Error connecting to database", e));
 
 // run tasks
-reservationTask.start();
-spaceTask.start();
+//reservationTask.start();
+//spaceTask.start();
 
 // start server
 fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });

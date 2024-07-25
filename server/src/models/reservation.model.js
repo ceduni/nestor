@@ -39,36 +39,6 @@ reservationSchema.pre("save", async function (next) {
     next("Space not found");
   }
   const capacity = spaceResult.capacity;
-  const indexToUpdate = spaceResult.availabilities.findIndex((avail) =>
-    avail._id.equals(this.availability._id),
-  );
-  if (indexToUpdate === -1) {
-    next("Availability not found");
-  }
-  if (
-    this.availability.startAt.getTime() !==
-      spaceResult.availabilities[indexToUpdate].startAt.getTime() ||
-    this.availability.endAt.getTime() !==
-      spaceResult.availabilities[indexToUpdate].endAt.getTime() ||
-    this.availability.isPeriodic !==
-      spaceResult.availabilities[indexToUpdate].isPeriodic
-  ) {
-    next("Reservation availability should match space availability");
-  }
-  if (this.status === "confirmed") {
-    spaceResult.availabilities[indexToUpdate].isBooked = true;
-    spaceResult.save();
-  } else if (this.status === "cancelled") {
-    spaceResult.availabilities[indexToUpdate].isBooked = false;
-    spaceResult.save();
-  } else if (this.status === "fulfilled") {
-    if (this.availability.isPeriodic) {
-      spaceResult.availabilities[indexToUpdate].isBooked = false;
-    } else {
-      spaceResult.availabilities.pull(this.availability._id);
-    }
-    spaceResult.save();
-  }
   if (this.guestIds.length > capacity) {
     next("Number of guests can not exceed space capacity");
   }
@@ -84,8 +54,6 @@ reservationSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.createdAt;
   delete obj.updatedAt;
-  delete obj.availability.isPeriodic;
-  delete obj.availability.isBooked;
   delete obj.__v;
   return obj;
 };

@@ -12,10 +12,6 @@ const imageSchema = new mongoose.Schema({
   },
 });
 const availabilitySchema = new mongoose.Schema({
-  isPeriodic: {
-    type: Boolean,
-    required: true,
-  },
   startAt: {
     type: Date,
     required: true,
@@ -23,11 +19,7 @@ const availabilitySchema = new mongoose.Schema({
   endAt: {
     type: Date,
     required: true,
-  },
-  isBooked: {
-    type: Boolean,
-    default: false,
-  },
+  }
 });
 
 const spaceLockSchema = new mongoose.Schema({

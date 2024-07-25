@@ -13,17 +13,7 @@ const reservationTask = cron.schedule(
         console.log("No reservation found");
       } else {
         reservations.forEach((reservation) => {
-          let endTime = reservation.availability.endAt;
-          if (reservation.availability.isPeriodic) {
-            endTime = new Date(
-              current.getFullYear(),
-              current.getMonth(),
-              current.getDate(),
-              endTime.getHours(),
-              endTime.getMinutes(),
-              endTime.getSeconds(),
-            );
-          }
+          const endTime = reservation.availability.endAt;
           if (
             current.getTime() > endTime.getTime() &&
             reservation.status === "confirmed"
@@ -53,7 +43,6 @@ const spaceTask = cron.schedule(
         spaces.forEach((space) => {
           space.availabilities.forEach((avail) => {
             if (
-              !avail.isPeriodic &&
               avail.endAt.getTime() < current.getTime()
             ) {
               space.availabilities.pull(avail._id);
