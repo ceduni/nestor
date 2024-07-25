@@ -46,22 +46,24 @@ export default function CardDetailCalendar({ spaceDetail }) {
   // console.log(allReservations);
 
   const {allReservations, setAllReservations, fetchAllReservations} = useReservations();
-  const [reservations, setReservations] = useState(allReservations.filter(r => r.spaceId === spaceDetail.spaceId));
   const [events, setEvents] = useState([]);
   const [isEventSelected, setIsEventSelected] = useState(false);
   const [eventSelected, setEventSelected] = useState({
     title: "",
-    start: undefined,
-    end: undefined,
+    start: "",
+    end: "",
   });
   const [reservation, setReservation] = useState({
-    hostId: "",
-    isPeriodic: false,
-    startAt: "",
-    endAt: "",
+    hostId: "613f3bda5f4378b64b448f20",
+    availability:{
+      isPeriodic: true,
+      startAt: "2024-07-22T13:00:00.000Z",
+      endAt: "2024-07-22T14:00:00.000Z",
+      _id: "669c6aa9127704186ecb4588"
+    },
     guestIds: [],
     activity: "",
-    status: "",
+    status: "fullfilled",
     isPrivate: false,
     spaceId: spaceDetail._id,
   });
@@ -102,56 +104,99 @@ export default function CardDetailCalendar({ spaceDetail }) {
 
     console.log(allEvents);
     setEvents(allEvents);
-  }, [spaceDetail])
+  }, [spaceDetail]);
 
   const handleInputsChange = (e)=>{
     const {name, value} = e.target;
     setReservation(prev =>({
       ...prev,
-      [name]: value
+      [name]:value
     }))
+  }
+
+  const handleDatesChange = (e)=>{
+    // const {name, value} = e.target;
+    // const dateValue = new Date(value).toISOString();
+    // setReservation(prev =>({
+    //   ...prev,
+    //   availability: {
+    //     ...prev.availability,
+    //     [name]:dateValue
+    //   }
+    // }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(spaceDetail);
     console.log(reservation);
-    const { activity, startAt, endAt } = reservation;
+    const { activity, availability } = reservation;
     const event = {
       title: activity,
-      start: new Date(startAt),
-      end: new Date(endAt),
+      start: new Date(availability.startAt),
+      end: new Date(availability.endAt),
     };
-    const isBeforeNow = isDateBeforeNow(event.start, event.end);
-    const hasDuplicate = allReservations.some((reservation) => {
-      return isDateInInterval(
-        event.start,
-        event.end,
-        reservation.start,
-        reservation.end,
-      );
-    });
+    // const isBeforeNow = isDateBeforeNow(event.start, event.end);
+    // const hasDuplicate = allReservations.some((reservation) => {
+    //   return isDateInInterval(
+    //     event.start,
+    //     event.end,
+    //     reservation.start,
+    //     reservation.end,
+    //   );
+    // });
 
-    if (isBeforeNow) {
-      console.log("Impossible");
-      alert("Impossible");
-      // display msg
-      return;
-    }
 
-    if (hasDuplicate) {
-      console.log("Already exists");
-      alert("Already exists");
-      // display msg
-      return;
-    } else {
-      // add post request
-      setAllReservations((prevAllReservations) => [
-        ...prevAllReservations,
-        event,
-      ]);
-    }
+    postAddReservation(event);
+    // date validations
+    // if (isBeforeNow) {
+    //   console.log("Impossible");
+    //   alert("Impossible");
+    //   // display msg
+    //   return;
+    // }
+    // if (hasDuplicate) {
+    //   console.log("Already exists");
+    //   alert("Already exists");
+    //   // display msg
+    //   return;
+    // } else {
+    //   // add post request
+    //   postAddReservation(event);
+
+    //   // setEvents((prevAllReservations) => [
+    //   //   ...prevAllReservations,
+    //   //   event,
+    //   // ]);
+    // }
   };
+
+  const postAddReservation = async (newEvent)=>{
+    try{
+      const res = await fetch(`http://localhost:3000/api/v1/reservations/`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(reservation)
+      })
+
+      const result = await res.json();
+
+      if(!res.ok){
+        console.error('Error : ', result);
+        throw new Error("Failed to add reservation");
+      }
+
+      setEvents((prevAllReservations) => [
+        ...prevAllReservations,
+        newEvent,
+      ]);
+
+      console.log('Add reservation successfully');
+    } catch(err){
+      console.log(error);
+    }
+  }
 
   const handleSelectEvent = (e) => {
     // e.preventDefault();
@@ -183,7 +228,7 @@ export default function CardDetailCalendar({ spaceDetail }) {
               Date et heure de début
             </label>
             <input
-              onChange={handleInputsChange}
+              onChange={handleDatesChange}
               id="startAt"
               name='startAt'
               className="card_detail_input border w-44 p-2"
@@ -195,7 +240,7 @@ export default function CardDetailCalendar({ spaceDetail }) {
               Date et heure de fin
             </label>
             <input
-              onChange={handleInputsChange}
+              onChange={handleDatesChange}
               id="endAt"
               name='endAt'
               className="card_detail_input border w-44 p-2"

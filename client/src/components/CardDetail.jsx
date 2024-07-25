@@ -32,7 +32,7 @@ export default function CardDetail({ spaceDetail }) {
   };
 
   return (
-    <div className="card_detail rounded-xl flex flex-col w-[700px] sticky border top-[270.98px] self-start">
+    <div className="card_detail rounded-xl flex flex-col w-[800px] sticky border top-[270.98px] self-start">
       {/*<div className="slide-container">
         <Slide easing="ease">
           {slideImages.map((slide, index) => {
