@@ -139,9 +139,9 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
         </div>
       </section>*/}
       
-      <section className="p-4 flex gap-0 justify-center">
+      <section className="px-20 flex justify-center">
         <div
-          className={`${cardSelected ? "cards_left flex flex-col gap-5 w-[600px]" : "grid grid-cols-4 gap-8 p-6 auto-rows-fr"}`}
+          className={`${cardSelected ? "cards_left flex flex-col gap-5 w-[600px]" : "grid grid-cols-4 gap-8 auto-rows-fr"}`}
         >
           {spaces.map((item, index) => (
             <Card
