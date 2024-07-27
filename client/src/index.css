@@ -236,7 +236,7 @@ body {
 }
 
 .rbc-current-time-indicator {
-  @apply border-2 border-black;
+  @apply border-2 border-white;
 }
 
 .rbc-time-column {
@@ -256,9 +256,18 @@ body {
 }
 
 .rbc-event-label {
-  @apply text-wrap;
+  display: none;
 }
 
 .rbc-event {
-  @apply bg-[#88f488] text-black;
+  padding: 0;
+  border: none !important;
+  border-radius: 0;
+  background: #84e987;
+  outline: none !important;
+  width: 100% !important;
+}
+
+.rbc-events-container {
+  margin-right: 0 !important;
 }

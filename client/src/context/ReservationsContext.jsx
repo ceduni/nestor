@@ -15,7 +15,6 @@ export function ReservationsProvider({ children }) {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setAllReservations(data);
       })
       .catch((err) => console.error(err));

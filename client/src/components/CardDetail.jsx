@@ -5,7 +5,6 @@ import "react-slideshow-image/dist/styles.css";
 
 import CardDetailCalendar from "./CardDetailCalendar";
 import CardDetailDescription from "./CardDetailDescription";
-import Calendar from "./Calendar";
 export default function CardDetail({ spaceDetail }) {
   const [slideImages, setSlideImages] = useState([]);
   const [isApercu, setIsApercu] = useState(true);

@@ -22,7 +22,6 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
 
   const filtering = (filters) => {
     let filteredSpaces = [...allSpaces];
-
     const addressParts = filters.address.split(",");
     if (addressParts.length === 2) {
       const [city, state] = addressParts;
@@ -40,12 +39,13 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           space.state.toLowerCase().includes(state.toLowerCase().trim()),
       );
     }
-    filteredSpaces = filteredSpaces.filter((space) =>
-      space.availabilities.some((avail) =>
-        avail.startAt.includes(filters.date),
-      ),
+    filteredSpaces = filteredSpaces.filter(
+      (space) =>
+        space.availabilities.length === 0 ||
+        space.availabilities.some((avail) =>
+          avail.startAt.includes(filters.date),
+        ),
     );
-    console.log(filters.date);
     filteredSpaces = filteredSpaces.filter(
       (space) =>
         Number(filters.peopleNum) === 0 ||

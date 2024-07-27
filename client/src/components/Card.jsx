@@ -21,21 +21,8 @@ export default function Card({ space, cardSelected, onCardClick }) {
   const checkOngoingActivity = () => {
     setHasOngoingActivity(
       space.availabilities.some((avail) => {
-        let localEndTime = new Date(avail.endAt);
-        if (avail.isPeriodic) {
-          localEndTime = new Date(
-            current.getFullYear(),
-            current.getMonth(),
-            current.getDate(),
-            localEndTime.getHours(),
-            localEndTime.getMinutes(),
-            localEndTime.getSeconds(),
-          );
-        }
-        return (
-          avail.isBooked &&
-          (localEndTime.getTime() - current.getTime()) / 1000 > 1800
-        );
+        const localEndTime = new Date(avail.endAt);
+        return (localEndTime.getTime() - current.getTime()) / 1000 > 1800;
       }),
     );
   };
@@ -47,30 +34,18 @@ export default function Card({ space, cardSelected, onCardClick }) {
 
   const alertNextAvailability = () => {
     space.availabilities.some((avail) => {
-      let localStartTime = new Date(avail.startAt);
-      if (avail.isPeriodic) {
-        localStartTime = new Date(
-          current.getFullYear(),
-          current.getMonth(),
-          current.getDate(),
-          localStartTime.getHours(),
-          localStartTime.getMinutes(),
-          localStartTime.getSeconds(),
-        );
-      }
+      const localStartTime = new Date(avail.startAt);
       if (
-        !avail.isBooked &&
         localStartTime.getTime() - current.getTime() > 0 &&
-        (localStartTime.getTime() - current.getTime()) / 1000 < 1800
+        (localStartTime.getTime() - current.getTime()) / 1000 < 3600
       ) {
         setRemainTimeBeforeNext(
           Math.floor((localStartTime.getTime() - current.getTime()) / 60000),
         );
       }
       return (
-        !avail.isBooked &&
         localStartTime.getTime() - current.getTime() > 0 &&
-        (localStartTime.getTime() - current.getTime()) / 1000 < 1800
+        (localStartTime.getTime() - current.getTime()) / 1000 < 3600
       );
     });
   };
