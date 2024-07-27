@@ -7,6 +7,10 @@
   --color-text: #22243b;
 }
 
+* {
+  trasition: all 0.3s ease-in;
+}
+
 body {
   font-family: Nunito;
   color: var(--color-text);
@@ -134,8 +138,11 @@ body {
   cursor: pointer;
 }
 
+.cards_left:hover {
+}
+
 .cards_detailmode {
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .card:hover {
