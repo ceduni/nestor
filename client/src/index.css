@@ -263,11 +263,11 @@ body {
 }
 
 .rbc-event-label {
-  display: none;
+  @apply text-wrap
 }
 
 .rbc-event {
-  padding: 0;
+  padding: 4px;
   border: none !important;
   border-radius: 0;
   background: #84e987;
@@ -277,4 +277,39 @@ body {
 
 .rbc-events-container {
   margin-right: 0 !important;
+}
+
+.modal-show {
+  display: block;
+}
+
+.modal-hide {
+  display: none;
+}
+
+.fc-event {
+  @apply border-2;
+}
+
+.popover{
+  max-width: 100%; /* Max Width of the popover (depending on the container!) */
+  max-height: 100%;
+  @apply z-0
+}
+
+.popover-body {
+  width: 400px;
+}
+
+.MuiStack-root {
+  @apply border-2 rounded-xl
+}
+
+.Mui-selected {
+  background: #000 !important;
+}
+
+.fc-day-today
+{
+  background-color:inherit !important;
 }

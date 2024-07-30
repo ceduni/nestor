@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-
+import Calendar from "./Calendar.jsx";
 import CardDetailCalendar from "./CardDetailCalendar";
 import CardDetailDescription from "./CardDetailDescription";
+import Modal from "./Modal.jsx";
 export default function CardDetail({ spaceDetail }) {
   const [slideImages, setSlideImages] = useState([]);
   const [isApercu, setIsApercu] = useState(true);
@@ -82,8 +83,8 @@ export default function CardDetail({ spaceDetail }) {
         </header>
 
         {isApercu && <CardDetailDescription spaceDetail={spaceDetail} />}
-
-        {isReservation && <CardDetailCalendar spaceDetail={spaceDetail} />}
+        {isReservation && <Calendar spaceDetail={spaceDetail} />}
+        {/*isReservation && <CardDetailCalendar spaceDetail={spaceDetail} />*/}
       </section>
     </div>
   );

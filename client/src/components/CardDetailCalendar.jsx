@@ -4,7 +4,6 @@ import { frCA } from "date-fns/locale";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-import ReservationInfo from "./ReservationInfo";
 import {
   addDays,
   addMinutes,
@@ -36,25 +35,15 @@ const localizer = dateFnsLocalizer({
 
 export default function CardDetailCalendar({ spaceDetail }) {
   const [events, setEvents] = useState([]);
-  const [isEventSelected, setIsEventSelected] = useState(false);
-  const [view, setView] = useState(Views.WEEK);
-  const currentDate = new Date();
-  const [date, setDate] = useState(currentDate);
+  const [selectedEvent, setSelectedEvent] = useState(undefined)
+  const [modalState, setModalState] = useState(false)
+
+
+
   const onView = useCallback((newDate) => setDate(newDate), [setDate]);
   const onNavigate = useCallback((newDate) => setDate(newDate), [setDate]);
   const DndCalendar = withDragAndDrop(Calendar);
-  const displayDate = () => {
-    if (view === Views.MONTH) return format(date, "MMMM yyyy");
-    else if (view === Views.WEEK) {
-      let concatFormat = "dd";
-      if (getMonth(startOfWeek(date)) !== getMonth(endOfWeek(date))) {
-        concatFormat = "MMMM dd";
-      }
-      return format(startOfWeek(date), "MMMM dd")
-        .concat(" - ")
-        .concat(format(endOfWeek(date), concatFormat));
-    } else return format(date, "EEEE MMM dd");
-  };
+
 
   const [allReservations, setAllReservations] = useState([]);
 
@@ -81,20 +70,25 @@ export default function CardDetailCalendar({ spaceDetail }) {
     );
   };
 
-  const handleNextClick = () => {
-    if (view === Views.MONTH) setDate(addMonths(date, 1));
-    else if (view === Views.WEEK) setDate(addWeeks(date, 1));
-    else setDate(addDays(date, 1));
-  };
 
-  const handleBackClick = () => {
-    if (view === Views.MONTH) setDate(subMonths(date, 1));
-    else if (view === Views.WEEK) setDate(subWeeks(date, 1));
-    else setDate(subDays(date, 1));
-  };
+
+  const handleSelectEvent = (e) => {
+    setSelectedEvent(e);
+    setModalState(true);
+  }
+
+  const Modal = () => {
+    return (
+        <div className={`modal-${modalState === true ? 'show' : 'hide'}`}>
+          // Here you define your modal, what you want it to contain.
+          // Event title for example will be accessible via 'selectedEvent.title'
+        </div>
+    )
+  }
 
   useEffect(() => {
     const allEvents = [];
+    let index = 0
     allReservations.forEach((reservation) => {
       if (
         reservation.spaceId === spaceDetail._id &&
@@ -107,7 +101,9 @@ export default function CardDetailCalendar({ spaceDetail }) {
           isVisible: true,
           isBooked: true,
           isDraggable: false,
+          id: index
         });
+        index += 1
       }
     });
     spaceDetail.availabilities.forEach((avail) => {
@@ -129,7 +125,9 @@ export default function CardDetailCalendar({ spaceDetail }) {
             isVisible: true,
             isBooked: false,
             isDraggable: true,
+            id: index
           });
+          index += 1
         }
         currentTime = addMinutes(currentTime, 30);
       }
@@ -137,16 +135,15 @@ export default function CardDetailCalendar({ spaceDetail }) {
     setEvents(allEvents);
   }, [spaceDetail, allReservations]);
 
-  useEffect(() => {
-    console.log(events);
-  }, [events]);
-
   const eventPropGetter = useCallback(
     (event, start, end, isSelected) => ({
       ...((isSelected || event.isClicked) && {
         style: {
           backgroundColor: "#06940a",
         },
+      }),
+      ...({
+        className : event.id.toString()
       }),
       ...(!event.isVisible && {
         style: {
@@ -221,54 +218,12 @@ export default function CardDetailCalendar({ spaceDetail }) {
   return (
     <div>
       <div className="py-5 flex flex-col gap-4">
-        <div className="flex justify-between">
-          <div className="flex bg-[#ebedee] text-lg ">
-            <div
-              className="px-4 hover:bg-[#d4d5d6]"
-              onClick={() => setDate(currentDate)}
-            >
-              Today
-            </div>
-            <div className="px-4 hover:bg-[#d4d5d6]" onClick={handleBackClick}>
-              Back
-            </div>
-            <div className="px-4 hover:bg-[#d4d5d6] " onClick={handleNextClick}>
-              Next
-            </div>
-          </div>
-          <div className="bg-[#ebedee] px-2">{displayDate()}</div>
-          <div className="flex bg-[#ebedee] text-lg ">
-            <div
-              className="px-4 hover:bg-[#d4d5d6] "
-              onClick={() => {
-                setView(Views.MONTH);
-              }}
-            >
-              Month
-            </div>
-            <div
-              className="px-4 hover:bg-[#d4d5d6]"
-              onClick={() => {
-                setView(Views.WEEK);
-              }}
-            >
-              Week
-            </div>
-            <div
-              className="px-4 hover:bg-[#d4d5d6] "
-              onClick={() => {
-                setView(Views.DAY);
-              }}
-            >
-              Day
-            </div>
-          </div>
-        </div>
+        {selectedEvent && <Modal />}
         <DndCalendar
           localizer={localizer}
           events={events}
           eventPropGetter={eventPropGetter}
-          components={{ event: customEvent }}
+          //components={{ event: customEvent }}
           style={{ height: 500 }}
           defaultView="week"
           toolbar={false}
@@ -279,10 +234,10 @@ export default function CardDetailCalendar({ spaceDetail }) {
           onEventResize={handleEventResize}
           draggableAccessor={(event) => event.isDraggable}
           date={date}
+          //onSelectSlot={(e) => handleSelect(e)}
+          //onSelectEvent={(e) => handleSelectEvent(e)}
         />
       </div>
-
-      {isEventSelected && <ReservationInfo eventSelected={eventSelected} />}
     </div>
   );
 }
