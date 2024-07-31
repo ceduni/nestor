@@ -146,10 +146,19 @@ body {
 
 .cards_left {
   overflow-y: unset;
+  height: 60rem;
+}
+
+.cards_left::-webkit-scrollbar {
+  display: none;
+  @apply overflow-scroll;
 }
 
 .cards_left:hover {
-  overflow-y: scroll;
+}
+
+.card_detail {
+  @apply h-max;
 }
 
 .cards_detailmode {

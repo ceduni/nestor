@@ -105,7 +105,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
 
   return (
     <>
-      <div className="flex justify-center items-center sticky top-44 p-2 bg-white z-20">
+      <div className="flex justify-center items-center sticky top-44 p-2 bg-white z-20 h-14">
         <p className="text-center p-3 font-bold">
           {spaces.length} espaces trouvés
         </p>
@@ -118,9 +118,9 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
         </button>
       </div>
       
-      <section className="px-20 flex justify-center z-0">
+      <section className="px-20 pb-5 gap-x-5 flex justify-center z-0 h-max">
         <div
-          className={`${cardSelected ? "cards_left flex flex-col gap-3 w-[600px]" : "grid grid-cols-4 gap-8 auto-rows-fr"}`}
+          className={`${cardSelected ? "cards_left flex flex-col gap-3 w-[600px] overflow-y-auto" : "grid grid-cols-4 gap-8 auto-rows-fr"}`}
         >
           {spaces.map((item, index) => (
             <Card
@@ -131,11 +131,13 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
             />
           ))}
         </div>
-        {cardSelected && spaces.length !== 0 ? (
-          <CardDetail spaceDetail={detailSelected} />
-        ) : (
-          <></>
-        )}
+        <div className='card_detail'>
+          {cardSelected && spaces.length !== 0 ? (
+            <CardDetail spaceDetail={detailSelected} />
+          ) : (
+            <></>
+          )}
+        </div>
       </section>
     </>
   );
