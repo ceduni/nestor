@@ -57,7 +57,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
     >
       <div className="">
         <img
-          className={`rounded-lg object-cover ${cardSelected ? "w-44 h-full" : "w-full h-[200px]"}  `}
+          className={`rounded-lg object-cover ${cardSelected ? "w-40 h-full" : "w-full h-[200px]"}  `}
           src={images[0].url}
           alt="space photo"
         />

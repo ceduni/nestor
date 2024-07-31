@@ -129,16 +129,21 @@ body {
 }
 
 /* -----Card----- */
-.cards::-webkit-scrollbar {
+/* .cards::-webkit-scrollbar {
   display: none;
   @apply overflow-scroll;
-}
+} */
 
 .cards:hover {
   cursor: pointer;
 }
 
+.cards_left {
+  overflow-y: unset;
+}
+
 .cards_left:hover {
+  overflow-y: scroll;
 }
 
 .cards_detailmode {
@@ -263,7 +268,7 @@ body {
 }
 
 .rbc-event-label {
-  @apply text-wrap
+  @apply text-wrap;
 }
 
 .rbc-event {
@@ -291,10 +296,10 @@ body {
   @apply border-2;
 }
 
-.popover{
+.popover {
   max-width: 100%; /* Max Width of the popover (depending on the container!) */
   max-height: 100%;
-  @apply z-0
+  @apply z-0;
 }
 
 .popover-body {
@@ -302,14 +307,13 @@ body {
 }
 
 .MuiStack-root {
-  @apply border-2 rounded-xl
+  @apply border-2 rounded-xl;
 }
 
 .Mui-selected {
   background: #000 !important;
 }
 
-.fc-day-today
-{
-  background-color:inherit !important;
+.fc-day-today {
+  background-color: inherit !important;
 }

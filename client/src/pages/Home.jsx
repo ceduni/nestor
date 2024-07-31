@@ -83,7 +83,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="filters p-2 sticky bg-white z-10 top-0">
+      <section className="filters p-1 sticky bg-white z-10 top-0">
         <Filters
           onFiltersUpdate={handleFilters}
           onIconFiltersUpdate={setIconFilters}
