@@ -32,7 +32,7 @@ export default function CardDetail({ spaceDetail }) {
   };
 
   return (
-    <div className="card_detail rounded-xl flex flex-col w-[900px] sticky top-[270.98px] self-start">
+    <div className="card_detail rounded-xl flex flex-col w-[900px] top-[270.98px] self-star">
       <div className="grid gap-2 grid-cols-8 grid-rows-auto">
         {spaceDetail.images.map((image, index) => (
           <div key={index} className={`grid-image grid-image-${index} `}>

@@ -145,8 +145,7 @@ body {
 }
 
 .cards_left {
-  overflow-y: unset;
-  height: 60rem;
+  height: 50rem;
 }
 
 .cards_left::-webkit-scrollbar {

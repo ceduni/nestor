@@ -114,7 +114,7 @@ export default function Filters({
   }, [addressRef, dateRef, nameRef]);
 
   return (
-    <div className="filter_section flex flex-col items-center">
+    <div className="filter_section flex flex-col items-center z-8 bg-white">
       <form
         className="relative filter_form flex justify-center rounded-full px-8 m-3 shadow"
         action=""

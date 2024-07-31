@@ -14,7 +14,7 @@ export default function App() {
     <LoginStatusProvider>
       <ReservationsProvider>
         <QueryClientProvider client={queryClient}>
-          <div className='overflow-hidden'>
+          <div>
             <Header />
             <Outlet />
             <Footer />

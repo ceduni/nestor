@@ -62,7 +62,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
           alt="space photo"
         />
       </div>
-      <div className="flex flex-col px-1 py-2 gap-0 flex-1">
+      <div className="flex flex-col px-1 py-2 gap-1 flex-1">
         <div className="text-base font-bold flex items-center gap-2">
           <MdOutlineSubtitles className="w-5" />
           <p>{name}</p>
