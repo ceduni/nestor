@@ -33,25 +33,7 @@ export default function CardDetail({ spaceDetail }) {
 
   return (
     <div className="card_detail rounded-xl flex flex-col w-[900px] sticky border top-[270.98px] self-start">
-      {/*<div className="slide-container">
-        <Slide easing="ease">
-          {slideImages.map((slide, index) => {
-            return (
-              <div className={slide} key={slide}>
-                <div
-                  className="slide_bg rounded-lg bg-no-repeat bg-cover brightness-105 contrast-125 saturate-125"
-                  style={{ backgroundImage: `url(${slideImages[index].url})` }}
-                >
-                  <span className="">
-                    image {index + 1} / {slideImages.length}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </Slide>
-      </div>*/}
-      <div className="grid gap-2 grid-cols-8 grid-rows-8 h-[474.66px]">
+      <div className="grid gap-2 grid-cols-8 grid-rows-auto">
         {spaceDetail.images.map((image, index) => (
           <div key={index} className={`grid-image grid-image-${index} `}>
             <img

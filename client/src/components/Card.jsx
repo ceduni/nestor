@@ -52,7 +52,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
 
   return (
     <a
-      className={`cards ${cardSelected ? "flex flex-row h-36" : "card rounded-lg flex flex-col gap-2 border"}`}
+      className={`cards ${cardSelected ? "flex flex-row h-28" : "card rounded-lg flex flex-col gap-2 border"}`}
       onClick={handleClick}
     >
       <div className="">
@@ -62,7 +62,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
           alt="space photo"
         />
       </div>
-      <div className="flex flex-col px-1 py-2 gap-1 flex-1">
+      <div className="flex flex-col px-1 py-2 gap-0 flex-1">
         <p className="text-base font-bold flex items-center gap-2">
           <MdOutlineSubtitles className="w-5" />
           {name}

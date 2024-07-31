@@ -117,31 +117,10 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           )}
         </button>
       </div>
-      {/*<section className="grid grid-cols-3 gap-2 xl:grid-cols-4 md:px-3 xl:px-14">
-        <div
-          className={
-            cardSelected
-              ? "cards scrollbar-hidden grid grid-cols-1 gap-y-4 col-span-1 py-5"
-              : "cards scrollbar-hidden grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 py-5 col-span-4"
-          }
-        >
-          {spaces.map((item, index) => (
-            <Card
-              key={index}
-              space={item}
-              cardSelected={cardSelected}
-              onCardClick={handleCardClick}
-            />
-          ))}
-        </div>
-        <div className="card_detail overflow-auto flex justify-center items-start md:col-span-2 xl:col-span-3 pr-5 py-5">
-          {cardSelected ? <CardDetail spaceDetail={detailSelected} /> : <></>}
-        </div>
-      </section>*/}
       
       <section className="px-20 flex justify-center">
         <div
-          className={`${cardSelected ? "cards_left flex flex-col gap-5 w-[600px]" : "grid grid-cols-4 gap-8 auto-rows-fr"}`}
+          className={`${cardSelected ? "cards_left flex flex-col gap-3 w-[600px]" : "grid grid-cols-4 gap-8 auto-rows-fr"}`}
         >
           {spaces.map((item, index) => (
             <Card
