@@ -104,7 +104,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
   };
 
   return (
-    <div className="">
+    <div className="cards_section">
       <div className="flex justify-center items-center sticky top-[206.98px] p-2 bg-white z-20">
         <p className="text-center p-3 font-bold">
           {spaces.length} espaces trouvés
@@ -118,7 +118,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
         </button>
       </div>
       
-      <section className="px-20 flex justify-center">
+      <section className="px-20 flex justify-center z-0">
         <div
           className={`${cardSelected ? "cards_left flex flex-col gap-3 w-[600px]" : "grid grid-cols-4 gap-8 auto-rows-fr"}`}
         >

@@ -115,7 +115,6 @@ export default function Filters({
 
   return (
     <div className="filter_section flex flex-col items-center">
-      {/* <h1 className='text-xl p-2'>Slogan</h1> */}
       <form
         className="relative filter_form flex justify-center rounded-full px-8 m-3 shadow"
         action=""
