@@ -104,8 +104,8 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
   };
 
   return (
-    <div className="cards_section">
-      <div className="flex justify-center items-center sticky top-[206.98px] p-2 bg-white z-20">
+    <>
+      <div className="flex justify-center items-center sticky top-44 p-2 bg-white z-20">
         <p className="text-center p-3 font-bold">
           {spaces.length} espaces trouvés
         </p>
@@ -137,6 +137,6 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           <></>
         )}
       </section>
-    </div>
+    </>
   );
 }

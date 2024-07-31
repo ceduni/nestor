@@ -91,12 +91,13 @@ export default function Home() {
           allNames={allNames}
         />
       </section>
-
-      <Cards
-        allSpaces={allSpaces}
-        filters={filters}
-        iconFilters={iconFilters}
-      />
+      <section>
+        <Cards
+          allSpaces={allSpaces}
+          filters={filters}
+          iconFilters={iconFilters}
+        />
+      </section>
     </main>
   );
 }
