@@ -226,7 +226,7 @@ body {
 .account_create_form {
 }
 
-.account_create_input {
+.signup_input {
   @apply w-80 p-1;
 }
 
