@@ -219,8 +219,8 @@ body {
 }
 
 /* -----Account create----- */
-.account_create_container {
-  width: 50%;
+.signup_container {
+  width: 35%;
 }
 
 .account_create_form {

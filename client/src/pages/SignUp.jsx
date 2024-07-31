@@ -44,13 +44,14 @@ export default function SignUp() {
   };
   return (
     <div className="flex justify-center items-center">
-      <div className="account_create_container flex flex-col justify-center items-center gap-5 border m-10 px-5 py-10">
-        <h1>Créer un compte </h1>
+      <div className="signup_container flex flex-col justify-center items-center gap-5 border rounded-3xl m-10 px-5 py-10">
+        <h1 className='text-2xl font-bold'>Créer un compte </h1>
         <form className="account_create_form flex flex-col gap-3">
           <label htmlFor="nom">Nom</label>
           <input
             onChange={handleChangeNom}
-            id="nom"
+            id="signup_name"
+            name='lastName'
             className="account_create_input border"
             type="text"
             placeholder="Enter votre nom"
@@ -60,15 +61,26 @@ export default function SignUp() {
           <input
             onChange={handleChangePrenom}
             id="prenom"
+            name='firstName'
             className="account_create_input border"
             type="text"
             placeholder="Entrer votre prénom"
+          />
+
+          <label htmlFor="prenom">Nom d'utilisateur</label>
+          <input
+            onChange={handleChangePrenom}
+            id="userName"
+            className="account_create_input border"
+            type="text"
+            placeholder="Entrer votre nom d'utilisateur"
           />
 
           <label htmlFor="courriel">Courriel</label>
           <input
             onChange={handleChangeEmail}
             id="courriel"
+            name='email'
             className="account_create_input border"
             type="email"
             placeholder="Enter votre courriel"
@@ -78,6 +90,7 @@ export default function SignUp() {
           <input
             onChange={handleChangePassword}
             id="motdepasse"
+            name='password'
             className="account_create_input border"
             type="password"
             placeholder="Entrer votre mot de passe"
@@ -86,24 +99,17 @@ export default function SignUp() {
           <input
             onChange={handleChangePasswordConfirm}
             id="confirm_mdp"
+            name='password_confirm'
             className="account_create_input border"
             type="password"
             placeholder="Entrer votre mot de passe à nouveau"
-          />
-
-          <label htmlFor="tel">Téléphone</label>
-          <input
-            onChange={handleChangeTelephone}
-            id="tel"
-            className="account_create_input border"
-            type="tel"
-            placeholder="Entrer votre numéro de téléphone"
           />
 
           <label htmlFor="account_type">Type du compte</label>
           <select
             onChange={handleChangeTypeCompte}
             id="account_type"
+            name='role'
             className="account_create_input border"
           >
             <option value="Étudiant">Étudiant</option>
@@ -112,13 +118,13 @@ export default function SignUp() {
 
           <div className="flex justify-between mt-5">
             <input
-              className="border p-2"
+              className="border p-2 w-20 bg-red-400 rounded"
               type="button"
               value="Annuler"
               onClick={handleAnnulerClick}
             />
             <input
-              className="border p-2"
+              className="border p-2 w-20 bg-blue-400 rounded"
               type="button"
               value="Créer"
               onClick={handleSignupClick}
