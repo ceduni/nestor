@@ -4,7 +4,7 @@ import { SiMinutemailer } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="footer h-28">
+    <footer className="footer h-max">
       <div className="flex flex-col gap-2 w-full max-w-screen-xl mx-auto md:py-8">
         <div className="flex justify-center">
           <a href="https://github.com/ceduni/nestor">

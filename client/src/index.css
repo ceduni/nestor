@@ -15,6 +15,7 @@ body {
   font-family: Nunito;
   color: var(--color-text);
   @apply text-base;
+  min-height: 100vh;
 }
 
 .grid-image-0 {
@@ -231,8 +232,12 @@ body {
 }
 
 /* -----Login----- */
+.login_section {
+  height: 80vh;
+}
+
 .login_container {
-  width: 30%;
+  width: 25%;
 }
 .login_form {
   height: 55%;
