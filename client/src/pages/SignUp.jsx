@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [isShowBtnFstClick, setIsShowBtnFstClick] = useState(false);
+  const [isShowBtnSndClick, setIsShowBtnSndClick] = useState(false);
   const [passwordComfirm, setPasswordConfirm] = useState("");
   const [signupInfo, setSignupInfo] = useState({
     userName: "",
@@ -25,6 +28,12 @@ export default function SignUp() {
     setPasswordConfirm(e.target.value);
     console.log(e.target.value);
   };
+  const handleShowBtnFstClick = ()=>{
+    setIsShowBtnFstClick(prev => !prev);
+  }
+  const handleShowBtnSndClick = ()=>{
+    setIsShowBtnSndClick(prev => !prev);
+  }
   const handleAnnulerClick = (e) => {
     e.preventDefault();
     navigate("../connexion/login");
@@ -33,6 +42,7 @@ export default function SignUp() {
     e.preventDefault();
     console.log(signupInfo);
     
+    // Verify password
     if (signupInfo.password !== passwordComfirm){
       console.log("Password does not match");
       return;
@@ -86,23 +96,42 @@ export default function SignUp() {
           />
 
           <label htmlFor="motdepasse">Mot de passe</label>
-          <input
-            onChange={handleInputsChange}
-            id="motdepasse"
-            name='password'
-            className="signup_input border"
-            type="password"
-            placeholder="Entrer votre mot de passe"
-          />
+          <div className=''>
+            <div className='relative'>
+              <input
+                onChange={handleInputsChange}
+                id="motdepasse"
+                name="password"
+                className="signup_input border"
+                type={`${isShowBtnFstClick ? "text" : "password"}`}
+                placeholder="Entrer votre mot de passe"
+              />
+              { 
+                isShowBtnFstClick ? 
+                  <IoEyeOffOutline onClick={handleShowBtnFstClick} className='absolute inline top-2 right-2'/> :
+                  <IoEyeOutline onClick={handleShowBtnFstClick} className='absolute inline top-2 right-2'/> 
+              }
+            </div>
+          </div>
+
           <label htmlFor="confirm_mdp">Confirmation du mot de passe</label>
-          <input
-            onChange={handleChangePasswordConfirm}
-            id="confirm_mdp"
-            name='passwordConfirm'
-            className="signup_input border"
-            type="password"
-            placeholder="Entrer votre mot de passe à nouveau"
-          />
+          <div>
+            <div className='relative'>
+              <input
+                onChange={handleChangePasswordConfirm}
+                id="confirm_mdp"
+                name='passwordConfirm'
+                className="signup_input border"
+                type={`${isShowBtnSndClick ? "text" : "password"}`}
+                placeholder="Entrer votre mot de passe à nouveau"
+              />
+              { 
+                isShowBtnSndClick ? 
+                  <IoEyeOffOutline onClick={handleShowBtnSndClick} className='absolute inline top-2 right-2'/> :
+                  <IoEyeOutline onClick={handleShowBtnSndClick} className='absolute inline top-2 right-2'/> 
+              }
+            </div>
+          </div>
 
           <label htmlFor="account_type">Type du compte</label>
           <select
