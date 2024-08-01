@@ -89,7 +89,7 @@ export default function MonProfil() {
                         name='userName'
                         className="signup_input border"
                         type="text"
-                        disabled={isModifBtnClick ? "false" : "true"}
+                        disabled={!isModifBtnClick}
                         value={isModifBtnClick ? "" : "Username"}
                         placeholder={isModifBtnClick ? "Entrer votre nouveau nom d'utilisateur" : ""}
                     />
@@ -97,15 +97,16 @@ export default function MonProfil() {
 
                 <div className='flex flex-col'>
                     <label htmlFor="courriel" className='font-bold'>Courriel</label>
-                    <small>Ex : exemple@gmail.com</small>
+                    {isModifBtnClick && <small>Ex : exemple@gmail.com</small>}
                     <input
                         onChange={handleInputsChange}
                         id="courriel"
                         name='email'
                         className="signup_input border"
                         type="email"
-                        disabled="true"
-                        value={"Courriel"}
+                        disabled={!isModifBtnClick}
+                        value={`${isModifBtnClick ? '' : "Courriel"}`}
+                        placeholder={`${isModifBtnClick ? "Entrer votre nouveau courriel" : ""}`}
                     />
                 </div>
                 
@@ -132,8 +133,9 @@ export default function MonProfil() {
                                 name="password"
                                 className="signup_input border"
                                 type={`${isShowBtnFstClick ? "text" : "password"}`}
-                                disabled="true"
-                                value={"Password"}
+                                disabled={!isModifBtnClick}
+                                value={`${isModifBtnClick ? "":"Password"}`}
+                                placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : ""}`}
                             />
                             { 
                             isShowBtnFstClick ? 
@@ -173,11 +175,11 @@ export default function MonProfil() {
                         onChange={handleInputsChange}
                         id="account_type"
                         name='role'
-                        className="signup_input border"
+                        className={`signup_input border ${isModifBtnClick? '':'bg-gray-100'} ${isModifBtnClick ? '':'appearance-none'}`}
                         disabled="true"
                     >
-                    <option value="Étudiant">Étudiant</option>
-                    <option value="Administrateur">Administrateur</option>
+                        <option value="Étudiant">Étudiant</option>
+                        <option value="Administrateur">Administrateur</option>
                     </select>
                 </div>
 
