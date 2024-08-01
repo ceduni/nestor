@@ -9,8 +9,9 @@ const defaultItems = [];
 const adminItems = [
   "Mes réservations",
   "Gérer mes espaces",
+  "Mon profil",
 ];
-const studentItems = ["Mes réservations"];
+const studentItems = ["Mes réservations", "Mon profil",];
 
 export default function Header() {
   const { hasLogedin, setHasLogedin, isAdmin, setIsAdmin } = useLoginStatus();
