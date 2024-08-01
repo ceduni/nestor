@@ -68,8 +68,8 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <section className="filters p-2 sticky bg-white z-[1] top-0">
+    <main className=''>
+      <section className="filters p-1 bg-white z-9 top-16">
         <Filters
           onFiltersUpdate={handleFilters}
           onIconFiltersUpdate={setIconFilters}
@@ -77,7 +77,7 @@ export default function Home() {
           allNames={allNames}
         />
       </section>
-      <section className="">
+      <section className=''>
         <Cards
           allSpaces={allSpaces}
           filters={filters}

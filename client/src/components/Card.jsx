@@ -7,6 +7,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
   const { images, name, organisation, capacity } = space;
   const [remainTimeBeforeNext, setRemainTimeBeforeNext] = useState(0);
   const [hasOngoingActivity, setHasOngoingActivity] = useState(false);
+
   const current = new Date();
   const handleClick = (e) => {
     e.preventDefault();
@@ -47,29 +48,29 @@ export default function Card({ space, cardSelected, onCardClick }) {
 
   return (
     <a
-      className={`cards ${cardSelected ? "flex flex-row h-36 border rounded-xl" : "card rounded-lg flex flex-col gap-2 border"}`}
+      className={`cards ${cardSelected ? "flex flex-row h-28 border rounded-xl" : "card rounded-lg flex flex-col gap-2 border"}`}
       onClick={handleClick}
     >
       <div className="">
         <img
-          className={`rounded-lg object-cover ${cardSelected ? "w-44 h-full" : "w-full h-[200px]"}  `}
+          className={`rounded-lg object-cover ${cardSelected ? "w-40 h-full" : "w-full h-[200px]"}  `}
           src={images[0].url}
           alt="space photo"
         />
       </div>
       <div className="flex flex-col px-1 py-2 gap-1 flex-1">
-        <p className="text-base font-bold flex items-center gap-2">
+        <div className="text-base font-bold flex items-center gap-2">
           <MdOutlineSubtitles className="w-5" />
-          {name}
-        </p>
-        <p className="text-base flex items-center gap-2">
+          <p>{name}</p>
+        </div>
+        <div className="text-base flex items-center gap-2">
           <CgOrganisation className="w-5" />
-          {organisation}
-        </p>
-        <p className="text-base flex items-center gap-2">
+          <p>{organisation}</p>
+        </div>
+        <div className="text-base flex items-center gap-2">
           <IoPeopleOutline className="w-5" />
-          {capacity} {capacity > 1 ? "personnes" : "personne"}
-        </p>
+          <p>{capacity} {capacity > 1 ? "personnes" : "personne"}</p>
+        </div>
       </div>
       <div>
         {hasOngoingActivity && (

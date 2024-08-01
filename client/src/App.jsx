@@ -13,9 +13,11 @@ export default function App() {
     <LoginStatusProvider>
       <ReservationsProvider>
         <QueryClientProvider client={queryClient}>
-          <Header />
-          <Outlet />
-          <Footer />
+          <div>
+            <Header />
+            <Outlet />
+            <Footer />
+          </div>
         </QueryClientProvider>
       </ReservationsProvider>
     </LoginStatusProvider>

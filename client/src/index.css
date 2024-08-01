@@ -15,6 +15,7 @@ body {
   font-family: Nunito;
   color: var(--color-text);
   @apply text-base;
+  min-height: 100vh;
 }
 
 .grid-image-0 {
@@ -105,6 +106,9 @@ body {
   /* color: red; */
 }
 
+.filter_icons {
+}
+
 .filter_icons:hover {
   /* scale: 1.1; */
   /* border-bottom: 0.4rem solid #eceded; */
@@ -129,16 +133,32 @@ body {
 }
 
 /* -----Card----- */
-.cards::-webkit-scrollbar {
+/* .cards::-webkit-scrollbar {
   display: none;
   @apply overflow-scroll;
+} */
+
+.cards_section {
 }
 
 .cards:hover {
   cursor: pointer;
 }
 
+.cards_left {
+  height: 50rem;
+}
+
+.cards_left::-webkit-scrollbar {
+  display: none;
+  @apply overflow-scroll;
+}
+
 .cards_left:hover {
+}
+
+.card_detail {
+  @apply h-max;
 }
 
 .cards_detailmode {
@@ -177,20 +197,24 @@ body {
 }
 
 /* -----Account create----- */
-.account_create_container {
-  width: 50%;
+.signup_container {
+  width: 35%;
 }
 
 .account_create_form {
 }
 
-.account_create_input {
+.signup_input {
   @apply w-80 p-1;
 }
 
 /* -----Login----- */
+.login_section {
+  height: 80vh;
+}
+
 .login_container {
-  width: 30%;
+  width: 25%;
 }
 .login_form {
   height: 55%;

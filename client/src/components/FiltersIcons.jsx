@@ -68,13 +68,13 @@ export default function FiltersIcons({ onIconFiltersUpdate }) {
   }, [iconFilters]);
 
   return (
-    <div className="m-3">
-      <ul className="flex w-[900px] gap-2">
+    <div className="">
+      <ul className="flex w-[900px] gap-x-2">
         {icons.map((icon, index) => {
           const IconComponent = icon.name;
           return (
             <li
-              className={`filter_icons flex flex-col flex-1 items-center gap-1 opacity-70 py-4 rounded-full transition hover:rounded-full hover:transition hover:bg-[#cccccc]
+              className={`filter_icons flex flex-col flex-1 items-center gap-1 opacity-70 py-3 rounded-xl transition hover:rounded-xl hover:transition hover:bg-[#cccccc]
               ${iconFilters.indexOf(icon.title) !== -1 ? "bg-[#cccccc]" : ""}`}
               key={index}
               onClick={handleIconClick}
