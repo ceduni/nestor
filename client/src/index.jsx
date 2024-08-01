@@ -11,6 +11,7 @@ import Home from "./pages/Home.jsx";
 import SpaceAdd from "./components/SpaceAdd.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
+import MonProfil from './pages/MonProfil.jsx';
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/àpropos", element: <Apropos /> },
       { path: "/connexion/login", element: <LogIn /> },
       { path: "/connexion/signup", element: <SignUp /> },
+      { path: "/monprofil", element: <MonProfil /> },
       { path: "/mesréservations", element: <MesReservations /> },
       { path: "/gérermesespaces", element: <GererMesEspaces /> },
       { path: "/gérermesespaces/spaceadd", element: <SpaceAdd /> },
