@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { CgOrganisation } from "react-icons/cg";
 import { MdOutlineSubtitles } from "react-icons/md";
 import { IoPeopleOutline } from "react-icons/io5";
@@ -7,15 +7,10 @@ export default function Card({ space, cardSelected, onCardClick }) {
   const { images, name, organisation, capacity } = space;
   const [remainTimeBeforeNext, setRemainTimeBeforeNext] = useState(0);
   const [hasOngoingActivity, setHasOngoingActivity] = useState(false);
-
   const current = new Date();
   const handleClick = (e) => {
     e.preventDefault();
     onCardClick(cardSelected, space);
-  };
-
-  const setUTCDate = (year, month, date, hours, minutes, seconds) => {
-    return new Date(year, month, date, hours, minutes, seconds);
   };
 
   const checkOngoingActivity = () => {
@@ -52,7 +47,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
 
   return (
     <a
-      className={`cards ${cardSelected ? "flex flex-row h-36" : "card rounded-lg flex flex-col gap-2 border"}`}
+      className={`cards ${cardSelected ? "flex flex-row h-36 border rounded-xl" : "card rounded-lg flex flex-col gap-2 border"}`}
       onClick={handleClick}
     >
       <div className="">

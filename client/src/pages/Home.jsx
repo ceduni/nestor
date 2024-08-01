@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Filters from "../components/Filters";
 import Cards from "../components/Cards";
-import { useQuery } from "@tanstack/react-query";
-import { getSpaces } from "../apis/spaces-api";
-import { all } from "axios";
 
 export default function Home() {
   const [filters, setFilters] = useState({
@@ -16,17 +13,6 @@ export default function Home() {
   const [allNames, setAllNames] = useState([]);
   const [iconFilters, setIconFilters] = useState([]);
   const [allSpaces, setAllSpaces] = useState([]);
-
-  // const {data:allSpaces, error, isLoading} = useQuery({
-  //     queryKey : ['spaces'],
-  //     queryFn : getSpaces,
-  //     staleTime: 1000 * 60 * 2,
-  // });
-
-  // console.log(getSpaces);
-  // console.log('allSpaces:', allSpaces);
-  // console.log('error:', error);
-  // console.log('isLoading:', isLoading);
 
   useEffect(() => {
     fetchAllSpaces();
@@ -83,7 +69,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="filters p-2 sticky bg-white z-10 top-0">
+      <section className="filters p-2 sticky bg-white z-[1] top-0">
         <Filters
           onFiltersUpdate={handleFilters}
           onIconFiltersUpdate={setIconFilters}
@@ -91,12 +77,13 @@ export default function Home() {
           allNames={allNames}
         />
       </section>
-
-      <Cards
-        allSpaces={allSpaces}
-        filters={filters}
-        iconFilters={iconFilters}
-      />
+      <section className="">
+        <Cards
+          allSpaces={allSpaces}
+          filters={filters}
+          iconFilters={iconFilters}
+        />
+      </section>
     </main>
   );
 }

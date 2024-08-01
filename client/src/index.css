@@ -172,31 +172,8 @@ body {
   @apply font-bold;
 }
 
-.card_detail_input {
-}
-
 .display_btn {
   transform: rotate(180deg);
-}
-
-.slide-container {
-  /* background-color: grey; */
-}
-
-.slide_bg {
-  height: 24rem;
-  background-position: 50% 50%;
-}
-
-.slide span {
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 15px;
-  color: white;
-  /* background: rgba(141, 174, 224, 0.5); */
-  text-align: center;
-  position: relative;
-  top: 90%;
 }
 
 /* -----Account create----- */
@@ -227,74 +204,14 @@ body {
   background-color: #f7f7f7;
 }
 
-.rbc-time-view {
-  @apply rounded-xl;
-}
-
-.rbc-today {
-  @apply bg-white;
-}
-.rbc-month-view {
-  @apply rounded-xl;
-}
-
-.rbc-header {
-  @apply border-none;
-}
-
-.rbc-current-time-indicator {
-  @apply border-2 border-white;
-}
-
-.rbc-time-column {
-  @apply h-[2500px] border-none;
-}
-
-.rbc-timeslot-group {
-  @apply border-none;
-}
-
-.rbc-time-content {
-  @apply border;
-}
-
-.rbc-label {
-  @apply text-gray-400;
-}
-
-.rbc-event-label {
-  @apply text-wrap
-}
-
-.rbc-event {
-  padding: 4px;
-  border: none !important;
-  border-radius: 0;
-  background: #84e987;
-  outline: none !important;
-  width: 100% !important;
-}
-
-.rbc-events-container {
-  margin-right: 0 !important;
-}
-
-.modal-show {
-  display: block;
-}
-
-.modal-hide {
-  display: none;
-}
-
 .fc-event {
   @apply border-2;
 }
 
-.popover{
+.popover {
   max-width: 100%; /* Max Width of the popover (depending on the container!) */
   max-height: 100%;
-  @apply z-0
+  @apply z-0;
 }
 
 .popover-body {
@@ -302,14 +219,13 @@ body {
 }
 
 .MuiStack-root {
-  @apply border-2 rounded-xl
+  @apply border-2 rounded-xl;
 }
 
 .Mui-selected {
   background: #000 !important;
 }
 
-.fc-day-today
-{
-  background-color:inherit !important;
+.fc-day-today {
+  background-color: inherit !important;
 }

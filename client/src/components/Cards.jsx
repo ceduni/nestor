@@ -9,7 +9,6 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
   const [cardSelected, setCardSelected] = useState(false);
   const [spaces, setSpaces] = useState([]);
   const [detailSelected, setDetailSelected] = useState({});
-  const [onlyCards, setOnlyCards] = useState(false);
 
   // effects
   useEffect(() => {
@@ -105,7 +104,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
 
   return (
     <div className="">
-      <div className="flex justify-center items-center sticky top-[206.98px] p-2 bg-white z-20">
+      <div className="flex justify-center items-center sticky top-[180px] p-2 ">
         <p className="text-center p-3 font-bold">
           {spaces.length} espaces trouvés
         </p>
@@ -117,29 +116,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           )}
         </button>
       </div>
-      {/*<section className="grid grid-cols-3 gap-2 xl:grid-cols-4 md:px-3 xl:px-14">
-        <div
-          className={
-            cardSelected
-              ? "cards scrollbar-hidden grid grid-cols-1 gap-y-4 col-span-1 py-5"
-              : "cards scrollbar-hidden grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 py-5 col-span-4"
-          }
-        >
-          {spaces.map((item, index) => (
-            <Card
-              key={index}
-              space={item}
-              cardSelected={cardSelected}
-              onCardClick={handleCardClick}
-            />
-          ))}
-        </div>
-        <div className="card_detail overflow-auto flex justify-center items-start md:col-span-2 xl:col-span-3 pr-5 py-5">
-          {cardSelected ? <CardDetail spaceDetail={detailSelected} /> : <></>}
-        </div>
-      </section>*/}
-      
-      <section className="px-20 flex justify-center">
+      <section className="px-20 flex justify-center gap-4">
         <div
           className={`${cardSelected ? "cards_left flex flex-col gap-5 w-[600px]" : "grid grid-cols-4 gap-8 auto-rows-fr"}`}
         >
