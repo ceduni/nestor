@@ -3,35 +3,41 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../apis/user-api";
 
 export default function LogIn() {
+
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginInfo, setLoginInfo] = useState({
+    email: "",
+    password: "",
+  });
   const [loginError, setLoginError] = useState("");
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const handleInputsChange = (e)=>{
+    const {name, value} = e.target;
 
+    setLoginInfo(prev => prev ? {
+      ...prev,
+      [name]: value
+    }: prev);
+  };
   const handleSignupClick = () => {
     navigate("../connexion/signup");
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await loginUser(email, username);
-      localStorage.setItem("token", response.token);
-      navigate("/");
-    } catch (err) {
-      setLoginError(
-        `La connexion a échoué. Veuillez vérifier vos informations d'identification et réessayer.`,
-      );
-      console.error(err);
-    }
+    console.log(loginInfo);
+
+    // 
+    // try {
+    //   const res = await loginUser(email, password);
+    //   localStorage.setItem("token", response.token);
+    //   navigate("/");
+    // } catch (err) {
+    //   setLoginError(
+    //     `La connexion a échoué. Veuillez vérifier vos informations d'identification et réessayer.`,
+    //   );
+    //   console.error(err);
+    // }
   };
 
   return (
@@ -43,11 +49,13 @@ export default function LogIn() {
           className="login_form flex flex-col gap-4"
           onSubmit={handleSubmit}
         >
-        
+
           <div className='flex flex-col'>
-            <label htmlFor="" className='font-bold'>Courriel</label>
+            <label htmlFor="email" className='font-bold'>Courriel</label>
             <input
-              onChange={handleEmailChange}
+              id='email'
+              name='email'
+              onChange={handleInputsChange}
               className="login_input w-56 p-1 border"
               type="email"
               placeholder="Enter votre courriel"
@@ -57,7 +65,9 @@ export default function LogIn() {
           <div className='flex flex-col'>
             <label htmlFor="" className='font-bold'>Mot de passe</label>
             <input
-              onChange={handlePasswordChange}
+              id='password'
+              name='password'
+              onChange={handleInputsChange}
               className="login_input w-56 p-1 border font-bold"
               type="password"
               placeholder="Entrer votre mot de passe"
