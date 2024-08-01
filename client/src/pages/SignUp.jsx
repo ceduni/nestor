@@ -93,6 +93,7 @@ export default function SignUp() {
 
           <div className='flex flex-col'>
             <label htmlFor="courriel" className='font-bold'>Courriel</label>
+            <small>Ex : exemple@gmail.com</small>
             <input
               onChange={handleInputsChange}
               id="courriel"
@@ -115,6 +116,7 @@ export default function SignUp() {
                 <li>un caractère spécial (!, @, #, $, ...)</li>
               </div>
             </small>
+            <small>Ex : Motdepasse1234!!</small>
             <div className=''>
               <div className='relative'>
                 <input
