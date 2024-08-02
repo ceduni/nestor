@@ -138,6 +138,6 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }
