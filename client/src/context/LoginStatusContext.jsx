@@ -4,7 +4,7 @@ const LoginStatusContext = createContext();
 
 export function LoginStatusProvider({ children }) {
   const [hasLogedin, setHasLogedin] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   return (
     <LoginStatusContext.Provider
