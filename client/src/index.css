@@ -223,6 +223,11 @@ body {
 .login_input {
 }
 
+/* -----SpaceAdd----- */
+.spaceadd_input{
+  @apply w-80 p-1;
+}
+
 /* -----footer----- */
 .footer {
   background-color: #f7f7f7;

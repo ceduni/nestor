@@ -8,7 +8,7 @@ import Apropos from "./pages/Apropos.jsx";
 import MesReservations from "./pages/MesReservations.jsx";
 import GererMesEspaces from "./pages/GererMesEspaces.jsx";
 import Home from "./pages/Home.jsx";
-import SpaceAdd from "./components/SpaceAdd.jsx";
+import SpaceAdd from "./pages/SpaceAdd.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import MonProfil from './pages/MonProfil.jsx';
