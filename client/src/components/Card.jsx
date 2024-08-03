@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CgOrganisation } from "react-icons/cg";
 import { MdOutlineSubtitles } from "react-icons/md";
 import { IoPeopleOutline } from "react-icons/io5";
@@ -69,7 +69,9 @@ export default function Card({ space, cardSelected, onCardClick }) {
         </div>
         <div className="text-base flex items-center gap-2">
           <IoPeopleOutline className="w-5" />
-          <p>{capacity} {capacity > 1 ? "personnes" : "personne"}</p>
+          <p>
+            {capacity} {capacity > 1 ? "personnes" : "personne"}
+          </p>
         </div>
       </div>
       <div>

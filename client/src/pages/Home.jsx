@@ -68,7 +68,7 @@ export default function Home() {
   };
 
   return (
-    <main className=''>
+    <main className="">
       <section className="filters p-1 bg-white z-9 top-16">
         <Filters
           onFiltersUpdate={handleFilters}
@@ -77,7 +77,7 @@ export default function Home() {
           allNames={allNames}
         />
       </section>
-      <section className=''>
+      <section className="">
         <Cards
           allSpaces={allSpaces}
           filters={filters}

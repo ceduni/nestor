@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 
-export default function TimePicker({ availTimes, setStart,  setShowTimeDrop}) {
+export default function TimePicker({ availTimes, setTime, setShowTimeDrop }) {
   const handleTimeClick = (e) => {
     const selectedTime = e.target.textContent;
     availTimes.some((availTime) => {
       if (format(availTime, "HH:mm") === selectedTime) {
-        setStart(availTime);
+        setTime(availTime);
       }
       return format(availTime, "HH:mm") === selectedTime;
     });
-      setShowTimeDrop(false);
+    setShowTimeDrop(false);
   };
 
   return (

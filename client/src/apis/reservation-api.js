@@ -38,10 +38,9 @@ export const createReservation = async (reservationData) => {
       body: JSON.stringify(reservationData),
     });
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      console.error("Network response was not ok");
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (err) {
     console.error("Error creating reservation:", err);
     throw err;
