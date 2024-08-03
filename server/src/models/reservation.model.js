@@ -6,7 +6,7 @@ const reservationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    availability: { type: availabilitySchema, required: true },
+    availability: { type: availabilitySchema, required: true, unique: true },
     guestIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
     activity: {
       type: String,
@@ -35,9 +35,39 @@ reservationSchema.pre("save", async function (next) {
   const uniqueStrSet = [...new Set(strArr)];
   this.guestIds = uniqueStrSet.map((str) => new mongoose.Types.ObjectId(str));
   const spaceResult = await space.findById(this.spaceId);
+  const reservations = await reservation.find();
+  reservations.some((reservation) => {
+    const isInvalid =
+      reservation.availability._id.equals(this.availability._id) &&
+      (reservation.status === "pending" ||
+        reservation.status === "confirmed") &&
+      reservation.availability.endAt.getTime() >
+        this.availability.startAt.getTime() &&
+      reservation.availability.startAt.getTime() <
+        this.availability.endAt.getTime();
+    if (isInvalid) {
+      next("availability already taken or temporarily disable");
+    }
+    return isInvalid;
+  });
   if (!spaceResult) {
     next("Space not found");
   }
+  const indexOfAvail = spaceResult.availabilities.findIndex((avail) =>
+    avail._id.equals(this.availability._id),
+  );
+  if (indexOfAvail === -1) {
+    next("Reservation availability id should match space availability id");
+  }
+  if (
+    this.availability.startAt.getTime() <
+      spaceResult.availabilities[indexOfAvail].startAt.getTime() ||
+    this.availability.endAt.getTime() >
+      spaceResult.availabilities[indexOfAvail].endAt.getTime()
+  ) {
+    next("Reservation availability should be included in space availability");
+  }
+
   const capacity = spaceResult.capacity;
   if (this.guestIds.length > capacity) {
     next("Number of guests can not exceed space capacity");

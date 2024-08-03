@@ -19,7 +19,7 @@ const availabilitySchema = new mongoose.Schema({
   endAt: {
     type: Date,
     required: true,
-  }
+  },
 });
 
 const spaceSchema = new mongoose.Schema(
@@ -123,8 +123,8 @@ availabilitySchema.pre("save", function (next) {
   ) {
     next(new Error("Availability start and end date should be within a day"));
   }
-  if ((endAtToMilliseconds - startAtToMilliseconds) / 1000 < 3600) {
-    next(new Error("Availability should at least be 1 hour"));
+  if ((endAtToMilliseconds - startAtToMilliseconds) / 1000 < 1800) {
+    next(new Error("Availability should at least be 30 minutes"));
   }
   next();
 });

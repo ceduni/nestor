@@ -42,9 +42,7 @@ const spaceTask = cron.schedule(
       } else {
         spaces.forEach((space) => {
           space.availabilities.forEach((avail) => {
-            if (
-              avail.endAt.getTime() < current.getTime()
-            ) {
+            if (avail.endAt.getTime() < current.getTime()) {
               space.availabilities.pull(avail._id);
             }
           });
