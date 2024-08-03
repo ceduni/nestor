@@ -117,6 +117,123 @@ export default function SpaceAdd() {
                             placeholder="Enter le nom de l'organisation"
                         />
                     </div>
+                    <div className='flex flex-col gap-y-2'>
+                        <label htmlFor="prise" className='font-bold'>Équipements</label>
+                        <fieldset className='flex flex-wrap gap-x-4'>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="prise"
+                                    name='prise'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="prise">Prise</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="screen"
+                                    name='screen'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="screen">Écran</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="board"
+                                    name='board'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="board">Tableau</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="projector"
+                                    name='projector'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="projector">Projecteur</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="Wifi"
+                                    name='Wifi'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="Wifi">Wifi</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div className='flex flex-col gap-y-2'>
+                        <label htmlFor="space_postalcode" className='font-bold'>Heures de disponibilité</label>
+                        <div className='flex justify-between'>
+                            <input
+                                id="space_available_time"
+                                name='availability'
+                                className="border"
+                                type="time"
+                            />
+                            <input
+                                id="space_available_time"
+                                name='availability'
+                                className="border"
+                                type="time"
+                            />
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-y-2'>
+                        <label htmlFor="prise" className='font-bold'>Catégorie</label>
+                        <fieldset className='flex flex-wrap gap-x-4'>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="university"
+                                    name='university'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="university">Université</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="library"
+                                    name='library'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="library">Bibliothèque</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="cafe"
+                                    name='cafe'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="cafe">Café</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="nature"
+                                    name='nature'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="nature">Nature</label>
+                            </div>
+                            <div className='flex gap-1'>
+                                <input
+                                    id="Wilaboratoryfi"
+                                    name='laboratory'
+                                    className="border"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="laboratory">Laboratoire</label>
+                            </div>
+                        </fieldset>
+                    </div>
                 </form>
             </div>
         </div>
