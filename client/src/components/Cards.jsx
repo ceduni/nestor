@@ -104,7 +104,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
 
   return (
     <div className="">
-      <div className="flex justify-center items-center sticky top-60  p-2 bg-white z-2 h-14">
+      <div className="flex justify-center items-center top-60  p-2 bg-white z-2 h-14">
         <p className="text-center p-3 font-bold">
           {spaces.length} espaces trouvés
         </p>
@@ -138,6 +138,6 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }

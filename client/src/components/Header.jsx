@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
-import { RiLoginBoxLine } from "react-icons/ri";
+import { RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useLoginStatus } from "../context/LoginStatusContext";
 
@@ -18,6 +18,10 @@ export default function Header() {
   const [navItems, setNavitems] = useState(() =>
     selectNavItems(hasLogedin, isAdmin),
   );
+  const handleLogout = ()=>{
+    
+  }
+  
   return (
     <header className="header sticky top-0 z-10 bg-white px-32 h-max w-full flex place-content-between items-center">
       {/* Nestor logo */}
@@ -44,10 +48,10 @@ export default function Header() {
           ))}
 
           {/* nav connection button */}
-          <Link to="connexion/login" className="nav_items">
+          <Link to={`${hasLogedin ? "" : "connexion/login"}`} className="nav_items">
             {hasLogedin && (
               <li>
-                <FaRegUserCircle className="size-6" />
+                <RiLogoutBoxLine onClick={handleLogout} className="size-6" />
               </li>
             )}
             {!hasLogedin && (
