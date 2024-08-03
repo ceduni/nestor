@@ -2,8 +2,25 @@ import React, { useState } from 'react';
 
 export default function SpaceAdd() {
     const [imageUrls, setImageUrls] = useState([]);
+    const [equipments, setEquipements] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [availabilities, setAvailabilities] = useState([]);
+    const [spaceInfo, setSpaceInfo] = useState({
+        name: "",
+        street: "",
+        city: "",
+        state: "",
+        postalCode: "",
+        capacity: 0,
+        isAvailable: true,
+        images: [],
+        description: "",
+        organisation: "",
+        features: [],
+        availabilities: [],
+        type: []
+    });
     const handleImageInput = (e)=>{
-        // console.log(imageUrls);
         const files = Array.from(e.target.files);
         const urls = files.map(file => URL.createObjectURL(file));
         setImageUrls(urls);
