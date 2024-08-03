@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 
 export default function SpaceAdd() {
     const [imageUrls, setImageUrls] = useState([]);
+    const handleImageInput = (e)=>{
+        // console.log(imageUrls);
+        const files = Array.from(e.target.files);
+        const urls = files.map(file => URL.createObjectURL(file));
+        setImageUrls(urls);
+    };
     return (
         <div className="flex justify-center items-center">
             <div className="spaceadd_container flex flex-col justify-center items-center gap-5 rounded-3xl m-10 px-5 py-10 shadow-md">
@@ -9,34 +15,26 @@ export default function SpaceAdd() {
                 <form className="flex flex-col gap-3">
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_images_input" className='font-bold'>Images</label>
+                        <small className='pl-2'>Vous devez sélectionner au moins 1 image et au plus 4 images</small>
                         <input
                             id="space_images_input"
                             name='images'
                             accept='image/*'
-                            className="spaceadd_input border"
+                            className="spaceadd_input"
                             type="file"
+                            multiple
+                            onChange={handleImageInput}
                         />
-                        <input
-                            id="space_images_input"
-                            name='images'
-                            accept='image/*'
-                            className="spaceadd_input border"
-                            type="file"
-                        />
-                        <input
-                            id="space_images_input"
-                            name='images'
-                            accept='image/*'
-                            className="spaceadd_input border"
-                            type="file"
-                        />
-                        <input
-                            id="space_images_input"
-                            name='images'
-                            accept='image/*'
-                            className="spaceadd_input border"
-                            type="file"
-                        />
+                        <div className='flex gap-x-2 pl-1'>
+                        {imageUrls.map((imageUrl, index)=>(
+                            <img 
+                                key={index}
+                                src={imageUrl}
+                                alt={`Selected preview ${index}`}
+                                className='w-1/4 h-20'
+                            />
+                        ))}
+                    </div> 
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_name" className='font-bold'>Nom</label>
