@@ -9,7 +9,6 @@ const fastify = require("fastify")({
     },
   },
 });
-
 const cors = require("@fastify/cors");
 const mongoose = require("mongoose");
 mongoose.set({ debug: true });
@@ -62,3 +61,5 @@ const start = () => {
 };
 
 start();
+
+module.exports = fastify;

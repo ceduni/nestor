@@ -11,7 +11,7 @@ import Home from "./pages/Home.jsx";
 import SpaceAdd from "./pages/SpaceAdd.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
-import MonProfil from './pages/MonProfil.jsx';
+import MonProfil from "./pages/MonProfil.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 

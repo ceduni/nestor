@@ -6,12 +6,8 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { useLoginStatus } from "../context/LoginStatusContext";
 
 const defaultItems = [];
-const adminItems = [
-  "Mes réservations",
-  "Gérer mes espaces",
-  "Mon profil",
-];
-const studentItems = ["Mes réservations", "Mon profil",];
+const adminItems = ["Mes réservations", "Gérer mes espaces", "Mon profil"];
+const studentItems = ["Mes réservations", "Mon profil"];
 
 export default function Header() {
   const { hasLogedin, setHasLogedin, isAdmin, setIsAdmin } = useLoginStatus();

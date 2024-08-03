@@ -10,6 +10,8 @@ import { addMinutes, format, getDay, getMonth } from "date-fns";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as bootstrap from "bootstrap";
 import Modal from "./Modal";
+import ConfirmationAlert from "./ConfirmationAlert.jsx";
+import { io } from "socket.io-client";
 
 export default function Calendar({ spaceDetail }) {
   const [events, setEvents] = useState([]);
@@ -18,13 +20,21 @@ export default function Calendar({ spaceDetail }) {
   const locale = fr;
   const [allReservations, setAllReservations] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [event, setEvent] = useState({
-    start: new Date(),
-    end: addMinutes(new Date(), 30),
-  });
+  const [event, setEvent] = useState({});
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  //const socket = io('http://localhost:3000')
 
   useEffect(() => {
+    /*socket.on("newReservation", (newReservation) => {
+      console.log("test")
+      setAllReservations([...allReservations, newReservation])
+    })*/
     fetchAllReservations();
+    return () => {
+      /*socket.off('newReservation', (newReservation) => {
+        setAllReservations([...allReservations, newReservation])
+      });*/
+    };
   }, []);
 
   const fetchAllReservations = () => {
@@ -48,18 +58,19 @@ export default function Calendar({ spaceDetail }) {
     allReservations.forEach((reservation) => {
       if (
         reservation.spaceId === spaceDetail._id &&
-        reservation.status === "confirmed"
+        (reservation.status === "confirmed" || reservation.status === "pending")
       ) {
         allEvents.push({
           start: new Date(reservation.availability.startAt),
           end: new Date(reservation.availability.endAt),
           extendedProps: {
             isBooked: true,
+            spaceId: spaceDetail._id,
+            availId: reservation.availability._id,
           },
           overlap: false,
           borderColor: "#df9294",
           textColor: "#000",
-          editable: false,
           backgroundColor: "#df9294",
           id: index,
         });
@@ -83,12 +94,13 @@ export default function Calendar({ spaceDetail }) {
             end: addMinutes(currentTime, 30),
             extendedProps: {
               isBooked: false,
+              spaceId: spaceDetail._id,
+              availId: avail._id,
             },
             overlap: true,
             borderColor: "#84e987",
             textColor: "#000",
             backgroundColor: "#84e987",
-            editable: true,
             id: index,
           });
           index += 1;
@@ -97,29 +109,6 @@ export default function Calendar({ spaceDetail }) {
       }
     });
     allEvents.sort((a, b) => a.start.getTime() - b.start.getTime());
-    let pos = 0;
-    while (pos < allEvents.length - 1) {
-      if (getDay(allEvents[pos].end) !== getDay(allEvents[pos + 1].start)) {
-        allEvents.splice(pos, 0, {
-          start: allEvents[pos].end,
-          end: addMinutes(allEvents[pos].end, 30),
-          overlap: false,
-          backgroundColor: "#FFF",
-          borderColor: "#FFF",
-          textColor: "#FFF",
-        });
-        pos += 1;
-      }
-      pos += 1;
-    }
-    allEvents.push({
-      start: allEvents[pos].end,
-      end: addMinutes(allEvents[pos].end, 30),
-      overlap: false,
-      backgroundColor: "#FFF",
-      borderColor: "#FFF",
-      textColor: "#FFF",
-    });
     setEvents(allEvents);
   };
 
@@ -150,65 +139,37 @@ export default function Calendar({ spaceDetail }) {
     calendarAPI?.prev();
   };
 
-  const handleResize = (e) => {
-    if (
-      typeof e.extendedProps.isBooked !== undefined &&
-      !e.extendedProps.isBooked
-    ) {
-      e.setProp("borderColor", "#06940a");
-      e.setProp("textColor", "#FFF");
-      e.setProp("backgroundColor", "#06940a");
-    } else if (
-      typeof e.extendedProps.isBooked !== undefined &&
-      e.extendedProps.isBooked
-    ) {
-      e.setProp("borderColor", "#f1090d");
-      e.setProp("textColor", "#FFF");
-      e.setProp("backgroundColor", "#f1090d");
-    }
-    const calendarAPI = calendarRef?.current?.getApi();
-    const events = calendarAPI?.getEvents();
-    const indexToUpdate = events.findIndex((event) => e.id === event.id);
-    for (let i = 0; i < events.length; i++) {
-      if (
-        i !== indexToUpdate &&
-        events[i].end.getTime() <= e.end.getTime() &&
-        events[i].start.getTime() >= e.start.getTime()
-      ) {
-        console.log(e);
-        console.log(event);
-        events[i].setProp("display", "none");
-      }
-      if (i !== indexToUpdate && events[i].start.getTime() >= e.end.getTime()) {
-        events[i].setProp("display", "");
-      }
-    }
-    setEvent(e);
-    setShowModal(true);
-  };
-
   const handlePopOverContent = (event) => {
     return "";
   };
 
   const handleEventClick = (e) => {
-    if (
-      typeof e.extendedProps.isBooked !== undefined &&
-      e.extendedProps.isBooked
+    /*if (e.extendedProps.isBooked
     ) {
       e.setProp("backgroundColor", "#f1090d");
       e.setProp("textColor", "#FFF");
       e.setProp("borderColor", "#f1090d");
-    } else if (
-      typeof e.extendedProps.isBooked !== undefined &&
-      !e.extendedProps.isBooked
-    ) {
+    }*/ if (!e.extendedProps.isBooked) {
       e.setProp("backgroundColor", "#06940a");
       e.setProp("textColor", "#FFF");
       e.setProp("borderColor", "#06940a");
+      setEvent((prevEvent) => {
+        if (Object.keys(prevEvent).length !== 0) {
+          /*if(prevEvent.extendedProps.isBooked) {
+            prevEvent.setProp("backgroundColor", "#df9294");
+            prevEvent.setProp("textColor", "#000");
+            prevEvent.setProp("borderColor", "#df9294");
+          }*/
+          if (!prevEvent.extendedProps.isBooked) {
+            prevEvent.setProp("backgroundColor", "#84e987");
+            prevEvent.setProp("textColor", "#000");
+            prevEvent.setProp("borderColor", "#84e987");
+          }
+        }
+        return e;
+      });
+      setShowModal(true);
     }
-    setEvent(e);
-    setShowModal(true);
   };
 
   return (
@@ -244,7 +205,6 @@ export default function Calendar({ spaceDetail }) {
           datesSet={(dateInfo) => {
             displayDate(dateInfo.start, dateInfo.end);
           }}
-          eventResize={(info) => handleResize(info.event)}
           eventClick={(info) => handleEventClick(info.event)}
           eventDidMount={(info) => {
             return new bootstrap.Popover(info.el, {
@@ -260,7 +220,15 @@ export default function Calendar({ spaceDetail }) {
         />
       </div>
       {showModal && (
-        <Modal events={events} event={event} setShowModal={setShowModal} />
+        <Modal
+          events={events}
+          event={event}
+          setShowModal={setShowModal}
+          setShowConfirmation={setShowConfirmation}
+        />
+      )}
+      {showConfirmation && (
+        <ConfirmationAlert setShowConfirmation={setShowConfirmation} />
       )}
     </div>
   );
