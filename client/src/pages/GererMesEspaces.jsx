@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Routes, Route } from "react-router-dom";
-import SpaceAdd from "../components/SpaceAdd";
+import SpaceAdd from "../pages/SpaceAdd";
 
 export default function GererMesEspaces() {
   const [isAddBtnClicked, setIsAddBtnClicked] = useState(false);
