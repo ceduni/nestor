@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export default function SpaceAdd() {
+    const navigate = useNavigate();
     const [imageUrls, setImageUrls] = useState([]);
     const [equipments, setEquipements] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -25,11 +28,18 @@ export default function SpaceAdd() {
         const urls = files.map(file => URL.createObjectURL(file));
         setImageUrls(urls);
     };
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+    }
+    const handleAnnulerClick = (e)=>{
+        e.preventDefault();
+        navigate("../gérermesespaces");
+    }
     return (
         <div className="flex justify-center items-center">
             <div className="spaceadd_container flex flex-col justify-center items-center gap-5 rounded-3xl m-10 px-5 py-10 shadow-md">
                 <h1 className='text-2xl font-bold'>Ajouter un espace</h1>
-                <form className="flex flex-col gap-3">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_images_input" className='font-bold'>Images</label>
                         <small className='pl-2'>Vous devez sélectionner au moins 1 image et au plus 4 images</small>
@@ -280,6 +290,7 @@ export default function SpaceAdd() {
                         className="border p-2 w-20 rounded font-bold"
                         type="button"
                         value="Annuler"
+                        onClick={handleAnnulerClick}
                         />
                         <input
                         className="border p-2 w-20 rounded font-bold"
