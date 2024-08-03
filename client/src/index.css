@@ -225,7 +225,15 @@ body {
 
 /* -----SpaceAdd----- */
 .spaceadd_input{
-  @apply w-80 p-1;
+  @apply w-full p-1;
+}
+
+.spaceadd_container{
+  width: 50%;
+}
+
+.spaceadd_address_input{
+  @apply p-1;
 }
 
 /* -----footer----- */

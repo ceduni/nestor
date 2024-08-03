@@ -1,92 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function SpaceAdd() {
+    const [imageUrls, setImageUrls] = useState([]);
     return (
         <div className="flex justify-center items-center">
-            <div className="signup_container flex flex-col justify-center items-center gap-5 rounded-3xl m-10 px-5 py-10 shadow-md">
+            <div className="spaceadd_container flex flex-col justify-center items-center gap-5 rounded-3xl m-10 px-5 py-10 shadow-md">
                 <h1 className='text-2xl font-bold'>Ajouter un espace</h1>
                 <form className="flex flex-col gap-3">
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-1'>
                         <label htmlFor="space_images_input" className='font-bold'>Images</label>
                         <input
                             id="space_images_input"
                             name='images'
+                            accept='image/*'
                             className="spaceadd_input border"
                             type="file"
-                            placeholder="Enter le code postal"
+                        />
+                        <input
+                            id="space_images_input"
+                            name='images'
+                            accept='image/*'
+                            className="spaceadd_input border"
+                            type="file"
+                        />
+                        <input
+                            id="space_images_input"
+                            name='images'
+                            accept='image/*'
+                            className="spaceadd_input border"
+                            type="file"
+                        />
+                        <input
+                            id="space_images_input"
+                            name='images'
+                            accept='image/*'
+                            className="spaceadd_input border"
+                            type="file"
                         />
                     </div>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-1'>
                         <label htmlFor="space_name" className='font-bold'>Nom</label>
                         <input
                             id="space_name"
                             name='name'
                             className="spaceadd_input border"
                             type="text"
-                            placeholder="Enter le nom d'espace"
+                            placeholder="Entrer le nom d'espace"
                         />
                     </div>
-                    <div className='flex flex-col'>
-                        <label htmlFor="space_street" className='font-bold'>Rue</label>
-                        <input
-                            id="space_street"
-                            name='street'
-                            className="spaceadd_input border"
-                            type="text"
-                            placeholder="Enter la rue"
-                        />
+                    <div className='flex flex-col gap-3'>
+                        <div className='flex gap-x-3'>
+                            <div className='flex flex-col gap-1'>
+                                <label htmlFor="space_street" className='font-bold'>Rue</label>
+                                <input
+                                    id="space_street"
+                                    name='street'
+                                    className="spaceadd_address_input border w-80"
+                                    type="text"
+                                    placeholder="Entrer le nom de la rue"
+                                />
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label htmlFor="space_city" className='font-bold'>Ville</label>
+                                <input
+                                    id="space_city"
+                                    name='city'
+                                    className="spaceadd_address_input border w-32"
+                                    type="text"
+                                    placeholder="Entrer la ville"
+                                />
+                            </div>
+                        </div>
+                        <div className='flex gap-x-3'>
+                            <div className='flex flex-col gap-1'>
+                                <label htmlFor="space_state" className='font-bold'>Province</label>
+                                <input
+                                    id="space_state"
+                                    name='state'
+                                    className="spaceadd_address_input border w-72"
+                                    type="text"
+                                    placeholder="Entrer la province"
+                                />
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label htmlFor="space_postalcode" className='font-bold'>Code postal</label>
+                                <input
+                                    id="space_postalcode"
+                                    name='postalCode'
+                                    className="spaceadd_address_input border w-40"
+                                    type="text"
+                                    placeholder="Entrer le code postal"
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className='flex flex-col'>
-                        <label htmlFor="space_city" className='font-bold'>Ville</label>
-                        <input
-                            id="space_city"
-                            name='city'
-                            className="spaceadd_input border"
-                            type="text"
-                            placeholder="Enter la ville"
-                        />
-                    </div>
-                    <div className='flex flex-col'>
-                        <label htmlFor="space_state" className='font-bold'>Province</label>
-                        <input
-                            id="space_state"
-                            name='state'
-                            className="spaceadd_input border"
-                            type="text"
-                            placeholder="Enter la province"
-                        />
-                    </div>
-                    <div className='flex flex-col'>
-                        <label htmlFor="space_postalcode" className='font-bold'>Code postal</label>
-                        <input
-                            id="space_postalcode"
-                            name='postalCode'
-                            className="spaceadd_input border"
-                            type="text"
-                            placeholder="Enter le code postal"
-                        />
-                    </div>
-                    <div className='flex flex-col'>
-                        <label htmlFor="space_capacity" className='font-bold'>Nombre de peronnes disponible</label>
+                    <div className='flex flex-col gap-1'>
+                        <label htmlFor="space_capacity" className='font-bold'>Nombre de personnes disponibles</label>
                         <input
                             id="space_capacity"
                             name='capacity'
                             className="spaceadd_input border"
                             type="number"
-                            placeholder="Enter le code postal"
+                            placeholder="Entrer le code postal"
                         />
                     </div>
-                    <div className='flex flex-col'>
-                        <label htmlFor="space_postalcode" className='font-bold'>Code postal</label>
-                        <input
-                            id="space_postalcode"
-                            name='postalCode'
-                            className="spaceadd_input border"
-                            type="text"
-                            placeholder="Enter le code postal"
-                        />
-                    </div>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-1'>
                         <label htmlFor="space_invitation_availability" className='font-bold'>Disponibilité des invitations</label>
                         <select
                             id="space_invitation_availability"
@@ -97,29 +115,29 @@ export default function SpaceAdd() {
                             <option value="Administrateur">Non disponible</option>
                         </select>
                     </div>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-1'>
                         <label htmlFor="space_description" className='font-bold'>Description</label>
                         <input
                             id="space_description"
                             name='description'
                             className="spaceadd_input border"
                             type="text"
-                            placeholder="Enter la description de l'espace"
+                            placeholder="Entrer la description de l'espace"
                         />
                     </div>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-1'>
                         <label htmlFor="space_organisation" className='font-bold'>Organisation</label>
                         <input
                             id="space_organisation"
                             name='organisation'
                             className="spaceadd_input border"
                             type="text"
-                            placeholder="Enter le nom de l'organisation"
+                            placeholder="Entrer le nom de l'organisation"
                         />
                     </div>
                     <div className='flex flex-col gap-y-2'>
                         <label htmlFor="prise" className='font-bold'>Équipements</label>
-                        <fieldset className='flex flex-wrap gap-x-4'>
+                        <fieldset className='flex flex-wrap gap-x-4 pl-2'>
                             <div className='flex gap-1'>
                                 <input
                                     id="prise"
@@ -168,25 +186,8 @@ export default function SpaceAdd() {
                         </fieldset>
                     </div>
                     <div className='flex flex-col gap-y-2'>
-                        <label htmlFor="space_postalcode" className='font-bold'>Heures de disponibilité</label>
-                        <div className='flex justify-between'>
-                            <input
-                                id="space_available_time"
-                                name='availability'
-                                className="border"
-                                type="time"
-                            />
-                            <input
-                                id="space_available_time"
-                                name='availability'
-                                className="border"
-                                type="time"
-                            />
-                        </div>
-                    </div>
-                    <div className='flex flex-col gap-y-2'>
                         <label htmlFor="prise" className='font-bold'>Catégorie</label>
-                        <fieldset className='flex flex-wrap gap-x-4'>
+                        <fieldset className='flex flex-wrap gap-x-5 gap-y-2 pl-2'>
                             <div className='flex gap-1'>
                                 <input
                                     id="university"
@@ -233,6 +234,43 @@ export default function SpaceAdd() {
                                 <label htmlFor="laboratory">Laboratoire</label>
                             </div>
                         </fieldset>
+                    </div>
+                    <div className='flex flex-col gap-y-2'>
+                        <label htmlFor="space_postalcode" className='font-bold'>Heures de disponibilité</label>
+                        <div className='flex items-center justify-between pl-2'>
+                            <div className='flex items-center gap-x-2'>
+                                <label htmlFor="">Début</label>
+                                <input
+                                    id="space_available_time"
+                                    name='availability'
+                                    className="border w-40 p-1"
+                                    type="time"
+                                />
+                            </div>
+                            <p>-----</p>
+                            <div className='flex items-center gap-x-2'>
+                                <label htmlFor="">Fin</label>
+                                <input
+                                    id="space_available_time"
+                                    name='availability'
+                                    className="border w-40 p-1"
+                                    type="time"
+                                />
+                            </div>
+                        </div>
+                        <button className='border w-12'>+</button>
+                    </div>
+                    <div className="flex justify-between mt-5">
+                        <input
+                        className="border p-2 w-20 rounded font-bold"
+                        type="button"
+                        value="Annuler"
+                        />
+                        <input
+                        className="border p-2 w-20 rounded font-bold"
+                        type="button"
+                        value="Ajouter"
+                        />
                     </div>
                 </form>
             </div>
