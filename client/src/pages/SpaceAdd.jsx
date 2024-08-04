@@ -119,26 +119,28 @@ export default function SpaceAdd() {
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="space_capacity" className='font-bold'>Nombre de personnes disponibles</label>
-                        <input
-                            id="space_capacity"
-                            name='capacity'
-                            className="spaceadd_input border"
-                            type="number"
-                            placeholder="Entrer le code postal"
-                        />
-                    </div>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="space_invitation_availability" className='font-bold'>Disponibilité des invitations</label>
-                        <select
-                            id="space_invitation_availability"
-                            name='isAvailable'
-                            className="spaceadd_input border"
+                    <div className='flex gap-x-3'>
+                        <div className='flex flex-col gap-1'>
+                            <label htmlFor="space_capacity" className='font-bold'>Capacité</label>
+                            <input
+                                id="space_capacity"
+                                name='capacity'
+                                className="border w-56"
+                                type="number"
+                                min="1"
+                            />
+                        </div>
+                        <div className='flex flex-col gap-1'>
+                            <label htmlFor="space_invitation_availability" className='font-bold'>Invitation</label>
+                            <select
+                                id="space_invitation_availability"
+                                name='isAvailable'
+                                className="border w-56"
                             >
-                            <option value="Étudiant">Disponible</option>
-                            <option value="Administrateur">Non disponible</option>
-                        </select>
+                                <option value="Étudiant">Disponible</option>
+                                <option value="Administrateur">Non disponible</option>
+                            </select>
+                        </div>
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_description" className='font-bold'>Description</label>
