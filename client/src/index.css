@@ -223,6 +223,19 @@ body {
 .login_input {
 }
 
+/* -----SpaceAdd----- */
+.spaceadd_input{
+  @apply w-full p-1;
+}
+
+.spaceadd_container{
+  width: 50%;
+}
+
+.spaceadd_address_input{
+  @apply p-1;
+}
+
 /* -----footer----- */
 .footer {
   background-color: #f7f7f7;
