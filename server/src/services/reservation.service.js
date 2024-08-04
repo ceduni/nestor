@@ -1,11 +1,5 @@
 const reservation = require("../models/reservation.model");
 require("dotenv").config();
-const { Server } = require("socket.io");
-const io = new Server(process.env.PORT, {
-  cors: {
-    origin: "*",
-  },
-});
 async function getReservations(req, rep) {
   try {
     const reservations = await reservation.find();
@@ -51,7 +45,6 @@ async function addReservation(req, rep) {
     const newReservation = new reservation(req.body);
     const newReservationResult = await newReservation.save();
     rep.send(newReservationResult);
-    io.sockets.emit("newReservation", newReservationResult);
   } catch (error) {
     rep.status(500).send(error);
   }

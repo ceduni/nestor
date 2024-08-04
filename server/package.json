@@ -20,7 +20,8 @@
     "fastify-socket.io": "^5.0.0",
     "mongoose": "^8.4.1",
     "node-cron": "^3.0.3",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.1",
