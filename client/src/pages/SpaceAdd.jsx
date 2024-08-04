@@ -54,14 +54,14 @@ export default function SpaceAdd() {
                         />
                         <div className='flex gap-x-2 pl-1'>
                         {imageUrls.map((imageUrl, index)=>(
-                            <img 
+                            <img
                                 key={index}
                                 src={imageUrl}
                                 alt={`Selected preview ${index}`}
                                 className='w-1/4 h-20'
                             />
                         ))}
-                    </div> 
+                    </div>
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_name" className='font-bold'>Nom</label>
