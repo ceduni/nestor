@@ -130,7 +130,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
             />
           ))}
         </div>
-        <div className='card_detail'>
+        <div className="card_detail">
           {cardSelected && spaces.length !== 0 ? (
             <CardDetail spaceDetail={detailSelected} />
           ) : (

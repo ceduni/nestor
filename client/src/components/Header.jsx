@@ -14,10 +14,8 @@ export default function Header() {
   const [navItems, setNavitems] = useState(() =>
     selectNavItems(hasLogedin, isAdmin),
   );
-  const handleLogout = ()=>{
-    
-  }
-  
+  const handleLogout = () => {};
+
   return (
     <header className="header sticky top-0 z-10 bg-white px-32 h-max w-full flex place-content-between items-center">
       {/* Nestor logo */}
@@ -44,7 +42,10 @@ export default function Header() {
           ))}
 
           {/* nav connection button */}
-          <Link to={`${hasLogedin ? "" : "connexion/login"}`} className="nav_items">
+          <Link
+            to={`${hasLogedin ? "" : "connexion/login"}`}
+            className="nav_items"
+          >
             {hasLogedin && (
               <li>
                 <RiLogoutBoxLine onClick={handleLogout} className="size-6" />

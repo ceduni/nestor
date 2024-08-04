@@ -14,6 +14,7 @@ export default function Modal({
   event,
   setShowModal,
   setShowConfirmation,
+  socket,
 }) {
   const [day, setDay] = useState(event.start);
   const [start, setStart] = useState(event.start);
@@ -155,10 +156,11 @@ export default function Modal({
           status: "confirmed",
           isPrivate: status === "private",
           spaceId: event.extendedProps.spaceId,
-        }).then(() => {
+        }).then((newReservation) => {
           setShowModal(false);
           setTriggerReservation(false);
           setShowConfirmation(true);
+          socket.send(JSON.stringify(newReservation));
         });
       } else {
         setTriggerReservation(false);

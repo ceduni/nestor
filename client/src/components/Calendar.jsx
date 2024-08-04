@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import * as bootstrap from "bootstrap";
 import Modal from "./Modal";
 import ConfirmationAlert from "./ConfirmationAlert.jsx";
-import { io } from "socket.io-client";
+const socket = new WebSocket("ws://localhost:3000/api/v1/reservations/new");
 
 export default function Calendar({ spaceDetail }) {
   const [events, setEvents] = useState([]);
@@ -22,19 +22,20 @@ export default function Calendar({ spaceDetail }) {
   const [showModal, setShowModal] = useState(false);
   const [event, setEvent] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
-  //const socket = io('http://localhost:3000')
+  const ws = new WebSocket("ws://localhost:3000/api/v1/reservations/new");
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    /*socket.on("newReservation", (newReservation) => {
-      console.log("test")
-      setAllReservations([...allReservations, newReservation])
-    })*/
-    fetchAllReservations();
-    return () => {
-      /*socket.off('newReservation', (newReservation) => {
-        setAllReservations([...allReservations, newReservation])
-      });*/
+    setSocket(ws);
+    ws.onmessage = async (event) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const newReservation = JSON.parse(e.target.result);
+        setAllReservations([...allReservations, newReservation]);
+      };
+      reader.readAsText(event.data);
     };
+    fetchAllReservations();
   }, []);
 
   const fetchAllReservations = () => {
@@ -225,6 +226,7 @@ export default function Calendar({ spaceDetail }) {
           event={event}
           setShowModal={setShowModal}
           setShowConfirmation={setShowConfirmation}
+          socket={socket}
         />
       )}
       {showConfirmation && (

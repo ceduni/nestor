@@ -44,6 +44,24 @@ fastify.register(cors, {
   origin: "*",
   methods: ["GET", "POST", "PUT"],
 });
+
+fastify.register(require("@fastify/websocket"));
+fastify.register(async function (fastify) {
+  fastify.get(
+    "/api/v1/reservations/new",
+    { websocket: true },
+    (socket, req) => {
+      socket.on("message", (message) => {
+        fastify.websocketServer.clients.forEach((client) => {
+          if (client.readyState === client.OPEN) {
+            client.send(message);
+          }
+        });
+      });
+    },
+  );
+});
+
 const start = () => {
   try {
     fastify.listen({ port: process.env.PORT }, (err) => {
