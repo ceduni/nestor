@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from "uuid";
-
 
 export default function MultiCheckBoxes({title, boxItems, onUpdateList}) {
     const [items, setItems] = useState([]);
@@ -20,18 +18,18 @@ export default function MultiCheckBoxes({title, boxItems, onUpdateList}) {
     
     return (
         <div className='flex flex-col gap-y-2'>
-            <label htmlFor="prise" className='font-bold'>{title}</label>
+            <p className='font-bold'>{title}</p>
             <fieldset className='flex flex-wrap gap-x-4 pl-2'>
                 {boxItems.map(item => (
-                    <div key={uuidv4()} className='flex gap-1'>
+                    <div key={item.name} className='flex gap-1'>
                         <input
-                            id="prise"
+                            id={item.name}
                             name={item.name}
                             className="border"
                             type="checkbox"
                             onChange={handleInputChange}
                         />
-                        <label htmlFor="prise">{item.label}</label>
+                        <label htmlFor={item.name}>{item.label}</label>
                     </div>
                 ))}
             </fieldset>

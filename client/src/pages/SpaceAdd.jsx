@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import TimeAvailability from '../components/TimeAvailability';
 import MultiCheckBoxes from '../components/MultiCheckBoxes';
+import { space } from '../../../server/src/models/space.model';
 
 const equips = [
     {name: "prise", label: "Prise"},
@@ -43,7 +44,17 @@ export default function SpaceAdd() {
         type: []
     });
     
-    
+    const hasEmptyFields = (obj)=>{
+        return Object.values(obj).some(value =>{
+            if(Array.isArray(value)){
+                return value.length === 0;
+            } else if(typeof value === 'boolean' || value === 0){
+                return false;
+            } else {
+                return !value;
+            }
+        })
+    }
     // Submit form
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -52,6 +63,29 @@ export default function SpaceAdd() {
         console.log("categories : ", categories);
         console.log("imagesInfo : ", imagesInfo);
         console.log(spaceInfo);
+        setSpaceInfo(prev => prev ? {
+            ...prev,
+            images: imagesInfo,
+            features: equipments,
+            availabilities: availabilities,
+            type: categories
+        } : prev);
+
+        if(hasEmptyFields(spaceInfo)){
+            alert("Tous les champs doivent être remplis!");
+            return;
+        } else {
+            // post add space
+        }
+    };
+    // Text & number fields
+    const handleInputsChange = (e)=>{
+        console.log(e.target.value);
+        const {name, value} = e.target;
+        setSpaceInfo(prev => prev ? {
+            ...prev,
+            [name]: value
+        } : prev);
     };
     // Images
     const handleImageInput = (e)=>{
@@ -94,6 +128,7 @@ export default function SpaceAdd() {
             <div className="spaceadd_container flex flex-col justify-center items-center gap-5 rounded-3xl m-10 px-5 py-10 shadow-md">
                 <h1 className='text-2xl font-bold'>Ajouter un espace</h1>
                 <form className="flex flex-col gap-3">
+                    {/* Images */}
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_images_input" className='font-bold'>Images</label>
                         <small className='pl-2'>Vous devez sélectionner au moins 1 image et au plus 4 images</small>
@@ -116,6 +151,7 @@ export default function SpaceAdd() {
                             />
                         ))}
                     </div>
+                    {/* Texts & number */}
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_name" className='font-bold'>Nom</label>
@@ -125,6 +161,7 @@ export default function SpaceAdd() {
                             className="spaceadd_input border"
                             type="text"
                             placeholder="Entrer le nom d'espace"
+                            onChange={handleInputsChange}
                         />
                     </div>
                     <div className='flex flex-col gap-3'>
@@ -137,6 +174,7 @@ export default function SpaceAdd() {
                                     className="spaceadd_address_input border w-80"
                                     type="text"
                                     placeholder="Entrer le nom de la rue"
+                                    onChange={handleInputsChange}
                                 />
                             </div>
                             <div className='flex flex-col gap-1'>
@@ -147,6 +185,7 @@ export default function SpaceAdd() {
                                     className="spaceadd_address_input border w-44"
                                     type="text"
                                     placeholder="Entrer la ville"
+                                    onChange={handleInputsChange}
                                 />
                             </div>
                         </div>
@@ -159,6 +198,7 @@ export default function SpaceAdd() {
                                     className="spaceadd_address_input border w-80"
                                     type="text"
                                     placeholder="Entrer la province"
+                                    onChange={handleInputsChange}
                                 />
                             </div>
                             <div className='flex flex-col gap-1'>
@@ -169,6 +209,7 @@ export default function SpaceAdd() {
                                     className="spaceadd_address_input border w-44"
                                     type="text"
                                     placeholder="Entrer le code postal"
+                                    onChange={handleInputsChange}
                                 />
                             </div>
                         </div>
@@ -182,6 +223,7 @@ export default function SpaceAdd() {
                                 className="border w-64"
                                 type="number"
                                 min="1"
+                                onChange={handleInputsChange}
                             />
                         </div>
                         <div className='flex flex-col gap-1'>
@@ -190,9 +232,10 @@ export default function SpaceAdd() {
                                 id="space_invitation_availability"
                                 name='isAvailable'
                                 className="border w-60"
+                                onChange={handleInputsChange}
                             >
-                                <option value="Étudiant">Disponible</option>
-                                <option value="Administrateur">Non disponible</option>
+                                <option value="true">Disponible</option>
+                                <option value="false">Non disponible</option>
                             </select>
                         </div>
                     </div>
@@ -204,6 +247,7 @@ export default function SpaceAdd() {
                             className="spaceadd_input border"
                             type="text"
                             placeholder="Entrer la description de l'espace"
+                            onChange={handleInputsChange}
                         />
                     </div>
                     <div className='flex flex-col gap-1'>
@@ -214,6 +258,7 @@ export default function SpaceAdd() {
                             className="spaceadd_input border"
                             type="text"
                             placeholder="Entrer le nom de l'organisation"
+                            onChange={handleInputsChange}
                         />
                     </div>
 
