@@ -4,9 +4,9 @@ import TimeAvailability from '../components/TimeAvailability';
 import MultiCheckBoxes from '../components/MultiCheckBoxes';
 
 const equips = [
-    {name: "prise", label: "Prise"},
+    {name: "plug", label: "Prise"},
     {name: "screen", label: "Écran"},
-    {name: "board", label: "Tableau"},
+    {name: "whiteboard", label: "Tableau"},
     {name: "projector", label: "Projecteur"},
     {name: "wifi", label: "Wifi"},
 ]
@@ -14,7 +14,7 @@ const equips = [
 const categoriesInfo = [
     {name: "university", label: "Université"},
     {name: "library", label: "Bibliothèque"},
-    {name: "cafe", label: "Café"},
+    {name: "coffee", label: "Café"},
     {name: "nature", label: "Nature"},
     {name: "laboratory", label: "Laboratoire"},
 ]
@@ -22,46 +22,29 @@ const categoriesInfo = [
 export default function SpaceAdd() {
     const navigate = useNavigate();
     const [imagesInfo, setImagesInfo] = useState([
-        {
-            "url": "src/assets/images/agrandissement-1.jpg",
-            "isMain": true
-          },
-          {
-            "url": "src/assets/images/agrandissement-2.jpg",
-            "isMain": false
-          }
+        
     ]);
     const [availNum, setAvailNum] = useState(0);
     const avails = Array.from({length: availNum}, (_, index)=> index + 1);
     const [equipments, setEquipements] = useState([]); // features
     const [categories, setCategories] = useState([]); // type
     const [availabilities, setAvailabilities] = useState([
-        {
-            "startAt": "2024-08-05T09:00:00Z",
-            "endAt": "2024-08-05T11:00:00Z"
-        }
+        
     ]);
     const [spaceInfo, setSpaceInfo] = useState({
-        name: "Test space 88",
-        street: "L'Entraide Pont-Viaurue St-André",
-        city: "Lasalle",
-        state: "QC",
-        postalCode: "H7G 3A5",
+        name: "",
+        street: "",
+        city: "",
+        state: "",
+        postalCode: "",
         capacity: 8,
         isAvailable: true,
         images: [
-            {
-            "url": "src/assets/images/agrandissement-1.jpg",
-            "isMain": true
-            },
-            {
-            "url": "src/assets/images/agrandissement-2.jpg",
-            "isMain": false
-            }
+        
         ],
-        description: "Espace Génial",
-        organisation: "Association de location de salles du Québec",
-        features: ["wifi", "screen"],
+        description: "",
+        organisation: "",
+        features: [],
         availabilities: [
             {
                 "startAt": "2024-08-05T09:00:00Z",
@@ -72,7 +55,7 @@ export default function SpaceAdd() {
                 "endAt": "2024-08-05T15:00:00Z"
               }
         ],
-        type: ["library"]
+        type: []
     });
     
     const hasEmptyFields = (obj)=>{
@@ -98,12 +81,12 @@ export default function SpaceAdd() {
             ...spaceInfo,
             images: imagesInfo,
             features: equipments,
-            availabilities: availabilities,
+            // availabilities: availabilities,
             type: categories
         }
         console.log("updated : ",updatedSpaceInfo);
 
-        if(hasEmptyFields(spaceInfo)){
+        if(hasEmptyFields(updatedSpaceInfo)){
             alert("Tous les champs doivent être remplis!");
             return;
         } else {
@@ -142,7 +125,7 @@ export default function SpaceAdd() {
                 "type": ["library"]
             }
             console.log(testSpace);
-            postAddSpace(spaceInfo);
+            postAddSpace(updatedSpaceInfo);
         }
     };
     const postAddSpace = async (space)=>{
@@ -228,7 +211,7 @@ export default function SpaceAdd() {
                                 key={index}
                                 src={imageInfo.url}
                                 alt={`Selected preview ${index}`}
-                                className='w-1/4 h-20'
+                                className='w-1/4 h-24 border'
                             />
                         ))}
                     </div>
@@ -303,7 +286,9 @@ export default function SpaceAdd() {
                                 name='capacity'
                                 className="border w-64"
                                 type="number"
-                                min="1"
+                                min={1}
+                                placeholder='Entrer la capacité'
+                                onChange={handleInputsChange}
                             />
                         </div>
                         <div className='flex flex-col gap-1'>
@@ -312,9 +297,10 @@ export default function SpaceAdd() {
                                 id="space_invitation_availability"
                                 name='isAvailable'
                                 className="border w-60"
+                                onChange={handleInputsChange}
                             >
-                                <option value="true">Disponible</option>
-                                <option value="false">Non disponible</option>
+                                <option value={true}>Disponible</option>
+                                <option value={false}>Non disponible</option>
                             </select>
                         </div>
                     </div>
@@ -323,7 +309,7 @@ export default function SpaceAdd() {
                         <input
                             id="space_description"
                             name='description'
-                            className="spaceadd_input border"
+                            className="spaceadd_input border p-1"
                             type="text"
                             placeholder="Entrer la description de l'espace"
                             onChange={handleInputsChange}
