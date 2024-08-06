@@ -61,7 +61,7 @@ export default function LogIn() {
               onChange={handleInputsChange}
               className="login_input w-56 p-1 border"
               type="email"
-              placeholder="Enter votre courriel"
+              placeholder="Entrer votre courriel"
             />
           </div>
 

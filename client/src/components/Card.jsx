@@ -48,7 +48,7 @@ export default function Card({ space, cardSelected, onCardClick }) {
 
   return (
     <a
-      className={`cards ${cardSelected ? "flex flex-row h-28 border rounded-xl" : "card rounded-lg flex flex-col gap-2 border"}`}
+      className={`cards ${cardSelected ? "flex flex-row h-28 shadow-md rounded-xl" : "card rounded-xl flex flex-col gap-2 border"}`}
       onClick={handleClick}
     >
       <div className="">
