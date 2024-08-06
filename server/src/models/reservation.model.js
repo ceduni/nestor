@@ -45,7 +45,7 @@ reservationSchema.pre("save", async function (next) {
         this.availability.startAt.getTime() &&
       reservation.availability.startAt.getTime() <
         this.availability.endAt.getTime();
-    if (isInvalid) {
+    if (isInvalid && reservation.length !== 0) {
       next("availability already taken or temporarily disable");
     }
     return isInvalid;
@@ -90,7 +90,7 @@ reservationSchema.methods.toJSON = function () {
 
 reservationSchema.index(
   { createdAt: 1 },
-  { expireAfterSeconds: 600, partialFilterExpression: { status: "pending" } },
+  { expireAfterSeconds: 10, partialFilterExpression: { status: "pending" } },
 );
 
 const reservation = mongoose.model("reservation", reservationSchema);

@@ -54,7 +54,7 @@ fastify.register(async function (fastify) {
       socket.on("message", (message) => {
         fastify.websocketServer.clients.forEach((client) => {
           if (client.readyState === client.OPEN) {
-            client.send(message);
+            if (client !== socket ) client.send(message);
           }
         });
       });

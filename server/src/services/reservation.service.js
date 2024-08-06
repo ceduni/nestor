@@ -3,9 +3,6 @@ require("dotenv").config();
 async function getReservations(req, rep) {
   try {
     const reservations = await reservation.find();
-    if (reservations.length === 0) {
-      return rep.status(404).send("No reservation found");
-    }
     rep.send(reservations);
   } catch (error) {
     rep.status(500).send(error);
@@ -15,9 +12,6 @@ async function getReservations(req, rep) {
 async function getReservation(req, rep) {
   try {
     const reservationResult = await reservation.findById(req.params.id);
-    if (!reservationResult) {
-      return rep.status(404).send("Reservation not found");
-    }
     rep.send(reservationResult);
   } catch (error) {
     rep.status(500).send(error);

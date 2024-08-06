@@ -4,9 +4,6 @@ const mongoose = require("mongoose");
 async function getSpaces(req, rep) {
   try {
     const spaces = await space.find({ isAvailable: true });
-    if (spaces.length === 0) {
-      return rep.status(404).send("No space found");
-    }
     rep.send(spaces);
   } catch (error) {
     rep.status(500).send(error);
@@ -16,9 +13,6 @@ async function getSpaces(req, rep) {
 async function getSpace(req, rep) {
   try {
     const spaceResult = await space.findById(req.params.id);
-    if (!spaceResult) {
-      return rep.status(404).send("Space not found");
-    }
     rep.send(spaceResult);
   } catch (error) {
     rep.status(500).send(error);
