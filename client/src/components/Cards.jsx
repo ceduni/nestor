@@ -48,7 +48,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
     filteredSpaces = filteredSpaces.filter(
       (space) =>
         Number(filters.peopleNum) === 0 ||
-        space.capacity === Number(filters.peopleNum),
+        space.capacity >= Number(filters.peopleNum),
     );
     filteredSpaces = filteredSpaces.filter(
       (space) =>

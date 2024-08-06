@@ -245,15 +245,14 @@ body {
   @apply border-2;
 }
 
-.popover {
-  max-width: 100%; /* Max Width of the popover (depending on the container!) */
+/*.popover {
+  max-width: 100%;
   max-height: 100%;
   @apply z-0;
-}
-
-.popover-body {
+}*/
+/*.popover-body {
   width: 400px;
-}
+}*/
 
 .MuiStack-root {
   @apply border-2 rounded-xl;

@@ -14,6 +14,7 @@ export default function Modal({
   event,
   setShowModal,
   setShowConfirmation,
+    setAllReservations,
   socket,
 }) {
   const [day, setDay] = useState(event.start);
@@ -37,15 +38,16 @@ export default function Modal({
 
   const handleCancelClick = () => {
     setShowModal(false);
-    if (!event.extendedProps.isBooked) {
+    if (!event.extendedProps.status) {
       event.setProp("borderColor", "#84e987");
       event.setProp("textColor", "#000");
       event.setProp("backgroundColor", "#84e987");
-    } else if (event.extendedProps.isBooked) {
+    } else if (event.extendedProps.status) {
       event.setProp("borderColor", "#df9294");
       event.setProp("textColor", "#000");
       event.setProp("backgroundColor", "#df9294");
     }
+
   };
 
   const handleDayClick = () => {
@@ -82,7 +84,7 @@ export default function Modal({
     const tempAvailDays = [];
     events.forEach((event) => {
       if (
-        !event.extendedProps.isBooked &&
+        !event.extendedProps.status &&
         !tempAvailDays.includes(event.start.toISOString().split("T")[0])
       ) {
         tempAvailDays.push(event.start.toISOString().split("T")[0]);
@@ -96,14 +98,14 @@ export default function Modal({
     const availEndTimes = [];
     events.forEach((event) => {
       if (
-        !event.extendedProps.isBooked &&
+        !event.extendedProps.status &&
         day.toISOString().split("T")[0] ===
           event.start.toISOString().split("T")[0]
       ) {
         availStartTimes.push(event.start);
       }
       if (
-        !event.extendedProps.isBooked &&
+        !event.extendedProps.status &&
         day.toISOString().split("T")[0] ===
           event.end.toISOString().split("T")[0]
       ) {
@@ -114,7 +116,7 @@ export default function Modal({
     availEndTimes.sort((a, b) => a.getTime() - b.getTime());
     setAvailStartTimes(availStartTimes);
     setAvailEndTimes(availEndTimes);
-  }, [events, day]);
+  }, [day]);
 
   useEffect(() => {
     if (end.getTime() <= start.getTime()) {
@@ -161,6 +163,7 @@ export default function Modal({
           setTriggerReservation(false);
           setShowConfirmation(true);
           socket.send(JSON.stringify(newReservation));
+          setAllReservations(prevReservations => [...prevReservations,newReservation])
         });
       } else {
         setTriggerReservation(false);
@@ -198,14 +201,14 @@ export default function Modal({
                 <div>{format(day, "dd MMM, yyyy")}</div>
                 <IoCalendarClearOutline className="mt-[3px]" />
               </div>
-              <div className={`${showDayCalendar ? "" : "hidden"}`}>
+              {/*<div className={`${showDayCalendar ? "" : "hidden"}`}>
                 <DayCalendar
                   availableDays={availableDays}
                   day={day}
                   setDay={setDay}
                   setShowDayCalendar={setShowDayCalendar}
                 />
-              </div>
+              </div>*/}
             </div>
             <div className="pt-2 self-start">De</div>
             <div className="flex flex-col gap-2 self-start" ref={startRef}>

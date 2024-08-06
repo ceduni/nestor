@@ -49,7 +49,7 @@ export default function NameDropDown({
   return (
     <div
       id="dropdown"
-      className={`right-[650px] z-10 top-[72px] p-3 gap-5 flex flex-col bg-white shadow absolute rounded-lg border w-80 ${
+      className={`right-[650px] z-10 top-[72px] p-3 gap-4 flex flex-col bg-white shadow absolute rounded-lg border w-80 ${
         !filters.name.trim() ||
         filteredNames.length === 0 ||
         hasClickedOutsideName ||

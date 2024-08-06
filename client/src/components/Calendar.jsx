@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import * as bootstrap from "bootstrap";
 import Modal from "./Modal";
 import ConfirmationAlert from "./ConfirmationAlert.jsx";
-const socket = new WebSocket("ws://localhost:3000/api/v1/reservations/new");
+import { createReservation } from "../apis/reservation-api.js";
 
 export default function Calendar({ spaceDetail }) {
   const [events, setEvents] = useState([]);
@@ -22,20 +22,30 @@ export default function Calendar({ spaceDetail }) {
   const [showModal, setShowModal] = useState(false);
   const [event, setEvent] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const ws = new WebSocket("ws://localhost:3000/api/v1/reservations/new");
   const [socket, setSocket] = useState(null);
 
-  useEffect(() => {
+  useEffect( () => {
+    fetchAllReservations();
+    const ws = new WebSocket("ws://localhost:3000/api/v1/reservations/new");
     setSocket(ws);
     ws.onmessage = async (event) => {
       const reader = new FileReader();
       reader.onload = function (e) {
-        const newReservation = JSON.parse(e.target.result);
-        setAllReservations([...allReservations, newReservation]);
+        const data = JSON.parse(e.target.result);
+        if (data.status === 'confirmed'){
+          setAllReservations(prevReservations => [...prevReservations, data]);
+        }
+        else {
+          setAllReservations(prevReservations => [...prevReservations, ...data]);
+          setTimeout(fetchAllReservations,60000);
+        }
+
       };
       reader.readAsText(event.data);
     };
-    fetchAllReservations();
+    return () => {
+      ws.close();
+    };
   }, []);
 
   const fetchAllReservations = () => {
@@ -59,17 +69,17 @@ export default function Calendar({ spaceDetail }) {
     allReservations.forEach((reservation) => {
       if (
         reservation.spaceId === spaceDetail._id &&
-        (reservation.status === "confirmed" || reservation.status === "pending")
+        (reservation.status === "pending" || reservation.status === "confirmed")
       ) {
         allEvents.push({
           start: new Date(reservation.availability.startAt),
           end: new Date(reservation.availability.endAt),
           extendedProps: {
-            isBooked: true,
+            status: reservation.status,
             spaceId: spaceDetail._id,
             availId: reservation.availability._id,
+            hostId : reservation.hostId
           },
-          overlap: false,
           borderColor: "#df9294",
           textColor: "#000",
           backgroundColor: "#df9294",
@@ -84,21 +94,19 @@ export default function Calendar({ spaceDetail }) {
       while (currentTime.getTime() < endTime.getTime()) {
         const tempStart = currentTime;
         const tempEnd = addMinutes(currentTime, 30);
-        const alreadyBooked = allEvents.findIndex(
+        const alreadyPending = allEvents.findIndex(
           (event) =>
             tempStart.getTime() >= event.start.getTime() &&
             tempEnd.getTime() <= event.end.getTime(),
         );
-        if (alreadyBooked === -1) {
+        if (alreadyPending === -1) {
           allEvents.push({
             start: currentTime,
             end: addMinutes(currentTime, 30),
             extendedProps: {
-              isBooked: false,
               spaceId: spaceDetail._id,
               availId: avail._id,
             },
-            overlap: true,
             borderColor: "#84e987",
             textColor: "#000",
             backgroundColor: "#84e987",
@@ -119,9 +127,9 @@ export default function Calendar({ spaceDetail }) {
       concatFormat = "MMMM dd";
     }
     setDateRange(
-      format(start, "MMMM dd", { locale })
-        .concat(" - ")
-        .concat(format(end, concatFormat, { locale })),
+      format(start, "MMMM dd", { locale }) +
+        " - " +
+        format(end, concatFormat, { locale }),
     );
   };
 
@@ -141,27 +149,30 @@ export default function Calendar({ spaceDetail }) {
   };
 
   const handlePopOverContent = (event) => {
+    if (event.extendedProps.status === "pending") {
+      return `<div>en cours de réservation</div>`
+    }
     return "";
   };
 
   const handleEventClick = (e) => {
-    /*if (e.extendedProps.isBooked
+    /*if (e.extendedProps.status
     ) {
       e.setProp("backgroundColor", "#f1090d");
       e.setProp("textColor", "#FFF");
       e.setProp("borderColor", "#f1090d");
-    }*/ if (!e.extendedProps.isBooked) {
+    }*/ if (!e.extendedProps.status) {
       e.setProp("backgroundColor", "#06940a");
       e.setProp("textColor", "#FFF");
       e.setProp("borderColor", "#06940a");
       setEvent((prevEvent) => {
         if (Object.keys(prevEvent).length !== 0) {
-          /*if(prevEvent.extendedProps.isBooked) {
+          /*if(prevEvent.extendedProps.status) {
             prevEvent.setProp("backgroundColor", "#df9294");
             prevEvent.setProp("textColor", "#000");
             prevEvent.setProp("borderColor", "#df9294");
           }*/
-          if (!prevEvent.extendedProps.isBooked) {
+          if (!prevEvent.extendedProps.status) {
             prevEvent.setProp("backgroundColor", "#84e987");
             prevEvent.setProp("textColor", "#000");
             prevEvent.setProp("borderColor", "#84e987");
@@ -170,6 +181,29 @@ export default function Calendar({ spaceDetail }) {
         return e;
       });
       setShowModal(true);
+      const lockedAvails = []
+      events.forEach(event => {
+        if (event.start.toISOString().split('T')[0] === e.start.toISOString().split('T')[0]
+        && !event.extendedProps.status) {
+          lockedAvails.push({
+            hostId: "613f3bda5f4378b64b448f20",
+            availability: {
+              startAt: event.start,
+              endAt: event.end,
+              _id: event.extendedProps.availId
+            },
+            spaceId: event.extendedProps.spaceId,
+            status: "pending",
+            guestIds: [],
+            isPrivate: true,
+            activity: " "
+          })
+        }
+      })
+      lockedAvails.forEach(lockedAvail => {
+        createReservation(lockedAvail).then()
+      })
+      socket.send(JSON.stringify(lockedAvails))
     }
   };
 
@@ -211,7 +245,7 @@ export default function Calendar({ spaceDetail }) {
             return new bootstrap.Popover(info.el, {
               title: info.event.title,
               placement: "auto",
-              trigger: "click",
+              trigger: "hover",
               customClass: "popoverStyle",
               content: handlePopOverContent(info.event),
               html: true,
@@ -227,6 +261,7 @@ export default function Calendar({ spaceDetail }) {
           setShowModal={setShowModal}
           setShowConfirmation={setShowConfirmation}
           socket={socket}
+          setAllReservations={setAllReservations}
         />
       )}
       {showConfirmation && (
