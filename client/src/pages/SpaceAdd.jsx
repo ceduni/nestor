@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import TimeAvailability from '../components/TimeAvailability';
 import MultiCheckBoxes from '../components/MultiCheckBoxes';
-import { space } from '../../../server/src/models/space.model';
 
 const equips = [
     {name: "prise", label: "Prise"},
@@ -22,26 +21,58 @@ const categoriesInfo = [
 
 export default function SpaceAdd() {
     const navigate = useNavigate();
-    const [imagesInfo, setImagesInfo] = useState([]);
+    const [imagesInfo, setImagesInfo] = useState([
+        {
+            "url": "src/assets/images/agrandissement-1.jpg",
+            "isMain": true
+          },
+          {
+            "url": "src/assets/images/agrandissement-2.jpg",
+            "isMain": false
+          }
+    ]);
     const [availNum, setAvailNum] = useState(0);
     const avails = Array.from({length: availNum}, (_, index)=> index + 1);
     const [equipments, setEquipements] = useState([]); // features
     const [categories, setCategories] = useState([]); // type
-    const [availabilities, setAvailabilities] = useState([]);
+    const [availabilities, setAvailabilities] = useState([
+        {
+            "startAt": "2024-08-05T09:00:00Z",
+            "endAt": "2024-08-05T11:00:00Z"
+        }
+    ]);
     const [spaceInfo, setSpaceInfo] = useState({
-        name: "",
-        street: "",
-        city: "",
-        state: "",
-        postalCode: "",
-        capacity: 0,
+        name: "Test space 88",
+        street: "L'Entraide Pont-Viaurue St-André",
+        city: "Lasalle",
+        state: "QC",
+        postalCode: "H7G 3A5",
+        capacity: 8,
         isAvailable: true,
-        images: [],
-        description: "",
-        organisation: "",
-        features: [],
-        availabilities: [],
-        type: []
+        images: [
+            {
+            "url": "src/assets/images/agrandissement-1.jpg",
+            "isMain": true
+            },
+            {
+            "url": "src/assets/images/agrandissement-2.jpg",
+            "isMain": false
+            }
+        ],
+        description: "Espace Génial",
+        organisation: "Association de location de salles du Québec",
+        features: ["wifi", "screen"],
+        availabilities: [
+            {
+                "startAt": "2024-08-05T09:00:00Z",
+                "endAt": "2024-08-05T11:00:00Z"
+              },
+              {
+                "startAt": "2024-08-05T13:00:00Z",
+                "endAt": "2024-08-05T15:00:00Z"
+              }
+        ],
+        type: ["library"]
     });
     
     const hasEmptyFields = (obj)=>{
@@ -62,25 +93,75 @@ export default function SpaceAdd() {
         console.log("Equipements : ", equipments);
         console.log("categories : ", categories);
         console.log("imagesInfo : ", imagesInfo);
-        console.log(spaceInfo);
-        setSpaceInfo(prev => prev ? {
-            ...prev,
+        console.log("spaceInfo : ", spaceInfo);
+        const updatedSpaceInfo = {
+            ...spaceInfo,
             images: imagesInfo,
             features: equipments,
             availabilities: availabilities,
             type: categories
-        } : prev);
+        }
+        console.log("updated : ",updatedSpaceInfo);
 
         if(hasEmptyFields(spaceInfo)){
             alert("Tous les champs doivent être remplis!");
             return;
         } else {
             // post add space
+            const testSpace = {
+                "name": "Test space 777799",
+                "street": "L'Entraide Pont-Viaurue St-André",
+                "city": "Lasalle",
+                "state": "QC",
+                "postalCode": "H7G 3A5",
+                "capacity": 20,
+                "isAvailable": true,
+                "images": [
+                  {
+                    "url": "src/assets/images/agrandissement-1.jpg",
+                    "isMain": true
+                  },
+                  {
+                    "url": "src/assets/images/agrandissement-2.jpg",
+                    "isMain": false
+                  }
+                ],
+                "description": "Espace Génial",
+                "organisation": "Association de location de salles du Québec",
+                "features": ["wifi", "screen"],
+                "availabilities": [
+                  {
+                    "startAt": "2024-08-05T09:00:00Z",
+                    "endAt": "2024-08-05T11:00:00Z"
+                  },
+                  {
+                    "startAt": "2024-08-05T13:00:00Z",
+                    "endAt": "2024-08-05T15:00:00Z"
+                  }
+                ],
+                "type": ["library"]
+            }
+            console.log(testSpace);
+            postAddSpace(spaceInfo);
         }
     };
+    const postAddSpace = async (space)=>{
+        try{
+            const res = await fetch('http://localhost:3000/api/v1/spaces/', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(space),
+            });
+            const data = await res.json();
+            console.log(data);
+        } catch(err){
+            console.error(err);
+        }
+    }
     // Text & number fields
     const handleInputsChange = (e)=>{
-        console.log(e.target.value);
         const {name, value} = e.target;
         setSpaceInfo(prev => prev ? {
             ...prev,
@@ -127,7 +208,7 @@ export default function SpaceAdd() {
         <div className="flex justify-center items-center">
             <div className="spaceadd_container flex flex-col justify-center items-center gap-5 rounded-3xl m-10 px-5 py-10 shadow-md">
                 <h1 className='text-2xl font-bold'>Ajouter un espace</h1>
-                <form className="flex flex-col gap-3">
+                <form id='space_add_form' className="flex flex-col gap-3">
                     {/* Images */}
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="space_images_input" className='font-bold'>Images</label>
@@ -223,7 +304,6 @@ export default function SpaceAdd() {
                                 className="border w-64"
                                 type="number"
                                 min="1"
-                                onChange={handleInputsChange}
                             />
                         </div>
                         <div className='flex flex-col gap-1'>
@@ -232,7 +312,6 @@ export default function SpaceAdd() {
                                 id="space_invitation_availability"
                                 name='isAvailable'
                                 className="border w-60"
-                                onChange={handleInputsChange}
                             >
                                 <option value="true">Disponible</option>
                                 <option value="false">Non disponible</option>
@@ -266,7 +345,7 @@ export default function SpaceAdd() {
                     <MultiCheckBoxes title="Catégories" boxItems={categoriesInfo} onUpdateList={setCategories}/>
                     
                     <div className='flex flex-col gap-y-3'>
-                        <label htmlFor="space_postalcode" className='font-bold'>Heures de disponibilité</label>
+                        <p className='font-bold'>Heures de disponibilité</p>
                         {avails.map((_, index) =>(
                             <TimeAvailability 
                                 key={index} 

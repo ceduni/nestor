@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       { path: "/connexion/signup", element: <SignUp /> },
       { path: "/monprofil", element: <MonProfil /> },
       { path: "/mesréservations", element: <MesReservations /> },
-      { path: "/gérermesespaces", element: <GererMesEspaces /> },
+      { path: "/gérermesespaces/*", element: <GererMesEspaces /> },
       { path: "/gérermesespaces/spaceadd", element: <SpaceAdd /> },
     ],
   },
