@@ -21,6 +21,8 @@ export default function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userid");
     localStorage.removeItem("username");
     localStorage.removeItem("logedin");
     setHasLogedin(false);
