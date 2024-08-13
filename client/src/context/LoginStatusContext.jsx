@@ -5,14 +5,6 @@ const LoginStatusContext = createContext();
 export function LoginStatusProvider({ children }) {
   const [hasLogedin, setHasLogedin] = useState(localStorage.getItem("logedin") ? true : false);
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") ? true : false);
-  const [userInfo, setUserInfo] = useState({  
-    userName: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    role: "student",
-  });
 
   return (
     <LoginStatusContext.Provider

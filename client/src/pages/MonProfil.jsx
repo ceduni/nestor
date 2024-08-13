@@ -7,7 +7,7 @@ export default function MonProfil() {
   const [isShowBtnFstClick, setIsShowBtnFstClick] = useState(false);
   const [isShowBtnSndClick, setIsShowBtnSndClick] = useState(false);
   const [passwordComfirm, setPasswordConfirm] = useState("");
-  const [currentInfo, setCurrentInfo] = useState({
+  const [userInfo, setUserInfo] = useState({
     userName: "",
     firstName: "",
     lastName: "",
@@ -45,7 +45,7 @@ export default function MonProfil() {
         throw new Error("Failed to fetch user");
       }
       const data = await response.json();
-      setCurrentInfo(data);
+      setUserInfo(data);
       console.log(data);
     } catch (error) {
       console.error(error);
@@ -74,7 +74,7 @@ export default function MonProfil() {
   }
   const handleSignupClick = (e) => {
     e.preventDefault();
-    console.log(profilInfo);
+    // console.log(profilInfo);
 
     // Verify password
     if (signupInfo.password !== passwordComfirm) {
@@ -116,7 +116,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="text"
                 disabled="true"
-                value={isModifBtnClick? profilInfo.lastName : currentInfo.lastName}
+                value={userInfo.lastName}
               />
             </div>
 
@@ -130,7 +130,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="text"
                 disabled="true"
-                value={isModifBtnClick ? profilInfo.firstName : currentInfo.firstName}
+                value={userInfo.firstName}
               />
             </div>
 
@@ -145,7 +145,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="text"
                 disabled={!isModifBtnClick}
-                value={isModifBtnClick ? profilInfo.userName : currentInfo.userName}
+                value={isModifBtnClick ? profilInfo.userName : userInfo.userName}
                 placeholder={
                   isModifBtnClick
                     ? "Entrer votre nouveau nom d'utilisateur"
@@ -166,7 +166,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="email"
                 disabled={!isModifBtnClick}
-                value={`${isModifBtnClick ? "" : currentInfo.email}`}
+                value={`${isModifBtnClick ? "" : userInfo.email}`}
                 placeholder={`${isModifBtnClick ? "Entrer votre nouveau courriel" : ""}`}
               />
             </div>
@@ -180,7 +180,7 @@ export default function MonProfil() {
                   <small>
                     Votre mot de passe doit contenir au moins 10 caractères
                   </small>
-                  <small>
+                  {/* <small>
                     Votre mot de passe doit comprendre au moins :
                     <div className="pl-3">
                       <li>une lettre majuscule (a à z)</li>
@@ -188,8 +188,8 @@ export default function MonProfil() {
                       <li>un chiffre (0 à 9)</li>
                       <li>un caractère spécial (!, @, #, $, ...)</li>
                     </div>
-                  </small>
-                  <small>Ex : Motdepasse1234!!</small>
+                  </small> */}
+                  <small>Ex : Motdepasse</small>
                 </>
               )}
               <div className="">
@@ -201,7 +201,7 @@ export default function MonProfil() {
                     className="signup_input border"
                     type={`${isShowBtnFstClick ? "text" : "password"}`}
                     disabled={!isModifBtnClick}
-                    value={`${isModifBtnClick ? profilInfo.password : currentInfo.password}`}
+                    value={`${isModifBtnClick ? profilInfo.password : userInfo.password}`}
                     placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : ""}`}
                   />
                   {isShowBtnFstClick ? (
@@ -250,7 +250,7 @@ export default function MonProfil() {
               </div>
             )}
 
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <label htmlFor="account_type" className="font-bold">
                 Type du compte
               </label>
@@ -259,13 +259,12 @@ export default function MonProfil() {
                 id="account_type"
                 name="role"
                 className={`signup_input border bg-gray-100 appearance-none`}
-                // className={`signup_input border ${isModifBtnClick ? "" : "bg-gray-100"} ${isModifBtnClick ? "" : "appearance-none"}`}
                 disabled="true"
               >
                 <option value="Étudiant">Étudiant</option>
-                {/* <option value="Administrateur">Administrateur</option> */}
+                <option value="Administrateur">Administrateur</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="flex justify-between mt-5">
               <input
