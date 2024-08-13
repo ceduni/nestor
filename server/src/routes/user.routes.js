@@ -40,6 +40,37 @@ async function getUserRoutes(fastify, options){
         },
         userService.loginUser
     );
+
+    // Route to update a user by ID (protected route)
+    fastify.put(
+    "/:id",
+    {
+        preHandler: userService.authenticateToken,
+        schema: {
+        body: {
+            type: "object",
+            properties: {
+            userName: { type: "string" },
+            firstName: { type: "string" },
+            lastName: { type: "string" },
+            email: { type: "string" },
+            password: { type: "string" },
+            role: { type: "string", enum: ["admin", "student"] },
+            },
+        },
+        },
+    },
+    userService.updateUser
+    );
+
+    // Route to get a specific user by ID (protected route)
+    fastify.get(
+    "/:id",
+    {
+        preHandler: userService.authenticateToken,
+    },
+    userService.getUser
+    );
 }
 
 

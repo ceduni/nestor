@@ -126,8 +126,51 @@ async function loginUser(req, rep) {
   }
 }
 
+async function updateUser(req, rep) {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedUser) {
+      return rep.status(404).send("User not found");
+    }
+    rep.send(updatedUser);
+  } catch (error) {
+    rep.status(500).send(error);
+  }
+}
+
+async function getUser(req, rep) {
+  try {
+    const userResult = await User.findById(req.params.id);
+    if (!userResult) {
+      return rep.status(404).send("User not found");
+    }
+    rep.send(userResult);
+  } catch (error) {
+    rep.status(500).send(error);
+  }
+}
+
+
+async function authenticateToken(req, rep, next) {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return rep.status(401).send({ message: "Token required" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    rep.status(403).send({ message: "Forbidden" });
+  }
+}
 
 module.exports = {
   addUser,
   loginUser,
+  updateUser,
+  getUser,
+  authenticateToken
 }
