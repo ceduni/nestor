@@ -1,6 +1,6 @@
 const userService = require("../services/user.service");
 
-async function getRoutes(fastify, options){
+async function getUserRoutes(fastify, options){
     // Add a new user
     fastify.post(
         "/register",
@@ -22,6 +22,26 @@ async function getRoutes(fastify, options){
         },
         userService.addUser
     );
+
+    // Route to login a user
+    fastify.post(
+        "/login",
+        {
+            schema: {
+                body: {
+                    type: "object",
+                    required: ["email", "password"],
+                    properties: {
+                        email: { type: "string" },
+                        password: { type: "string" },
+                    },
+                },
+            },
+        },
+        userService.loginUser
+    );
 }
 
-module.exports = getRoutes;
+
+
+module.exports = getUserRoutes;
