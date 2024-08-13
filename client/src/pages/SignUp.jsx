@@ -13,7 +13,7 @@ export default function SignUp() {
     lastName: "",
     email: "",
     password: "",
-    role: "Étudiant",
+    role: "student",
   });
 
   const handleInputsChange = (e) => {
@@ -42,6 +42,9 @@ export default function SignUp() {
     e.preventDefault();
     navigate("../connexion/login");
   };
+  const isAnyFieldEmpty = ()=>{
+    return Object.values(signupInfo).some(value => value.trim() === "");
+  }
   const handleSignupClick = (e) => {
     e.preventDefault();
     console.log(signupInfo);
@@ -51,8 +54,36 @@ export default function SignUp() {
       console.log("Password does not match");
       return;
     }
+
+    // check empty field
+    if(isAnyFieldEmpty()){
+      alert("All fields must be filled out");
+      return;
+    }
+
     // add post
+    registerUser(signupInfo);
   };
+  async function registerUser(userData) {
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to register user');
+      }
+  
+      const data = await response.json();
+      console.log('User registered:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <div className="flex justify-center items-center">
@@ -197,8 +228,8 @@ export default function SignUp() {
               name="role"
               className="signup_input border"
             >
-              <option value="Étudiant">Étudiant</option>
-              <option value="Administrateur">Administrateur</option>
+              <option value="student">Étudiant</option>
+              <option value="admin">Administrateur</option>
             </select>
           </div>
 
