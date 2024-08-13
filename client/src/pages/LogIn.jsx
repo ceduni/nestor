@@ -55,7 +55,7 @@ export default function LogIn() {
   
       const data = await response.json();
       localStorage.setItem('token', data.token); // Store the token in localStorage
-      localStorage.setItem('user', data.userName); // Store the user in localStorage
+      localStorage.setItem('username', data.userName); // Store the user in localStorage
       localStorage.setItem('logedin', true);
       
       setHasLogedin(true);

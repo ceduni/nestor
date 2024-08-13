@@ -18,9 +18,10 @@ export default function Header() {
     setNavitems(selectNavItems(hasLogedin, isAdmin));
   }
   , [hasLogedin, isAdmin]);
-  
+
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
     localStorage.removeItem("logedin");
     setHasLogedin(false);
   };
