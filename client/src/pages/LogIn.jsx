@@ -29,18 +29,36 @@ export default function LogIn() {
     e.preventDefault();
     console.log(loginInfo);
 
-    //
-    // try {
-    //   const res = await loginUser(email, password);
-    //   localStorage.setItem("token", response.token);
-    //   navigate("/");
-    // } catch (err) {
-    //   setLoginError(
-    //     `La connexion a échoué. Veuillez vérifier vos informations d'identification et réessayer.`,
-    //   );
-    //   console.error(err);
-    // }
+    // post login
+    if(!loginInfo.email || !loginInfo.password){
+      alert("Vous devez remplir tous les champs");
+      return;
+    }
+
+    loginUser(loginInfo);
   };
+  async function loginUser(credentials) {
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to log in');
+      }
+  
+      const data = await response.json();
+      localStorage.setItem('token', data.token); // Store the token in localStorage
+      console.log('User logged in:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
 
   return (
     <div className="login_section flex justify-center items-center">
