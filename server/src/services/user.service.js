@@ -104,8 +104,6 @@ async function loginUser(req, rep) {
       return rep.status(401).send({ error: 'Invalid email or password' });
     }
     
-    console.log("Stored password hash:", user.password);
-    console.log("Provided password:", password);
     const isMatch = await bcrypt.compareSync(password, user.password);
 
     if (!isMatch) {

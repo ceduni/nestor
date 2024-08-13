@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../apis/user-api";
+import { useLoginStatus } from "../context/LoginStatusContext";
 
 export default function LogIn() {
   const navigate = useNavigate();
+  const { hasLogedin, setHasLogedin } = useLoginStatus();
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -36,6 +37,7 @@ export default function LogIn() {
     }
 
     loginUser(loginInfo);
+    navigate("/");
   };
   async function loginUser(credentials) {
     try {
@@ -53,7 +55,12 @@ export default function LogIn() {
   
       const data = await response.json();
       localStorage.setItem('token', data.token); // Store the token in localStorage
+      localStorage.setItem('user', data.userName); // Store the user in localStorage
+      localStorage.setItem('logedin', true);
+      
+      setHasLogedin(true);
       console.log('User logged in:', data);
+      console.log(localStorage.getItem('logedin'));
     } catch (error) {
       console.error('Error:', error);
     }

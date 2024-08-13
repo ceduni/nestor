@@ -63,6 +63,7 @@ export default function SignUp() {
 
     // add post
     registerUser(signupInfo);
+    navigate("../connexion/login");
   };
   async function registerUser(userData) {
     try {
@@ -154,7 +155,7 @@ export default function SignUp() {
             <small>
               Votre mot de passe doit contenir au moins 10 caractères
             </small>
-            <small>
+            {/* <small>
               Votre mot de passe doit comprendre au moins :
               <div className="pl-3">
                 <li>une lettre majuscule (a à z)</li>
@@ -162,8 +163,8 @@ export default function SignUp() {
                 <li>un chiffre (0 à 9)</li>
                 <li>un caractère spécial (!, @, #, $, ...)</li>
               </div>
-            </small>
-            <small>Ex : Motdepasse1234!!</small>
+            </small> */}
+            <small>Ex : Motdepasse</small>
             <div className="">
               <div className="relative">
                 <input
@@ -218,7 +219,7 @@ export default function SignUp() {
             </div>
           </div>
 
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="account_type" className="font-bold">
               Type du compte
             </label>
@@ -231,7 +232,7 @@ export default function SignUp() {
               <option value="student">Étudiant</option>
               <option value="admin">Administrateur</option>
             </select>
-          </div>
+          </div> */}
 
           <div className="flex justify-between mt-5">
             <input
