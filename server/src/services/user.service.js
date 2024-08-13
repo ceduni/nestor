@@ -99,6 +99,7 @@ async function loginUser(req, rep) {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+    console.log("login user : ",user);
 
     if (!user) {
       return rep.status(401).send({ error: 'Invalid email or password' });
@@ -117,7 +118,6 @@ async function loginUser(req, rep) {
       user: {
         id: user._id,
         userName: user.userName,
-        email: user.email,
         role: user.role,
       },
     });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
@@ -7,15 +7,50 @@ export default function MonProfil() {
   const [isShowBtnFstClick, setIsShowBtnFstClick] = useState(false);
   const [isShowBtnSndClick, setIsShowBtnSndClick] = useState(false);
   const [passwordComfirm, setPasswordConfirm] = useState("");
+  const [currentInfo, setCurrentInfo] = useState({
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    role: "student",
+  });
   const [profilInfo, setProfilInfo] = useState({
     userName: "",
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    role: "Étudiant",
+    role: "student",
   });
 
+  useEffect(() => {
+    getCurrrentInfo();
+  }, []);
+
+  const getCurrrentInfo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      let userId = localStorage.getItem("userid");
+      userId = userId.replace(/^"(.*)"$/, '$1');
+
+      const response = await fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+          method: "GET",
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch user");
+      }
+      const data = await response.json();
+      setCurrentInfo(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleModifBtnClick = () => {
     setIsModifBtnClick(true);
   };
@@ -34,16 +69,27 @@ export default function MonProfil() {
     e.preventDefault();
     setIsModifBtnClick(false);
   };
+  const isAnyFieldEmpty = ()=>{
+    return Object.values(profilInfo).some(value => value.trim() === "");
+  }
   const handleSignupClick = (e) => {
     e.preventDefault();
-    console.log(signupInfo);
+    console.log(profilInfo);
 
     // Verify password
     if (signupInfo.password !== passwordComfirm) {
       console.log("Password does not match");
       return;
     }
-    // add post
+
+    // check empty field
+    if(isAnyFieldEmpty()){
+      alert("All fields must be filled out");
+      return;
+    }
+
+    // post update
+
   };
 
   return (
@@ -70,7 +116,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="text"
                 disabled="true"
-                value={"Nom"}
+                value={isModifBtnClick? profilInfo.lastName : currentInfo.lastName}
               />
             </div>
 
@@ -84,7 +130,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="text"
                 disabled="true"
-                value={"Prenom"}
+                value={isModifBtnClick ? profilInfo.firstName : currentInfo.firstName}
               />
             </div>
 
@@ -99,7 +145,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="text"
                 disabled={!isModifBtnClick}
-                value={isModifBtnClick ? "" : "Username"}
+                value={isModifBtnClick ? profilInfo.userName : currentInfo.userName}
                 placeholder={
                   isModifBtnClick
                     ? "Entrer votre nouveau nom d'utilisateur"
@@ -120,7 +166,7 @@ export default function MonProfil() {
                 className="signup_input border"
                 type="email"
                 disabled={!isModifBtnClick}
-                value={`${isModifBtnClick ? "" : "Courriel"}`}
+                value={`${isModifBtnClick ? "" : currentInfo.email}`}
                 placeholder={`${isModifBtnClick ? "Entrer votre nouveau courriel" : ""}`}
               />
             </div>
@@ -155,7 +201,7 @@ export default function MonProfil() {
                     className="signup_input border"
                     type={`${isShowBtnFstClick ? "text" : "password"}`}
                     disabled={!isModifBtnClick}
-                    value={`${isModifBtnClick ? "" : "Password"}`}
+                    value={`${isModifBtnClick ? profilInfo.password : currentInfo.password}`}
                     placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : ""}`}
                   />
                   {isShowBtnFstClick ? (
@@ -212,11 +258,12 @@ export default function MonProfil() {
                 onChange={handleInputsChange}
                 id="account_type"
                 name="role"
-                className={`signup_input border ${isModifBtnClick ? "" : "bg-gray-100"} ${isModifBtnClick ? "" : "appearance-none"}`}
+                className={`signup_input border bg-gray-100 appearance-none`}
+                // className={`signup_input border ${isModifBtnClick ? "" : "bg-gray-100"} ${isModifBtnClick ? "" : "appearance-none"}`}
                 disabled="true"
               >
                 <option value="Étudiant">Étudiant</option>
-                <option value="Administrateur">Administrateur</option>
+                {/* <option value="Administrateur">Administrateur</option> */}
               </select>
             </div>
 

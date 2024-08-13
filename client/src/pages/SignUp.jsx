@@ -55,13 +55,18 @@ export default function SignUp() {
       return;
     }
 
+    if(signupInfo.password.length < 10){
+      alert("Votre mot de passe doit contenir au moins 10 caractères");
+      return;
+    }
+
     // check empty field
     if(isAnyFieldEmpty()){
       alert("All fields must be filled out");
       return;
     }
 
-    // add post
+    // post add
     registerUser(signupInfo);
     navigate("../connexion/login");
   };
