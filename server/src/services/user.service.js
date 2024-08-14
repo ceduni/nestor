@@ -128,6 +128,13 @@ async function loginUser(req, rep) {
 
 async function updateUser(req, rep) {
   try {
+    const { password } = req.body;
+    const SALT_ROUNDS = 10;
+    if (password) {
+      const hashedPassword = await bcrypt.hashSync(password, SALT_ROUNDS);
+      req.body.password = hashedPassword;
+    }
+    console.log("update user : ", req.body);
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedUser) {
       return rep.status(404).send("User not found");

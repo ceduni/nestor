@@ -55,7 +55,7 @@ export default function MonProfil() {
     setIsModifBtnClick(true);
   };
   const handleInputsChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const { name, value } = e.target;
     setProfilInfo((prev) =>
       prev
