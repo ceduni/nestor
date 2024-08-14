@@ -137,7 +137,6 @@ export default function MonProfil() {
         throw new Error("Failed to update user");
       }
       const data = await response.json();
-      console.log(data);
       alert("Votre profil a été mis à jour avec succès");
       setIsModifBtnClick(false);
     } catch (error) {
