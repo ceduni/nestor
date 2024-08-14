@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../apis/user-api";
+import { useLoginStatus } from "../context/LoginStatusContext";
 
 export default function LogIn() {
   const navigate = useNavigate();
+  const { hasLogedin, setHasLogedin } = useLoginStatus();
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -27,20 +28,42 @@ export default function LogIn() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(loginInfo);
+    
+    // post login
+    if(!loginInfo.email || !loginInfo.password){
+      alert("Vous devez remplir tous les champs");
+      return;
+    }
 
-    //
-    // try {
-    //   const res = await loginUser(email, password);
-    //   localStorage.setItem("token", response.token);
-    //   navigate("/");
-    // } catch (err) {
-    //   setLoginError(
-    //     `La connexion a échoué. Veuillez vérifier vos informations d'identification et réessayer.`,
-    //   );
-    //   console.error(err);
-    // }
+    loginUser(loginInfo);
+    navigate("/");
   };
+  async function loginUser(credentials) {
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to log in');
+      }
+  
+      const data = await response.json();
+      localStorage.setItem('token', data.token); // Store the token in localStorage
+      localStorage.setItem('userid', JSON.stringify(data.user.id)); // Store the user id in localStorage
+      localStorage.setItem('username', JSON.stringify(data.user.userName)); // Store the username in localStorage
+      localStorage.setItem('logedin', true);
+      
+      setHasLogedin(true);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
 
   return (
     <div className="login_section flex justify-center items-center">

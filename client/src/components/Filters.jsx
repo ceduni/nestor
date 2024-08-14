@@ -185,10 +185,11 @@ export default function Filters({
           ref={dateRef}
         >
           <div>
-            <label className="filter_label" htmlFor="">
+            <label className="filter_label" htmlFor="filter_date">
               Date
             </label>
             <input
+              id="filter_date"
               type="text"
               placeholder={currentDate.toISOString().split("T")[0]}
               className="filter_input caret-transparent"

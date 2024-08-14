@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
@@ -7,19 +7,65 @@ export default function MonProfil() {
   const [isShowBtnFstClick, setIsShowBtnFstClick] = useState(false);
   const [isShowBtnSndClick, setIsShowBtnSndClick] = useState(false);
   const [passwordComfirm, setPasswordConfirm] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    role: "student",
+  });
   const [profilInfo, setProfilInfo] = useState({
     userName: "",
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    role: "Étudiant",
+    role: "student",
   });
 
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const getUserInfo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      let userId = localStorage.getItem("userid");
+      userId = userId.replace(/^"(.*)"$/, '$1');
+
+      const response = await fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+          method: "GET",
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch user");
+      }
+      const data = await response.json();
+      setUserInfo(data);
+      // console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleModifBtnClick = () => {
     setIsModifBtnClick(true);
   };
-  const handleInputsChange = () => {};
+  const handleInputsChange = (e) => {
+    // console.log(e.target.value);
+    const { name, value } = e.target;
+    setProfilInfo((prev) =>
+      prev
+        ? {
+            ...prev,
+            [name]: value,
+          }
+        : prev,
+    );
+  };
   const handleChangePasswordConfirm = (e) => {
     setPasswordConfirm(e.target.value);
     console.log(e.target.value);
@@ -34,17 +80,69 @@ export default function MonProfil() {
     e.preventDefault();
     setIsModifBtnClick(false);
   };
+  const isAnyFieldEmpty = ()=>{
+    return Object.values(profilInfo).some(value => value.trim() === "");
+  }
   const handleSignupClick = (e) => {
     e.preventDefault();
-    console.log(signupInfo);
+    console.log(profilInfo);
+    setProfilInfo(
+      (prev) =>
+        prev
+          ? {
+              ...prev,
+              firstName: userInfo.firstName,
+              lastName: userInfo.lastName,
+            }
+          : prev
+    );
 
     // Verify password
-    if (signupInfo.password !== passwordComfirm) {
+    if (profilInfo.password !== passwordComfirm) {
       console.log("Password does not match");
       return;
     }
-    // add post
+
+    if(profilInfo.password.length < 10){
+      alert("Votre mot de passe doit contenir au moins 10 caractères");
+      return;
+    }
+
+    // check empty field
+    if(isAnyFieldEmpty()){
+      alert("Tous les champs doivent être remplis");
+      return;
+    }
+
+    // post update
+    updateUser(profilInfo);
   };
+
+  const updateUser = async (userData) => {
+    try {
+      const token = localStorage.getItem("token");
+      let userId = localStorage.getItem("userid");
+      userId = userId.replace(/^"(.*)"$/, '$1');
+
+      const response = await fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update user");
+      }
+      const data = await response.json();
+      alert("Votre profil a été mis à jour avec succès");
+      setIsModifBtnClick(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <section>
@@ -67,10 +165,10 @@ export default function MonProfil() {
               <input
                 id="profil_name"
                 name="lastName"
-                className="signup_input border"
+                className="signup_input border placeholder-gray-900"
                 type="text"
                 disabled="true"
-                value={"Nom"}
+                value={userInfo.lastName}
               />
             </div>
 
@@ -81,10 +179,10 @@ export default function MonProfil() {
               <input
                 id="prenom"
                 name="firstName"
-                className="signup_input border"
+                className={`signup_input border placeholder-gray-900`}
                 type="text"
                 disabled="true"
-                value={"Prenom"}
+                placeholder={userInfo.firstName}
               />
             </div>
 
@@ -96,14 +194,13 @@ export default function MonProfil() {
                 onChange={handleInputsChange}
                 id="userName"
                 name="userName"
-                className="signup_input border"
+                className={`signup_input border ${isModifBtnClick ? "" : "placeholder-gray-900"}`}
                 type="text"
                 disabled={!isModifBtnClick}
-                value={isModifBtnClick ? "" : "Username"}
                 placeholder={
                   isModifBtnClick
                     ? "Entrer votre nouveau nom d'utilisateur"
-                    : ""
+                    : userInfo.userName
                 }
               />
             </div>
@@ -117,11 +214,10 @@ export default function MonProfil() {
                 onChange={handleInputsChange}
                 id="courriel"
                 name="email"
-                className="signup_input border"
+                className={`signup_input border ${isModifBtnClick ? "" : "placeholder-gray-900"}`}
                 type="email"
                 disabled={!isModifBtnClick}
-                value={`${isModifBtnClick ? "" : "Courriel"}`}
-                placeholder={`${isModifBtnClick ? "Entrer votre nouveau courriel" : ""}`}
+                placeholder={`${isModifBtnClick ? "Entrer votre nouveau courriel" : userInfo.email}`}
               />
             </div>
 
@@ -134,7 +230,7 @@ export default function MonProfil() {
                   <small>
                     Votre mot de passe doit contenir au moins 10 caractères
                   </small>
-                  <small>
+                  {/* <small>
                     Votre mot de passe doit comprendre au moins :
                     <div className="pl-3">
                       <li>une lettre majuscule (a à z)</li>
@@ -142,8 +238,8 @@ export default function MonProfil() {
                       <li>un chiffre (0 à 9)</li>
                       <li>un caractère spécial (!, @, #, $, ...)</li>
                     </div>
-                  </small>
-                  <small>Ex : Motdepasse1234!!</small>
+                  </small> */}
+                  <small>Ex : Motdepasse</small>
                 </>
               )}
               <div className="">
@@ -152,23 +248,22 @@ export default function MonProfil() {
                     onChange={handleInputsChange}
                     id="motdepasse"
                     name="password"
-                    className="signup_input border"
+                    className={`signup_input border ${isModifBtnClick ? "" : "placeholder-gray-900"}`}
                     type={`${isShowBtnFstClick ? "text" : "password"}`}
                     disabled={!isModifBtnClick}
-                    value={`${isModifBtnClick ? "" : "Password"}`}
-                    placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : ""}`}
+                    placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : "**********"}`}
                   />
-                  {isShowBtnFstClick ? (
+                  {isModifBtnClick && (isShowBtnFstClick ? 
                     <IoEyeOffOutline
                       onClick={handleShowBtnFstClick}
                       className="absolute inline top-2 right-2"
                     />
-                  ) : (
+                  :
                     <IoEyeOutline
                       onClick={handleShowBtnFstClick}
                       className="absolute inline top-2 right-2"
-                    />
-                  )}
+                    />)
+                  }
                 </div>
               </div>
             </div>
@@ -204,7 +299,7 @@ export default function MonProfil() {
               </div>
             )}
 
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <label htmlFor="account_type" className="font-bold">
                 Type du compte
               </label>
@@ -212,13 +307,13 @@ export default function MonProfil() {
                 onChange={handleInputsChange}
                 id="account_type"
                 name="role"
-                className={`signup_input border ${isModifBtnClick ? "" : "bg-gray-100"} ${isModifBtnClick ? "" : "appearance-none"}`}
+                className={`signup_input border bg-gray-100 appearance-none`}
                 disabled="true"
               >
                 <option value="Étudiant">Étudiant</option>
                 <option value="Administrateur">Administrateur</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="flex justify-between mt-5">
               <input

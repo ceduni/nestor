@@ -13,7 +13,7 @@ export default function SignUp() {
     lastName: "",
     email: "",
     password: "",
-    role: "Étudiant",
+    role: "student",
   });
 
   const handleInputsChange = (e) => {
@@ -42,6 +42,9 @@ export default function SignUp() {
     e.preventDefault();
     navigate("../connexion/login");
   };
+  const isAnyFieldEmpty = ()=>{
+    return Object.values(signupInfo).some(value => value.trim() === "");
+  }
   const handleSignupClick = (e) => {
     e.preventDefault();
     console.log(signupInfo);
@@ -51,8 +54,42 @@ export default function SignUp() {
       console.log("Password does not match");
       return;
     }
-    // add post
+
+    if(signupInfo.password.length < 10){
+      alert("Votre mot de passe doit contenir au moins 10 caractères");
+      return;
+    }
+
+    // check empty field
+    if(isAnyFieldEmpty()){
+      alert("All fields must be filled out");
+      return;
+    }
+
+    // post add
+    registerUser(signupInfo);
+    navigate("../connexion/login");
   };
+  async function registerUser(userData) {
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to register user');
+      }
+  
+      const data = await response.json();
+      console.log('User registered:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <div className="flex justify-center items-center">
@@ -123,7 +160,7 @@ export default function SignUp() {
             <small>
               Votre mot de passe doit contenir au moins 10 caractères
             </small>
-            <small>
+            {/* <small>
               Votre mot de passe doit comprendre au moins :
               <div className="pl-3">
                 <li>une lettre majuscule (a à z)</li>
@@ -131,8 +168,8 @@ export default function SignUp() {
                 <li>un chiffre (0 à 9)</li>
                 <li>un caractère spécial (!, @, #, $, ...)</li>
               </div>
-            </small>
-            <small>Ex : Motdepasse1234!!</small>
+            </small> */}
+            <small>Ex : Motdepasse</small>
             <div className="">
               <div className="relative">
                 <input
@@ -187,7 +224,7 @@ export default function SignUp() {
             </div>
           </div>
 
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="account_type" className="font-bold">
               Type du compte
             </label>
@@ -197,10 +234,10 @@ export default function SignUp() {
               name="role"
               className="signup_input border"
             >
-              <option value="Étudiant">Étudiant</option>
-              <option value="Administrateur">Administrateur</option>
+              <option value="student">Étudiant</option>
+              <option value="admin">Administrateur</option>
             </select>
-          </div>
+          </div> */}
 
           <div className="flex justify-between mt-5">
             <input

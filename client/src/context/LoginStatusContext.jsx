@@ -3,8 +3,8 @@ import { createContext, useState, useEffect, useContext } from "react";
 const LoginStatusContext = createContext();
 
 export function LoginStatusProvider({ children }) {
-  const [hasLogedin, setHasLogedin] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [hasLogedin, setHasLogedin] = useState(localStorage.getItem("logedin") ? true : false);
+  const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") ? true : false);
 
   return (
     <LoginStatusContext.Provider

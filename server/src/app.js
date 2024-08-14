@@ -20,6 +20,7 @@ mongoose.set({ debug: true });
 const spaceRoutes = require("./routes/space.routes.js");
 const locationRoutes = require("./routes/location.routes.js");
 const reservationRoutes = require("./routes/reservation.routes.js");
+const userRoutes = require("./routes/user.routes.js");
 
 // import schemas
 const spaceSchema = require("./schemas/space.schema.js");
@@ -38,6 +39,7 @@ mongoose
 fastify.register(spaceRoutes, { prefix: "/api/v1/spaces" });
 fastify.register(locationRoutes, { prefix: "/api/v1/cities" });
 fastify.register(reservationRoutes, { prefix: "/api/v1/reservations" });
+fastify.register(userRoutes, { prefix: "/api/v1/users" });
 fastify.addSchema(spaceSchema);
 fastify.addSchema(reservationSchema);
 fastify.register(cors, {
