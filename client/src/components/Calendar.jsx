@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import * as bootstrap from "bootstrap";
 import Modal from "./Modal";
 import ConfirmationAlert from "./ConfirmationAlert.jsx";
-import { createReservation } from "../apis/reservation-api.js";
+import { createReservation, getReservations } from "../apis/reservation-api.js";
 
 export default function Calendar({ spaceDetail }) {
   const [events, setEvents] = useState([]);
@@ -23,23 +23,26 @@ export default function Calendar({ spaceDetail }) {
   const [event, setEvent] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [socket, setSocket] = useState(null);
+  const [expireTimes, setExpireTimes] = useState([]);
+  const [pendingReservationId, setPendingReservationId] = useState("");
 
-  useEffect( () => {
-    fetchAllReservations();
+  useEffect(() => {
+    getReservations().then((reservations) => setAllReservations(reservations));
     const ws = new WebSocket("ws://localhost:3000/api/v1/reservations/new");
     setSocket(ws);
     ws.onmessage = async (event) => {
       const reader = new FileReader();
       reader.onload = function (e) {
         const data = JSON.parse(e.target.result);
-        if (data.status === 'confirmed'){
-          setAllReservations(prevReservations => [...prevReservations, data]);
+        if (data.status === "pending" || data.status === "confirmed") {
+          setAllReservations((prevReservations) => [...prevReservations, data]);
+        } else if (data.status === "cancelled") {
+          setAllReservations((prevReservations) =>
+            prevReservations.filter(
+              (reservation) => reservation._id !== data.pendingReservationId,
+            ),
+          );
         }
-        else {
-          setAllReservations(prevReservations => [...prevReservations, ...data]);
-          setTimeout(fetchAllReservations,60000);
-        }
-
       };
       reader.readAsText(event.data);
     };
@@ -48,16 +51,28 @@ export default function Calendar({ spaceDetail }) {
     };
   }, []);
 
-  const fetchAllReservations = () => {
-    fetch("http://localhost:3000/api/v1/reservations/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setAllReservations(data);
-      })
-      .catch((err) => console.error(err));
-  };
+  useEffect(() => {
+    const tempExpireTimes = [];
+    allReservations.forEach((reservation) => {
+      if (reservation.status === "pending") {
+        tempExpireTimes.push(new Date(reservation.expireAt.toString()));
+      }
+    });
+    setExpireTimes(tempExpireTimes);
+  }, [allReservations]);
+
+  useEffect(() => {
+    expireTimes.forEach((expireTime) => {
+      const currentDate = new Date();
+      setTimeout(
+        () =>
+          getReservations().then((reservations) =>
+            setAllReservations(reservations),
+          ),
+        expireTime.getTime() - currentDate.getTime() + 60000,
+      );
+    });
+  }, [expireTimes]);
 
   useEffect(() => {
     handleAvailabilities();
@@ -78,7 +93,7 @@ export default function Calendar({ spaceDetail }) {
             status: reservation.status,
             spaceId: spaceDetail._id,
             availId: reservation.availability._id,
-            hostId : reservation.hostId
+            hostId: reservation.hostId,
           },
           borderColor: "#df9294",
           textColor: "#000",
@@ -150,7 +165,7 @@ export default function Calendar({ spaceDetail }) {
 
   const handlePopOverContent = (event) => {
     if (event.extendedProps.status === "pending") {
-      return `<div>en cours de réservation</div>`
+      return `<div>en cours de réservation</div>`;
     }
     return "";
   };
@@ -181,29 +196,36 @@ export default function Calendar({ spaceDetail }) {
         return e;
       });
       setShowModal(true);
-      const lockedAvails = []
-      events.forEach(event => {
-        if (event.start.toISOString().split('T')[0] === e.start.toISOString().split('T')[0]
-        && !event.extendedProps.status) {
-          lockedAvails.push({
-            hostId: "613f3bda5f4378b64b448f20",
-            availability: {
-              startAt: event.start,
-              endAt: event.end,
-              _id: event.extendedProps.availId
-            },
-            spaceId: event.extendedProps.spaceId,
-            status: "pending",
-            guestIds: [],
-            isPrivate: true,
-            activity: " "
-          })
+      let minStartTime = Number.MAX_VALUE;
+      let maxEndTime = 0;
+      events.forEach((event) => {
+        if (
+          event.start.toISOString().split("T")[0] ===
+            e.start.toISOString().split("T")[0] &&
+          !event.extendedProps.status
+        ) {
+          minStartTime = Math.min(minStartTime, event.start.getTime());
+          maxEndTime = Math.max(maxEndTime, event.end.getTime());
         }
-      })
-      lockedAvails.forEach(lockedAvail => {
-        createReservation(lockedAvail).then()
-      })
-      socket.send(JSON.stringify(lockedAvails))
+      });
+      const lockedAvail = {
+        hostId: "613f3bda5f4378b64b448f20",
+        availability: {
+          startAt: new Date(minStartTime),
+          endAt: new Date(maxEndTime),
+          _id: e.extendedProps.availId,
+        },
+        spaceId: e.extendedProps.spaceId,
+        status: "pending",
+        guestIds: [],
+        isPrivate: true,
+        activity: " ",
+        expireAt: new Date(Date.now() + 10 * 1000),
+      };
+      createReservation(lockedAvail).then((lockedAvail) => {
+        setPendingReservationId(lockedAvail._id);
+        socket.send(JSON.stringify(lockedAvail));
+      });
     }
   };
 
@@ -262,6 +284,7 @@ export default function Calendar({ spaceDetail }) {
           setShowConfirmation={setShowConfirmation}
           socket={socket}
           setAllReservations={setAllReservations}
+          pendingReservationId={pendingReservationId}
         />
       )}
       {showConfirmation && (

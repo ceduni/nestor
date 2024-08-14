@@ -4,10 +4,9 @@ export const getReservations = async () => {
   try {
     const response = await fetch(API_URL);
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      console.error("Network response was not ok");
     }
-    const data = await response.json();
-    return data;
+    return response.json();
   } catch (err) {
     console.error("Error fetching reservations:", err);
     throw err;
@@ -18,10 +17,9 @@ export const getReservationById = async (id) => {
   try {
     const response = await fetch(`${API_URL}${id}`);
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      console.error("Network response was not ok");
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (err) {
     console.error("Error fetching reservation by id:", err);
     throw err;
@@ -40,7 +38,7 @@ export const createReservation = async (reservationData) => {
     if (!response.ok) {
       console.error("Network response was not ok");
     }
-    return await response.json();
+    return response.json();
   } catch (err) {
     console.error("Error creating reservation:", err);
     throw err;
@@ -73,7 +71,7 @@ export const deleteReservation = async (id) => {
       method: "DELETE",
     });
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      console.error("Network response was not ok");
     }
   } catch (err) {
     console.error("Error deleting reservation:", err);

@@ -7,15 +7,19 @@ import { useEffect, useRef, useState } from "react";
 import DayCalendar from "./DayCalendar";
 import TimePicker from "./TimePicker.jsx";
 import { MdCancel } from "react-icons/md";
-import { createReservation } from "../apis/reservation-api.js";
+import {
+  createReservation,
+  deleteReservation,
+} from "../apis/reservation-api.js";
 
 export default function Modal({
   events,
   event,
   setShowModal,
   setShowConfirmation,
-    setAllReservations,
+  setAllReservations,
   socket,
+  pendingReservationId,
 }) {
   const [day, setDay] = useState(event.start);
   const [start, setStart] = useState(event.start);
@@ -35,6 +39,7 @@ export default function Modal({
   const [status, setStatus] = useState("");
   const [activity, setActivity] = useState("");
   const [triggerReservation, setTriggerReservation] = useState(false);
+  let timeOut;
 
   const handleCancelClick = () => {
     setShowModal(false);
@@ -47,7 +52,15 @@ export default function Modal({
       event.setProp("textColor", "#000");
       event.setProp("backgroundColor", "#df9294");
     }
-
+    deleteReservation(pendingReservationId).then(() => {
+      clearTimeout(timeOut);
+      socket.send(
+        JSON.stringify({
+          status: "cancelled",
+          pendingReservationId: pendingReservationId,
+        }),
+      );
+    });
   };
 
   const handleDayClick = () => {
@@ -92,6 +105,18 @@ export default function Modal({
     });
     setAvailableDays(tempAvailDays);
   }, [events]);
+
+  useEffect(() => {
+    timeOut = setTimeout(() => {
+      socket.send(
+        JSON.stringify({
+          status: "cancelled",
+          pendingReservationId: pendingReservationId,
+        }),
+      );
+      setShowModal(false);
+    }, 61000);
+  }, []);
 
   useEffect(() => {
     const availStartTimes = [];
@@ -146,24 +171,43 @@ export default function Modal({
   useEffect(() => {
     if (triggerReservation) {
       if (!alertActivity && !alertDate && !alertStatus) {
-        createReservation({
-          hostId: "613f3bda5f4378b64b448f20",
-          availability: {
-            startAt: start.toISOString(),
-            endAt: end.toISOString(),
-            _id: event.extendedProps.availId,
-          },
-          guestIds: ["613f3c3c5f4378b64b448f21", "613f3c4a5f4378b64b448f22"],
-          activity: activity,
-          status: "confirmed",
-          isPrivate: status === "private",
-          spaceId: event.extendedProps.spaceId,
-        }).then((newReservation) => {
-          setShowModal(false);
-          setTriggerReservation(false);
-          setShowConfirmation(true);
-          socket.send(JSON.stringify(newReservation));
-          setAllReservations(prevReservations => [...prevReservations,newReservation])
+        deleteReservation(pendingReservationId).then(() => {
+          clearTimeout(timeOut);
+          socket.send(
+            JSON.stringify({
+              status: "cancelled",
+              pendingReservationId: pendingReservationId,
+            }),
+          );
+          createReservation({
+            hostId: "613f3bda5f4378b64b448f20",
+            availability: {
+              startAt: start.toISOString(),
+              endAt: end.toISOString(),
+              _id: event.extendedProps.availId,
+            },
+            guestIds: ["613f3c3c5f4378b64b448f21", "613f3c4a5f4378b64b448f22"],
+            activity: activity,
+            status: "confirmed",
+            isPrivate: status === "private",
+            spaceId: event.extendedProps.spaceId,
+          }).then((newReservation) => {
+            setShowModal(false);
+            setTriggerReservation(false);
+            setShowConfirmation(true);
+            clearTimeout(timeOut);
+            socket.send(
+              JSON.stringify({
+                status: "cancelled",
+                pendingReservationId: pendingReservationId,
+              }),
+            );
+            socket.send(JSON.stringify(newReservation));
+            setAllReservations((prevReservations) => [
+              ...prevReservations,
+              newReservation,
+            ]);
+          });
         });
       } else {
         setTriggerReservation(false);

@@ -224,15 +224,15 @@ body {
 }
 
 /* -----SpaceAdd----- */
-.spaceadd_input{
+.spaceadd_input {
   @apply w-full p-1;
 }
 
-.spaceadd_container{
+.spaceadd_container {
   width: 50%;
 }
 
-.spaceadd_address_input{
+.spaceadd_address_input {
   @apply p-1;
 }
 
