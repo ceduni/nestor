@@ -201,20 +201,20 @@ export default function MonProfil() {
                     className="signup_input border"
                     type={`${isShowBtnFstClick ? "text" : "password"}`}
                     disabled={!isModifBtnClick}
-                    value={`${isModifBtnClick ? profilInfo.password : userInfo.password}`}
+                    value={`${isModifBtnClick ? profilInfo.password : "**********"}`}
                     placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : ""}`}
                   />
-                  {isShowBtnFstClick ? (
+                  {isModifBtnClick && (isShowBtnFstClick ? 
                     <IoEyeOffOutline
                       onClick={handleShowBtnFstClick}
                       className="absolute inline top-2 right-2"
                     />
-                  ) : (
+                  :
                     <IoEyeOutline
                       onClick={handleShowBtnFstClick}
                       className="absolute inline top-2 right-2"
-                    />
-                  )}
+                    />)
+                  }
                 </div>
               </div>
             </div>
