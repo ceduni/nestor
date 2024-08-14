@@ -16,6 +16,7 @@ async function getRoutes(fastify) {
   );
   fastify.put("/:id", reservationService.updateReservation);
   fastify.get("/:id", reservationService.getReservation);
+  fastify.delete("/:id", reservationService.removeReservation);
 }
 
 module.exports = getRoutes;

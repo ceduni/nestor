@@ -44,7 +44,7 @@ fastify.addSchema(spaceSchema);
 fastify.addSchema(reservationSchema);
 fastify.register(cors, {
   origin: "*",
-  methods: ["GET", "POST", "PUT"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
 });
 
 fastify.register(require("@fastify/websocket"));
@@ -56,7 +56,7 @@ fastify.register(async function (fastify) {
       socket.on("message", (message) => {
         fastify.websocketServer.clients.forEach((client) => {
           if (client.readyState === client.OPEN) {
-            if (client !== socket ) client.send(message);
+            if (client !== socket) client.send(message);
           }
         });
       });

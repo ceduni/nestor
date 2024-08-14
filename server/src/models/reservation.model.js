@@ -26,6 +26,9 @@ const reservationSchema = new mongoose.Schema(
       ref: "space",
       required: true,
     },
+    expireAt: {
+      type: Date,
+    },
   },
   { timestamps: true },
 );
@@ -82,17 +85,16 @@ reservationSchema.pre("save", async function (next) {
 
 reservationSchema.methods.toJSON = function () {
   const obj = this.toObject();
-  delete obj.createdAt;
   delete obj.updatedAt;
   delete obj.__v;
   return obj;
 };
 
 reservationSchema.index(
-  { createdAt: 1 },
-  { expireAfterSeconds: 10, partialFilterExpression: { status: "pending" } },
+  { expireAt: 1 },
+  { expireAfterSeconds: 0, partialFilterExpression: { status: "pending" } },
 );
 
 const reservation = mongoose.model("reservation", reservationSchema);
-
+reservation.syncIndexes();
 module.exports = reservation;

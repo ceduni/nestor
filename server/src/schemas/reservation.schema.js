@@ -28,6 +28,7 @@ const reservationSchema = {
         },
         isPrivate: { type: "boolean" },
         spaceId: { type: "string" },
+        expireAt: { type: "string" },
       },
       additionalProperties: false,
       minProperties: 1,
