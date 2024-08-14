@@ -61,8 +61,6 @@ export default function LogIn() {
       localStorage.setItem('logedin', true);
       
       setHasLogedin(true);
-      console.log('User logged in:', data);
-      console.log(localStorage.getItem('userid'));
     } catch (error) {
       console.error('Error:', error);
     }

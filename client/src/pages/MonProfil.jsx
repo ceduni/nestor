@@ -25,10 +25,10 @@ export default function MonProfil() {
   });
 
   useEffect(() => {
-    getCurrrentInfo();
+    getUserInfo();
   }, []);
 
-  const getCurrrentInfo = async () => {
+  const getUserInfo = async () => {
     try {
       const token = localStorage.getItem("token");
       let userId = localStorage.getItem("userid");
@@ -46,7 +46,7 @@ export default function MonProfil() {
       }
       const data = await response.json();
       setUserInfo(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -54,7 +54,18 @@ export default function MonProfil() {
   const handleModifBtnClick = () => {
     setIsModifBtnClick(true);
   };
-  const handleInputsChange = () => {};
+  const handleInputsChange = (e) => {
+    console.log(e.target.value);
+    const { name, value } = e.target;
+    setProfilInfo((prev) =>
+      prev
+        ? {
+            ...prev,
+            [name]: value,
+          }
+        : prev,
+    );
+  };
   const handleChangePasswordConfirm = (e) => {
     setPasswordConfirm(e.target.value);
     console.log(e.target.value);
@@ -74,23 +85,65 @@ export default function MonProfil() {
   }
   const handleSignupClick = (e) => {
     e.preventDefault();
-    // console.log(profilInfo);
+    console.log(profilInfo);
+    setProfilInfo(
+      (prev) =>
+        prev
+          ? {
+              ...prev,
+              firstName: userInfo.firstName,
+              lastName: userInfo.lastName,
+            }
+          : prev
+    );
 
     // Verify password
-    if (signupInfo.password !== passwordComfirm) {
+    if (profilInfo.password !== passwordComfirm) {
       console.log("Password does not match");
+      return;
+    }
+
+    if(profilInfo.password.length < 10){
+      alert("Votre mot de passe doit contenir au moins 10 caractères");
       return;
     }
 
     // check empty field
     if(isAnyFieldEmpty()){
-      alert("All fields must be filled out");
+      alert("Tous les champs doivent être remplis");
       return;
     }
 
     // post update
-
+    updateUser(profilInfo);
   };
+
+  const updateUser = async (userData) => {
+    try {
+      const token = localStorage.getItem("token");
+      let userId = localStorage.getItem("userid");
+      userId = userId.replace(/^"(.*)"$/, '$1');
+
+      const response = await fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update user");
+      }
+      const data = await response.json();
+      console.log(data);
+      alert("Votre profil a été mis à jour avec succès");
+      setIsModifBtnClick(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <section>
@@ -113,7 +166,7 @@ export default function MonProfil() {
               <input
                 id="profil_name"
                 name="lastName"
-                className="signup_input border"
+                className="signup_input border placeholder-gray-900"
                 type="text"
                 disabled="true"
                 value={userInfo.lastName}
@@ -127,10 +180,10 @@ export default function MonProfil() {
               <input
                 id="prenom"
                 name="firstName"
-                className="signup_input border"
+                className={`signup_input border placeholder-gray-900`}
                 type="text"
                 disabled="true"
-                value={userInfo.firstName}
+                placeholder={userInfo.firstName}
               />
             </div>
 
@@ -142,14 +195,13 @@ export default function MonProfil() {
                 onChange={handleInputsChange}
                 id="userName"
                 name="userName"
-                className="signup_input border"
+                className={`signup_input border ${isModifBtnClick ? "" : "placeholder-gray-900"}`}
                 type="text"
                 disabled={!isModifBtnClick}
-                value={isModifBtnClick ? profilInfo.userName : userInfo.userName}
                 placeholder={
                   isModifBtnClick
                     ? "Entrer votre nouveau nom d'utilisateur"
-                    : ""
+                    : userInfo.userName
                 }
               />
             </div>
@@ -163,11 +215,10 @@ export default function MonProfil() {
                 onChange={handleInputsChange}
                 id="courriel"
                 name="email"
-                className="signup_input border"
+                className={`signup_input border ${isModifBtnClick ? "" : "placeholder-gray-900"}`}
                 type="email"
                 disabled={!isModifBtnClick}
-                value={`${isModifBtnClick ? "" : userInfo.email}`}
-                placeholder={`${isModifBtnClick ? "Entrer votre nouveau courriel" : ""}`}
+                placeholder={`${isModifBtnClick ? "Entrer votre nouveau courriel" : userInfo.email}`}
               />
             </div>
 
@@ -198,11 +249,10 @@ export default function MonProfil() {
                     onChange={handleInputsChange}
                     id="motdepasse"
                     name="password"
-                    className="signup_input border"
+                    className={`signup_input border ${isModifBtnClick ? "" : "placeholder-gray-900"}`}
                     type={`${isShowBtnFstClick ? "text" : "password"}`}
                     disabled={!isModifBtnClick}
-                    value={`${isModifBtnClick ? profilInfo.password : "**********"}`}
-                    placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : ""}`}
+                    placeholder={`${isModifBtnClick ? "Entrer votre nouveau mot de passe" : "**********"}`}
                   />
                   {isModifBtnClick && (isShowBtnFstClick ? 
                     <IoEyeOffOutline
