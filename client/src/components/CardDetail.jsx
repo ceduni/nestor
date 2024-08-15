@@ -23,7 +23,7 @@ export default function CardDetail({ spaceDetail }) {
           <div key={index} className={`grid-image grid-image-${index} `}>
             <img
               src={image.url}
-              className="object-cover w-full h-full rounded-lg"
+              className="object-cover w-full h-64 rounded-lg"
               alt="space photo"
             />
           </div>
