@@ -40,7 +40,7 @@ export default function Modal({
   const [activity, setActivity] = useState("");
   const [triggerReservation, setTriggerReservation] = useState(false);
   let timeOut;
-
+  const userId = localStorage.getItem("userid");
   const handleCancelClick = () => {
     setShowModal(false);
     if (!event.extendedProps.status) {
@@ -180,13 +180,13 @@ export default function Modal({
             }),
           );
           createReservation({
-            hostId: "613f3bda5f4378b64b448f20",
+            hostId: userId,
             availability: {
               startAt: start.toISOString(),
               endAt: end.toISOString(),
               _id: event.extendedProps.availId,
             },
-            guestIds: ["613f3c3c5f4378b64b448f21", "613f3c4a5f4378b64b448f22"],
+            guestIds: [],
             activity: activity,
             status: "confirmed",
             isPrivate: status === "private",
