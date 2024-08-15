@@ -34,7 +34,7 @@ export default function MesReservations() {
                     return (
                         <div key={index} className="grid grid-cols-7 border-b p-3 items-center">
                             <div className="w-[100px]">{status}</div>
-                            <div>{reservation.guestIds.length + 1} personnes</div>
+                            <div>{reservation.guestIds.length} personnes</div>
                             <div>{format(reservation.createdAt, "d MMMM yyyy", {locale: fr})}</div>
                             <div>{format(reservation.availability.startAt, "HH:mm", {locale: fr})}</div>
                             <div>{format(reservation.availability.endAt, "HH:mm", {locale: fr})}</div>
