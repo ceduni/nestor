@@ -4,7 +4,7 @@ import CardDetail from "./CardDetail";
 import { LuRefreshCw } from "react-icons/lu";
 import { BsFillGrid1X2Fill, BsFillGrid3X3GapFill } from "react-icons/bs";
 
-export default function Cards({ allSpaces, filters, iconFilters }) {
+export default function Cards({ allSpaces, filters, featureFilters, categoryFilters }) {
   // States
   const [cardSelected, setCardSelected] = useState(false);
   const [spaces, setSpaces] = useState([]);
@@ -17,7 +17,7 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
 
   useEffect(() => {
     filtering(filters);
-  }, [filters, iconFilters]);
+  }, [filters, featureFilters, categoryFilters]);
 
   const filtering = (filters) => {
     let filteredSpaces = [...allSpaces];
@@ -38,13 +38,14 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
           space.state.toLowerCase().includes(state.toLowerCase().trim()),
       );
     }
-    filteredSpaces = filteredSpaces.filter(
-      (space) =>
-        space.availabilities.length === 0 ||
-        space.availabilities.some((avail) =>
-          avail.startAt.includes(filters.date),
-        ),
-    );
+    if (filters.date) {
+      filteredSpaces = filteredSpaces.filter(
+          (space) =>
+              space.availabilities.some((avail) =>
+                  avail.startAt.includes(filters.date),
+              ),
+      );
+    }
     filteredSpaces = filteredSpaces.filter(
       (space) =>
         Number(filters.peopleNum) === 0 ||
@@ -61,12 +62,19 @@ export default function Cards({ allSpaces, filters, iconFilters }) {
             .includes(filters.name.toLowerCase().trim())) ||
         space.name.toLowerCase().includes(filters.name.toLowerCase().trim()),
     );
-    if (iconFilters.length !== 0) {
+    if (categoryFilters.length !== 0) {
+      filteredSpaces = filteredSpaces.filter(
+          (space) =>
+              categoryFilters.every((categoryFilter) =>
+                  space.type.includes(categoryFilter),
+              ),
+      );
+    }
+    if (featureFilters.length !== 0) {
       filteredSpaces = filteredSpaces.filter(
         (space) =>
-          iconFilters.some((iconFilter) => space.type.includes(iconFilter)) ||
-          iconFilters.every((iconFilter) =>
-            space.features.includes(iconFilter),
+          featureFilters.every((featureFilter) =>
+            space.features.includes(featureFilter),
           ),
       );
     }

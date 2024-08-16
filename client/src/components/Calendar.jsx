@@ -70,7 +70,7 @@ export default function Calendar({ spaceDetail }) {
           getReservations().then((reservations) =>
             setAllReservations(reservations),
           ),
-        expireTime.getTime() - currentDate.getTime() + 60000,
+        expireTime.getTime() - currentDate.getTime(),
       );
     });
   }, [expireTimes]);

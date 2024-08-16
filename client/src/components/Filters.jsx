@@ -10,7 +10,7 @@ export default function Filters({
   onFiltersUpdate,
   allAddresses,
   allNames,
-  onIconFiltersUpdate,
+  onFeatureFiltersUpdate, onCategoryFiltersUpdate
 }) {
   const [filterBtnCliked, setFilterBtnClicked] = useState(false);
   const [hasAnyFilter, setHasAnyFilter] = useState(false);
@@ -214,7 +214,7 @@ export default function Filters({
           </button>
         </div>
       </form>
-      <FiltersIcons onIconFiltersUpdate={onIconFiltersUpdate} />
+      <FiltersIcons onFeatureFiltersUpdate={onFeatureFiltersUpdate} onCategoryFiltersUpdate = {onCategoryFiltersUpdate} />
     </div>
   );
 }

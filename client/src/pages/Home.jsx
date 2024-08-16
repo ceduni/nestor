@@ -11,7 +11,8 @@ export default function Home() {
   });
   const [allAddresses, setAllAddresses] = useState([]);
   const [allNames, setAllNames] = useState([]);
-  const [iconFilters, setIconFilters] = useState([]);
+  const [featureFilters, setFeatureFilters] = useState([]);
+  const [categoryFilters, setCategoryFilters] = useState([])
   const [allSpaces, setAllSpaces] = useState([]);
 
   useEffect(() => {
@@ -72,7 +73,8 @@ export default function Home() {
       <section className="filters p-1 bg-white z-9 top-16">
         <Filters
           onFiltersUpdate={handleFilters}
-          onIconFiltersUpdate={setIconFilters}
+          onFeatureFiltersUpdate={setFeatureFilters}
+          onCategoryFiltersUpdate={setCategoryFilters}
           allAddresses={allAddresses}
           allNames={allNames}
         />
@@ -81,7 +83,8 @@ export default function Home() {
         <Cards
           allSpaces={allSpaces}
           filters={filters}
-          iconFilters={iconFilters}
+          featureFilters={featureFilters}
+          categoryFilters={categoryFilters}
         />
       </section>
     </main>
