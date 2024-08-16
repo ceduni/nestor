@@ -25,6 +25,7 @@ export default function Calendar({ spaceDetail }) {
   const [socket, setSocket] = useState(null);
   const [expireTimes, setExpireTimes] = useState([]);
   const [pendingReservationId, setPendingReservationId] = useState("");
+  const userId = localStorage.getItem("userid");
 
   useEffect(() => {
     getReservations().then((reservations) => setAllReservations(reservations));
@@ -209,7 +210,7 @@ export default function Calendar({ spaceDetail }) {
         }
       });
       const lockedAvail = {
-        hostId: "613f3bda5f4378b64b448f20",
+        hostId: userId,
         availability: {
           startAt: new Date(minStartTime),
           endAt: new Date(maxEndTime),
