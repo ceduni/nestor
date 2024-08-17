@@ -1,68 +1,82 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+@font-face {
+  font-family: "GothicA1-Light";   /*Can be any text*/
+  src: local("GothicA1"),
+  url("./assets/fonts/GothicA1-Light.ttf") format("truetype");
 }
 
 body {
+  font-family: GothicA1-Light, serif;
   margin: 0;
+}
+
+.nav-container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  padding: 4px 25px;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.nav-left-container {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 90px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.app-logo {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 50px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.nav-tag-container {
+  padding: 4px;
+  display: flex;
+  gap: 45px;
+}
+
+.nav-tag-item {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.nav-tag-item > div {
+  opacity: 65%;
+}
+
+.nav-tag-item:hover {
+  background: #F3F4F6;
+}
+
+.nav-icon-container {
+  display: flex;
+  padding: 4px;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-icon-item {
+  width: 25px;
+  height: 25px;
+}
+
+.user-profile-icon-container {
+  position: relative;
+  background: #a2a2a2;
+  border-radius: 9999px;
+  width: 100%;
+  height: 100%;
+}
+
+.user-profile-icon {
+  color: white;
+  position: absolute;
+  left: 4px;
+  top: 9px;
 }
