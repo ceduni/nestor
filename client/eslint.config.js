@@ -2,6 +2,7 @@ import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import useEncapsulation from 'eslint-plugin-use-encapsulation'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
@@ -16,6 +17,7 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+        'use-encapsulation': useEncapsulation,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -30,9 +32,9 @@ export default tseslint.config(
                     // disables cross-feature imports:
                     // eg. src/features/discussions should not import from src/features/comments, etc.
                     {
-                        target: './src/features/auth',
+                        target: './src/features/filters',
                         from: './src/features',
-                        except: ['./auth'],
+                        except: ['./filters'],
                     },
                     {
                         target: './src/features/comments',
@@ -76,6 +78,10 @@ export default tseslint.config(
                 ],
             },
         ],
+        "use-encapsulation/prefer-custom-hooks": [
+            "error",
+            { "allow": ["useMemo"] }
+        ]
     },
   },
 )
