@@ -10,6 +10,7 @@
 
 body {
   font-family: GothicA1-Light, serif;
+  color: #192D58;
   margin: 0;
 }
 
@@ -68,7 +69,7 @@ body {
 
 .user-profile-icon-container {
   position: relative;
-  background: #a2a2a2;
+  background: #dbdcdd;
   border-radius: 9999px;
   width: 100%;
   height: 100%;
@@ -79,4 +80,120 @@ body {
   position: absolute;
   left: 4px;
   top: 9px;
+}
+
+.filter-section {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 4px;
+}
+
+.filter-container {
+  display: flex;
+  margin: 30px 125px;
+  flex-direction: column;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 25px;
+}
+
+.filter-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.filter-bar-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-bar-item-label {
+  display: flex;
+  gap: 4px;
+  font-weight: bold;
+}
+
+.filter-bar-item-input {
+}
+
+.filter-bar-item-input > input {
+  outline: none;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+  width: 250px;
+}
+
+.filter-bar-item-input > input:hover {
+  outline: #0C8CEA solid 1px;
+}
+
+.filter-bar-item-input > input:focus {
+  outline: #0C8CEA solid 1px;
+}
+
+#capacity {
+  width: 200px;
+}
+
+#filter-search-button {
+  margin-top: 25px;
+  padding: 8px;
+  color: #0C8CEA;
+  font-weight: bold;
+  background: #ECF6FB;
+  border-radius: 15px;
+}
+
+.filter-icons-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 15px 125px;
+}
+
+.filter-icons-item {
+  padding: 8px;
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.filter-icons-item:hover {
+  background: #ECF6FB;
+  color: #0C8CEA;
+  border-radius: 10px
+}
+
+.dropdown-container {
+  display: flex;
+  gap: 8px;
+  padding: 20px;
+  flex-direction: column;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  position: absolute;
+  top: 80px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+.dropdown-item {
+  padding: 3px
+}
+
+.dropdown-item-subtitle {
+  font-size: smaller;
+  opacity: 65%;
+}
+
+.dropdown-item-title {
+  font-weight: 900;
 }

@@ -1,0 +1,608 @@
+{
+"spaces":[
+  {
+    "id": "64e1f6c5e72f92d3b4e12c7a",
+    "name": "Salle de Conférence Centre-Ville",
+    "library": "Bibliothèque Centrale",
+    "street": "123 Rue Principale",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10001",
+    "capacity": 50,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c7b",
+        "url": "https://example.com/images/espace-001-main.jpg",
+        "isMain": true
+      },
+      {
+        "id": "64e1f6c5e72f92d3b4e12c7c",
+        "url": "https://example.com/images/espace-001-1.jpg",
+        "isMain": false
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c7d",
+        "startAt": "2024-08-20T09:00:00Z",
+        "endAt": "2024-08-20T17:00:00Z"
+      },
+      {
+        "id": "64e1f6c5e72f92d3b4e12c7e",
+        "startAt": "2024-08-21T09:00:00Z",
+        "endAt": "2024-08-21T17:00:00Z"
+      }
+    ],
+    "description": "Une salle de conférence spacieuse et moderne située au cœur de la ville, idéale pour des réunions et des séminaires.",
+    "organisation": "Événements Métropole",
+    "features": ["wifi", "projector", "whiteboard"],
+    "type": ["library", "studyRoom"],
+    "createdAt": "2024-01-15T08:30:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c7f",
+    "name": "Studio Urbain",
+    "library": "Studio de la Ville",
+    "street": "456 Rue Elm",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10002",
+    "capacity": 20,
+    "isAvailable": false,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c80",
+        "url": "https://example.com/images/espace-002-main.jpg",
+        "isMain": true
+      },
+      {
+        "id": "64e1f6c5e72f92d3b4e12c81",
+        "url": "https://example.com/images/espace-002-1.jpg",
+        "isMain": false
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c82",
+        "startAt": "2024-08-22T09:00:00Z",
+        "endAt": "2024-08-22T17:00:00Z"
+      }
+    ],
+    "description": "Un studio confortable, parfait pour des ateliers et des réunions en petit comité.",
+    "organisation": "Arts de la Ville",
+    "features": ["wifi", "screen", "plug"],
+    "type": ["coffee", "studyRoom"],
+    "createdAt": "2024-02-10T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c83",
+    "name": "Salle de Réunion Universitaire",
+    "library": "Université de Métropole",
+    "street": "789 Rue Université",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10003",
+    "capacity": 30,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c84",
+        "url": "https://example.com/images/espace-003-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c85",
+        "startAt": "2024-09-01T09:00:00Z",
+        "endAt": "2024-09-01T17:00:00Z"
+      }
+    ],
+    "description": "Salle de réunion avec équipement moderne et vue sur le campus universitaire.",
+    "organisation": "Université de Métropole",
+    "features": ["wifi", "projector", "whiteboard"],
+    "type": ["university", "studyRoom"],
+    "createdAt": "2024-03-15T08:30:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c86",
+    "name": "Espace Café de Travail",
+    "library": "Café Créatif",
+    "street": "321 Rue Café",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10004",
+    "capacity": 15,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c87",
+        "url": "https://example.com/images/espace-004-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c88",
+        "startAt": "2024-09-05T09:00:00Z",
+        "endAt": "2024-09-05T17:00:00Z"
+      }
+    ],
+    "description": "Un espace confortable et informel, idéal pour travailler en prenant un café.",
+    "organisation": "Café Créatif",
+    "features": ["wifi", "plug", "screen"],
+    "type": ["coffee", "studyRoom"],
+    "createdAt": "2024-04-10T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c89",
+    "name": "Laboratoire de Recherche",
+    "library": "Laboratoire Scientifique",
+    "street": "654 Avenue Recherche",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10005",
+    "capacity": 25,
+    "isAvailable": false,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c8a",
+        "url": "https://example.com/images/espace-005-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c8b",
+        "startAt": "2024-09-10T09:00:00Z",
+        "endAt": "2024-09-10T17:00:00Z"
+      }
+    ],
+    "description": "Laboratoire équipé pour les expériences scientifiques et la recherche.",
+    "organisation": "Laboratoire Scientifique",
+    "features": ["wifi", "projector", "whiteboard", "plug"],
+    "type": ["laboratory"],
+    "createdAt": "2024-05-20T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c8c",
+    "name": "Espace Nature en Plein Air",
+    "library": "Parc Métropolitain",
+    "street": "987 Rue Nature",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10006",
+    "capacity": 10,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c8d",
+        "url": "https://example.com/images/espace-006-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c8e",
+        "startAt": "2024-09-15T09:00:00Z",
+        "endAt": "2024-09-15T17:00:00Z"
+      }
+    ],
+    "description": "Espace extérieur idéal pour des événements en plein air et des rencontres.",
+    "organisation": "Parc Métropolitain",
+    "features": ["wifi", "plug"],
+    "type": ["nature"],
+    "createdAt": "2024-06-25T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c8f",
+    "name": "Salle de Séminaire",
+    "library": "Centre de Conférences",
+    "street": "852 Avenue Séminaire",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10007",
+    "capacity": 75,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c90",
+        "url": "https://example.com/images/espace-007-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c91",
+        "startAt": "2024-09-20T09:00:00Z",
+        "endAt": "2024-09-20T17:00:00Z"
+      }
+    ],
+    "description": "Grande salle adaptée pour des séminaires et des conférences de grande envergure.",
+    "organisation": "Centre de Conférences",
+    "features": ["wifi", "screen", "projector", "whiteboard"],
+    "type": ["facility"],
+    "createdAt": "2024-07-10T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c92",
+    "name": "Espace de Collaboration",
+    "library": "Co-Working Métropole",
+    "street": "111 Rue Collaboration",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10008",
+    "capacity": 40,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c93",
+        "url": "https://example.com/images/espace-008-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c94",
+        "startAt": "2024-09-25T09:00:00Z",
+        "endAt": "2024-09-25T17:00:00Z"
+      }
+    ],
+    "description": "Espace flexible pour des sessions de travail collaboratif et des réunions de groupe.",
+    "organisation": "Co-Working Métropole",
+    "features": ["wifi", "screen", "plug"],
+    "type": ["coffee", "facility"],
+    "createdAt": "2024-08-01T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c95",
+    "name": "Atelier d'Art",
+    "library": "Centre Artistique",
+    "street": "222 Rue Art",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10009",
+    "capacity": 15,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c96",
+        "url": "https://example.com/images/espace-009-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c97",
+        "startAt": "2024-10-01T09:00:00Z",
+        "endAt": "2024-10-01T17:00:00Z"
+      }
+    ],
+    "description": "Espace créatif pour des ateliers artistiques et des cours de peinture.",
+    "organisation": "Centre Artistique",
+    "features": ["wifi", "whiteboard"],
+    "type": ["facility", "coffee"],
+    "createdAt": "2024-08-05T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c98",
+    "name": "Bureau de Réunion",
+    "library": "Hub de Startups",
+    "street": "333 Rue Innovations",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10010",
+    "capacity": 25,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c99",
+        "url": "https://example.com/images/espace-010-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c9a",
+        "startAt": "2024-10-05T09:00:00Z",
+        "endAt": "2024-10-05T17:00:00Z"
+      }
+    ],
+    "description": "Bureau avec équipements modernes, idéal pour des réunions d'affaires et des présentations.",
+    "organisation": "Hub de Startups",
+    "features": ["wifi", "screen", "projector", "whiteboard"],
+    "type": ["coffee", "facility"],
+    "createdAt": "2024-08-10T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c9b",
+    "name": "Salle de Formation",
+    "library": "Centre de Formation Professionnelle",
+    "street": "444 Rue Formation",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10011",
+    "capacity": 60,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c9c",
+        "url": "https://example.com/images/espace-011-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c9d",
+        "startAt": "2024-10-10T09:00:00Z",
+        "endAt": "2024-10-10T17:00:00Z"
+      }
+    ],
+    "description": "Salle de formation avec tout le nécessaire pour des sessions de formation professionnelles.",
+    "organisation": "Centre de Formation Professionnelle",
+    "features": ["wifi", "screen", "projector", "whiteboard"],
+    "type": ["university", "facility"],
+    "createdAt": "2024-08-15T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12c9e",
+    "name": "Espaces de Réflexion",
+    "library": "Espace Zen",
+    "street": "555 Rue Tranquillité",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10012",
+    "capacity": 12,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12c9f",
+        "url": "https://example.com/images/espace-012-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12ca0",
+        "startAt": "2024-10-15T09:00:00Z",
+        "endAt": "2024-10-15T17:00:00Z"
+      }
+    ],
+    "description": "Espaces de réflexion calmes pour des sessions de méditation ou de brainstorming.",
+    "organisation": "Espace Zen",
+    "features": ["wifi", "plug"],
+    "type": ["nature"],
+    "createdAt": "2024-08-20T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12ca1",
+    "name": "Laboratoire de Création",
+    "library": "Atelier Créatif",
+    "street": "666 Rue Innovation",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10013",
+    "capacity": 35,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12ca2",
+        "url": "https://example.com/images/espace-013-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12ca3",
+        "startAt": "2024-10-20T09:00:00Z",
+        "endAt": "2024-10-20T17:00:00Z"
+      }
+    ],
+    "description": "Laboratoire pour la création et la conception de projets innovants.",
+    "organisation": "Atelier Créatif",
+    "features": ["wifi", "screen", "projector"],
+    "type": ["laboratory"],
+    "createdAt": "2024-08-25T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12ca4",
+    "name": "Espace de Détente",
+    "library": "Lounge Métropole",
+    "street": "777 Rue Détente",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10014",
+    "capacity": 20,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12ca5",
+        "url": "https://example.com/images/espace-014-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12ca6",
+        "startAt": "2024-10-25T09:00:00Z",
+        "endAt": "2024-10-25T17:00:00Z"
+      }
+    ],
+    "description": "Un espace confortable pour se détendre entre des sessions de travail.",
+    "organisation": "Lounge Métropole",
+    "features": ["wifi", "plug"],
+    "type": ["coffee"],
+    "createdAt": "2024-09-01T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12ca7",
+    "name": "Salle de Formation Technique",
+    "library": "Institut Technique",
+    "street": "888 Rue Technique",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10015",
+    "capacity": 40,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12ca8",
+        "url": "https://example.com/images/espace-015-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12ca9",
+        "startAt": "2024-11-01T09:00:00Z",
+        "endAt": "2024-11-01T17:00:00Z"
+      }
+    ],
+    "description": "Salle équipée pour des formations techniques et ateliers spécialisés.",
+    "organisation": "Institut Technique",
+    "features": ["wifi", "projector", "whiteboard", "plug"],
+    "type": ["university", "facility"],
+    "createdAt": "2024-09-05T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12caa",
+    "name": "Espace Récréatif",
+    "library": "Centre de Loisirs",
+    "street": "999 Rue Récréation",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10016",
+    "capacity": 50,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12cab",
+        "url": "https://example.com/images/espace-016-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12cac",
+        "startAt": "2024-11-05T09:00:00Z",
+        "endAt": "2024-11-05T17:00:00Z"
+      }
+    ],
+    "description": "Espace pour des activités récréatives et des événements sociaux.",
+    "organisation": "Centre de Loisirs",
+    "features": ["wifi", "screen"],
+    "type": ["facility"],
+    "createdAt": "2024-09-10T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12cad",
+    "name": "Salle de Formation Professionnelle",
+    "library": "Académie Métropolitaine",
+    "street": "1000 Avenue Formation",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10017",
+    "capacity": 40,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12cae",
+        "url": "https://example.com/images/espace-017-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12caf",
+        "startAt": "2024-11-10T09:00:00Z",
+        "endAt": "2024-11-10T17:00:00Z"
+      }
+    ],
+    "description": "Salle dédiée aux formations professionnelles avec équipements modernes.",
+    "organisation": "Académie Métropolitaine",
+    "features": ["wifi", "screen", "projector", "whiteboard"],
+    "type": ["university", "facility"],
+    "createdAt": "2024-09-15T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12cb0",
+    "name": "Espace Créatif",
+    "library": "Studio d'Art",
+    "street": "1111 Rue Création",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10018",
+    "capacity": 20,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12cb1",
+        "url": "https://example.com/images/espace-018-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12cb2",
+        "startAt": "2024-11-15T09:00:00Z",
+        "endAt": "2024-11-15T17:00:00Z"
+      }
+    ],
+    "description": "Espace inspirant pour des projets artistiques et créatifs.",
+    "organisation": "Studio d'Art",
+    "features": ["wifi", "whiteboard"],
+    "type": ["coffee", "laboratory"],
+    "createdAt": "2024-09-20T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  },
+  {
+    "id": "64e1f6c5e72f92d3b4e12cb3",
+    "name": "Salle de Réunion",
+    "library": "Espace de Réunion",
+    "street": "1212 Rue Réunion",
+    "city": "Métropole",
+    "state": "NY",
+    "postalCode": "10019",
+    "capacity": 30,
+    "isAvailable": true,
+    "images": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12cb4",
+        "url": "https://example.com/images/espace-019-main.jpg",
+        "isMain": true
+      }
+    ],
+    "availabilities": [
+      {
+        "id": "64e1f6c5e72f92d3b4e12cb5",
+        "startAt": "2024-11-20T09:00:00Z",
+        "endAt": "2024-11-20T17:00:00Z"
+      }
+    ],
+    "description": "Salle de réunion polyvalente pour des discussions et des présentations.",
+    "organisation": "Espace de Réunion",
+    "features": ["wifi", "screen", "projector", "whiteboard"],
+    "type": ["facility"],
+    "createdAt": "2024-09-25T09:00:00Z",
+    "updatedAt": "2024-08-01T10:00:00Z"
+  }
+]
+}
