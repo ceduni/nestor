@@ -183,9 +183,12 @@ body {
   top: 80px;
   border-radius: 10px;
   width: 400px;
+  white-space: nowrap;
 }
 
-.dropdown-item {
+.dropdown-left-item {
+  display: flex;
+  gap: 8px;
   padding: 3px
 }
 
@@ -196,4 +199,81 @@ body {
 
 .dropdown-item-title {
   font-weight: 900;
+}
+
+.dropdown-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.distance-tag {
+  margin-right: 20px;
+  align-self: center;
+  padding: 1px 15px;
+  background: #ddfde6;
+  color: #3b9f57;
+  font-weight: bolder;
+  border-radius: 15px;
+  border: 1px solid #3b9f57;
+  font-size: small;
+}
+
+.location-icon {
+  margin-top: 4px;
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+  border-radius: 20px;
+}
+.title-skeleton {
+  width: 150px;
+  height: 15px;
+}
+
+.subtitle-skeleton {
+  width: 125px;
+  height: 10px;
+}
+
+.distance-tag-skeleton {
+  width: 59px;
+  height: 23px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color : hsl(200, 20%, 70%);
+  }
+
+  100% {
+    background-color : hsl(200, 20%, 95%);
+  }
+}
+
+.left-item-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.dropdown-item-skeleton-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skeleton-container {
+  display: flex;
+  gap: 25px;
+  padding: 30px 40px;
+  flex-direction: column;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  position: absolute;
+  top: 80px;
+  border-radius: 10px;
+  width: 400px;
+  white-space: nowrap;
 }

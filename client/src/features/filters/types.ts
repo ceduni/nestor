@@ -2,9 +2,11 @@ export type Space = {
     id: string;
     name: string;
     library?: string;
-    street: string;
+    streetNumber: string;
+    streetName: string;
     city: string;
     state: string;
+    country: string;
     postalCode: string;
     capacity: number;
     isAvailable: boolean;
@@ -31,7 +33,6 @@ export type Availability = {
 }
 
 export type FilterParams = {
-    name?: string;
     address?: string;
     date?: string;
     capacity?: string;

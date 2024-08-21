@@ -1,29 +1,13 @@
-import {useContext} from "react";
-import {SpaceContext} from "./Filter.tsx";
-import {Space} from "../types.ts";
+import {useContext, useEffect} from "react";
+import {FilterContext} from "./Filter.tsx";
 import {FaLocationDot} from "react-icons/fa6";
 
-export default function AddressFilterDropDown() {
-    const {spaces, isLoading} = useContext(SpaceContext);
+export default function AddressDropDown({spaces}) {
 
     return (
         <div className="dropdown-container">
-            {isLoading && <div className="dropdown-item-wrapper" key={space.id}>
-                <div className="dropdown-left-item">
-                    <div className="location-icon">
-                        <FaLocationDot />
-                    </div>
-                    <div>
-                        <div className="dropdown-item-title">{space.street}</div>
-                        <div className="dropdown-item-subtitle">{space.city}, {space.state}</div>
-                    </div>
-                </div>
-                <div className="dropdown-right-item">
-                    2 km
-                </div>
-            </div>}
             {
-                spaces?.map(space => {
+                spaces.map(space => {
                     return(
                         <div className="dropdown-item-wrapper" key={space.id}>
                             <div className="dropdown-left-item">
@@ -31,15 +15,13 @@ export default function AddressFilterDropDown() {
                                     <FaLocationDot />
                                 </div>
                                 <div>
-                                    <div className="dropdown-item-title">{space.street}</div>
-                                    <div className="dropdown-item-subtitle">{space.city}, {space.state}</div>
+                                    <div className="dropdown-item-title">{space.streetNumber} {space.streetName}</div>
+                                    <div className="dropdown-item-subtitle">{space.state}, {space.country}</div>
                                 </div>
                             </div>
-                            <div className="dropdown-right-item">
-                                2 km
-                            </div>
+                            <div className="distance-tag">2 km</div>
                         </div>
-                        )
+                    )
                 })
             }
         </div>
