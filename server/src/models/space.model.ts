@@ -31,7 +31,11 @@ const spaceSchema = new mongoose.Schema(
         library: {
             type: String,
         },
-        street: {
+        streetNumber: {
+            type: String,
+            required: true,
+        },
+        streetName: {
             type: String,
             required: true,
         },
