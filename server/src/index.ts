@@ -7,8 +7,10 @@ const mongodb_connection_string =
   process.env.MONGODB_DEV_CONNECTION_STRING ?? "";
 const port = Number(process.env.DEV_PORT) ?? 5000;
 
+
+import {space} from "./models/space.model";
 app.get("/v1/spaces/locations", (req: Request, res: Response) => {
-  res.send(req.query);
+
 });
 
 mongoose
