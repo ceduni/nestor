@@ -13,7 +13,7 @@ export function useSpaces() {
     });
     return [useQuery({
         queryKey: ['spaces', queryParams],
-        queryFn: () => fetchSpacesWithFilters(queryParams),
+        queryFn: () => fetchSpaces(queryParams),
         enabled: !!queryParams.filters
 }), setQueryParams];
 }
