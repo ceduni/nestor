@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/index.ts\"",
+    "seed": "ts-node src/utils/seedSpaceMockData.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
