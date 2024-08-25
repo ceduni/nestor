@@ -11,15 +11,16 @@ import { PiPlug } from "react-icons/pi";
 import { LuProjector } from "react-icons/lu";
 import { FaWifi } from "react-icons/fa";
 import AddressDropDown from "./AddressDropDown.tsx";
-import {useSpaces} from "../../../hooks/useSpaces.ts";
 import {ChangeEvent, createContext, useEffect, useState} from "react";
-import {FilterParams} from "../types.ts";
+import {FilterParams, Location} from "../types.ts";
 import AddressDropDownSkeleton from "./AddressDropDownSkeleton.tsx";
+import {useLocations} from "../hooks/useLocations.ts";
 
 export const FilterContext = createContext({});
 export default function Filter() {
     const [filterParams, setFilterParams] = useState<FilterParams>()
-    const [{data: spaces, isLoading},setQueryParams] = useSpaces();
+    const [{data: locations, isLoading},setQueryParams] = useLocations();
+    const [processedLocations, setProcessedLocations] = useState<Location[]>([]);
     const [addressFilter, setAddressFilter] = useState("");
     const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
         const addressFilter = event.target.value;
@@ -34,6 +35,44 @@ export default function Filter() {
         setAddressFilter(addressFilter);
     }
 
+    useEffect(() => {
+        locations?.forEach(location => {
+            if(location.streetNumber.startsWith(addressFilter.trim())) {
+                setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, location]);
+            }
+            if(location.streetName.startsWith(addressFilter.trim().toLowerCase())) {
+                setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, {
+                    streetNumber: "",
+                    streetName: location.streetName,
+                    city: location.city,
+                    state: location.state,
+                    country: location.country,
+                    postalCode: location.postalCode,
+                }]);
+            }
+            if(location.city.startsWith(addressFilter.trim().toLowerCase())) {
+                setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, {
+                    streetNumber: "",
+                    streetName: "",
+                    city: location.city,
+                    state: location.state,
+                    country: location.country,
+                    postalCode: location.postalCode,
+                }]);
+            }
+            if(location.state.startsWith(addressFilter.trim().toLowerCase()) ) {
+                setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, {
+                    streetNumber: "",
+                    streetName: "",
+                    city: "",
+                    state: location.state,
+                    country: location.country,
+                    postalCode: location.postalCode,
+                }]);
+            }
+        })
+    }, [locations]);
+
     return (
         <section className="filter-section">
             <div className="filter-container">
@@ -47,7 +86,7 @@ export default function Filter() {
                             <input type="search" id="address" name="address" placeholder="Entrer une adresse" onChange={(event) => handleAddressChange(event)}/>
                         </div>
                         {isLoading && <AddressDropDownSkeleton/>}
-                        {addressFilter && spaces && spaces.length !== 0 && <AddressDropDown spaces={spaces}/>}
+                        {addressFilter && locations && locations.length !== 0 && <AddressDropDown locations={locations}/>}
                     </div>
                     <div className="filter-bar-item">
                         <div className="filter-bar-item-label">

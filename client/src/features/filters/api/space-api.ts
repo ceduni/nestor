@@ -1,6 +1,5 @@
-import {QueryParams, Space} from "../types.ts";
-const BASE_URL = 'http://localhost:3000/spaces';
-import {spaces} from './space-mock-data.json'
+import {QueryParams, Space, Location} from "../types.ts";
+const BASE_URL = 'http://127.0.0.1:3000/v1/spaces';
 
 export const fetchSpaces = async (
     queryParams: QueryParams
@@ -24,17 +23,28 @@ export const fetchSpaces = async (
     return body.data;
 };
 
-export const fetchSpacesWithFilters = async (
+export const fetchLocations = async (
     queryParams: QueryParams
-): Promise<Space[]> => {
+): Promise<Location[]> => {
     // Introduce a 5-second delay
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    return spaces.filter(space => space.streetNumber.toLowerCase().includes(<string>queryParams.filters?.address?.trim().toLowerCase())
-        || space.streetName.toLowerCase().includes(<string>queryParams.filters?.address?.trim().toLowerCase())
-        || space.city.toLowerCase().includes(<string>queryParams.filters?.address?.trim().toLowerCase())
-        || space.state.toLowerCase().includes(<string>queryParams.filters?.address?.trim().toLowerCase())
-        || space.country.toLowerCase().includes(<string>queryParams.filters?.address?.trim().toLowerCase()));
+    const response = await fetch(BASE_URL +'/' + 'locations' + '?' + new URLSearchParams(
+        {
+            page: queryParams.pagination.page,
+            limit: queryParams.pagination.limit,
+            ...queryParams.filters
+        }
+    ).toString());
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch space data');
+    }
+    return response.json()
 };
+
+
+
+
 
 
