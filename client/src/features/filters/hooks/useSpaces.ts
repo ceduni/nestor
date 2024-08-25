@@ -1,8 +1,8 @@
 // hooks/useSpaces.ts
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import { useQuery } from '@tanstack/react-query';
-import {fetchSpaces, fetchSpacesWithFilters} from '../features/filters/api/space-api.ts';
-import { QueryParams, Space } from '../features/filters/types.ts';
+import {fetchSpaces} from '../api/space-api.ts';
+import { QueryParams, Space } from '../types.ts';
 
 export function useSpaces() {
     const [queryParams, setQueryParams] = useState<QueryParams>({
@@ -17,3 +17,4 @@ export function useSpaces() {
         enabled: !!queryParams.filters
 }), setQueryParams];
 }
+

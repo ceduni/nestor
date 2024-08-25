@@ -192,9 +192,19 @@ body {
   padding: 3px
 }
 
+.dropdown-item-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .dropdown-item-subtitle {
   font-size: smaller;
   opacity: 65%;
+}
+
+.dropdown-item-subtitle:hover {
+  align-self: start;
+  border-bottom: 1px solid rgba(0,0,0,0.5);
 }
 
 .dropdown-item-title {

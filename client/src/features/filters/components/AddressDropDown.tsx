@@ -2,21 +2,21 @@ import {useContext, useEffect} from "react";
 import {FilterContext} from "./Filter.tsx";
 import {FaLocationDot} from "react-icons/fa6";
 
-export default function AddressDropDown({spaces}) {
+export default function AddressDropDown({locations}) {
 
     return (
         <div className="dropdown-container">
             {
-                spaces.map(space => {
+                locations.map(location => {
                     return(
-                        <div className="dropdown-item-wrapper" key={space.id}>
+                        <div className="dropdown-item-wrapper" key={location.id}>
                             <div className="dropdown-left-item">
                                 <div className="location-icon">
                                     <FaLocationDot />
                                 </div>
-                                <div>
-                                    <div className="dropdown-item-title">{space.streetNumber} {space.streetName}</div>
-                                    <div className="dropdown-item-subtitle">{space.state}, {space.country}</div>
+                                <div className="dropdown-item-text-container">
+                                    <div className="dropdown-item-title" >{location.streetNumber} {location.streetName}</div>
+                                    <div className="dropdown-item-subtitle">{location.state}, {location.country}</div>
                                 </div>
                             </div>
                             <div className="distance-tag">2 km</div>

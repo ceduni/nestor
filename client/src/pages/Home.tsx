@@ -4,7 +4,7 @@ import {QueryClient, QueryClientProvider, useQuery} from "@tanstack/react-query"
 import {fetchSpaces} from "../features/filters/api/space-api.ts";
 import {useEffect, useState} from "react";
 import {QueryParams} from "../features/filters/types.ts";
-import {useSpaces} from "../hooks/useSpaces.ts";
+import {useSpaces} from "../features/filters/hooks/useSpaces.ts";
 
 export default function Home() {
     const queryClient = new QueryClient();

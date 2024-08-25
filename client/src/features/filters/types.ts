@@ -47,3 +47,12 @@ export type QueryParams = {
     filters?: FilterParams;
     pagination?: PaginationParams
 }
+
+export type Location = {
+    streetNumber: string;
+    streetName: string;
+    city: string;
+    state: string;
+    country: string;
+    postalCode: string;
+}
