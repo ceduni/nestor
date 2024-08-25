@@ -51,6 +51,10 @@ const spaceSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        country: {
+            type: String,
+            required: true
+        },
         capacity: {
             type: Number,
             min: 1,
