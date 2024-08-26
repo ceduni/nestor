@@ -49,6 +49,7 @@ export type QueryParams = {
 }
 
 export type Location = {
+    id: string;
     streetNumber: string;
     streetName: string;
     city: string;

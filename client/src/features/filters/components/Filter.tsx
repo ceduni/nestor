@@ -36,12 +36,14 @@ export default function Filter() {
     }
 
     useEffect(() => {
+        setProcessedLocations([]);
         locations?.forEach(location => {
             if(location.streetNumber.startsWith(addressFilter.trim())) {
                 setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, location]);
             }
-            if(location.streetName.startsWith(addressFilter.trim().toLowerCase())) {
+            if(location.streetName.toLowerCase().startsWith(addressFilter.trim().toLowerCase())) {
                 setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, {
+                    id: location.id,
                     streetNumber: "",
                     streetName: location.streetName,
                     city: location.city,
@@ -50,8 +52,9 @@ export default function Filter() {
                     postalCode: location.postalCode,
                 }]);
             }
-            if(location.city.startsWith(addressFilter.trim().toLowerCase())) {
+            if(location.city.toLowerCase().startsWith(addressFilter.trim().toLowerCase())) {
                 setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, {
+                    id: location.id,
                     streetNumber: "",
                     streetName: "",
                     city: location.city,
@@ -60,8 +63,9 @@ export default function Filter() {
                     postalCode: location.postalCode,
                 }]);
             }
-            if(location.state.startsWith(addressFilter.trim().toLowerCase()) ) {
+            if(location.state.toLowerCase().startsWith(addressFilter.trim().toLowerCase())) {
                 setProcessedLocations(prevProcessedLocations => [...prevProcessedLocations, {
+                    id: location.id,
                     streetNumber: "",
                     streetName: "",
                     city: "",
@@ -86,7 +90,7 @@ export default function Filter() {
                             <input type="search" id="address" name="address" placeholder="Entrer une adresse" onChange={(event) => handleAddressChange(event)}/>
                         </div>
                         {isLoading && <AddressDropDownSkeleton/>}
-                        {addressFilter && locations && locations.length !== 0 && <AddressDropDown locations={locations}/>}
+                        {addressFilter && processedLocations.length !== 0 && <AddressDropDown locations={processedLocations}/>}
                     </div>
                     <div className="filter-bar-item">
                         <div className="filter-bar-item-label">
