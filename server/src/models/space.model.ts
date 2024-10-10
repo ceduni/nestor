@@ -106,6 +106,9 @@ const spaceSchema = new mongoose.Schema(
       ],
       required: true,
     },
+    fullAddress: {
+      type: String,
+    },
   },
   { timestamps: true },
 );

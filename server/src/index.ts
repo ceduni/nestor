@@ -8,7 +8,7 @@ import { router as spaceRoutes } from "./routes/space.route";
 
 // connect to database
 const mongodb_connection_string =
-  process.env.MONGODB_DEV_CONNECTION_STRING ?? "";
+  process.env.MONGODB_CLOUD_CONNECTION_STRING ?? "";
 const port = Number(process.env.DEV_PORT) ?? 5000;
 
 // configure cross origin

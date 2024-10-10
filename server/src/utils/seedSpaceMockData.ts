@@ -2,7 +2,7 @@ import { space } from "../models/space.model";
 import mongoose from "mongoose";
 import "dotenv/config";
 const mongodb_connection_string =
-  process.env.MONGODB_DEV_CONNECTION_STRING ?? "";
+  process.env.MONGODB_CLOUD_CONNECTION_STRING ?? "";
 const spaceMockData = [
   {
     id: "64e1f6c5e72f92d3b4e12d0a",
@@ -627,6 +627,25 @@ mongoose
   .then(async () => {
     try {
       await space.insertMany(spaceMockData);
+      await space.updateMany({}, [
+        {
+          $set: {
+            fullAddress: {
+              $concat: [
+                "$streetNumber",
+                " ",
+                "$streetName",
+                ", ",
+                "$city",
+                ", ",
+                "$state",
+                ", ",
+                "$country",
+              ],
+            },
+          },
+        },
+      ]);
     } catch (e) {
       console.log(e);
     } finally {
