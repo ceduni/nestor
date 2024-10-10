@@ -5,18 +5,11 @@ export default function AddressDropDown({
   setAddressFilter,
   setShowAddressDropDown,
 }) {
-  const handleAddressDropDownTitleTitleClick = () => {
-    const title = document.querySelector(".dropdown-item-title").textContent;
-    const subtitle = document.querySelector(
-      ".dropdown-item-subtitle",
-    ).textContent;
+  const handleAddressDropDownTitleClick = (title, subtitle) => {
     setAddressFilter(title + ", " + subtitle);
     setShowAddressDropDown(false);
   };
-  const handleAddressDropDownSubtitleTitleClick = () => {
-    const subtitle = document.querySelector(
-      ".dropdown-item-subtitle",
-    ).textContent;
+  const handleAddressDropDownSubtitleClick = (title, subtitle) => {
     setAddressFilter(subtitle);
     setShowAddressDropDown(false);
   };
@@ -48,13 +41,17 @@ export default function AddressDropDown({
               <div className="dropdown-item-text-container">
                 <div
                   className="dropdown-item-title"
-                  onClick={handleAddressDropDownTitleTitleClick}
+                  onClick={() =>
+                    handleAddressDropDownTitleClick(title, subtitle)
+                  }
                 >
                   {title}
                 </div>
                 <div
                   className="dropdown-item-subtitle"
-                  onClick={handleAddressDropDownSubtitleTitleClick}
+                  onClick={() =>
+                    handleAddressDropDownSubtitleClick(title, subtitle)
+                  }
                 >
                   {subtitle}
                 </div>
