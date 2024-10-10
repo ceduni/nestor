@@ -1,25 +1,12 @@
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCalendarDay } from "react-icons/fa";
-import { LuSchool2 } from "react-icons/lu";
-import { IoLibraryOutline } from "react-icons/io5";
-import { FiCoffee } from "react-icons/fi";
-import { LuTreeDeciduous } from "react-icons/lu";
-import { PiMicroscope } from "react-icons/pi";
-import { PiMonitor } from "react-icons/pi";
-import { TfiBlackboard } from "react-icons/tfi";
-import { PiPlug } from "react-icons/pi";
-import { LuProjector } from "react-icons/lu";
-import { FaWifi } from "react-icons/fa";
 import AddressDropDown from "./AddressDropDown.tsx";
-import { ChangeEvent, createContext, useEffect, useState } from "react";
-import { FilterParams, Location } from "../types.ts";
+import { useState } from "react";
 import AddressDropDownSkeleton from "./AddressDropDownSkeleton.tsx";
-import { useLocations } from "../hooks/useLocations.ts";
 import { useAddress } from "../hooks/useAddress.ts";
-import { useSpaces } from "../hooks/useSpaces.ts";
+import FilterIcons from "./FilterIcons.tsx";
 
-export default function Filter() {
-  const [filterParams, setFilterParams] = useState<FilterParams>();
+export default function Filter({ setQueryParams }) {
   const {
     processedLocations,
     isLoading: isLocationLoading,
@@ -30,9 +17,6 @@ export default function Filter() {
     setShowAddressDropDown,
   } = useAddress();
 
-  const [{ data: spaces, isLoading: isSpaceLoading }, setQueryParams] =
-    useSpaces();
-
   const [date, setDate] = useState<Date>(new Date());
 
   const [capacity, setCapacity] = useState(1);
@@ -41,15 +25,13 @@ export default function Filter() {
   };
 
   const handleSearchButtonClick = () => {
+    console.log(addressFilter);
     setQueryParams((prevQueryParams) => ({
+      ...prevQueryParams,
       filters: {
         date: date.toISOString(),
         address: addressFilter,
         capacity: capacity.toString(),
-      },
-      pagination: {
-        limit: "5",
-        page: prevQueryParams.pagination?.page.toString(),
       },
     }));
   };
@@ -76,6 +58,7 @@ export default function Filter() {
             {isLocationLoading && <AddressDropDownSkeleton />}
             {showAddressDropDown &&
               addressFilter &&
+              processedLocations &&
               processedLocations.length !== 0 && (
                 <AddressDropDown
                   locations={processedLocations}
@@ -114,55 +97,11 @@ export default function Filter() {
               />
             </div>
           </div>
-          <input
-            type="submit"
-            id="filter-search-button"
-            value="Rechercher"
-            onClick={handleSearchButtonClick}
-          />
+          <div onClick={handleSearchButtonClick} id="filter-search-button">
+            Rechercher
+          </div>
         </form>
-        <div className="filter-icons-container">
-          <div className="filter-icons-item">
-            <LuSchool2 />
-            <div>uni</div>
-          </div>
-          <div className="filter-icons-item">
-            <IoLibraryOutline />
-            <div>biblio</div>
-          </div>
-          <div className="filter-icons-item">
-            <FiCoffee />
-            <div>café</div>
-          </div>
-          <div className="filter-icons-item">
-            <LuTreeDeciduous />
-            <div>nature</div>
-          </div>
-          <div className="filter-icons-item">
-            <PiMicroscope />
-            <div>labo</div>
-          </div>
-          <div className="filter-icons-item">
-            <PiMonitor />
-            <div>écran</div>
-          </div>
-          <div className="filter-icons-item">
-            <TfiBlackboard />
-            <div>tableau</div>
-          </div>
-          <div className="filter-icons-item">
-            <PiPlug />
-            <div>prise</div>
-          </div>
-          <div className="filter-icons-item">
-            <LuProjector />
-            <div>projecteur</div>
-          </div>
-          <div className="filter-icons-item">
-            <FaWifi />
-            <div>wifi</div>
-          </div>
-        </div>
+        <FilterIcons setQueryParams={setQueryParams} />
       </div>
     </section>
   );

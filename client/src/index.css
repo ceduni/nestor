@@ -304,7 +304,7 @@ body {
 }
 
 .card-container {
-  display: flex;
+  displa/: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -415,3 +415,10 @@ body {
   gap: 30px;
   padding: 25px;
 }
+
+.icon-focus {
+  background: #ecf6fb;
+  color: #0c8cea;
+  border-radius: 10px;
+}
+

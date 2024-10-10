@@ -10,8 +10,7 @@ export const fetchSpaces = async (
     BASE_URL +
       "?" +
       new URLSearchParams({
-        page: queryParams.pagination.page,
-        limit: queryParams.pagination.limit,
+        ...queryParams.pagination,
         ...queryParams.filters,
       }).toString(),
   );
@@ -20,14 +19,14 @@ export const fetchSpaces = async (
     throw new Error("Failed to fetch space data");
   }
 
-  return await response.json();
+  return response.json();
 };
 
 export const fetchLocations = async (
   queryParams: QueryParams,
 ): Promise<Location[]> => {
   // Introduce a 5-second delay
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
   const response = await fetch(
     BASE_URL +
       "/" +
