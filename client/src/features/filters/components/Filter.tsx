@@ -88,6 +88,7 @@ export default function Filter({ setQueryParams }) {
             <div className="filter-bar-item-input">
               <input
                 type="number"
+                min="1"
                 id="capacity"
                 name="capacity"
                 placeholder="Entrer une capacité"
