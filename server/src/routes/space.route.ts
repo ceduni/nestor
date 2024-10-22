@@ -9,6 +9,7 @@ router.get("/spaces", async (req: Request, res: Response) => {
     const address = req.query.address as string;
     const capacity = Number(req.query.capacity) || 1;
     const agg_pipeline = [];
+    console.log(req.query);
     if (address) {
       const search_pipeline = {
         $search: {
