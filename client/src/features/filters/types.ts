@@ -36,6 +36,7 @@ export type FilterParams = {
   address?: string;
   date?: string;
   capacity?: string;
+  features?: string[];
 };
 
 export type PaginationParams = {
