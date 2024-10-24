@@ -26,6 +26,7 @@ export default function Filter({ setQueryParams }) {
   };
 
   const handleSearchButtonClick = () => {
+    setShowAddressDropDown(false);
     setQueryParams((prevQueryParams: QueryParams) => ({
       ...prevQueryParams,
       filters: {

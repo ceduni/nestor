@@ -149,6 +149,7 @@ body {
   font-weight: bold;
   background: #ecf6fb;
   border-radius: 15px;
+  border: 1px solid #0c8cea;
 }
 
 .filter-icons-container {
@@ -165,12 +166,14 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 2px;
+  border: 1px solid transparent;
 }
 
 .filter-icons-item:hover {
   background: #ecf6fb;
   color: #0c8cea;
   border-radius: 10px;
+  border: 1px solid #0c8cea;
 }
 
 .dropdown-container {
@@ -420,5 +423,5 @@ body {
   background: #ecf6fb;
   color: #0c8cea;
   border-radius: 10px;
+  border: 1px solid #0c8cea;
 }
-
