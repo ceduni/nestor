@@ -5,6 +5,7 @@ import { PiMicroscope, PiMonitor, PiPlug } from "react-icons/pi";
 import { TfiBlackboard } from "react-icons/tfi";
 import { FaWifi } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { QueryParams } from "../types";
 
 const iconData = [
   { Icon: LuSchool2, label: "uni" },
@@ -41,14 +42,20 @@ export default function FilterIcons({ setQueryParams }) {
     } else {
       setSelectedFeatures((prev) => [...prev, label]);
     }
-    const selectedFeaturesToEng = selectedFeatures.map(
-      (selectedFeature) => toEn[selectedFeature],
-    );
-    setQueryParams((prevQueryParams) => ({
-      ...prevQueryParams,
-      features: selectedFeaturesToEng,
-    }));
   };
+
+  useEffect(() => {
+    const selectedFeaturesTranslated = selectedFeatures.map(
+      (feature: string) => toEn[feature],
+    );
+    setQueryParams(({ pagination, filters = {} }: QueryParams) => ({
+      pagination,
+      filters: {
+        ...filters,
+        features: selectedFeaturesTranslated,
+      },
+    }));
+  }, [selectedFeatures, setQueryParams]);
 
   return (
     <div className="filter-icons-container">
