@@ -8,7 +8,7 @@ router.get("/spaces", async (req: Request, res: Response) => {
     const limit = Number(req.query.limit);
     const address = req.query.address as string;
     const capacity = Number(req.query.capacity) || 1;
-    const features = req.query.features;
+    const features = req.query.features as string;
     const agg_pipeline = [];
     if (address) {
       const search_pipeline = {
@@ -22,17 +22,36 @@ router.get("/spaces", async (req: Request, res: Response) => {
       };
       agg_pipeline.push(search_pipeline);
     }
-    agg_pipeline.push({
-      $match: {
-        $and: [
-          {
-            capacity: {
-              $gte: capacity,
+    if (features) {
+      agg_pipeline.push({
+        $match: {
+          $and: [
+            {
+              features: {
+                $all: features.split(","),
+              },
             },
-          },
-        ],
-      },
-    });
+            {
+              capacity: {
+                $gte: capacity,
+              },
+            },
+          ],
+        },
+      });
+    } else {
+      agg_pipeline.push({
+        $match: {
+          $and: [
+            {
+              capacity: {
+                $gte: capacity,
+              },
+            },
+          ],
+        },
+      });
+    }
     agg_pipeline.push({
       $limit: limit,
     });
