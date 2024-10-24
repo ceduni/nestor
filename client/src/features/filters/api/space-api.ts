@@ -26,7 +26,7 @@ export const fetchLocations = async (
   queryParams: QueryParams,
 ): Promise<Location[]> => {
   // Introduce a 5-second delay
-  // await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const response = await fetch(
     BASE_URL +
       "/" +

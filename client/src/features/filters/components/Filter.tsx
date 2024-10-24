@@ -5,6 +5,7 @@ import { useState } from "react";
 import AddressDropDownSkeleton from "./AddressDropDownSkeleton.tsx";
 import { useAddress } from "../hooks/useAddress.ts";
 import FilterIcons from "./FilterIcons.tsx";
+import { QueryParams } from "../types.ts";
 
 export default function Filter({ setQueryParams }) {
   const {
@@ -25,8 +26,7 @@ export default function Filter({ setQueryParams }) {
   };
 
   const handleSearchButtonClick = () => {
-    console.log(addressFilter);
-    setQueryParams((prevQueryParams) => ({
+    setQueryParams((prevQueryParams: QueryParams) => ({
       ...prevQueryParams,
       filters: {
         date: date.toISOString(),
