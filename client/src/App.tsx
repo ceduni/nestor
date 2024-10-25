@@ -1,4 +1,3 @@
-import DatePicker from "./features/filters/components/DatePicker.tsx";
 import Home from "./pages/Home.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 function App() {
@@ -8,7 +7,6 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Home />
       </QueryClientProvider>
-      <DatePicker />
     </>
   );
 }
