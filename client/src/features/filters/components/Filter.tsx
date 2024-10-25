@@ -1,11 +1,13 @@
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCalendarDay } from "react-icons/fa";
 import AddressDropDown from "./AddressDropDown.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddressDropDownSkeleton from "./AddressDropDownSkeleton.tsx";
 import { useAddress } from "../hooks/useAddress.ts";
 import FilterIcons from "./FilterIcons.tsx";
 import { QueryParams } from "../types.ts";
+import DatePicker from "./DatePicker.tsx";
+import { format } from "date-fns";
 
 export default function Filter({ setQueryParams }) {
   const {
@@ -19,6 +21,10 @@ export default function Filter({ setQueryParams }) {
   } = useAddress();
 
   const [date, setDate] = useState<Date>(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const handleDateClick = () => {
+    setShowDatePicker((prevState) => !prevState);
+  };
 
   const [capacity, setCapacity] = useState(1);
   const handleCapacityChange = (event) => {
@@ -36,7 +42,6 @@ export default function Filter({ setQueryParams }) {
       },
     }));
   };
-
   return (
     <section className="filter-section">
       <div className="filter-container">
@@ -79,8 +84,12 @@ export default function Filter({ setQueryParams }) {
                 id="date"
                 name="date"
                 placeholder="Entrer une date"
+                value={format(date, "yyyy-MM-dd")}
+                onClick={handleDateClick}
+                onChange={() => {}}
               />
             </div>
+            {showDatePicker && <DatePicker setDate={setDate} />}
           </div>
           <div className="filter-bar-item">
             <div className="filter-bar-item-label">
