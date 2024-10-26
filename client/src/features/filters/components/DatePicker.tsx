@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function DatePicker({ setDate }) {
   const handleDateChange = (newDate: Date) => {
-    setDate(newDate);
+    setDate(new Date(newDate));
   };
   return (
     <div className="datepicker-container">
