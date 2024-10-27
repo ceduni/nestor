@@ -4,60 +4,45 @@ export const router = express.Router();
 
 router.get("/spaces", async (req: Request, res: Response) => {
   try {
-    const page = Number(req.query.page);
-    const limit = Number(req.query.limit);
-    const address = req.query.address as string;
-    const capacity = Number(req.query.capacity) || 1;
-    const features = req.query.features as string;
-    const agg_pipeline = [];
+    const {
+      page = 1,
+      limit = 10,
+      address,
+      capacity = 1,
+      features,
+      date = new Date(),
+    } = req.query;
+
+    const agg_pipeline: any[] = [];
     if (address) {
-      const search_pipeline = {
+      agg_pipeline.push({
         $search: {
           index: "default",
           autocomplete: {
-            query: address.trim(),
+            query: (address as string).trim(),
             path: "fullAddress",
           },
         },
-      };
-      agg_pipeline.push(search_pipeline);
+      });
     }
+    const match_conditions: any[] = [
+      { capacity: { $gte: Number(capacity) } },
+      { "availabilities.startAt": { $gte: new Date(date as string) } },
+    ];
+
     if (features) {
-      agg_pipeline.push({
-        $match: {
-          $and: [
-            {
-              features: {
-                $all: features.split(","),
-              },
-            },
-            {
-              capacity: {
-                $gte: capacity,
-              },
-            },
-          ],
-        },
-      });
-    } else {
-      agg_pipeline.push({
-        $match: {
-          $and: [
-            {
-              capacity: {
-                $gte: capacity,
-              },
-            },
-          ],
-        },
+      match_conditions.push({
+        features: { $all: (features as string).split(",") },
       });
     }
-    agg_pipeline.push({
-      $limit: limit,
-    });
-    agg_pipeline.push({
-      $skip: page - 1,
-    });
+
+    agg_pipeline.push(
+      { $unwind: "$availabilities" },
+      { $match: { $and: match_conditions } },
+      { $limit: Number(limit) },
+      { $skip: (Number(page) - 1) * Number(limit) },
+    );
+
     const results = await space.aggregate(agg_pipeline);
     res.status(200).send(results);
   } catch (e) {
