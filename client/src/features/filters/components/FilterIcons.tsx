@@ -45,17 +45,19 @@ export default function FilterIcons({ setQueryParams }) {
   };
 
   useEffect(() => {
-    const selectedFeaturesTranslated = selectedFeatures.map(
-      (feature: string) => toEn[feature],
-    );
-    setQueryParams(({ pagination, filters = {} }: QueryParams) => ({
-      pagination,
-      filters: {
-        ...filters,
-        features: selectedFeaturesTranslated,
-      },
-    }));
-  }, [selectedFeatures, setQueryParams]);
+    if (selectedFeatures.length !== 0) {
+      const selectedFeaturesTranslated = selectedFeatures.map(
+        (feature: string) => toEn[feature],
+      );
+      setQueryParams(({ pagination, filters = {} }: QueryParams) => ({
+        pagination,
+        filters: {
+          ...filters,
+          features: selectedFeaturesTranslated,
+        },
+      }));
+    }
+  }, [selectedFeatures]);
 
   return (
     <div className="filter-icons-container">
