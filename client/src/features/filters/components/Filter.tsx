@@ -1,13 +1,14 @@
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCalendarDay } from "react-icons/fa";
 import AddressDropDown from "./AddressDropDown.tsx";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddressDropDownSkeleton from "./AddressDropDownSkeleton.tsx";
 import { useAddress } from "../hooks/useAddress.ts";
 import FilterIcons from "./FilterIcons.tsx";
 import { QueryParams } from "../types.ts";
 import DatePicker from "./DatePicker.tsx";
 import { format } from "date-fns";
+import { useClickOutside } from "../hooks/useClickOutside.ts";
 
 export default function Filter({ setQueryParams }) {
   const {
@@ -31,11 +32,19 @@ export default function Filter({ setQueryParams }) {
     setCapacity(event.target.value);
   };
 
+  const dropDown = useRef(null);
+
+  useClickOutside(dropDown, () => {
+    setShowDatePicker(false);
+    setShowAddressDropDown(false);
+  });
+
   const handleSearchButtonClick = () => {
     setShowAddressDropDown(false);
     setQueryParams((prevQueryParams: QueryParams) => ({
       ...prevQueryParams,
       filters: {
+        ...prevQueryParams.filters,
         date: date.toISOString(),
         address: addressFilter,
         capacity: capacity.toString(),
@@ -46,7 +55,7 @@ export default function Filter({ setQueryParams }) {
     <section className="filter-section">
       <div className="filter-container">
         <form className="filter-bar-container">
-          <div className="filter-bar-item">
+          <div className="filter-bar-item" ref={dropDown}>
             <div className="filter-bar-item-label">
               <FaLocationDot />
               <label htmlFor="address">Adresse</label>
@@ -73,7 +82,7 @@ export default function Filter({ setQueryParams }) {
                 />
               )}
           </div>
-          <div className="filter-bar-item">
+          <div className="filter-bar-item" ref={dropDown}>
             <div className="filter-bar-item-label">
               <FaCalendarDay />
               <label htmlFor="date">Date</label>
@@ -89,7 +98,12 @@ export default function Filter({ setQueryParams }) {
                 onChange={() => {}}
               />
             </div>
-            {showDatePicker && <DatePicker setDate={setDate} />}
+            {showDatePicker && (
+              <DatePicker
+                setDate={setDate}
+                setShowDatePicker={setShowDatePicker}
+              />
+            )}
           </div>
           <div className="filter-bar-item">
             <div className="filter-bar-item-label">
