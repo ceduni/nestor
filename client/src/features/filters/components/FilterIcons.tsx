@@ -35,7 +35,6 @@ const toEn = {
 
 export default function FilterIcons({ setQueryParams }) {
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-
   const handleIconClick = (label: string) => {
     if (selectedFeatures.includes(label)) {
       setSelectedFeatures((prev) => prev.filter((item) => item !== label));
@@ -45,7 +44,6 @@ export default function FilterIcons({ setQueryParams }) {
   };
 
   useEffect(() => {
-    if (selectedFeatures.length !== 0) {
       const selectedFeaturesTranslated = selectedFeatures.map(
         (feature: string) => toEn[feature],
       );
@@ -56,7 +54,6 @@ export default function FilterIcons({ setQueryParams }) {
           features: selectedFeaturesTranslated,
         },
       }));
-    }
   }, [selectedFeatures]);
 
   return (
