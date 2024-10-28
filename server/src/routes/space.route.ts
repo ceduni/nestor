@@ -10,7 +10,7 @@ router.get("/spaces", async (req: Request, res: Response) => {
       address,
       capacity = 1,
       features,
-      date = new Date(),
+      date = new Date(2024,9,1), // for debugging
     } = req.query;
 
     const agg_pipeline: any[] = [];
