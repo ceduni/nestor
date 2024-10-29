@@ -9,8 +9,9 @@ import { QueryParams } from "../types.ts";
 import DatePicker from "./DatePicker.tsx";
 import { format } from "date-fns";
 import { useClickOutside } from "../hooks/useClickOutside.ts";
+import FilterTags from "./FilterTags.tsx";
 
-export default function Filter({ setQueryParams }) {
+export default function Filter({ queryParams, setQueryParams }) {
   const {
     processedLocations,
     isLoading: isLocationLoading,
@@ -128,6 +129,7 @@ export default function Filter({ setQueryParams }) {
         </form>
         <FilterIcons setQueryParams={setQueryParams} />
       </div>
+      <FilterTags queryParams={queryParams}/>
     </section>
   );
 }

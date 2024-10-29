@@ -14,14 +14,14 @@ import CardsSkeleton from "../features/cards/components/CardsSkeleton.tsx";
 
 export default function Home() {
   const queryClient = new QueryClient();
-  const [{ data: spaces, isLoading }, setQueryParams] = useSpaces();
+  const [{ data: spaces, isLoading }, queryParams,setQueryParams] = useSpaces();
 
   return (
     <>
       <NavBar />
       <main>
         <QueryClientProvider client={queryClient}>
-          <Filter setQueryParams={setQueryParams}/>
+          <Filter setQueryParams={setQueryParams} queryParams={queryParams}/>
           {isLoading && <CardsSkeleton />}
           {spaces && spaces.length !== 0 && <Cards spaces={spaces}/>}
         </QueryClientProvider>

@@ -18,6 +18,7 @@ export function useSpaces() {
       queryFn: () => fetchSpaces(queryParams),
       enabled: !!queryParams,
     }),
+    queryParams,
     setQueryParams,
   ];
 }

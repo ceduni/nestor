@@ -307,7 +307,7 @@ body {
 }
 
 .card-container {
-  displa/: flex;
+  display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -434,3 +434,23 @@ body {
   width: 400px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
+
+.filter-tag-item {
+  display: inline-block;
+  background: #ecf6fb;
+  color: #0c8cea;
+  padding: 4px 6px 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #0c8cea;
+}
+
+.filter-tag-item-container {
+  display: flex;
+  gap: 8px;
+}
+
+.cancel-icon {
+  margin-top: 4px;
+  margin-left: 2px;
+}
+
