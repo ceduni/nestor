@@ -454,3 +454,10 @@ body {
   margin-left: 2px;
 }
 
+.filter-tag-container {
+  display: flex;
+  gap: 8px;
+  margin-left: 120px;
+}
+
+
