@@ -4,6 +4,9 @@ import { format } from "date-fns";
 
 export default function FilterTags({queryParams}) {
     const [tags, setTags] = useState([])
+    const handleCancelButtonClick = (cancelledTag: string) => {
+        setTags((prev) => prev.filter((tag) => tag !== cancelledTag));
+    }
     useEffect(() => {
         setTags([])
         if (queryParams.filters) {
@@ -29,7 +32,7 @@ export default function FilterTags({queryParams}) {
             <div className="filter-tag-item" key={index}>
                 <div className="filter-tag-item-container">
                     <div className="filter-tag-label">{tag}</div>
-                    <GiCancel className="cancel-icon"/>
+                    <GiCancel className="cancel-icon" onClick={() => handleCancelButtonClick(tag)}/>
                 </div>
             </div>
             ))}

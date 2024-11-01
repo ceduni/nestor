@@ -73,15 +73,15 @@ export default function Filter({ queryParams, setQueryParams }) {
             </div>
             {isLocationLoading && <AddressDropDownSkeleton />}
             {showAddressDropDown &&
-              addressFilter &&
-              processedLocations &&
-              processedLocations.length !== 0 && (
-                <AddressDropDown
-                  locations={processedLocations}
-                  setAddressFilter={setAddressFilter}
-                  setShowAddressDropDown={setShowAddressDropDown}
-                />
-              )}
+                addressFilter &&
+                processedLocations &&
+                processedLocations.length !== 0 && (
+                    <AddressDropDown
+                        locations={processedLocations}
+                        setAddressFilter={setAddressFilter}
+                        setShowAddressDropDown={setShowAddressDropDown}
+                    />
+                )}
           </div>
           <div className="filter-bar-item" ref={dropDown}>
             <div className="filter-bar-item-label">
