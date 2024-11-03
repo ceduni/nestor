@@ -6,7 +6,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { fetchSpaces } from "../features/filters/api/space-api.ts";
-import {createContext, useEffect, useState} from "react";
+import { createContext, useEffect, useState } from "react";
 import { QueryParams } from "../features/filters/types.ts";
 import { useSpaces } from "../features/filters/hooks/useSpaces.ts";
 import Cards from "../features/cards/components/Cards.tsx";
@@ -14,16 +14,17 @@ import CardsSkeleton from "../features/cards/components/CardsSkeleton.tsx";
 
 export default function Home() {
   const queryClient = new QueryClient();
-  const [{ data: spaces, isLoading }, queryParams,setQueryParams] = useSpaces();
+  const [{ data: spaces, isLoading }, queryParams, setQueryParams] =
+    useSpaces();
 
   return (
     <>
       <NavBar />
       <main>
         <QueryClientProvider client={queryClient}>
-          <Filter setQueryParams={setQueryParams} queryParams={queryParams}/>
+          <Filter setQueryParams={setQueryParams} queryParams={queryParams} />
           {isLoading && <CardsSkeleton />}
-          {spaces && spaces.length !== 0 && <Cards spaces={spaces}/>}
+          {spaces && spaces.length !== 0 && <Cards spaces={spaces} />}
         </QueryClientProvider>
       </main>
     </>

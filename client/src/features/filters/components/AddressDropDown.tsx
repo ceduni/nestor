@@ -4,6 +4,7 @@ export default function AddressDropDown({
   locations,
   setAddressFilter,
   setShowAddressDropDown,
+  dropDownRef,
 }) {
   const handleAddressDropDownTitleClick = (title, subtitle) => {
     setAddressFilter(title + ", " + subtitle);
@@ -14,7 +15,7 @@ export default function AddressDropDown({
     setShowAddressDropDown(false);
   };
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-container" ref={dropDownRef}>
       {locations.map((location, index) => {
         let title = "";
         let subtitle = "";

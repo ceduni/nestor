@@ -33,35 +33,13 @@ const toEn = {
   wifi: "wifi",
 };
 
-export default function FilterIcons({ setQueryParams }) {
-  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-  const handleIconClick = (label: string) => {
-    if (selectedFeatures.includes(label)) {
-      setSelectedFeatures((prev) => prev.filter((item) => item !== label));
-    } else {
-      setSelectedFeatures((prev) => [...prev, label]);
-    }
-  };
-
-  useEffect(() => {
-      const selectedFeaturesTranslated = selectedFeatures.map(
-        (feature: string) => toEn[feature],
-      );
-      setQueryParams(({ pagination, filters = {} }: QueryParams) => ({
-        pagination,
-        filters: {
-          ...filters,
-          features: selectedFeaturesTranslated,
-        },
-      }));
-  }, [selectedFeatures]);
-
+export default function FilterIcons({ handleIconClick, features }) {
   return (
     <div className="filter-icons-container">
       {iconData.map(({ Icon, label }, index) => (
         <div
           key={index}
-          className={`filter-icons-item ${selectedFeatures.includes(label) ? "icon-focus" : ""}`}
+          className={`filter-icons-item ${features.includes(label) ? "icon-focus" : ""}`}
           onClick={() => handleIconClick(label)}
         >
           <Icon />

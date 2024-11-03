@@ -10,6 +10,7 @@ import DatePicker from "./DatePicker.tsx";
 import { format } from "date-fns";
 import { useClickOutside } from "../hooks/useClickOutside.ts";
 import FilterTags from "./FilterTags.tsx";
+import { useFilter } from "../hooks/useFilter.ts";
 
 export default function Filter({ queryParams, setQueryParams }) {
   const {
@@ -33,9 +34,12 @@ export default function Filter({ queryParams, setQueryParams }) {
     setCapacity(event.target.value);
   };
 
-  const dropDown = useRef(null);
+  const { handleIconClick, handleCancelButtonClick, features, tags } =
+    useFilter(setQueryParams, queryParams);
 
-  useClickOutside(dropDown, () => {
+  const dropDownRef = useRef(null);
+
+  useClickOutside(dropDownRef, () => {
     setShowDatePicker(false);
     setShowAddressDropDown(false);
   });
@@ -56,7 +60,7 @@ export default function Filter({ queryParams, setQueryParams }) {
     <section className="filter-section">
       <div className="filter-container">
         <form className="filter-bar-container">
-          <div className="filter-bar-item" ref={dropDown}>
+          <div className="filter-bar-item">
             <div className="filter-bar-item-label">
               <FaLocationDot />
               <label htmlFor="address">Adresse</label>
@@ -73,17 +77,18 @@ export default function Filter({ queryParams, setQueryParams }) {
             </div>
             {isLocationLoading && <AddressDropDownSkeleton />}
             {showAddressDropDown &&
-                addressFilter &&
-                processedLocations &&
-                processedLocations.length !== 0 && (
-                    <AddressDropDown
-                        locations={processedLocations}
-                        setAddressFilter={setAddressFilter}
-                        setShowAddressDropDown={setShowAddressDropDown}
-                    />
-                )}
+              addressFilter &&
+              processedLocations &&
+              processedLocations.length !== 0 && (
+                <AddressDropDown
+                  locations={processedLocations}
+                  setAddressFilter={setAddressFilter}
+                  setShowAddressDropDown={setShowAddressDropDown}
+                  dropDownRef={dropDownRef}
+                />
+              )}
           </div>
-          <div className="filter-bar-item" ref={dropDown}>
+          <div className="filter-bar-item" ref={dropDownRef}>
             <div className="filter-bar-item-label">
               <FaCalendarDay />
               <label htmlFor="date">Date</label>
@@ -127,9 +132,12 @@ export default function Filter({ queryParams, setQueryParams }) {
             Rechercher
           </div>
         </form>
-        <FilterIcons setQueryParams={setQueryParams} />
+        <FilterIcons handleIconClick={handleIconClick} features={features} />
       </div>
-      <FilterTags queryParams={queryParams}/>
+      <FilterTags
+        handleCancelButtonClick={handleCancelButtonClick}
+        tags={tags}
+      />
     </section>
   );
 }
