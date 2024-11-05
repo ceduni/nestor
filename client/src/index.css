@@ -459,3 +459,39 @@ body {
   gap: 8px;
   margin-left: 120px;
 }
+
+.filter-tag-item-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.filter-tag-item-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.filter-tag-item-exit {
+  opacity: 1;
+}
+.filter-tag-item-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.cards-item-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.cards-item-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.cards-item-exit {
+  opacity: 1;
+}
+.cards-item-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 300ms, transform 300ms;
+}

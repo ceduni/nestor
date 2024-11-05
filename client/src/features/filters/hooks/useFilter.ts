@@ -28,7 +28,7 @@ const toFr = {
   wifi: "wifi",
 };
 
-export function useFilter(setQueryParams, queryParams) {
+export function useFilter(setQueryParams, queryParams, setAddressFilter, setCapacity) {
   const [features, setFeatures] = useState<string[]>([]);
   const [tags, setTags] = useState([]);
 
@@ -50,6 +50,7 @@ export function useFilter(setQueryParams, queryParams) {
         }});
     }
     else if (queryParams.filters.capacity === cancelledTag.split(' ')[1]) {
+        setCapacity("")
         setQueryParams(({ pagination, filters = {} }: QueryParams) => {
             if(filters) delete filters.capacity
             return {
@@ -61,6 +62,7 @@ export function useFilter(setQueryParams, queryParams) {
         }});
     }
     else if (queryParams.filters.address === cancelledTag) {
+        setAddressFilter("")
         setQueryParams(({ pagination, filters = {} }: QueryParams) => {
             if(filters) delete filters.address
             return {
@@ -78,7 +80,6 @@ export function useFilter(setQueryParams, queryParams) {
       setFeatures((prev) => prev.filter((item) => item !== label));
     } else {
       setFeatures((prev) => [...prev, label]);
-      console.log(label);
     }
   };
 

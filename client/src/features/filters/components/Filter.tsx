@@ -35,7 +35,7 @@ export default function Filter({ queryParams, setQueryParams }) {
   };
 
   const { handleIconClick, handleCancelButtonClick, features, tags } =
-    useFilter(setQueryParams, queryParams);
+    useFilter(setQueryParams, queryParams, setAddressFilter,setCapacity);
 
   const dropDownRef = useRef(null);
 
@@ -122,6 +122,7 @@ export default function Filter({ queryParams, setQueryParams }) {
                 id="capacity"
                 name="capacity"
                 placeholder="Entrer une capacité"
+                value={capacity}
                 onChange={(event) => {
                   handleCapacityChange(event);
                 }}
