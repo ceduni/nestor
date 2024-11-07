@@ -1,13 +1,11 @@
 import NavBar from "../components/NavBar.tsx";
+import LoadingSpinner from "../components/LoadingSpinner.tsx";
 import Filter from "../features/filters/components/Filter.tsx";
 import {
   QueryClient,
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
-import { fetchSpaces } from "../features/filters/api/space-api.ts";
-import { createContext, useEffect, useState } from "react";
-import { QueryParams } from "../features/filters/types.ts";
 import { useSpaces } from "../features/filters/hooks/useSpaces.ts";
 import Cards from "../features/cards/components/Cards.tsx";
 import CardsSkeleton from "../features/cards/components/CardsSkeleton.tsx";

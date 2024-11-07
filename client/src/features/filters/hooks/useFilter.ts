@@ -28,50 +28,55 @@ const toFr = {
   wifi: "wifi",
 };
 
-export function useFilter(setQueryParams, queryParams, setAddressFilter, setCapacity) {
+export function useFilter(
+  setQueryParams,
+  queryParams,
+  setAddressFilter,
+  setCapacity,
+) {
   const [features, setFeatures] = useState<string[]>([]);
   const [tags, setTags] = useState([]);
 
   const handleCancelButtonClick = (cancelledTag: string) => {
     setTags((prev) => prev.filter((tag) => tag !== cancelledTag));
-    if(features.includes(cancelledTag)) {
-        setFeatures((prevFeatures) =>
-            prevFeatures.filter((feature) => feature !== cancelledTag),
-        );
-    }
-    else if (queryParams.filters.date.split('T')[0] === cancelledTag) {
-        setQueryParams(({ pagination, filters = {} }: QueryParams) => {
-            if(filters) delete filters.date
-            return {
-            pagination,
-            filters: {
-                ...filters
-            },
-        }});
-    }
-    else if (queryParams.filters.capacity === cancelledTag.split(' ')[1]) {
-        setCapacity("")
-        setQueryParams(({ pagination, filters = {} }: QueryParams) => {
-            if(filters) delete filters.capacity
-            return {
-            pagination,
-            filters: {
-                ...filters,
-                capacity: ""
-            },
-        }});
-    }
-    else if (queryParams.filters.address === cancelledTag) {
-        setAddressFilter("")
-        setQueryParams(({ pagination, filters = {} }: QueryParams) => {
-            if(filters) delete filters.address
-            return {
-            pagination,
-            filters: {
-                ...filters,
-                address: ""
-            },
-        }});
+    if (features.includes(cancelledTag)) {
+      setFeatures((prevFeatures) =>
+        prevFeatures.filter((feature) => feature !== cancelledTag),
+      );
+    } else if (queryParams.filters.date.split("T")[0] === cancelledTag) {
+      setQueryParams(({ pagination, filters = {} }: QueryParams) => {
+        if (filters) delete filters.date;
+        return {
+          pagination,
+          filters: {
+            ...filters,
+          },
+        };
+      });
+    } else if (queryParams.filters.capacity === cancelledTag.split(" ")[1]) {
+      setCapacity("");
+      setQueryParams(({ pagination, filters = {} }: QueryParams) => {
+        if (filters) delete filters.capacity;
+        return {
+          pagination,
+          filters: {
+            ...filters,
+            capacity: "",
+          },
+        };
+      });
+    } else if (queryParams.filters.address === cancelledTag) {
+      setAddressFilter("");
+      setQueryParams(({ pagination, filters = {} }: QueryParams) => {
+        if (filters) delete filters.address;
+        return {
+          pagination,
+          filters: {
+            ...filters,
+            address: "",
+          },
+        };
+      });
     }
   };
 
@@ -99,7 +104,7 @@ export function useFilter(setQueryParams, queryParams, setAddressFilter, setCapa
     if (queryParams.filters) {
       const { date, address, capacity, features } = queryParams.filters;
       if (date) {
-        setTags((prevTag) => [...prevTag, date.split('T')[0]]);
+        setTags((prevTag) => [...prevTag, date.split("T")[0]]);
       }
       if (capacity) {
         setTags((prevTag) => [...prevTag, "capacité " + capacity]);

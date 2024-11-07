@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { useClickOutside } from "../hooks/useClickOutside.ts";
 import FilterTags from "./FilterTags.tsx";
 import { useFilter } from "../hooks/useFilter.ts";
+import FilterTagSkeleton from "./FilterTagSkeleton.tsx";
 
 export default function Filter({ queryParams, setQueryParams }) {
   const {
@@ -35,7 +36,7 @@ export default function Filter({ queryParams, setQueryParams }) {
   };
 
   const { handleIconClick, handleCancelButtonClick, features, tags } =
-    useFilter(setQueryParams, queryParams, setAddressFilter,setCapacity);
+    useFilter(setQueryParams, queryParams, setAddressFilter, setCapacity);
 
   const dropDownRef = useRef(null);
 
