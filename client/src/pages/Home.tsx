@@ -21,10 +21,18 @@ export default function Home() {
       <main>
         <QueryClientProvider client={queryClient}>
           <Filter setQueryParams={setQueryParams} queryParams={queryParams} />
-          {isLoading && <CardsSkeleton />}
-          {spaces && spaces.length !== 0 && <Cards spaces={spaces} />}
+          {isLoading && (
+            <>
+              <CardsSkeleton />
+              <div className="loader"></div>
+            </>
+          )}
+          {spaces && spaces.length !== 0 && (
+            <Cards spaces={spaces} setQueryParams={setQueryParams} />
+          )}
         </QueryClientProvider>
       </main>
     </>
   );
 }
+

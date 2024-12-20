@@ -1,115 +1,88 @@
 import { FaSchool } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
-import { motion } from "framer-motion";
-import {useEffect, useRef, useState} from "react";
-const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-        opacity: 1,
-        scale: 1,
-        transition: {
-            delayChildren: 0.3,
-            staggerChildren: 0.2
-        }
-    }
-}
+import { Space, QueryParams } from "../../filters/types";
+import { useRef, useState } from "react";
+import { useEffect } from "react";
 
-const item = {
-    hidden: { x: -20, opacity: 0 },
-    visible: {
-        x: 0,
-        opacity: 1,
-        transition: {
-            duration: 0.5
-        }
-    }
-}
-export default function Cards({ spaces }) {
-    const lastCardRef = useRef(null);
-    const [showLoader, setShowLoader] = useState(false)
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const lastCard = entries[0];
-                if (lastCard.isIntersecting) {
-                    setShowLoader(true)
-                }
-            },
-            {
-                rootMargin: '0px',
-                threshold: 1.0,
-            }
-        );
-        if (lastCardRef.current) {
-            observer.observe(lastCardRef.current);
-        }
+export default function Cards({ spaces, setQueryParams }) {
+  const lastCardRef = useRef<HTMLDivElement | null>(null);
+  const [currentSpaces, setCurrentSpaces] = useState<Space[]>(spaces);
 
-        return () => {
-            if (lastCardRef.current) {
-                setShowLoader(false)
-                observer.unobserve(lastCardRef.current);
-            }
-        };
-    }, [spaces]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setQueryParams((prevQueryParams: QueryParams) => ({
+              pagination: {
+                ...prevQueryParams.pagination,
+                page: `${Number(prevQueryParams.pagination.page) + 1}`,
+              },
+              filters: {
+                ...prevQueryParams.filters,
+              },
+            }));
+          }, 250);
+        }
+      },
+      { threshold: 1.0 }, // Adjust threshold as needed
+    );
+
+    if (lastCardRef.current) {
+      setTimeout(() => {
+        observer.observe(lastCardRef.current);
+      }, 1000);
+    }
+
+    return () => {
+      if (lastCardRef.current) {
+        observer.unobserve(lastCardRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    setCurrentSpaces((prevSpaces) => [...prevSpaces, ...spaces]);
+  }, [spaces]);
+
   return (
     <section className="cards-section">
-      <motion.div className="cards-container" variants={container} initial="hidden" animate="visible">
-          {spaces.map((space, index) => {
-              if (index === spaces.length - 1) {
-                  return (
-                      <motion.div key={index} ref={lastCardRef} className="card-container" variants={item}>
-                          <div className="card-image">
-                              <img
-                                  src={"src/assets/images/random-space.JPG"}
-                                  alt={"space photo"}
-                              />
-                          </div>
-                          <div className="card-info-container">
-                              <div>
-                                  <div className="card-info-name-container">
-                                      <FaSchool className="school-logo "/>
-                                      <div className="card-info-name">{space.name}</div>
-                                  </div>
-                                  <div className="card-info-library">{space.library}</div>
-                                  <div className="card-info-org">{space.organisation}</div>
-                              </div>
-                              <div className="card-info-cap-container">
-                                  <IoIosPeople className="people-logo"/>
-                                  <div className="card-info-capacity">
-                                      Capacité {space.capacity}
-                                  </div>
-                              </div>
-                          </div>
-                      </motion.div>
-                  );
-              }
-              return <motion.div key={index} className="card-container" variants={item}>
-                  <div className="card-image">
-                      <img
-                          src={"src/assets/images/random-space.JPG"}
-                          alt={"space photo"}
-                      />
+      <div className="cards-container">
+        {currentSpaces.map((space: Space, index: number) => {
+          const isLastCard = index === spaces.length - 1;
+          return (
+            <div
+              key={index}
+              className="card-container"
+              ref={isLastCard ? lastCardRef : null}
+            >
+              <div className="card-image">
+                <img
+                  src={"src/assets/images/random-space.JPG"}
+                  alt={"space photo"}
+                />
+              </div>
+              <div className="card-info-container">
+                <div>
+                  <div className="card-info-name-container">
+                    <FaSchool className="school-logo " />
+                    <div className="card-info-name">{space.name}</div>
                   </div>
-                  <div className="card-info-container">
-                      <div>
-                          <div className="card-info-name-container">
-                              <FaSchool className="school-logo "/>
-                              <div className="card-info-name">{space.name}</div>
-                          </div>
-                          <div className="card-info-library">{space.library}</div>
-                          <div className="card-info-org">{space.organisation}</div>
-                      </div>
-                      <div className="card-info-cap-container">
-                          <IoIosPeople className="people-logo"/>
-                          <div className="card-info-capacity">
-                              Capacité {space.capacity}
-                          </div>
-                      </div>
+                  <div className="card-info-library">{space.library}</div>
+                  <div className="card-info-org">{space.organisation}</div>
+                </div>
+                <div className="card-info-cap-container">
+                  <IoIosPeople className="people-logo" />
+                  <div className="card-info-capacity">
+                    Capacité {space.capacity}
                   </div>
-              </motion.div>
-          })}
-      </motion.div>
-        {showLoader && <div className="loader"></div>}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }
+

@@ -1,34 +1,11 @@
 import { GiCancel } from "react-icons/gi";
 import {motion} from "framer-motion";
 
-const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-        opacity: 1,
-        scale: 1,
-        transition: {
-            delayChildren: 0.3,
-            staggerChildren: 0.2
-        }
-    }
-}
-
-const item = {
-    hidden: { x: -20, opacity: 0 },
-    visible: {
-        x: 0,
-        opacity: 1,
-        transition: {
-            duration: 0.2
-        }
-    }
-}
-
 export default function FilterTags({ tags, handleCancelButtonClick }) {
   return (
-    <motion.div className="filter-tag-container" variants={container} initial="hidden" animate="visible">
+    <div className="filter-tag-container">
         {tags.map((tag, index) => (
-            <motion.div key={index} className="filter-tag-item" variants={item}>
+            <div key={index} className="filter-tag-item">
               <div className="filter-tag-item-container">
                 <div className="filter-tag-label">{tag}</div>
                 <GiCancel
@@ -36,8 +13,8 @@ export default function FilterTags({ tags, handleCancelButtonClick }) {
                   onClick={() => handleCancelButtonClick(tag)}
                 />
               </div>
-            </motion.div>
+            </div>
         ))}
-    </motion.div>
+    </div>
   );
 }
