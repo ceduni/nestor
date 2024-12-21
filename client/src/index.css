@@ -436,12 +436,41 @@ body {
 }
 
 .filter-tag-item {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   background: #ecf6fb;
   color: #0c8cea;
   padding: 4px 6px 4px 10px;
   border-radius: 20px;
   border: 1px solid #0c8cea;
+}
+
+/* Enter Animation */
+.filter-tag-item-enter {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.filter-tag-item-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 200ms,
+    transform 200ms;
+}
+
+/* Exit Animation */
+.filter-tag-item-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.filter-tag-item-exit-active {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity 200ms,
+    transform 200ms;
 }
 
 .filter-tag-item-container {
@@ -472,6 +501,10 @@ body {
   height: 40px;
 }
 
+.card-container:hover {
+  background-color: #f3f4f6;
+}
+
 .loader {
   margin-top: 25px;
   margin-left: auto;
@@ -481,13 +514,15 @@ body {
   aspect-ratio: 1;
   border-radius: 50%;
   background: #0c8cea;
-  --_m:
-          conic-gradient(#0000 10%,#000),
-          linear-gradient(#000 0 0) content-box;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
   -webkit-mask: var(--_m);
   mask: var(--_m);
   -webkit-mask-composite: source-out;
   mask-composite: subtract;
   animation: l3 1s infinite linear;
 }
-@keyframes l3 {to{transform: rotate(1turn)}}
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}

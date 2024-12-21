@@ -15,6 +15,8 @@ export default function Home() {
   const [{ data: spaces, isLoading }, queryParams, setQueryParams] =
     useSpaces();
 
+  const [isCardSelected, setIsCardSelected] = useState(false);
+
   return (
     <>
       <NavBar />
@@ -28,7 +30,11 @@ export default function Home() {
             </>
           )}
           {spaces && spaces.length !== 0 && (
-            <Cards spaces={spaces} setQueryParams={setQueryParams} />
+            <Cards
+              spaces={spaces}
+              setQueryParams={setQueryParams}
+              setIsCardSelected={setIsCardSelected}
+            />
           )}
         </QueryClientProvider>
       </main>

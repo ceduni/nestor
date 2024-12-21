@@ -4,10 +4,15 @@ import { Space, QueryParams } from "../../filters/types";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 
-export default function Cards({ spaces, setQueryParams }) {
+export default function Cards({ spaces, setQueryParams, setIsCardSelected }) {
   const lastCardRef = useRef<HTMLDivElement | null>(null);
   const [currentSpaces, setCurrentSpaces] = useState<Space[]>(spaces);
+  const [selectedCard, setSelectedCard] = useState<Space>(null);
 
+  const handleCardClick = (space: Space) => {
+    setSelectedCard(space);
+    setIsCardSelected(true);
+  };
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -25,7 +30,7 @@ export default function Cards({ spaces, setQueryParams }) {
           }, 250);
         }
       },
-      { threshold: 1.0 }, // Adjust threshold as needed
+      { threshold: 1.0 },
     );
 
     if (lastCardRef.current) {
@@ -45,6 +50,10 @@ export default function Cards({ spaces, setQueryParams }) {
     setCurrentSpaces((prevSpaces) => [...prevSpaces, ...spaces]);
   }, [spaces]);
 
+  useEffect(() => {
+    console.log(selectedCard);
+  }, [selectedCard]);
+
   return (
     <section className="cards-section">
       <div className="cards-container">
@@ -55,6 +64,7 @@ export default function Cards({ spaces, setQueryParams }) {
               key={index}
               className="card-container"
               ref={isLastCard ? lastCardRef : null}
+              onClick={() => handleCardClick(space)}
             >
               <div className="card-image">
                 <img
