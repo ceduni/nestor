@@ -294,6 +294,12 @@ body {
   white-space: nowrap;
 }
 
+.layout {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: row;
+  gap: 30px;
+}
 .cards-section {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 25px;
@@ -304,6 +310,19 @@ body {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-flow: row;
   gap: 30px;
+}
+
+.card-vertical-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.card-left-layout {
+  grid-column: 2 / span 3;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+  border-radius: 10px;
 }
 
 .card-container {
@@ -503,6 +522,99 @@ body {
 
 .card-container:hover {
   background-color: #f3f4f6;
+}
+
+.calendar-header-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.days-list-container {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.days-list-item-1 {
+  flex: 1 1 0px;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.days-list-item-0 {
+  flex: 1 1 0px;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.days-list-item-2 {
+  flex: 1 1 0px;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.days-list-item-3 {
+  flex: 1 1 0px;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.days-list-item-4 {
+  flex: 1 1 0px;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.days-list-item-5 {
+  flex: 1 1 0px;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.days-list-item-6 {
+  flex: 1 1 0px;
+  font-weight: bold;
+  text-align: center;
+  padding: 4px;
+}
+.date-label {
+  font-weight: bold;
+  font-size: 20px;
+}
+.today-button-container {
+  display: flex;
+  gap: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-weight: bold;
+  padding: 4px 6px;
+  border-radius: 10px;
+}
+
+.view-button-container {
+  display: flex;
+  gap: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-weight: bold;
+  padding: 4px 6px;
+  border-radius: 10px;
+}
+
+.calendar-header-left-container {
+  display: flex;
+  gap: 25px;
+}
+.arrow {
+  margin-top: 4px;
 }
 
 .loader {

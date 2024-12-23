@@ -1,5 +1,4 @@
 import NavBar from "../components/NavBar.tsx";
-import LoadingSpinner from "../components/LoadingSpinner.tsx";
 import Filter from "../features/filters/components/Filter.tsx";
 import {
   QueryClient,
@@ -9,13 +8,12 @@ import {
 import { useSpaces } from "../features/filters/hooks/useSpaces.ts";
 import Cards from "../features/cards/components/Cards.tsx";
 import CardsSkeleton from "../features/cards/components/CardsSkeleton.tsx";
+import { useState } from "react";
 
 export default function Home() {
   const queryClient = new QueryClient();
   const [{ data: spaces, isLoading }, queryParams, setQueryParams] =
     useSpaces();
-
-  const [isCardSelected, setIsCardSelected] = useState(false);
 
   return (
     <>
@@ -30,15 +28,10 @@ export default function Home() {
             </>
           )}
           {spaces && spaces.length !== 0 && (
-            <Cards
-              spaces={spaces}
-              setQueryParams={setQueryParams}
-              setIsCardSelected={setIsCardSelected}
-            />
+            <Cards spaces={spaces} setQueryParams={setQueryParams} />
           )}
         </QueryClientProvider>
       </main>
     </>
   );
 }
-

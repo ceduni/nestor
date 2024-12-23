@@ -3,11 +3,13 @@ import { IoIosPeople } from "react-icons/io";
 import { Space, QueryParams } from "../../filters/types";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
+import Calendar from "../../calendar/components/Calendar.tsx";
 
-export default function Cards({ spaces, setQueryParams, setIsCardSelected }) {
+export default function Cards({ spaces, setQueryParams }) {
   const lastCardRef = useRef<HTMLDivElement | null>(null);
   const [currentSpaces, setCurrentSpaces] = useState<Space[]>(spaces);
   const [selectedCard, setSelectedCard] = useState<Space>(null);
+  const [isCardSelected, setIsCardSelected] = useState(false);
 
   const handleCardClick = (space: Space) => {
     setSelectedCard(space);
@@ -56,41 +58,46 @@ export default function Cards({ spaces, setQueryParams, setIsCardSelected }) {
 
   return (
     <section className="cards-section">
-      <div className="cards-container">
-        {currentSpaces.map((space: Space, index: number) => {
-          const isLastCard = index === spaces.length - 1;
-          return (
-            <div
-              key={index}
-              className="card-container"
-              ref={isLastCard ? lastCardRef : null}
-              onClick={() => handleCardClick(space)}
-            >
-              <div className="card-image">
-                <img
-                  src={"src/assets/images/random-space.JPG"}
-                  alt={"space photo"}
-                />
-              </div>
-              <div className="card-info-container">
-                <div>
-                  <div className="card-info-name-container">
-                    <FaSchool className="school-logo " />
-                    <div className="card-info-name">{space.name}</div>
-                  </div>
-                  <div className="card-info-library">{space.library}</div>
-                  <div className="card-info-org">{space.organisation}</div>
+      <div className={`${isCardSelected ? "layout" : ""}`}>
+        <div
+          className={`${isCardSelected ? "card-vertical-layout" : "cards-container"}`}
+        >
+          {currentSpaces.map((space: Space, index: number) => {
+            const isLastCard = index === spaces.length - 1;
+            return (
+              <div
+                key={index}
+                className="card-container"
+                ref={isLastCard ? lastCardRef : null}
+                onClick={() => handleCardClick(space)}
+              >
+                <div className="card-image">
+                  <img
+                    src={"src/assets/images/random-space.JPG"}
+                    alt={"space photo"}
+                  />
                 </div>
-                <div className="card-info-cap-container">
-                  <IoIosPeople className="people-logo" />
-                  <div className="card-info-capacity">
-                    Capacité {space.capacity}
+                <div className="card-info-container">
+                  <div>
+                    <div className="card-info-name-container">
+                      <FaSchool className="school-logo " />
+                      <div className="card-info-name">{space.name}</div>
+                    </div>
+                    <div className="card-info-library">{space.library}</div>
+                    <div className="card-info-org">{space.organisation}</div>
+                  </div>
+                  <div className="card-info-cap-container">
+                    <IoIosPeople className="people-logo" />
+                    <div className="card-info-capacity">
+                      Capacité {space.capacity}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <Calendar/>
       </div>
     </section>
   );
