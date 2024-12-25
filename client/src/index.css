@@ -303,6 +303,8 @@ body {
 .cards-section {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 25px;
+  overflow-y: scroll;
+  height: 100vh;
 }
 
 .cards-container {
@@ -319,9 +321,16 @@ body {
 }
 
 .card-left-layout {
+  padding: 20px;
+  width: fit-content;
+  height: fit-content;
   grid-column: 2 / span 3;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  overflow-y: scroll;
+  border-radius: 10px;
+}
+
+.card-left-layout-container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
@@ -636,6 +645,11 @@ body {
 }
 .calendar-columns-container {
   display: flex;
+}
+
+.calendar-columns {
+  overflow: scroll;
+  height: 100vh;
 }
 
 .calendar-last-column {

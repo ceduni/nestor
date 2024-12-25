@@ -8,11 +8,11 @@ import Calendar from "../../calendar/components/Calendar.tsx";
 export default function Cards({ spaces, setQueryParams }) {
   const lastCardRef = useRef<HTMLDivElement | null>(null);
   const [currentSpaces, setCurrentSpaces] = useState<Space[]>(spaces);
-  const [selectedCard, setSelectedCard] = useState<Space>(null);
+  const [selectedSpace, setSelectedSpace] = useState<Space>(null);
   const [isCardSelected, setIsCardSelected] = useState(false);
 
   const handleCardClick = (space: Space) => {
-    setSelectedCard(space);
+    setSelectedSpace(space);
     setIsCardSelected(true);
   };
   useEffect(() => {
@@ -53,8 +53,8 @@ export default function Cards({ spaces, setQueryParams }) {
   }, [spaces]);
 
   useEffect(() => {
-    console.log(selectedCard);
-  }, [selectedCard]);
+    console.log(selectedSpace);
+  }, [selectedSpace]);
 
   return (
     <section className="cards-section">
@@ -97,9 +97,8 @@ export default function Cards({ spaces, setQueryParams }) {
             );
           })}
         </div>
-        <Calendar/>
+        <Calendar  space={selectedSpace}/>
       </div>
     </section>
   );
 }
-
