@@ -10,9 +10,8 @@ router.get("/spaces", async (req: Request, res: Response) => {
       address,
       capacity = 1,
       features,
-      date = new Date(2024,9,1), // for debugging
+      date = new Date(1900,9,1), // for debugging
     } = req.query;
-
     const agg_pipeline: any[] = [];
     if (address) {
       agg_pipeline.push({
@@ -27,7 +26,7 @@ router.get("/spaces", async (req: Request, res: Response) => {
     }
     const match_conditions: any[] = [
       { capacity: { $gte: Number(capacity) } },
-      { "availabilities.startAt": { $gte: new Date(date as string) } },
+      { "startAt": { $gte: new Date(date as string) } },
     ];
 
     if (features) {
@@ -36,11 +35,22 @@ router.get("/spaces", async (req: Request, res: Response) => {
       });
     }
 
+// Convertir le tableau de conditions en un objet combiné
+    const elemMatchConditions = match_conditions.reduce((acc, condition) => {
+      return { ...acc, ...condition };
+    }, {});
+
     agg_pipeline.push(
-      { $unwind: "$availabilities" },
-      { $match: { $and: match_conditions } },
-      { $limit: Number(limit) },
-      { $skip: (Number(page) - 1) * Number(limit) },
+        {
+          $match: {
+            capacity: { $gte: Number(capacity) },
+            availabilities: {
+              $elemMatch:  { "startAt": { $gte: new Date(date as string) } }
+            }
+          }
+        },
+        { $skip: (Number(page) - 1) * Number(limit) },
+        { $limit: Number(limit) }
     );
 
     const results = await space.aggregate(agg_pipeline);
