@@ -52,10 +52,6 @@ export default function Cards({ spaces, setQueryParams }) {
     setCurrentSpaces((prevSpaces) => [...prevSpaces, ...spaces]);
   }, [spaces]);
 
-  useEffect(() => {
-    console.log(selectedSpace);
-  }, [selectedSpace]);
-
   return (
     <section className="cards-section">
       <div className={`${isCardSelected ? "layout" : ""}`}>
@@ -97,7 +93,7 @@ export default function Cards({ spaces, setQueryParams }) {
             );
           })}
         </div>
-        <Calendar  space={selectedSpace}/>
+        {selectedSpace && <Calendar space={selectedSpace} />}
       </div>
     </section>
   );

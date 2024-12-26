@@ -605,6 +605,7 @@ body {
   background-color: rgba(0, 0, 0, 0.05);
   grid-gap: 1px;
   flex: 1 1 0px;
+  position: relative;
 }
 
 .calendar-day-cells-item {
@@ -656,6 +657,14 @@ body {
   width: 29px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.event-container {
+  padding: 5px;
+  background-color: #a5eebd;
+  border-radius: 10px;
+  height: 386px;
+}
+
 .loader {
   margin-top: 25px;
   margin-left: auto;
