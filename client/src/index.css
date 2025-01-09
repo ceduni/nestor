@@ -329,6 +329,10 @@ body {
   border-radius: 10px;
 }
 
+.card-highlight {
+  border: 1px solid black;
+}
+
 .card-left-layout-container {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -501,6 +505,33 @@ body {
     transform 200ms;
 }
 
+.card-left-layout-enter {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.card-left-layout-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 200ms,
+    transform 200ms;
+}
+
+/* Exit Animation */
+.card-left-layout-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card-left-layout-exit-active {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity 200ms,
+    transform 200ms;
+}
+
 .filter-tag-item-container {
   display: flex;
   gap: 8px;
@@ -659,10 +690,27 @@ body {
 }
 
 .event-container {
-  padding: 5px;
-  background-color: #a5eebd;
+  display: flex;
+  flex-direction: column;
+  background-color: #d2f7de;
   border-radius: 10px;
   height: 386px;
+}
+
+.event-item {
+  padding-top: 8px;
+  padding-left: 6px;
+  color: green;
+  font-weight: bolder;
+}
+
+.event-slots-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-slots-container > div {
+   flex: 1 1 0px;
 }
 
 .loader {

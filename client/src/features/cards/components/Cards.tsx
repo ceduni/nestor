@@ -63,7 +63,7 @@ export default function Cards({ spaces, setQueryParams }) {
             return (
               <div
                 key={index}
-                className="card-container"
+                className={`card-container`}
                 ref={isLastCard ? lastCardRef : null}
                 onClick={() => handleCardClick(space)}
               >
