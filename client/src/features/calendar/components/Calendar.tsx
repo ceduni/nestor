@@ -32,61 +32,58 @@ export default function Calendar({ space }: { space: Space }) {
   const [darkGreen, setDarkGreen] = useState(false);
 
   useEffect(() => {
-    const events: Event[] = [];
-    space.availabilities.forEach((availability) => {
-      const targetCell = document.getElementById(
-        availability.startAt.toString(),
-      );
-      if (targetCell) {
+    const fetchedEvents: Event[] = space.availabilities
+      .map((availability) => {
+        const targetCell = document.getElementById(
+          availability.startAt.toString(),
+        );
+        if (!targetCell) return null;
         const cellContainer = document.getElementsByClassName(
           "calendar-day-cells-container",
         )[0];
-        events.push({
+        const { width, height, x, y } = targetCell.getBoundingClientRect();
+        const offsetX = x - cellContainer.getBoundingClientRect().x;
+        const offsetY = y - cellContainer.getBoundingClientRect().y;
+        return {
           startTime: availability.startAt.toString(),
           endTime: availability.endAt.toString(),
-          width: targetCell.getBoundingClientRect().width,
-          height: targetCell.getBoundingClientRect().height,
-          x:
-            targetCell.getBoundingClientRect().x -
-            cellContainer.getBoundingClientRect().x,
-          y:
-            targetCell.getBoundingClientRect().y -
-            cellContainer.getBoundingClientRect().y,
-        });
-      }
-    });
-    setEvents(events);
-  }, [calendarDate]);
+          width,
+          height,
+          x: offsetX,
+          y: offsetY,
+        };
+      })
+      .filter(Boolean) as Event[];
+    setEvents(fetchedEvents);
+  }, [calendarDate, space.availabilities]);
 
-  const handleEventClick = () => {
-    setDarkGreen(true);
-  };
-
+  const handleEventClick = () => setDarkGreen(true);
   const handleBackArrowClick = () =>
     setCalendarDate((prev) => sub(prev, { weeks: 1 }));
   const handleForwardArrowClick = () =>
     setCalendarDate((prev) => add(prev, { weeks: 1 }));
   const handleTodayClick = () => setCalendarDate(startOfWeek(new Date()));
 
-  const calculateCellTimes = (index: number) => {
-    const dayIndex = index % 7;
-    const hourIndex = Math.floor(index / 7);
-    const cellDate = add(calendarDate, { days: dayIndex });
-    return add(cellDate, { hours: hourIndex });
-  };
-
-  const calculateEventSlots = (startTime: Date, endTime: Date) => {
-    return differenceInHours(endTime, startTime);
-  };
-
+  const calculateCellTimes = (index: number) =>
+    add(add(calendarDate, { days: index % 7 }), {
+      hours: Math.floor(index / 7),
+    });
+  const calculateEventSlots = (startTime: Date, endTime: Date) =>
+    differenceInHours(endTime, startTime);
   const calculateEventHeight = (
     startTime: Date,
     endTime: Date,
     height: number,
-  ) => {
-    const hoursBetween = calculateEventSlots(endTime, startTime);
-    return height * hoursBetween;
-  };
+  ) => height * calculateEventSlots(startTime, endTime);
+
+  useEffect(() => {
+    if (events.length) {
+      const { startTime, endTime, height } = events[0];
+      console.log(
+        calculateEventHeight(new Date(startTime), new Date(endTime), height),
+      );
+    }
+  }, [events]);
 
   return (
     <CSSTransition timeout={500} className="card-left-layout">
@@ -114,26 +111,20 @@ export default function Calendar({ space }: { space: Space }) {
               </div>
             </div>
           </div>
-          <div>
-            <div className="calendar-days-list-container">
-              <div className="calendar-empty-cell-start"></div>
-              {days.map((day, index) => (
-                <div
-                  key={day}
-                  className={`calendar-days-list-item-${
-                    index === 0
-                      ? "start"
-                      : index === days.length - 1
-                        ? "end"
-                        : "between"
-                  }`}
-                >
-                  {day}
-                </div>
-              ))}
-              <div className="calendar-empty-cell-end"></div>
-            </div>
+
+          <div className="calendar-days-list-container">
+            <div className="calendar-empty-cell-start"></div>
+            {days.map((day, index) => (
+              <div
+                key={day}
+                className={`calendar-days-list-item-${index === 0 ? "start" : index === days.length - 1 ? "end" : "between"}`}
+              >
+                {day}
+              </div>
+            ))}
+            <div className="calendar-empty-cell-end"></div>
           </div>
+
           <div className="calendar-columns">
             <div className="calendar-columns-container">
               <div className="calendar-hour-column">
@@ -144,28 +135,17 @@ export default function Calendar({ space }: { space: Space }) {
                 ))}
               </div>
               <div className="calendar-day-cells-container">
-                {Array.from({ length: 175 }).map((_, index) => {
-                  const isFirstRow = index < 7;
-                  if (isFirstRow) {
-                    return (
-                      <div
-                        key={index}
-                        className="calendar-day-cells-item-first-row"
-                      ></div>
-                    );
-                  }
-
-                  const adjustedIndex = index - 7;
-                  const startTime = calculateCellTimes(adjustedIndex);
-
-                  return (
-                    <div
-                      key={index}
-                      id={startTime.toISOString()}
-                      className="calendar-day-cells-item"
-                    ></div>
-                  );
-                })}
+                {Array.from({ length: 175 }).map((_, index) => (
+                  <div
+                    key={index}
+                    id={calculateCellTimes(index - 7).toISOString()}
+                    className={
+                      index < 7
+                        ? "calendar-day-cells-item-first-row"
+                        : "calendar-day-cells-item"
+                    }
+                  ></div>
+                ))}
                 {events.map((event, index) => (
                   <div
                     key={index}
@@ -178,30 +158,25 @@ export default function Calendar({ space }: { space: Space }) {
                       padding: "5px",
                     }}
                   >
-                    <div
-                      className="event-container"
-                      onClick={() => handleEventClick()}
-                    >
+                    <div className="event-container" onClick={handleEventClick}>
                       <div className="event-slots-container">
-                        <div className="event-item">
+                        <div className="event-first-slot">
                           {`${format(event.startTime, "H:mm", { locale: fr })} - ${format(event.endTime, "H:mm", { locale: fr })}`}
                         </div>
-                        {(() => {
-                          const numberOfSlots = calculateEventSlots(
-                            new Date(event.startTime),
-                            new Date(event.endTime),
-                          );
-
-                          return Array.from({ length: numberOfSlots - 1 }).map(
-                            (_, index) => (
-                              <div key={index} className="event-slot">
-                                test
-                              </div>
-                            ),
-                          );
-                        })()}
+                        {Array.from({
+                          length:
+                            calculateEventSlots(
+                              new Date(event.startTime),
+                              new Date(event.endTime),
+                            ) - 2,
+                        }).map((_, idx) => (
+                          <div key={idx} className="event-slot" style={{backgroundColor:"green"}}>
+                          </div>
+                        ))}
+                        <div className="event-last-slot">
+                          test
+                        </div>
                       </div>
-                      
                     </div>
                   </div>
                 ))}
