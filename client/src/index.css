@@ -713,6 +713,10 @@ body {
   border-radius: 10px;
 }
 
+.event-slot.active {
+  background-color: green;
+}
+
 .event-last-slot {
   height: 44.75px;
   border-radius: 10px;

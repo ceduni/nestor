@@ -30,6 +30,7 @@ export default function Calendar({ space }: { space: Space }) {
   );
   const [events, setEvents] = useState<Event[]>([]);
   const [darkGreen, setDarkGreen] = useState(false);
+  const [activeSlot, setActiveSlot] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchedEvents: Event[] = space.availabilities
@@ -64,6 +65,9 @@ export default function Calendar({ space }: { space: Space }) {
     setCalendarDate((prev) => add(prev, { weeks: 1 }));
   const handleTodayClick = () => setCalendarDate(startOfWeek(new Date()));
 
+  // Click handler updated to use UUID
+  const handleEventSlotClick = (customId: string) => setActiveSlot(customId);
+
   const calculateCellTimes = (index: number) =>
     add(add(calendarDate, { days: index % 7 }), {
       hours: Math.floor(index / 7),
@@ -76,14 +80,9 @@ export default function Calendar({ space }: { space: Space }) {
     height: number,
   ) => height * calculateEventSlots(startTime, endTime);
 
-  useEffect(() => {
-    if (events.length) {
-      const { startTime, endTime, height } = events[0];
-      console.log(
-        calculateEventHeight(new Date(startTime), new Date(endTime), height),
-      );
-    }
-  }, [events]);
+  const generateStableId = (startTime: Date, endTime: Date, idx: number) => {
+    return `${startTime}-${endTime}-${idx}`;
+  };
 
   return (
     <CSSTransition timeout={500} className="card-left-layout">
@@ -134,6 +133,7 @@ export default function Calendar({ space }: { space: Space }) {
                   </div>
                 ))}
               </div>
+
               <div className="calendar-day-cells-container">
                 {Array.from({ length: 175 }).map((_, index) => (
                   <div
@@ -146,6 +146,7 @@ export default function Calendar({ space }: { space: Space }) {
                     }
                   ></div>
                 ))}
+
                 {events.map((event, index) => (
                   <div
                     key={index}
@@ -169,18 +170,28 @@ export default function Calendar({ space }: { space: Space }) {
                               new Date(event.startTime),
                               new Date(event.endTime),
                             ) - 2,
-                        }).map((_, idx) => (
-                          <div key={idx} className="event-slot" style={{backgroundColor:"green"}}>
-                          </div>
-                        ))}
-                        <div className="event-last-slot">
-                          test
-                        </div>
+                        }).map((_, idx) => {
+                          const customId = generateStableId(
+                            new Date(event.startTime),
+                            new Date(event.endTime),
+                            idx,
+                          );
+                          return (
+                            <div
+                              key={customId}
+                              className={`event-slot ${activeSlot === customId ? "active" : ""}`}
+                              onClick={() => handleEventSlotClick(customId)}
+                            ></div>
+                          );
+                        })}
+
+                        <div className="event-last-slot">test</div>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+
               <div className="calendar-last-column"></div>
             </div>
           </div>
